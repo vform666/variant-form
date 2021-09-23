@@ -2,15 +2,15 @@
 ##### 一款高效的Vue表单，可视化设计，一键生成源码，享受更多摸鱼时间。
 
 
-文档官网：http://www.vform666.com/
+文档官网：<a href="http://www.vform666.com/" targe="blank">http://www.vform666.com/</a>
 
-在线演示：http://demo.vform666.com/
+在线演示：<a href="http://demo.vform666.com/" targe="blank">http://demo.vform666.com/</a>
 
-VS Code插件：http://www.vform666.com/pages/plugin/
+VS Code插件：<a href="http://www.vform666.com/pages/plugin/" targe="blank">http://www.vform666.com/pages/plugin/</a>
 
-Github仓库：https://github.com/vform666/variant-form
+Github仓库：<a href="https://github.com/vform666/variant-form" targe="blank">https://github.com/vform666/variant-form</a>
 
-Gitee备份仓库：https://gitee.com/vdpadmin/variant-form
+Gitee备份仓库：<a href="https://gitee.com/vdpadmin/variant-form" targe="blank">https://gitee.com/vdpadmin/variant-form</a>
 
 技术交流群：微信搜索“vformAdmin”，或者扫如下二维码加群
 
