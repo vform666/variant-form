@@ -1,0 +1,37 @@
+{
+  "id": "",
+  "name": "",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "586931",
+      "name": "insert-column",
+      "font_class": "insertcolumn",
+      "unicode": "e753",
+      "unicode_decimal": 59219
+    },
+    {
+      "icon_id": "586932",
+      "name": "insert-row",
+      "font_class": "insertrow",
+      "unicode": "e754",
+      "unicode_decimal": 59220
+    },
+    {
+      "icon_id": "1030072",
+      "name": "hide",
+      "font_class": "hide",
+      "unicode": "e76b",
+      "unicode_decimal": 59243
+    },
+    {
+      "icon_id": "14772710",
+      "name": "drag",
+      "font_class": "drag",
+      "unicode": "e61d",
+      "unicode_decimal": 58909
+    }
+  ]
+}

@@ -1,0 +1,103 @@
+/* 全局css变量 */
+$--color-primary: #409EFF;
+
+.primary-color {
+  color: $--color-primary;
+}
+
+.background-opacity {
+  background: rgba(64, 158, 255, 0.6);
+}
+
+.form-widget-list {
+
+  .ghost{
+    content: '';
+    font-size: 0;
+    height: 3px;
+    box-sizing: border-box;
+    background: $--color-primary;
+    border: 2px solid $--color-primary;
+    outline-width: 0;
+    padding: 0;
+    overflow: hidden;
+  }
+}
+
+.el-form-item--medium {
+  .el-radio {
+    line-height: 36px !important;
+  }
+
+  .el-rate{
+    margin-top: 8px;
+  }
+}
+
+.el-form-item--small {
+  .el-radio {
+    line-height: 32px !important;
+  }
+
+  .el-rate{
+    margin-top: 6px;
+  }
+}
+
+.el-form-item--mini {
+  .el-radio {
+    line-height: 28px !important;
+  }
+
+  .el-rate{
+    margin-top: 4px;
+  }
+}
+
+input[type="password"]::-ms-reveal {  /* 隐藏IE/Edge原生的密码查看按钮 */
+  display: none;
+}
+
+/* 滚动条样式 begin */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  width: 8px;
+  background: rgba(#101F1C, 0.1);
+  -webkit-border-radius: 2em;
+  -moz-border-radius: 2em;
+  border-radius: 2em;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgba(#101F1C, 0.35);
+  background-clip: padding-box;
+  min-height: 28px;
+  -webkit-border-radius: 2em;
+  -moz-border-radius: 2em;
+  border-radius: 2em;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(#101F1C, 0.85);
+}
+
+* {//Firefox浏览器滚动条样式
+  scrollbar-color: #e5e5e5 #f7f7f9; //滚动条轨道颜色、滚动条滑块的颜色
+  scrollbar-width: thin;     //thin模式下滚动条两端的三角按钮会消失
+}
+
+
+/*
+body {//IE浏览器滚动条样式
+  scrollbar-shadow-color: #e5e5e5;
+  scrollbar-face-color: #e5e5e5;
+  scrollbar-base-color: #ffffff;
+  scrollbar-arrow-color: #444040;
+}
+*/
+
+/* 滚动条样式 end */
