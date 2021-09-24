@@ -1,7 +1,7 @@
 # Variant Form
 ##### 一款高效的Vue表单，可视化设计，一键生成源码，享受更多摸鱼时间。
 
-
+![image](https://ks3-cn-beijing.ksyuncs.com/vform-static/img/vform_demo.gif)
 
 <br/>
 
