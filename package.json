@@ -3,10 +3,13 @@
   "version": "1.1.2",
   "private": false,
   "scripts": {
-    "serve": "vue-cli-service serve --open",
+    "serve": "vue-cli-service serve --open src/main.js",
+    "serve-iview": "vue-cli-service serve --open src/main-iview.js",
     "build": "vue-cli-service build --report --dest dist0",
-    "lib": "vue-cli-service build --report --target lib --name VFormDesigner install.js",
-    "lib-render": "vue-cli-service build --report --target lib --dest dist2 --name VFormRender install-render.js",
+    "lib": "vue-cli-service build --report --target lib --dest lib --name VFormDesigner install.js",
+    "lib-render": "vue-cli-service build --report --target lib --dest lib-render --name VFormRender install-render.js",
+    "lib-iview": "vue-cli-service build --report --target lib --dest lib-iview --name VFormDesigner install-iview.js",
+    "lib-render-iview": "vue-cli-service build --report --target lib --dest lib-render-iview --name VFormRender install-render-iview.js",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
@@ -15,6 +18,7 @@
     "core-js": "^3.6.5",
     "element-ui": "^2.15.1",
     "file-saver": "^2.0.5",
+    "view-design": "^4.7.0-beta.10",
     "vue": "^2.6.11",
     "vue-i18n": "^8.24.5",
     "vue2-editor": "^2.10.2",
