@@ -12,6 +12,7 @@ import '@/utils/directive'
 import '@/icons'
 import '@/iconfont/iconfont.css'
 
+
 VFormDesigner.install = function (Vue) {
   Vue.component(VFormDesigner.name, VFormDesigner)
 }
@@ -43,6 +44,7 @@ if (typeof window !== 'undefined' && window.Vue) { /* script方式引入时主�
 
 export default {
   install,
+  i18n,
   VFormDesigner,
   VFormRender
 }

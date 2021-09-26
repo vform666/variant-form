@@ -5,11 +5,12 @@
   "scripts": {
     "serve": "vue-cli-service serve --open src/main.js",
     "serve-iview": "vue-cli-service serve --open src/main-iview.js",
-    "build": "vue-cli-service build --report --dest dist0",
-    "lib": "vue-cli-service build --report --target lib --dest lib --name VFormDesigner install.js",
-    "lib-render": "vue-cli-service build --report --target lib --dest lib-render --name VFormRender install-render.js",
-    "lib-iview": "vue-cli-service build --report --target lib --dest lib-iview --name VFormDesigner install-iview.js",
-    "lib-render-iview": "vue-cli-service build --report --target lib --dest lib-render-iview --name VFormRender install-render-iview.js",
+    "build": "vue-cli-service build --report --dest dist/build",
+	"build-iview": "vue-cli-service build --report --dest dist/build-iview",
+    "lib": "vue-cli-service build --report --target lib --dest dist/lib --name VFormDesigner install.js",
+    "lib-render": "vue-cli-service build --report --target lib --dest dist/lib-render --name VFormRender install-render.js",
+    "lib-iview": "vue-cli-service build --report --target lib --dest dist/lib-iview --name VFormDesigner install-iview.js",
+    "lib-render-iview": "vue-cli-service build --report --target lib --dest dist/lib-render-iview --name VFormRender install-render-iview.js",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {

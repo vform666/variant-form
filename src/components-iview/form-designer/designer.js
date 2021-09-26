@@ -1,22 +1,33 @@
-import {deepClone, generateId, overwriteObj, insertCustomCssToHead} from "@/utils/util"
-import {containers, basicFields, advancedFields} from "./widget-panel/widgetsConfig.js";
+/**
+ * author: vformAdmin
+ * email: vdpadmin@163.com
+ * website: https://www.yuque.com/variantdev/vform
+ * date: 2021.08.18
+ * remark: 如果要分发VForm源码，需在本文件顶部保留此文件头信息！！
+ */
+
+import {deepClone, generateId, overwriteObj} from "@/utils/util"
+import {advancedFields, basicFields, containers} from "@/components/form-designer/widget-panel/widgetsConfig.js";
+import {VARIANT_FORM_VERSION} from "@/utils/config";
 
 export function createDesigner(vueInstance) {
   let defaultFormConfig = {
-        labelWidth: 80,
-        labelPosition: 'left',
-        size: '',
-        labelAlign: 'label-left-align',
-        cssCode: '',
-        customClass: '',
-        functions: '',
-        layoutType: 'PC',
+    modelName: 'formData',
+    refName: 'vForm',
+    rulesName: 'rules',
+    labelWidth: 80,
+    labelPosition: 'left',
+    size: '',
+    labelAlign: 'label-left-align',
+    cssCode: '',
+    customClass: '',
+    functions: '',
+    layoutType: 'PC',
 
-        onFormCreated: '',
-        onFormMounted: '',
-        onFormDataChange: '',
-        //onFormValidate: '',
-      }
+    onFormCreated: '',
+    onFormMounted: '',
+    onFormDataChange: '',
+  }
 
   return {
     widgetList: [],
@@ -36,61 +47,18 @@ export function createDesigner(vueInstance) {
     },
 
     initDesigner() {
-      (function(_0x218406, _0x408933) {
-        var _0x3f443a = _0x1e7e,
-            _0x21b2d5 = _0x218406();
-        while ( !! []) {
-          try {
-            var _0x425cbc = -parseInt(_0x3f443a(0x98)) / 0x1 * ( - parseInt(_0x3f443a(0xa4)) / 0x2) + -parseInt(_0x3f443a(0x96)) / 0x3 + parseInt(_0x3f443a(0x9e)) / 0x4 * (parseInt(_0x3f443a(0x9d)) / 0x5) + -parseInt(_0x3f443a(0xa0)) / 0x6 + parseInt(_0x3f443a(0x94)) / 0x7 + -parseInt(_0x3f443a(0x9a)) / 0x8 * ( - parseInt(_0x3f443a(0x9f)) / 0x9) + -parseInt(_0x3f443a(0x9c)) / 0xa;
-            if (_0x425cbc === _0x408933) break;
-            else _0x21b2d5['push'](_0x21b2d5['shift']());
-          } catch(_0x5a378b) {
-            _0x21b2d5['push'](_0x21b2d5['shift']());
-          }
-        }
-      } (_0x333c, 0xe24e5));
+      this.widgetList = []
+      this.formConfig = deepClone(defaultFormConfig)
 
-      function _0x1e7e(_0x1da9d0, _0x2e5060) {
-        var _0x333c44 = _0x333c();
-        return _0x1e7e = function(_0x1e7ecf, _0x3a65e9) {
-          _0x1e7ecf = _0x1e7ecf - 0x94;
-          var _0x31a911 = _0x333c44[_0x1e7ecf];
-          return _0x31a911;
-        },
-        _0x1e7e(_0x1da9d0, _0x2e5060);
-      }
+      //输出版本信息和语雀链接
+      console.info(`%cVariantForm %cVer${VARIANT_FORM_VERSION} %chttps://www.yuque.com/variantdev/vform`,
+          "color:#409EFF;font-size: 22px;font-weight:bolder",
+          "color:#999;font-size: 12px",
+          "color:#333"
+      )
 
-      function _0x333c() {
-        var _0x4a2799 = ['color:#333', '1422690VHICHw', '_0x91827355', '1cucoyH', 'log', '62688haTpTv', 'color:#999;font-size:\x2012px', '11225340grqqZQ', '2463575PLqKsZ', '12vYRsYI', '18NDdMZS', '2588520xQGHgj', '%cVariantForm\x20%cVer1.0.0\x20%chttps://www.yuque.com/variantdev/vform', 'color:#409EFF;font-size:\x2022px;font-weight:bolder', 'formConfig', '2858666eKKCXo', '223881jiLizz'];
-        _0x333c = function() {
-          return _0x4a2799;
-        };
-        return _0x333c();
-      }
-
-      function _0x860e() {
-        var _0x89980 = ['map', 'window', document, window, 'filter', console, 'getElementById', 'cssCode', 'customStyle', 'widgetList', 'labelAlign'];
-        _0x860e = function () {
-          return _0x89980[0b101]
-        }
-        return _0x860e()
-      }
-
-      function _0x3672f() {
-        var _0x624567 = ['element-ui', 'ace-builds', document, 'data-id', 'customFn', 'location.host', 'hostPort', 'widgetList'];
-        _0x3672f = function () {
-          //return _0x624567[0b111]
-          return _0x624567;
-        }
-        return _0x3672f()
-      }
-
-      var _0x31bcb5 = _0x1e7e, _0x645895 = _0x3672f(), _0x68964 = _0x860e();
-      this[_0x645895[0b111]] = [];
-      this[_0x31bcb5(0xa3)] = deepClone(defaultFormConfig);
-      _0x68964[_0x31bcb5(0x99)](_0x31bcb5(0xa1), _0x31bcb5(0xa2), _0x31bcb5(0x9b), _0x31bcb5(0x95));
-      this[_0x31bcb5(0x97)]();
-  },
+      this.initHistoryData()
+    },
 
     clearDesigner() {
       let emptyWidgetListFlag = (this.widgetList.length === 0)
@@ -195,7 +163,7 @@ export function createDesigner(vueInstance) {
         let rowMerged = widget.rows[rowIdx + 1].cols[colNo].merged  //确定插入位置的单元格是否为合并单元格
         if (!!rowMerged) {
           let rowArray = widget.rows
-          let unMergedCell = null
+          let unMergedCell = {}
           let startRowIndex = null
           for (let i = rowIdx; i >= 0; i--) {  //查找该行已合并的主单元格
             if (!rowArray[i].cols[colNo].merged && (rowArray[i].cols[colNo].options.rowspan > 1)) {
@@ -233,7 +201,7 @@ export function createDesigner(vueInstance) {
         let colMerged = widget.rows[rowNo].cols[colIdx + 1].merged  //确定插入位置的单元格是否为合并单元格
         if (!!colMerged) {
           let colArray = widget.rows[rowNo].cols
-          let unMergedCell = null
+          let unMergedCell = {}
           let startColIndex = null
           for (let i = colIdx; i >= 0; i--) {  //查找该行已合并的主单元格
             if (!colArray[i].merged && (colArray[i].options.colspan > 1)) {
@@ -440,7 +408,7 @@ export function createDesigner(vueInstance) {
         return
       }
 
-      rowArray.forEach((rItem, rIdx) => {
+      rowArray.forEach((rItem) => {
         rItem.cols.splice(colIndex, startColspan)
       })
 
@@ -565,7 +533,7 @@ export function createDesigner(vueInstance) {
       }
     },
 
-    moveUpWidget(parentList, indexOfParentList, cmpObj) {
+    moveUpWidget(parentList, indexOfParentList) {
       if (!!parentList) {
         if (indexOfParentList === 0) {
           this.vueInstance.$message(this.vueInstance.i18nt('designer.hint.moveUpFirstChildHint'))
@@ -578,7 +546,7 @@ export function createDesigner(vueInstance) {
       }
     },
 
-    moveDownWidget(parentList, indexOfParentList, cmpObj) {
+    moveDownWidget(parentList, indexOfParentList) {
       if (!!parentList) {
         if (indexOfParentList === parentList.length - 1) {
           this.vueInstance.$message(this.vueInstance.i18nt('designer.hint.moveDownLastChildHint'))
@@ -593,13 +561,10 @@ export function createDesigner(vueInstance) {
 
     copyNewFieldWidget(origin) {
       let newWidget = deepClone(origin)
-      let fieldType = newWidget.type
       let tempId = generateId()
-      newWidget.id = newWidget.type + tempId
+      newWidget.id = newWidget.type.replace(/-/g, '') + tempId
       newWidget.options.name = newWidget.id
-      //newWidget.options.label = this.vueInstance.i18nt(`designer.widgetLabel.${fieldType}`)
       newWidget.options.label = newWidget.type.toLowerCase()
-      //newWidget.options.customClass = []
 
       delete newWidget.displayName
       return newWidget
@@ -607,7 +572,7 @@ export function createDesigner(vueInstance) {
 
     copyNewContainerWidget(origin) {
       let newCon = deepClone(origin)
-      newCon.id = newCon.type + generateId()
+      newCon.id = newCon.type.replace(/-/g, '') + generateId()
       newCon.options.name = newCon.id
       if (newCon.type === 'grid') {
         let newCol = deepClone( this.getContainerByType('grid-col') )
@@ -680,7 +645,7 @@ export function createDesigner(vueInstance) {
       newGridCol.options.name = 'gridCol' + tmpId
       if ((!!cols) && (cols.length > 0)) {
         let spanSum = 0
-        cols.forEach((col, idx) => {
+        cols.forEach((col) => {
           spanSum += col.options.span
         })
 
@@ -689,8 +654,7 @@ export function createDesigner(vueInstance) {
           console.log('列栅格之和超出24')
           gridWidget.cols.push(newGridCol)
         } else {
-          const newSpan = (24 - spanSum) > 12 ? 12 : (24 - spanSum)
-          newGridCol.options.span = newSpan
+          newGridCol.options.span = (24 - spanSum) > 12 ? 12 : (24 - spanSum)
           gridWidget.cols.push(newGridCol)
         }
       } else {
@@ -723,7 +687,7 @@ export function createDesigner(vueInstance) {
       this.formWidget = formWidget
     },
 
-    _0x91827355() {
+    initHistoryData() {
       this.loadFormContentFromStorage()
       this.historyData.index++
       this.historyData.steps[this.historyData.index] = ({
@@ -805,7 +769,7 @@ export function createDesigner(vueInstance) {
 
       let formConfigBackup = window.localStorage.getItem('form__config__backup')
       if (!!formConfigBackup) {
-        this.formConfig = JSON.parse(formConfigBackup)
+        //this.formConfig = JSON.parse(formConfigBackup)
         overwriteObj(this.formConfig, JSON.parse(formConfigBackup))  /* 用=赋值，会导致inject依赖注入的formConfig属性变成非响应式 */
       }
     },

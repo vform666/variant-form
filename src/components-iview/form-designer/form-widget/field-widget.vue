@@ -241,8 +241,8 @@
 					:disabled="field.options.disabled"
 					:active-text="field.options.activeText" 
 					:inactive-text="field.options.inactiveText"
-					:true-color="field.options.activeColor" 
-					:false-color="field.options.inactiveColor"
+					:true-color="field.options.activeColor==''?field.options.activeColor:undefined"
+					:false-color="field.options.inactiveColor==''?field.options.activeColor:undefined"
 					:width="field.options.switchWidth">
 					<span slot="open" v-if="field.options.activeText">{{field.options.activeText}}</span>
 					<span slot="close" v-if="field.options.inactiveText">{{field.options.inactiveText}}</span>

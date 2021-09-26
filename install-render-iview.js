@@ -2,6 +2,8 @@ import VFormRender from '@/components-iview/form-render/index.vue'
 import ContainerItem from "@/components-iview/form-render/container-item";
 import axios from "axios";
 
+import {i18n} from '@/components-iview/utils/i18n.js'
+
 VFormRender.install = function (Vue) {
   Vue.component(VFormRender.name, VFormRender)
 }
@@ -27,5 +29,6 @@ if (typeof window !== 'undefined' && window.Vue) { /* script方式引入时主�
 
 export default {
   install,
+  i18n,
   VFormRender
 }
