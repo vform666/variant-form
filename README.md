@@ -1,9 +1,104 @@
 # Variant Form
-##### 一款高效的Vue表单，可视化设计，一键生成源码，享受更多摸鱼时间。
+#### 一款高效的Vue表单，可视化设计，一键生成源码，享受更多摸鱼时间。
 
 ![image](https://ks3-cn-beijing.ksyuncs.com/vform-static/img/vform_demo.gif)
 
 <br/>
+
+### 安装依赖
+```
+npm install
+```
+
+### 开发调试
+```
+npm run serve
+```
+
+### 生产打包
+```
+npm run build
+```
+
+### 表单设计器 + 表单渲染器打包
+```
+npm run lib
+```
+
+### 表单渲染器打包
+```
+npm run lib-render
+```
+
+### 浏览器兼容性
+```Chrome（及同内核的浏览器如QQ浏览器、360浏览器等等），Firefox，Safari，IE 11```
+
+<br/>
+
+### 跟Vue项目集成
+
+<br/>
+
+#### 1. 安装包
+  ```bash
+  npm i vform-builds
+  ```
+或
+  ```bash
+  yarn add vform-builds
+  ```
+
+<br/>
+
+#### 2. 引入并全局注册VForm组件
+```
+import Vue from 'vue'
+import App from './App.vue'
+
+import ElementUI from 'element-ui'  //引入element-ui库
+import VForm from 'vform-builds'  //引入VForm库
+
+import 'element-ui/lib/theme-chalk/index.css'  //引入element-ui样式
+import 'vform-builds/dist/VFormDesigner.css'  //引入VForm样式
+
+Vue.config.productionTip = false
+
+Vue.use(ElementUI)  //全局注册element-ui
+Vue.use(VForm)  //全局注册VForm(同时注册了v-form-designer和v-form-render组件)
+
+new Vue({
+  render: h => h(App),
+}).$mount('#app')
+```
+
+<br/>
+
+#### 3. 在Vue模板中使用表单设计器组件
+```bash
+<template>
+  <v-form-designer></v-form-designer>
+</template>
+
+<script>
+  export default {
+    data() {
+      return {
+      }
+    }
+  }
+</script>
+
+<style lang="scss">
+body {
+  margin: 0;  /* 如果页面出现垂直滚动条，则加入此行CSS以消除之 */
+}
+</style>
+```
+
+<br/>
+
+### 资源链接
+<hr>
 
 文档官网：<a href="http://www.vform666.com/" target="_blank">http://www.vform666.com/</a>
 
@@ -18,23 +113,3 @@ Gitee备份仓库：<a href="https://gitee.com/vdpadmin/variant-form" target="_b
 技术交流群：微信搜索“vformAdmin”，或者扫如下二维码加群
 
 ![image](https://ks3-cn-beijing.ksyuncs.com/vform-static/img/vx-qrcode-242.png)
-
-<br/>
-
-#### 安装依赖
-```
-npm install
-```
-
-#### 开发调试
-```
-npm run serve
-```
-
-#### 生产打包
-```
-npm run build
-```
-
-#### 浏览器兼容性
-```Chrome（及同内核的浏览器如QQ浏览器、360浏览器等等），Firefox，Safari，IE 11```
