@@ -14,14 +14,10 @@ import 'view-design/dist/styles/iview.css';
 import '@/styles/index.scss'
 import '@/iconfont/iconfont.css'
 
-
-import {i18n} from '@/components-iview/utils/i18n.js'
-
 /* 递归组件如需在递归组件的嵌套组件中使用，必须注册为全局组件，原因不明？？ begin */
 Vue.component('container-widget', ContainerWidget)
 Vue.component('container-item', ContainerItem)
 /* end */
-Vue.locale = () => {};
 Vue.use(ViewUI, {size:'small'});
 
 
@@ -32,7 +28,6 @@ if (typeof window !== 'undefined') {
 Vue.config.productionTip = false
 
 new Vue({
-  i18n,
   el: "#app",
   render: h => h(App),
 })

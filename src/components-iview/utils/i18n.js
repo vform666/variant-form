@@ -8,12 +8,8 @@ import zhLocale_render from "../lang/zh-CN_render";
 
 import en from 'view-design/dist/locale/en-US';
 import zh from 'view-design/dist/locale/zh-CN';
-Vue.use(VueI18n);
 
-Vue.locale = () => {};
-
-Vue.locale('en-US', en);
-Vue.locale('zh-CN', zh);
+import locale from "view-design/src/locale"
 
 
 const langResources = {
@@ -29,10 +25,15 @@ const langResources = {
 	}
 };
 
+
+Vue.use(VueI18n);
+
 export const i18n = new VueI18n({
     locale: localStorage.getItem('v_form_locale') || 'zh-CN',  // set locale
     messages:langResources  // set locale messages
 });
+
+locale.i18n((key, value) => i18n.t(key, value))
 
 export const changeLocale = function(langName) {
   i18n.locale = langName

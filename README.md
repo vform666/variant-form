@@ -34,14 +34,13 @@ npm run lib-render-iview
 ```
 ...
 import ViewUI from 'view-design';
-import {VFormDesigner,i18n} from './{YOURPATH}/VFormDesigner.umd.min.js'
+import VFormDesigner from './{YOURPATH}/VFormDesigner.umd.min.js'
 import './{YOURPATH}/VFormDesigner.css'
 ...
 Vue.use(VFormDesigner);
 Vue.use(ViewUI, {size:'small'});
 ...
 new Vue({
-  i18n,
   render: h => h(App)
 }).$mount('#app')
 ```
@@ -74,14 +73,13 @@ body {
 ```
 ...
 import ViewUI from 'view-design';
-import {VFormRender,i18n} from './{YOURPATH}/VFormRender.umd.min.js'
+import VFormRender from './{YOURPATH}/VFormRender.umd.min.js'
 import './{YOURPATH}/VFormRender.css'
 ...
 Vue.use(VFormRender);
 Vue.use(ViewUI, {size:'small'});
 ...
 new Vue({
-  i18n,
   render: h => h(App)
 }).$mount('#app')
 ```

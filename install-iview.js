@@ -6,8 +6,6 @@ import ContainerWidget from "@/components-iview/form-designer/form-widget/contai
 import ContainerItem from "@/components-iview/form-render/container-item";
 
 
-import {i18n} from '@/components-iview/utils/i18n.js'
-
 import '@/utils/directive'
 import '@/icons'
 import '@/iconfont/iconfont.css'
@@ -44,7 +42,6 @@ if (typeof window !== 'undefined' && window.Vue) { /* script方式引入时主�
 
 export default {
   install,
-  i18n,
   VFormDesigner,
   VFormRender
 }
