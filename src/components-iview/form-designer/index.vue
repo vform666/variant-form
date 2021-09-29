@@ -3,7 +3,7 @@
 		<Header class="main-header">
 			<div class="float-left main-title">
 				<img src="../../assets/vform-logo.png" @click="openHome">
-				<span class="bold">VariantForm Pro</span> {{i18nt('application.productTitle')}} <span class="version-span">Ver {{vFormVersion}}</span>
+				<span class="bold">VariantForm (iView)</span> {{i18nt('application.productTitle')}} <span class="version-span">Ver {{vFormVersion}}</span>
 			</div>
 			<div class="float-right external-link">
 				<Dropdown @on-click="handleLanguageChanged">

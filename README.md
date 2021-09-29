@@ -31,7 +31,7 @@ npm run lib-render
 ```
 
 ### 浏览器兼容性
-```Chrome（及同内核的浏览器如QQ浏览器、360浏览器等等），Firefox，Safari，IE 11```
+```Chrome（及同内核的浏览器如QQ浏览器、360浏览器等等），Edge, Firefox，Safari，IE 11```
 
 <br/>
 
@@ -94,6 +94,8 @@ body {
 }
 </style>
 ```
+
+<br/>
 
 #### 4. 在Vue模板中使用表单渲染器组件
 ```html

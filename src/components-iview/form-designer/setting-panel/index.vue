@@ -19,7 +19,7 @@
 										</FormItem>
 										<FormItem :label="i18nt('designer.setting.labelAlign')"
 											v-if="hasConfig('label') && !noLabelSetting && (selectedWidget.type !== 'button')">
-											<RadioGroup v-model="optionModel.labelAlign" class="radio-group-custom">
+											<RadioGroup v-model="optionModel.labelAlign" class="radio-group-custom" type="button" button-style="solid">
 												<Radio label="label-left-align">
 													{{i18nt('designer.setting.leftAlign')}}
 												</Radio>
@@ -677,7 +677,7 @@
 										</FormItem>
 										<FormItem :label="i18nt('designer.setting.labelAlign')"
 											v-if="hasConfig('labelAlign')">
-											<RadioGroup v-model="optionModel.labelAlign" class="radio-group-custom">
+											<RadioGroup v-model="optionModel.labelAlign" class="radio-group-custom" type="button" button-style="solid">
 												<Radio label="label-left-align">
 													{{i18nt('designer.setting.leftAlign')}}
 												</Radio>
@@ -858,7 +858,7 @@
 									</Select>
 								</FormItem>
 								<FormItem :label="i18nt('designer.setting.labelPosition')">
-									<RadioGroup v-model="formConfig.labelPosition" class="radio-group-custom">
+									<RadioGroup v-model="formConfig.labelPosition" class="radio-group-custom" type="button" button-style="solid">
 										<Radio label="left">{{i18nt('designer.setting.leftPosition')}}
 										</Radio>
 										<Radio label="top">{{i18nt('designer.setting.topPosition')}}
@@ -866,7 +866,7 @@
 									</RadioGroup>
 								</FormItem>
 								<FormItem :label="i18nt('designer.setting.labelAlign')">
-									<RadioGroup v-model="formConfig.labelAlign" class="radio-group-custom">
+									<RadioGroup v-model="formConfig.labelAlign" class="radio-group-custom" type="button" button-style="solid">
 										<Radio label="label-left-align">{{i18nt('designer.setting.leftAlign')}}
 										</Radio>
 										<Radio label="label-center-align">
@@ -1773,6 +1773,10 @@
 			::v-deep .Radio__inner {
 				padding-left: 12px;
 				padding-right: 12px;
+			}
+
+			::v-deep .ivu-radio-wrapper {
+				padding: 0 7px;
 			}
 		}
 		
