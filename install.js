@@ -11,10 +11,12 @@ import '@/iconfont/iconfont.css'
 
 VFormDesigner.install = function (Vue) {
   Vue.component(VFormDesigner.name, VFormDesigner)
+  Vue.component('container-widget', ContainerWidget)
 }
 
 VFormRender.install = function (Vue) {
   Vue.component(VFormRender.name, VFormRender)
+  Vue.component('container-item', ContainerItem)
 }
 
 const components = [

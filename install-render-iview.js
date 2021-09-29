@@ -4,6 +4,7 @@ import axios from "axios";
 
 VFormRender.install = function (Vue) {
   Vue.component(VFormRender.name, VFormRender)
+  Vue.component('container-item', ContainerItem)
 }
 
 const components = [

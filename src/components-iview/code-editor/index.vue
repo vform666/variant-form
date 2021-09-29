@@ -113,11 +113,11 @@
       },
 
       setJsonMode() {
-        this.aceEditor?.getSession().setMode('ace/mode/json')
+        this.aceEditor.getSession().setMode('ace/mode/json')
       },
 
       setCssMode() {
-        this.aceEditor?.getSession().setMode('ace/mode/css')
+        this.aceEditor.getSession().setMode('ace/mode/css')
       },
 
     }

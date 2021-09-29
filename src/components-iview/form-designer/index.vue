@@ -187,6 +187,8 @@
 	
 	  img {
 	    cursor: pointer;
+		width: 36px;
+      	height: 36px;
 	  }
 	
 	  span.bold {

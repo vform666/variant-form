@@ -2,7 +2,7 @@
 /**
  * author: vformAdmin
  * email: vdpadmin@163.com
- * website: https://www.yuque.com/variantdev/vform
+ * website: http://www.vform666.com/
  * date: 2021.08.18
  * remark: 如果要分发VForm源码，需在本文件顶部保留此文件头信息！！
  */

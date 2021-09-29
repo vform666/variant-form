@@ -69,7 +69,7 @@
 			v-model="showImportDialogFlag" :closable="true" class="small-padding-dialog" draggable
 			:mask-closable="false" >
 			<FormItem :label-width="0">
-				<el-input type="textarea" rows="10" v-model="optionLines"></el-input>
+				<Input type="textarea" :rows="10" v-model="optionLines"></Input>
 			</FormItem>
 			<div slot="footer" class="dialog-footer">
 				<Button size="default" type="primary" @click="saveOptions">{{i18nt('designer.hint.confirm')}}
