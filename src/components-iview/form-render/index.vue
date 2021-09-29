@@ -288,7 +288,7 @@
 			getWidgetRef(widgetName, showError = false) {
 				let foundRef = this.widgetRefList[widgetName]
 				if (!foundRef && !!showError) {
-					this.$message.error(this.i18nt('render.hint.refNotFound') + widgetName)
+					this.$Message.error(this.i18nt('render.hint.refNotFound') + widgetName)
 				}
 				return foundRef
 			},

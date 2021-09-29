@@ -48,48 +48,6 @@
 					</Input>
 			</template>
 			
-			<template v-if="field.type === 'input-composite'">
-					<Input ref="fieldEditor" 
-						v-model="fieldModel" 
-						:disabled="field.options.disabled"
-						:readonly="field.options.readonly" 
-						:size="field.options.size||'default'" 
-						 class="hide-spin-button"
-						
-						:type="inputType" 
-						:password ="field.options.showPassword"
-						:placeholder="field.options.placeholder" 
-						:clearable="field.options.clearable"
-						:maxlength="field.options.maxLength"
-						:show-word-limit="field.options.showWordLimit" 
-						
-						:minlength="field.options.minLength"
-						@change="handleChangeEvent" 
-						@focus="handleFocusCustomEvent"
-						@blur="handleBlurCustomEvent" 
-						@input="handleInputCustomEvent">
-						
-						<div slot="prepend" v-if="field.options.prependControl&&field.options.prependControlType=='div'">
-							<Icon :type="field.options.prependControlIcon" />{{field.options.prependControlText}}
-						</div>
-						<div slot="append" v-if="field.options.appendControl&&field.options.appendControlType=='div'">
-							<Icon :type="field.options.appendControlIcon" />{{field.options.appendControlText}}
-						</div>
-						<Button slot="prepend"
-							v-if="field.options.prependControl&&field.options.prependControlType==='button'"
-							type="primary"
-							:disabled="field.options.disabled || field.options.prependControlDisabled"
-							:icon="field.options.prependControlIcon" 
-							@click.native="emitPrependButtonClick">{{field.options.prependControlText}}</Button>
-						<Button slot="append"
-							v-if="field.options.appendControl&&field.options.appendControlType==='button'"
-							type="primary"
-							:disabled="field.options.disabled || field.options.appendButtonDisabled"
-							:icon="field.options.appendControlIcon" 
-							@click.native="emitAppendButtonClick">{{field.options.appendControlText}}</Button>
-					</Input>
-			</template>
-
 			<template v-if="field.type === 'textarea'">
 				<Input type="textarea" ref="fieldEditor" v-model="fieldModel" :disabled="field.options.disabled"
 					:readonly="field.options.readonly" :size="field.options.size||'default'"
@@ -1571,7 +1529,7 @@
 		}
 	}
 
-	.el-form-item.selected,
+	.ivu-form-item.selected,
 	.static-content-item.selected {
 		outline: 2px solid $--color-primary;
 	}

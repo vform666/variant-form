@@ -311,11 +311,11 @@
 					this.designer.loadFormJson(importObj)
 
 					this.showImportJsonDialogFlag = false
-					this.$message.success(this.i18nt('designer.hint.importJsonSuccess'))
+					this.$Message.success(this.i18nt('designer.hint.importJsonSuccess'))
 
 					this.designer.emitHistoryChange()
 				} catch (ex) {
-					this.$message.error(ex + '')
+					this.$Message.error(ex + '')
 				}
 			},
 
@@ -337,11 +337,11 @@
 				this.$nextTick(() => {
 					let copyClipboard = new Clipboard('.copy-json-btn')
 					copyClipboard.on('success', e => {
-						this.$message.success(this.i18nt('designer.hint.copyJsonSuccess'))
+						this.$Message.success(this.i18nt('designer.hint.copyJsonSuccess'))
 						copyClipboard.destroy() // 释放内存
 					})
 					copyClipboard.on('error', e => { // 不支持复制
-						this.$message.error(this.i18nt('designer.hint.copyJsonFail'))
+						this.$Message.error(this.i18nt('designer.hint.copyJsonFail'))
 						copyClipboard.destroy()
 					})
 				})
@@ -354,21 +354,21 @@
 				this.$nextTick(() => {
 					let vueClipboard = new Clipboard('.copy-vue-btn')
 					vueClipboard.on('success', e => {
-						this.$message.success(this.i18nt('designer.hint.copyVueCodeSuccess'))
+						this.$Message.success(this.i18nt('designer.hint.copyVueCodeSuccess'))
 						vueClipboard.destroy() // 释放内存
 					})
 					vueClipboard.on('error', e => { // 不支持复制
-						this.$message.error(this.i18nt('designer.hint.copyVueCodeFail'))
+						this.$Message.error(this.i18nt('designer.hint.copyVueCodeFail'))
 						vueClipboard.destroy()
 					})
 
 					let htmlClipboard = new Clipboard('.copy-html-btn')
 					htmlClipboard.on('success', e => {
-						this.$message.success(this.i18nt('designer.hint.copyHtmlCodeSuccess'))
+						this.$Message.success(this.i18nt('designer.hint.copyHtmlCodeSuccess'))
 						htmlClipboard.destroy() // 释放内存
 					})
 					htmlClipboard.on('error', e => { // 不支持复制
-						this.$message.error(this.i18nt('designer.hint.copyHtmlCodeFail'))
+						this.$Message.error(this.i18nt('designer.hint.copyHtmlCodeFail'))
 						htmlClipboard.destroy()
 					})
 				})
@@ -376,7 +376,7 @@
 
 			  copyVueCode(e) {
 				copyToClipboard(this.vueCode, e,
-					this.$message,
+					this.$Message,
 					this.i18nt('designer.hint.copyVueCodeSuccess'),
 					this.i18nt('designer.hint.copyVueCodeFail')
 				)
@@ -384,7 +384,7 @@
 
 			  copyHtmlCode(e) {
 				copyToClipboard(this.htmlCode, e,
-					this.$message,
+					this.$Message,
 					this.i18nt('designer.hint.copyHtmlCodeSuccess'),
 					this.i18nt('designer.hint.copyHtmlCodeFail')
 				)
@@ -410,7 +410,7 @@
 
 			  copyV2SFC(e) {
 				copyToClipboard(this.sfcCode, e,
-					this.$message,
+					this.$Message,
 					this.i18nt('designer.hint.copySFCSuccess'),
 					this.i18nt('designer.hint.copySFCFail')
 				)
@@ -418,7 +418,7 @@
 
 			  copyV3SFC(e) {
 				copyToClipboard(this.sfcCodeV3, e,
-					this.$message,
+					this.$Message,
 					this.i18nt('designer.hint.copySFCSuccess'),
 					this.i18nt('designer.hint.copySFCFail')
 				)
@@ -447,16 +447,16 @@
 					this.$nextTick(() => {
 						let copyClipboard = new Clipboard('.copy-form-data-json-btn')
 						copyClipboard.on('success', e => {
-							this.$message.success(this.i18nt('designer.hint.copyJsonSuccess'))
+							this.$Message.success(this.i18nt('designer.hint.copyJsonSuccess'))
 							copyClipboard.destroy() // 释放内存
 						})
 						copyClipboard.on('error', e => { // 不支持复制
-							this.$message.error(this.i18nt('designer.hint.copyJsonFail'))
+							this.$Message.error(this.i18nt('designer.hint.copyJsonFail'))
 							copyClipboard.destroy()
 						})
 					})
 				}).catch(error => {
-					this.$message.error(error)
+					this.$Message.error(error)
 				})
 			},
 

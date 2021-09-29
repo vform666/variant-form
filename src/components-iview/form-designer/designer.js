@@ -135,7 +135,7 @@ export function createDesigner(vueInstance) {
         let wgCategory = evt.draggedContext.element.category
         if (!!evt.to) {
           if ((evt.to.className === 'sub-form-table') && (wgCategory === 'container')) {
-            //this.$message.info(this.vueInstance.i18nt('designer.hint.onlyFieldWidgetAcceptable'))
+            //this.$Message.info(this.vueInstance.i18nt('designer.hint.onlyFieldWidgetAcceptable'))
             return false
           }
         }
@@ -650,7 +650,7 @@ export function createDesigner(vueInstance) {
         })
 
         if (spanSum >= 24) {
-          //this.$message.info('列栅格之和超出24')
+          //this.$Message.info('列栅格之和超出24')
           console.log('列栅格之和超出24')
           gridWidget.cols.push(newGridCol)
         } else {

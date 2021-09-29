@@ -80,7 +80,7 @@ export const generateCode = function(formJson, codeType= 'vue') {
           alert( JSON.stringify(formData) )
         }).catch(error => {
           // Form Validation failed
-          this.$message.error(error)
+          this.$Message.error(error)
         })
       }
     }
