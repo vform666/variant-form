@@ -37,6 +37,105 @@ npm run lib-render
 
 ### 跟Vue项目集成
 
+
+
+####### 打包
+```
+//VFromDesigner:
+npm run lib-iview
+//VFromRender
+npm run lib-render-iview
+```
+
+####### 使用vFormDesigner的lib包
+1. main.js全局注册
+```
+...
+import ViewUI from 'view-design';
+import VFormDesigner from './{YOURPATH}/VFormDesigner.umd.min.js'
+import './{YOURPATH}/VFormDesigner.css'
+...
+Vue.use(VFormDesigner);
+Vue.use(ViewUI, {size:'small'});
+...
+new Vue({
+  render: h => h(App)
+}).$mount('#app')
+```
+2. 在Vue模板中使用组件
+```
+<template>
+  <v-form-designer></v-form-designer>
+</template>
+
+<script>
+  export default {
+    data() {
+      return {
+      }
+    }
+  }
+</script>
+
+<style lang="scss">
+body {
+  margin: 0;  /* 如果页面出现垂直滚动条，则加入此行CSS以消除之 */
+}
+
+
+```
+
+
+####### 使用vFormRender的lib包
+1. main.js全局注册
+```
+...
+import ViewUI from 'view-design';
+import VFormRender from './{YOURPATH}/VFormRender.umd.min.js'
+import './{YOURPATH}/VFormRender.css'
+...
+Vue.use(VFormRender);
+Vue.use(ViewUI, {size:'small'});
+...
+new Vue({
+  render: h => h(App)
+}).$mount('#app')
+```
+2. 在Vue模板中使用组件
+```
+<template>
+  <div>
+    <v-form-render :form-json="formJson" :form-data="formData" :option-data="optionData" ref="vFormRef">
+    </v-form-render>
+    <el-button type="primary" @click="submitForm">Submit</el-button>
+  </div>
+</template>
+<script>
+  export default {
+    data() {
+      return {
+        formJson: {"widgetList":[],"formConfig":{"labelWidth":80,"labelPosition":"left","size":"","labelAlign":"label-left-align","cssCode":"","customClass":"","functions":"","layoutType":"PC","onFormCreated":"","onFormMounted":"","onFormDataChange":""}},
+        formData: {},
+        optionData: {}
+      }
+    },
+    methods: {
+      submitForm() {
+        this.$refs.vFormRef.getFormData().then(formData => {
+          // Form Validation OK
+          alert( JSON.stringify(formData) )
+        }).catch(error => {
+          // Form Validation failed
+          this.$message.error(error)
+        })
+      }
+    }
+  }
+</script>
+```
+
+
+
 <br/>
 
 #### 1. 安装包
