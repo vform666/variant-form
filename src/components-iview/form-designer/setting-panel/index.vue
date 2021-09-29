@@ -543,51 +543,7 @@
 											v-if="hasConfig('labelTooltip')">
 											<Input type="text" v-model="optionModel.labelTooltip" />
 										</FormItem>
-
-										<!-- 复合输入框 -->
-										<FormItem :label-width="0" v-if="hasConfig('appendControl')">
-											<Divider size="small" class="custom-divider">{{i18nt('designer.setting.inputControl')}}
-											</Divider>
-											<div style="font-size:12px;line-height:15px;color:#AAAAAA">提示：受iview组件限制，切换前置/后置组件可能无法及时生效，请刷新页面</div>
-										</FormItem>
-										<!-- 添加前置按钮 -->
-										<FormItem :label="i18nt('designer.setting.prependControl')" v-if="hasConfig('prependControl')">
-											<Checkbox v-model="optionModel.prependControl" @on-change="updateFormView"></Checkbox>
-										</FormItem>
-										<FormItem :label="i18nt('designer.setting.prependControlDisabled')" v-if="hasConfig('prependControlDisabled')">
-											<Checkbox v-model="optionModel.prependControlDisabled"></Checkbox>
-										</FormItem>
-										<FormItem :label="i18nt('designer.setting.prependControlIcon')" v-if="hasConfig('prependControlIcon')">
-											<Input type="text" v-model="optionModel.prependControlIcon" />
-										</FormItem>
-										<FormItem :label="i18nt('designer.setting.prependControlType')" v-if="hasConfig('prependControlType')">
-											<Select v-model="optionModel.prependControlType">
-												<Option v-for="item in inputControlType" :key="item.value"
-													:label="item.label" :value="item.value">
-												</Option>
-											</Select>
-										</FormItem>
-										<FormItem :label="i18nt('designer.setting.prependControlText')" v-if="hasConfig('prependControlText')">
-											<Input type="text" v-model="optionModel.prependControlText" />
-										</FormItem>
-										<!-- 添加后置按钮 -->
-										<FormItem :label="i18nt('designer.setting.appendControl')" v-if="hasConfig('appendControl')">
-											<Checkbox v-model="optionModel.appendControl" @on-change="updateFormView"></Checkbox>
-										</FormItem>
-										<FormItem :label="i18nt('designer.setting.appendControlDisabled')" v-if="hasConfig('appendControlDisabled')">
-											<Checkbox v-model="optionModel.appendControlDisabled"></Checkbox>
-										</FormItem>
-										<FormItem :label="i18nt('designer.setting.appendControlIcon')" v-if="hasConfig('appendControlIcon')">
-											<Input type="text" v-model="optionModel.appendControlIcon" />
-										</FormItem>
-										<FormItem :label="i18nt('designer.setting.appendControlType')" v-if="hasConfig('appendControlType')">
-											<Select v-model="optionModel.appendControlType">
-												<Option v-for="item in inputControlType" :key="item.value"
-													:label="item.label" :value="item.value">
-												</Option>
-											</Select>
-										</FormItem>
-										
+									
 										<FormItem :label="i18nt('designer.setting.appendControlText')" v-if="hasConfig('appendControlText')">
 											<Input type="text" v-model="optionModel.appendControlText" />
 										</FormItem>
