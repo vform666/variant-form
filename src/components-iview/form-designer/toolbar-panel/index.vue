@@ -31,7 +31,7 @@
 
 		<Modal :title="i18nt('designer.toolbar.preview')"
 			v-model="showPreviewDialogFlag" :closable="true" class="small-padding-dialog" draggable
-			:mask-closable="false" width="75%"
+			:mask-closable="false" width="1200" 
 			:fullscreen ="layoutType === 'H5'">
 			<div v-if="showPreviewDialogFlag">
 				<div class="form-render-wrapper" :class="[layoutType === 'H5' ? 'h5-layout' : '']">
@@ -52,7 +52,7 @@
 		</Modal>
 
 		<Modal :title="i18nt('designer.toolbar.importJson')"
-			v-model="showImportJsonDialogFlag" :closable="true" class="small-padding-dialog" draggable
+			v-model="showImportJsonDialogFlag" :closable="true" class="small-padding-dialog" width="800" draggable
 			:mask-closable="false">
 			<Alert show-icon>{{i18nt('designer.hint.importJsonHint')}}</Alert>
 			<code-editor v-if="showImportJsonDialogFlag" :mode="'json'" :readonly="false" v-model="importTemplate"></code-editor>
@@ -68,7 +68,7 @@
 		
 		<Modal :title="i18nt('designer.toolbar.exportJson')"
 			v-model="showExportJsonDialogFlag" :closable="true" class="small-padding-dialog" draggable
-			:mask-closable="false">
+			width="800" :mask-closable="false">
 			<code-editor v-if="showExportJsonDialogFlag" :mode="'json'" :readonly="true" v-model="jsonContent"></code-editor>
 			<div slot="footer" class="dialog-footer">
 				<Button size="default" type="primary" class="copy-json-btn" :data-clipboard-text="jsonRawContent">
@@ -83,7 +83,7 @@
 		<Modal :title="i18nt('designer.toolbar.exportCode')"
 			v-model="showExportCodeDialogFlag" :closable="true" class="small-padding-dialog" draggable
 			:mask-closable="false"
-			width="65%">
+			width="960">
 			<Tabs type="line" class="no-box-shadow" v-model="activeCodeTab">
 				<TabPane label="Vue" name="vue">
 					<code-editor v-if="showExportCodeDialogFlag" :mode="'html'" :readonly="true" v-model="vueCode" :user-worker="false"></code-editor>
@@ -108,7 +108,7 @@
 		</Modal>
 
 		<Modal :title="i18nt('designer.hint.exportFormData')"
-			v-model="showFormDataDialogFlag" :closable="true" class="dialog-title-light-bg" draggable
+			v-model="showFormDataDialogFlag" :closable="true" class="dialog-title-light-bg" width="800" draggable
 			:mask-closable="false">
 			<div style="border: 1px solid #DCDFE6">
 				<code-editor v-if="showFormDataDialogFlag" :mode="'json'" :readonly="true" v-model="formDataJson"></code-editor>
@@ -124,7 +124,7 @@
 		</Modal>
 		
 		
-		<Modal :title="i18nt('designer.toolbar.generateSFC')" width="85%"
+		<Modal :title="i18nt('designer.toolbar.generateSFC')" width="960" 
 		           v-model="showExportSFCDialogFlag" :closable="true" class="dialog-title-light-bg" draggable
 			:mask-closable="false">
 		  <Tabs type="line" class="no-box-shadow no-padding" v-model="activeSFCTab">

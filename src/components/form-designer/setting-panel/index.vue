@@ -4,7 +4,7 @@
       <el-tab-pane :label="i18nt('designer.hint.widgetSetting')" name="1">
         <el-scrollbar class="setting-scrollbar" :style="{height: scrollerHeight}">
         <template v-if="!!designer.selectedWidget && !designer.selectedWidget.category">
-          <el-form :model="optionModel" size="mini" label-position="left" label-width="120px" class="setting-form">
+          <el-form :model="optionModel" size="mini" label-position="left" label-width="120px" class="setting-form" @submit.native.prevent>
             <el-collapse v-model="widgetActiveCollapseNames" class="setting-collapse">
               <el-collapse-item name="1" :title="i18nt('designer.setting.commonSetting')">
                 <el-form-item :label="i18nt('designer.setting.fieldName')" v-if="hasConfig('name')"
@@ -467,7 +467,7 @@
 
           <el-collapse v-model="widgetActiveCollapseNames" class="setting-collapse">
             <el-collapse-item name="1" :title="i18nt('designer.setting.commonSetting')">
-              <el-form :model="optionModel" size="mini" label-position="left" label-width="120px" class="setting-form">
+              <el-form :model="optionModel" size="mini" label-position="left" label-width="120px" class="setting-form" @submit.native.prevent>
                 <el-form-item :label="i18nt('designer.setting.widgetName')" v-if="hasConfig('name')">
                   <el-input type="text" v-model="optionModel.name"></el-input>
                 </el-form-item>
@@ -511,7 +511,7 @@
               </el-form>
 
               <el-form :model="optionModel" size="mini" v-if="selectedWidget.type === 'grid'"
-                       label-position="top" class="setting-form">
+                       label-position="top" class="setting-form" @submit.native.prevent>
                 <el-form-item :label="i18nt('designer.setting.colsOfGrid')">
                   <li v-for="(colItem, colIdx) in selectedWidget.cols" :key="colIdx" class="col-item">
                     <span class="col-span-title">{{i18nt('designer.setting.colSpanTitle')}}{{colIdx + 1}}</span>
@@ -528,7 +528,7 @@
               </el-form>
 
               <el-form :model="optionModel" size="mini" v-if="selectedWidget.type === 'grid-col'"
-                       label-position="left" label-width="120px" class="setting-form">
+                       label-position="left" label-width="120px" class="setting-form" @submit.native.prevent>
                 <el-form-item :label="i18nt('designer.setting.colSpanTitle')">
                   <el-input-number v-model.number="optionModel.span" :min="1" :max="24"
                                    style="width: 100%"></el-input-number>
@@ -536,7 +536,7 @@
               </el-form>
 
               <el-form :model="optionModel" size="mini" v-if="selectedWidget.type === 'tab'"
-                       label-position="top" class="setting-form panes-setting">
+                       label-position="top" class="setting-form panes-setting" @submit.native.prevent>
                 <el-form-item :label="i18nt('designer.setting.tabPaneSetting')">
                   <draggable tag="ul" :list="selectedWidget.tabs"
                              v-bind="{group:'panesGroup', ghostClass: 'ghost', handle: '.drag-option'}">
@@ -558,7 +558,7 @@
             </el-collapse-item>
 
             <el-collapse-item name="3" :title="i18nt('designer.setting.eventSetting')">
-              <el-form :model="optionModel" size="mini" label-position="left" label-width="150px" class="setting-form">
+              <el-form :model="optionModel" size="mini" label-position="left" label-width="150px" class="setting-form" @submit.native.prevent>
                 <el-form-item label="onSubFormRowAdd" v-if="hasConfig('onSubFormRowAdd')">
                   <el-button type="info" icon="el-icon-edit" plain round @click="editEventHandler('onSubFormRowAdd')">
                     {{i18nt('designer.setting.addEventHandler')}}</el-button>
@@ -587,7 +587,7 @@
       <el-tab-pane v-if="!!designer" :label="i18nt('designer.hint.formSetting')" name="2">
         <el-scrollbar class="setting-scrollbar" :style="{height: scrollerHeight}">
         <el-form :model="formConfig" size="mini" label-position="left" label-width="120px"
-                 class="setting-form">
+                 class="setting-form" @submit.native.prevent>
           <el-collapse v-model="formActiveCollapseNames" class="setting-collapse">
             <el-collapse-item name="1" :title="i18nt('designer.setting.basicSetting')">
               <el-form-item :label="i18nt('designer.setting.formSize')">
