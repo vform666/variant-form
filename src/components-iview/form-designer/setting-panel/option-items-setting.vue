@@ -234,7 +234,7 @@
 
 					this.showImportCascaderDialogFlag = false
 				} catch (ex) {
-					this.$message.error(this.i18nt('designer.hint.invalidOptionsData') + ex.message)
+					this.$Message.error(this.i18nt('designer.hint.invalidOptionsData') + ex.message)
 				}
 			},
 

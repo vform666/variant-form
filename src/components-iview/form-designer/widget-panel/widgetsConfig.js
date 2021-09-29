@@ -138,59 +138,7 @@ export const basicFields = [
       onBlur: '',
       onValidate: '',
     },
-  },
- {
-    type: 'input-composite',
-    icon: 'text-field',
-    formItemFlag: true,
-    options: {
-      name: '',
-      label: '',
-      labelAlign: '',
-      type: 'text',
-      defaultValue: '',
-      placeholder: '',
-      columnWidth: '200px',
-      size: '',
-      labelWidth: null,
-      labelHidden: false,
-      readonly: false,
-      disabled: false,
-      hidden: false,
-      clearable: true,
-      showPassword: false,
-      required: false,
-      validation: '',
-      validationHint: '',
-      //-------------------
-      customClass: '',  //自定义css类名
-      labelIconClass: null,
-      labelIconPosition: 'rear',
-      labelTooltip: null,
-      // minLength: null,
-      maxLength: null,
-      showWordLimit: false,
-	  prependControl: true,
-	  prependControlDisabled: false,
-	  prependControlText:"",			//后置按钮文字
-	  prependControlIcon: 'ios-person',		//后置按钮文字
-      prependControlType: 'button',
-      appendControl: true,
-      appendControlDisabled: false,
-	  appendControlText:"",			//后置按钮文字
-      appendControlIcon: 'ios-search',			//后置按钮文字
-      appendControlType: 'button',
-	  
-      //-------------------
-      onCreated: '',
-      onMounted: '',
-      onInput: '',
-      onChange: '',
-      onFocus: '',
-      onBlur: '',
-      onValidate: '',
-    },
-  },
+  }, 
   {
     type: 'textarea',
     icon: 'textarea-field',

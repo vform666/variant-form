@@ -1554,7 +1554,7 @@
 				let oldName = this.designer.selectedWidgetName
 				if (isEmptyStr(newName)) {
 					this.selectedWidget.options.name = oldName
-					this.$message.info(this.i18nt('designer.hint.nameRequired'))
+					this.$Message.info(this.i18nt('designer.hint.nameRequired'))
 					return
 				}
 
@@ -1563,7 +1563,7 @@
 					let foundRef = this.designer.formWidget.getWidgetRef(newName)
 					if (!!foundRef) {
 						this.selectedWidget.options.name = oldName
-						this.$message.info(this.i18nt('designer.hint.duplicateName') + newName)
+						this.$Message.info(this.i18nt('designer.hint.duplicateName') + newName)
 						return
 					}
 
@@ -1581,7 +1581,7 @@
 					spanSum += colItem.options.span
 				})
 				if (spanSum > 24) {
-					//this.$message.info('列栅格之和超出24')
+					//this.$Message.info('列栅格之和超出24')
 					console.log('列栅格之和超出24')
 					//TODO: 语言字符串资源化
 				}
@@ -1639,7 +1639,7 @@
 
 			deleteTabPane(curTabs, tpIdx) {
 				if (curTabs.tabs.length === 1) {
-					this.$message.info(this.i18nt('designer.hint.lastPaneCannotBeDeleted'))
+					this.$Message.info(this.i18nt('designer.hint.lastPaneCannotBeDeleted'))
 					return
 				}
 
