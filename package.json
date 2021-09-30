@@ -6,7 +6,7 @@
     "serve": "vue-cli-service serve --open src/main.js",
     "serve-iview": "vue-cli-service serve --open src/main-iview.js",
     "build": "vue-cli-service build --report --dest dist/build",
-    "build-iview": "vue-cli-service build --report --dest dist/build-iview",
+    "build-iview": "vue-cli-service build --open src/main-iview.js --report --dest dist/build-iview",
     "lib": "vue-cli-service build --report --target lib --dest dist/lib --name VFormDesigner install.js",
     "lib-render": "vue-cli-service build --report --target lib --dest dist/lib-render --name VFormRender install-render.js",
     "lib-iview": "vue-cli-service build --report --target lib --dest dist/lib-iview --name VFormDesigner-iView install-iview.js",
