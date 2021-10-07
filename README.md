@@ -1,7 +1,7 @@
 # Variant Form
 #### 一款高效的Vue低代码表单，可视化设计，一键生成源码，享受更多摸鱼时间。
 
-![image](/index_template/vform_demo.gif)
+![image](https://vform2021.oss-cn-beijing.aliyuncs.com/vform_demo.gif?versionId=CAEQGBiBgIDst4zj4hciIDQyYTkyOGY1ZGJiODQ4YTk5ZjkxMGIwMDY0MmY2M2Ri)
 
 <br/>
 
