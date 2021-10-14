@@ -2,7 +2,7 @@
 /**
  * author: vformAdmin
  * email: vdpadmin@163.com
- * website: http://www.vform666.com/
+ * website: http://www.vform666.com
  * date: 2021.08.18
  * remark: 如果要分发VForm源码，需在本文件顶部保留此文件头信息！！
  */
@@ -62,7 +62,7 @@
   import VFormWidget from './form-widget/index'
   import {createDesigner} from "@/components/form-designer/designer";
   import {addWindowResizeHandler, getQueryParam} from "@/utils/util";
-  import {VARIANT_FORM_VERSION} from "@/utils/config";
+  import {MOCK_CASE_URL, VARIANT_FORM_VERSION} from "@/utils/config";
   import i18n, { changeLocale } from "@/utils/i18n";
 
   export default {
@@ -81,6 +81,8 @@
         curLangName: '',
 
         vsCodeFlag: false,
+        caseName: '',
+
         docUrl: 'http://www.vform666.com/document.html',
         gitUrl: 'https://github.com/vform666/variant-form',
         chatUrl: 'http://www.vform666.com/chat-group.html',
@@ -98,6 +100,7 @@
     },
     created() {
       this.vsCodeFlag = getQueryParam('vscode') == 1
+      this.caseName = getQueryParam('case')
     },
     mounted() {
       this.initLocale()
@@ -108,6 +111,8 @@
           this.scrollerHeight = window.innerHeight - 56 - 36 + 'px'
         })
       })
+
+      this.loadCase()
     },
     methods: {
       openHome() {
@@ -136,6 +141,24 @@
           aDom.href = url
           //window.open(url, '_blank') //直接打开新窗口，会被浏览器拦截
         }
+      },
+
+      loadCase() {
+        if (!this.caseName) {
+          return
+        }
+
+        axios.get(MOCK_CASE_URL + this.caseName).then(res => {
+          if (!!res.data.code) {
+            this.$message.error(this.i18nt('designer.hint.sampleLoadedFail'))
+            return
+          }
+
+          this.setFormJson(res.data)
+          this.$message.success(this.i18nt('designer.hint.sampleLoadedSuccess'))
+        }).catch(error => {
+          this.$message.error(this.i18nt('designer.hint.sampleLoadedFail') + ':' +error)
+        })
       },
 
       initLocale() {

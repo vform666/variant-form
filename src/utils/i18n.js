@@ -9,6 +9,8 @@ import enLocale from "@/lang/en-US";
 import zhLocale from "@/lang/zh-CN";
 import enLocale_render from "@/lang/en-US_render";
 import zhLocale_render from "@/lang/zh-CN_render";
+import enLocale_extension from "@/lang/en-US_extension";
+import zhLocale_extension from "@/lang/zh-CN_extension";
 
 const langResources = {
   'en-US': {
@@ -17,7 +19,8 @@ const langResources = {
     },
     ...enLocaleElement,
     ...enLocale,
-    ...enLocale_render
+    ...enLocale_render,
+    ...enLocale_extension
   },
 
   'zh-CN': {
@@ -26,7 +29,8 @@ const langResources = {
     },
     ...zhLocaleElement,
     ...zhLocale,
-    ...zhLocale_render
+    ...zhLocale_render,
+    ...zhLocale_extension
   }
 }
 

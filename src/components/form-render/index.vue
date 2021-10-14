@@ -2,7 +2,7 @@
 /**
  * author: vformAdmin
  * email: vdpadmin@163.com
- * website: http://www.vform666.com/
+ * website: http://www.vform666.com
  * date: 2021.08.18
  * remark: 如果要分发VForm源码，需在本文件顶部保留此文件头信息！！
  */
@@ -15,12 +15,12 @@
            @submit.native.prevent>
     <template v-for="(widget, index) in widgetList">
       <template v-if="'container' === widget.category">
-        <container-item :widget="widget" :key="widget.id" :parent-list="widgetList"
-                          :index-of-parent-list="index" :parent-widget="null"></container-item>
+        <component :is="getContainerWidgetName(widget)" :widget="widget" :key="widget.id" :parent-list="widgetList"
+                        :index-of-parent-list="index" :parent-widget="null"></component>
       </template>
       <template v-else>
-        <field-widget :field="widget" :form-model="formDataModel" :designer="null" :key="widget.id" :parent-list="widgetList"
-                      :index-of-parent-list="index" :parent-widget="null"></field-widget>
+        <component :is="getWidgetName(widget)" :field="widget" :form-model="formDataModel" :designer="null" :key="widget.id" :parent-list="widgetList"
+                      :index-of-parent-list="index" :parent-widget="null"></component>
       </template>
     </template>
   </el-form>
@@ -29,19 +29,20 @@
 <script>
   //import ElForm from 'element-ui/packages/form/src/form.vue'  /* 用于源码调试Element UI */
   import emitter from 'element-ui/lib/mixins/emitter'
-  import FieldWidget from "../form-designer/form-widget/field-widget";
-  import ContainerItem from "./container-item";
-  import {deepClone, insertCustomCssToHead, insertGlobalFunctionsToHtml} from "../../utils/util";
-  import i18n, { changeLocale } from "../../utils/i18n";
+  import ContainerComponents from './container-item/index'
+  import FieldComponents from '@/components/form-designer/form-widget/field-widget/index'
+  import {deepClone, insertCustomCssToHead, insertGlobalFunctionsToHtml} from "../../utils/util"
+  import i18n, { changeLocale } from "../../utils/i18n"
 
   export default {
     name: "VFormRender",
     componentName: 'VFormRender',
     mixins: [emitter, i18n],
     components: {
-      FieldWidget,
-      ContainerItem,
       //ElForm,
+
+      ...ContainerComponents,
+      ...FieldComponents,
     },
     props: {
       formJson: Object, //prop传入的表单JSON配置
@@ -119,6 +120,14 @@
       this.handleOnMounted()
     },
     methods: {
+      getContainerWidgetName(widget) {
+        return widget.type + '-item'
+      },
+
+      getWidgetName(widget) {
+        return widget.type + '-widget'
+      },
+
       initLocale() {
         let curLocale = localStorage.getItem('v_form_locale') || 'zh-CN'
         this.changeLanguage(curLocale)
@@ -209,6 +218,8 @@
             this.$set(this.formDataModel, wItem.options.name, deepClone(initialValue))
           }
         }
+
+        //TODO: 如果是自定义容器组件，需要特殊处理！！！
       },
 
       addFieldChangeEventHandler() {

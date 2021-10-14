@@ -9,6 +9,7 @@ export const containers = [
       name: '',
       hidden: false,
       gutter: 12,
+      customClass: '',  //自定义css类名
     }
   },
 
@@ -20,6 +21,7 @@ export const containers = [
     options: {
       name: '',
       hidden: false,
+      customClass: '',  //自定义css类名
     }
   },
 
@@ -32,6 +34,7 @@ export const containers = [
     options: {
       name: '',
       hidden: false,
+      customClass: '',  //自定义css类名
     }
   },
 
@@ -44,6 +47,7 @@ export const containers = [
     options: {
       name: '',
       hidden: false,
+      customClass: '',  //自定义css类名
     }
   },
   */
@@ -58,6 +62,7 @@ export const containers = [
       name: '',
       hidden: false,
       span: 12,
+      customClass: '',  //自定义css类名
     }
   },
 
@@ -74,6 +79,7 @@ export const containers = [
       cellHeight: '',
       colspan: 1,
       rowspan: 1,
+      customClass: '',  //自定义css类名
     }
   },
 
@@ -89,6 +95,7 @@ export const containers = [
       hidden: false,
       active: false,
       disabled: false,
+      customClass: '',  //自定义css类名
     }
   },
 

@@ -11,12 +11,12 @@
         <transition-group name="fade" tag="div" class="form-widget-list">
           <template v-for="(widget, index) in designer.widgetList">
             <template v-if="'container' === widget.category">
-              <container-widget :widget="widget" :designer="designer" :key="widget.id" :parent-list="designer.widgetList"
-                                :index-of-parent-list="index" :parent-widget="null"></container-widget>
+              <component :is="getWidgetName(widget)" :widget="widget" :designer="designer" :key="widget.id" :parent-list="designer.widgetList"
+                                :index-of-parent-list="index" :parent-widget="null"></component>
             </template>
             <template v-else>
-              <field-widget :field="widget" :designer="designer" :key="widget.id" :parent-list="designer.widgetList"
-                            :index-of-parent-list="index" :parent-widget="null" :design-state="true"></field-widget>
+              <component :is="getWidgetName(widget)" :field="widget" :designer="designer" :key="widget.id" :parent-list="designer.widgetList"
+                            :index-of-parent-list="index" :parent-widget="null" :design-state="true"></component>
             </template>
           </template>
         </transition-group>
@@ -29,9 +29,9 @@
 
 <script>
   import Draggable from 'vuedraggable'
-  import ContainerWidget from "@/components/form-designer/form-widget/container-widget";
-  import FieldWidget from "@/components/form-designer/form-widget/field-widget";
-  import i18n from "@/utils/i18n";
+  import ContainerComponents from '@/components/form-designer/form-widget/container-widget/index'
+  import FieldComponents from '@/components/form-designer/form-widget/field-widget/index'
+  import i18n from "@/utils/i18n"
 
   export default {
     name: "VFormWidget",
@@ -39,8 +39,9 @@
     mixins: [i18n],
     components: {
       Draggable,
-      ContainerWidget,
-      FieldWidget,
+
+      ...ContainerComponents,
+      ...FieldComponents,
     },
     props: {
       designer: Object,
@@ -116,6 +117,10 @@
       this.designer.registerFormWidget(this)
     },
     methods: {
+      getWidgetName(widget) {
+        return widget.type + '-widget'
+      },
+
       disableFirefoxDefaultDrop() {
         let isFirefox = (navigator.userAgent.toLowerCase().indexOf("firefox") !== -1)
         if (isFirefox) {

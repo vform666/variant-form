@@ -1,7 +1,7 @@
 /**
  * author: vformAdmin
  * email: vdpadmin@163.com
- * website: http://www.vform666.com/
+ * website: http://www.vform666.com
  * date: 2021.08.18
  * remark: 如果要分发VForm源码，需在本文件顶部保留此文件头信息！！
  */
@@ -39,6 +39,8 @@ export function createDesigner(vueInstance) {
     vueInstance: vueInstance,
 
     formWidget: null,  //表单设计容器
+
+    cssClassList: [],  //自定义样式列表
 
     historyData: {
       index: -1,  //index: 0,
@@ -528,7 +530,7 @@ export function createDesigner(vueInstance) {
         })
 
         return newTable
-      } else {
+      } else {  //其他容器组件不支持clone操作
         return null
       }
     },
@@ -681,6 +683,14 @@ export function createDesigner(vueInstance) {
 
     handleEvent(evtName, callback) {  //用于兄弟组件接收事件
       this.vueInstance.$on(evtName, (data) => callback(data))
+    },
+
+    setCssClassList(cssClassList) {
+      this.cssClassList = cssClassList
+    },
+
+    getCssClassList() {
+      return this.cssClassList
     },
 
     registerFormWidget(formWidget) {

@@ -103,6 +103,8 @@ export default {
       fileNameForSave: 'File name:',
       saveFileTitle: 'Save as File',
       fileNameInputPlaceholder: 'Enter the file name',
+      sampleLoadedSuccess: 'Example loaded successfully',
+      sampleLoadedFail: 'Sample load failed',
 
       widgetSetting: 'Widget Config',
       formSetting: 'Form Config',
@@ -239,6 +241,7 @@ export default {
       inputButton: 'Input Button Setting',
       appendButton: 'Append Button',
       appendButtonDisabled: 'Button Disabled',
+      appendButtonIcon: 'Append Button Icon',
       buttonIcon: 'Button Icon',
       switchWidth: 'Width of Switch(px)',
       activeText: 'Active Text',

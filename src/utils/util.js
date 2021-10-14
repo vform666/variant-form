@@ -93,7 +93,7 @@ export const optionExists = function(optionsObj, optionName) {
   return Object.keys(optionsObj).indexOf(optionName) > -1
 }
 
-export const loadRemoteScript = function(srcPath, callback) {  /*记载远程js，加载成功后执行回调函数*/
+export const loadRemoteScript = function(srcPath, callback) {  /*加载远程js，加载成功后执行回调函数*/
   let sid = encodeURIComponent(srcPath)
   let oldScriptEle = document.getElementById(sid)
 
@@ -132,7 +132,7 @@ export function traverseFieldWidgets(widgetList, handler) {
       w.tabs.map(tab => {
         traverseFieldWidgets(tab.widgetList, handler)
       })
-    } else if (w.type === 'sbu-form') {
+    } else if (w.type === 'sub-form') {
       traverseFieldWidgets(w.widgetList, handler)
     }
   })
@@ -158,7 +158,7 @@ export function traverseContainWidgets(widgetList, handler) {
       w.tabs.map(tab => {
         traverseContainWidgets(tab.widgetList, handler)
       })
-    } else if (w.type === 'sbu-form') {
+    } else if (w.type === 'sub-form') {
       traverseContainWidgets(w.widgetList, handler)
     }
   })
@@ -182,8 +182,7 @@ export function copyToClipboard(content, clickEvent, $message, successMsg, error
   clipboard.onClick(clickEvent)
 }
 
-export function getQueryParam(variable)
-{
+export function getQueryParam(variable) {
   let query = window.location.search.substring(1);
   let vars = query.split("&")
   for (let i=0; i<vars.length; i++) {
