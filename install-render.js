@@ -1,10 +1,8 @@
 import VFormRender from '@/components/form-render/index.vue'
-import ContainerItem from "@/components/form-render/container-item";
 import axios from "axios";
 
 VFormRender.install = function (Vue) {
   Vue.component(VFormRender.name, VFormRender)
-  Vue.component('container-item', ContainerItem)
 }
 
 const components = [
@@ -12,10 +10,6 @@ const components = [
 ]
 
 const install = (Vue) => {
-  /* 递归组件如需在递归组件的嵌套组件中使用，必须注册为全局组件，原因不明？？ begin */
-  Vue.component('container-item', ContainerItem)
-  /* end */
-
   components.forEach(component => {
     Vue.component(component.name, component)
   })
