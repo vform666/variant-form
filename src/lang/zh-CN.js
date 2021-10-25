@@ -29,6 +29,7 @@ export default {
       'grid-col':       '栅格列',
       'table-cell':     '单元格',
       'tab-pane':       '选项卡页',
+      'data-table':     '数据表格',
 
       input:          '单行输入',
       textarea:       '多行输入',
@@ -154,7 +155,7 @@ export default {
       commonSetting: '常见属性',
       advancedSetting: '高级属性',
       eventSetting: '事件属性',
-      fieldName: '字段唯一名称',
+      uniqueName: '唯一名称',
       label: '字段标签',
       displayType: '显示类型',
       defaultValue: '默认值',
@@ -217,7 +218,10 @@ export default {
       gutter: '栅格间隔(像素)',
       columnSetting: '栅格属性设置',
       colsOfGrid: '当前栅格列:',
-      colSpanTitle: '栅格列',
+      colSpanTitle: '栅格宽度',
+      colOffsetTitle: '左侧间隔格数',
+      colPushTitle: '右移栅格数',
+      colPullTitle: '左移栅格数',
       addColumn: '增加栅格',
 
       tabPaneSetting: '选项卡设置',

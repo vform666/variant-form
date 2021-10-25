@@ -36,7 +36,6 @@ const langResources = {
 
 Vue.use(VueI18n)
 
-
 const i18n = new VueI18n({
   locale: localStorage.getItem('v_form_locale') || 'zh-CN',
   //locale: 'en-US',
@@ -58,6 +57,14 @@ export default {
   methods: {
     i18nt(key) {
       return i18n._t(key, i18n.locale, i18n._getMessages())
-    }
+    },
+
+    /* 如果key1不存在，则查找key2 */
+    i18n2t(key1, key2) {
+      return i18n.te(key1) ? i18n._t(key1, i18n.locale, i18n._getMessages()) :
+          i18n._t(key2, i18n.locale, i18n._getMessages())
+    },
+
+
   }
 }

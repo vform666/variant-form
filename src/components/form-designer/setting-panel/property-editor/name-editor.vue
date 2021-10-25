@@ -1,5 +1,5 @@
 <template>
-  <el-form-item :label="i18nt('designer.setting.fieldName')" :rules="nameRequiredRule">
+  <el-form-item :label="i18nt('designer.setting.uniqueName')" :rules="nameRequiredRule">
     <el-input type="text" v-model="optionModel.name" @change="updateWidgetNameAndRef"></el-input>
   </el-form-item>
 </template>

@@ -9,7 +9,7 @@
                      :move="checkContainerMove" @end="onContainerDragEnd">
             <li v-for="(ctn, index) in containers" :key="index" class="container-widget-item" :title="ctn.displayName"
                 @dblclick="addContainerByDbClick(ctn)">
-              <span><svg-icon :icon-class="ctn.icon" />{{i18nt(`designer.widgetLabel.${ctn.type}`)}}</span>
+              <span><svg-icon :icon-class="ctn.icon" />{{i18n2t(`designer.widgetLabel.${ctn.type}`, `extension.widgetLabel.${ctn.type}`)}}</span>
             </li>
           </draggable>
         </el-collapse-item>
@@ -19,7 +19,7 @@
                      :clone="handleFieldWidgetClone" ghost-class="ghost" :sort="false">
             <li v-for="(fld, index) in basicFields" :key="index" class="field-widget-item" :title="fld.displayName"
                 @dblclick="addFieldByDbClick(fld)">
-              <span><svg-icon :icon-class="fld.icon" />{{i18nt(`designer.widgetLabel.${fld.type}`)}}</span>
+              <span><svg-icon :icon-class="fld.icon" />{{i18n2t(`designer.widgetLabel.${fld.type}`, `extension.widgetLabel.${fld.type}`)}}</span>
             </li>
           </draggable>
         </el-collapse-item>
@@ -29,22 +29,23 @@
                      :clone="handleFieldWidgetClone" ghost-class="ghost" :sort="false">
             <li v-for="(fld, index) in advancedFields" :key="index" class="field-widget-item" :title="fld.displayName"
                 @dblclick="addFieldByDbClick(fld)">
-              <span><svg-icon :icon-class="fld.icon" />{{i18nt(`designer.widgetLabel.${fld.type}`)}}</span>
+              <span><svg-icon :icon-class="fld.icon" />{{i18n2t(`designer.widgetLabel.${fld.type}`, `extension.widgetLabel.${fld.type}`)}}</span>
             </li>
           </draggable>
         </el-collapse-item>
 
-        <!--
+        <!-- -->
         <el-collapse-item name="4" :title="i18nt('designer.customFieldTitle')">
           <draggable tag="ul" :list="customFields" :group="{name: 'dragGroup', pull: 'clone', put: false}"
                      :clone="handleFieldWidgetClone" ghost-class="ghost" :sort="false">
             <li v-for="(fld, index) in customFields" :key="index" class="field-widget-item" :title="fld.displayName"
                 @dblclick="addFieldByDbClick(fld)">
-              <span :title="fld.displayName"><svg-icon :icon-class="fld.icon" />{{i18nt(`designer.widgetLabel.${fld.type}`)}}</span>
+              <span>
+                <svg-icon :icon-class="fld.icon" />{{i18n2t(`designer.widgetLabel.${fld.type}`, `extension.widgetLabel.${fld.type}`)}}</span>
             </li>
           </draggable>
         </el-collapse-item>
-        -->
+        <!-- -->
 
       </el-collapse>
 
@@ -102,8 +103,7 @@
         this.containers = this.containers.map(con => {
           return {
             ...con,
-            //category: 'container',
-            displayName: this.i18nt(`designer.widgetLabel.${con.type}`)
+            displayName: this.i18n2t(`designer.widgetLabel.${con.type}`, `extension.widgetLabel.${con.type}`)
           }
         }).filter(con => {
           return !con.internal
@@ -112,25 +112,23 @@
         this.basicFields = this.basicFields.map(fld => {
           return {
             ...fld,
-            displayName: this.i18nt(`designer.widgetLabel.${fld.type}`)
+            displayName: this.i18n2t(`designer.widgetLabel.${fld.type}`, `extension.widgetLabel.${fld.type}`)
           }
         })
 
         this.advancedFields = this.advancedFields.map(fld => {
           return {
             ...fld,
-            displayName: this.i18nt(`designer.widgetLabel.${fld.type}`)
+            displayName: this.i18n2t(`designer.widgetLabel.${fld.type}`, `extension.widgetLabel.${fld.type}`)
           }
         })
 
-        ///*
         this.customFields = this.customFields.map(fld => {
           return {
             ...fld,
-            displayName: this.i18nt(`designer.widgetLabel.${fld.type}`)
+            displayName: this.i18n2t(`designer.widgetLabel.${fld.type}`, `extension.widgetLabel.${fld.type}`)
           }
         })
-        //*/
       },
 
       handleContainerWidgetClone(origin) {

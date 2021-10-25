@@ -62,6 +62,9 @@ export const containers = [
       name: '',
       hidden: false,
       span: 12,
+      offset: 0,
+      push: 0,
+      pull: 0,
       customClass: '',  //自定义css类名
     }
   },
@@ -98,6 +101,46 @@ export const containers = [
       customClass: '',  //自定义css类名
     }
   },
+
+  /*
+  {
+    type: 'data-table',
+    category: 'container',
+    icon: 'data-table',
+    options: {
+      name: '',
+      label: '',
+      hidden: false,
+      columns: {},
+      checkboxColumn: {
+        width: 45,
+      },
+      operationColumn: {
+        buttons: [
+          {label: 'Edit', name: '', type: '', plain: false, round: true, circle: false, disabled: false, hidden: false},
+          {label: 'View', name: '', type: '', plain: false, round: true, circle: false, disabled: false, hidden: false},
+          {label: 'Delete', name: '', type: '', plain: false, round: true, circle: false, disabled: false, hidden: false},
+          {label: 'More...', name: '', type: '', plain: false, round: true, circle: false, disabled: false, hidden: false},
+        ]
+      },
+      size: 'medium',
+      height: '100%',
+      maxHeight: '1200px',
+      stripe: false,
+      border: false,
+      fit: true,
+      highlightCurrentRow: false,
+      emptyText: 'no data',
+      showHeader: true,
+      showCheckBox: true,
+      showPager: false,
+      pagerPosition: 'center',
+      pagerSmall: false,
+      pagerBackground: false,
+      pagerCount: 7,
+    }
+  }
+  */
 
 ]
 
@@ -886,6 +929,7 @@ export const advancedFields = [
 ]
 
 export const customFields = [
+  /*
   {
     type: 'custom',
     icon: 'custom-component',
@@ -895,5 +939,22 @@ export const customFields = [
     type: 'slot',
     icon: 'slot-component',
   },
+  */
 
 ]
+
+export function addContainerWidgetSchema(containerSchema) {
+  containers.push(containerSchema)
+}
+
+export function addBasicFieldSchema(fieldSchema) {
+  basicFields.push(fieldSchema)
+}
+
+export function addAdvancedFieldSchema(fieldSchema) {
+  advancedFields.push(fieldSchema)
+}
+
+export function addCustomWidgetSchema(widgetSchema) {
+  customFields.push(widgetSchema)
+}

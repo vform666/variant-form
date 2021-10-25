@@ -9,7 +9,7 @@
 -->
 
 <template>
-  <el-container class="full-height">
+  <el-container class="main-container full-height">
     <el-header class="main-header">
       <div class="float-left main-title">
         <img src="../../assets/vform-logo.png" @click="openHome">
@@ -267,9 +267,10 @@
   }
 
   .el-header.toolbar-header {
+    font-size: 14px;
     border-bottom: 1px dotted #CCCCCC;
     height: 42px !important;
-    line-height: 42px !important;
+    //line-height: 42px !important;
   }
 
   .el-aside.side-panel {

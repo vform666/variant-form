@@ -45,7 +45,7 @@
     <el-dialog :title="i18nt('designer.toolbar.importJson')" :visible.sync="showImportJsonDialogFlag"
                v-if="showImportJsonDialogFlag" :show-close="true" class="small-padding-dialog" center v-dialog-drag
                :close-on-click-modal="false" :close-on-press-escape="false" :destroy-on-close="true">
-      <el-alert type="info" :title="i18nt('designer.hint.importJsonHint')" show-icon></el-alert>
+      <el-alert type="info" :title="i18nt('designer.hint.importJsonHint')" show-icon class="alert-padding"></el-alert>
       <code-editor :mode="'json'" :readonly="false" v-model="importTemplate"></code-editor>
       <div slot="footer" class="dialog-footer">
         <el-button type="primary" @click="doJsonImport">
@@ -445,15 +445,15 @@
 
   .small-padding-dialog {
     ::v-deep .el-dialog__header {
-      padding-top: 3px;
-      padding-bottom: 3px;
+      //padding-top: 3px;
+      //padding-bottom: 3px;
       background: #f1f2f3;
     }
 
     ::v-deep .el-dialog__body {
       padding: 12px 15px 12px 15px;
 
-      .el-alert {
+      .el-alert.alert-padding {
         padding: 0 10px;
       }
     }
@@ -481,6 +481,7 @@
 
   .form-render-wrapper {
     //height: calc(100vh - 142px);
+    all: revert !important; /* 防止表单继承el-dialog等外部样式，未生效，原因不明？？ */
   }
 
   .form-render-wrapper.h5-layout {

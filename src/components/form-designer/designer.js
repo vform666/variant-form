@@ -7,8 +7,8 @@
  */
 
 import {deepClone, generateId, overwriteObj} from "@/utils/util"
-import {advancedFields, basicFields, containers} from "@/components/form-designer/widget-panel/widgetsConfig.js";
-import {VARIANT_FORM_VERSION} from "@/utils/config";
+import {containers, advancedFields, basicFields, customFields} from "@/components/form-designer/widget-panel/widgetsConfig.js"
+import {VARIANT_FORM_VERSION} from "@/utils/config"
 
 export function createDesigner(vueInstance) {
   let defaultFormConfig = {
@@ -443,9 +443,10 @@ export function createDesigner(vueInstance) {
     },
 
     getContainerByType(typeName) {
+      let allWidgets = [...containers, ...basicFields, ...advancedFields, ...customFields]
       let foundCon = null
-      containers.forEach(con => {
-        if (!!con.type && (con.type === typeName)) {
+      allWidgets.forEach(con => {
+        if (!!con.category && !!con.type && (con.type === typeName)) {
           foundCon = con
         }
       })
@@ -454,20 +455,11 @@ export function createDesigner(vueInstance) {
     },
 
     getFieldWidgetByType(typeName) {
+      let allWidgets = [...containers, ...basicFields, ...advancedFields, ...customFields]
       let foundWidget = null
-      basicFields.forEach(bf => {
-        if (!!bf.type && (bf.type === typeName)) {
-          foundWidget = bf
-        }
-      })
-
-      if (!!foundWidget) {
-        return foundWidget
-      }
-
-      advancedFields.forEach(af => {
-        if (!!af.type && (af.type === typeName)) {
-          foundWidget = af
+      allWidgets.forEach(widget => {
+        if (!!!widget.category && !!widget.type && (widget.type === typeName)) {
+          foundWidget = widget
         }
       })
 

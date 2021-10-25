@@ -18,15 +18,13 @@
 <script>
   import i18n from "../../../utils/i18n"
   import refMixin from "../../../components/form-render/refMixin"
-  import ContainerItems from './index'
   import FieldComponents from '@/components/form-designer/form-widget/field-widget/index'
 
   export default {
     name: "TableCellItem",
-    componentName: "TableCellItem",
+    componentName: "ContainerItem",
     mixins: [i18n, refMixin],
     components: {
-      ...ContainerItems,
       ...FieldComponents,
     },
     props: {

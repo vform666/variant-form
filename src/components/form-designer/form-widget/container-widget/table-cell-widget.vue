@@ -54,7 +54,6 @@
 <script>
   import Draggable from 'vuedraggable'
   import i18n from "@/utils/i18n"
-  import ContainerComponents from '@/components/form-designer/form-widget/container-widget/index'
   import FieldComponents from '@/components/form-designer/form-widget/field-widget/index'
 
   export default {
@@ -63,7 +62,6 @@
     mixins: [i18n],
     components: {
       Draggable,
-      ...ContainerComponents,
       ...FieldComponents,
     },
     props: {

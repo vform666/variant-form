@@ -11,6 +11,9 @@ import 'element-ui/lib/theme-chalk/index.css'
 import '@/styles/index.scss'
 import '@/iconfont/iconfont.css'
 
+import {loadExtension} from '@/extension/extension-loader'
+
+loadExtension()
 
 Vue.use(ElementUI, { size: 'small' })
 

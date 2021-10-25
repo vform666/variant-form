@@ -1,4 +1,5 @@
-import {deepClone} from "@/utils/util";
+import {deepClone} from "@/utils/util"
+import FormValidators from '@/utils/validators'
 
 export default {
   inject: ['refList', 'formConfig', 'globalOptionData', 'globalModel'],

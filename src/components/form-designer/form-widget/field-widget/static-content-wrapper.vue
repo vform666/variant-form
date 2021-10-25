@@ -1,7 +1,7 @@
 <template>
   <div class="field-wrapper" :class="{'design-time-bottom-margin': !!this.designer}">
     <div class="static-content-item" v-show="!field.options.hidden || (designState === true)"
-         :class="{'selected': selected}" @click.stop="selectField(field)">
+         :class="[selected ? 'selected' : '', customClass]" @click.stop="selectField(field)">
       <slot></slot>
     </div>
 
@@ -17,7 +17,7 @@
 
       <div class="drag-handler background-opacity" v-if="designer.selectedId === field.id">
         <i class="el-icon-rank" :title="i18nt('designer.hint.dragHandler')"></i>
-        <i>{{i18nt('designer.widgetLabel.' + field.type)}}</i>
+        <i>{{i18n2t(`designer.widgetLabel.${field.type}`, `extension.widgetLabel.${field.type}`)}}</i>
         <i v-if="field.options.hidden === true" class="iconfont icon-hide"></i>
       </div>
     </template>
@@ -58,6 +58,10 @@
     computed: {
       selected() {
         return !!this.designer && this.field.id === this.designer.selectedId
+      },
+
+      customClass() {
+        return !!this.field.options.customClass ? this.field.options.customClass.join(' ') : ''
       },
 
     },

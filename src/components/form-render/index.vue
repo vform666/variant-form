@@ -29,7 +29,7 @@
 <script>
   //import ElForm from 'element-ui/packages/form/src/form.vue'  /* 用于源码调试Element UI */
   import emitter from 'element-ui/lib/mixins/emitter'
-  import ContainerComponents from './container-item/index'
+  import './container-item/index'
   import FieldComponents from '@/components/form-designer/form-widget/field-widget/index'
   import {deepClone, insertCustomCssToHead, insertGlobalFunctionsToHtml} from "../../utils/util"
   import i18n, { changeLocale } from "../../utils/i18n"
@@ -41,7 +41,6 @@
     components: {
       //ElForm,
 
-      ...ContainerComponents,
       ...FieldComponents,
     },
     props: {

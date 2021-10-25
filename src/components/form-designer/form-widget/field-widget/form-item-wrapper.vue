@@ -48,7 +48,7 @@
 
       <div class="drag-handler background-opacity" v-if="designer.selectedId === field.id">
         <i class="el-icon-rank" :title="i18nt('designer.hint.dragHandler')"></i>
-        <i>{{i18nt('designer.widgetLabel.' + field.type)}}</i>
+        <i>{{i18n2t(`designer.widgetLabel.${field.type}`, `extension.widgetLabel.${field.type}`)}}</i>
         <i v-if="field.options.hidden === true" class="iconfont icon-hide"></i>
       </div>
     </template>

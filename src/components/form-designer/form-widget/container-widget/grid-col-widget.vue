@@ -1,5 +1,6 @@
 <template>
   <el-col v-else-if="widget.type === 'grid-col'" class="grid-cell" :span="widget.options.span || 12"
+          :offset="widget.options.offset || 0" :push="widget.options.push || 0" :pull="widget.options.pull || 0"
           :class="[selected ? 'selected' : '', customClass]"
           :key="widget.id" @click.native.stop="selectWidget(widget)">
     <draggable :list="widget.widgetList" v-bind="{group:'dragGroup', ghostClass: 'ghost',animation: 200}"
@@ -40,7 +41,6 @@
 <script>
   import Draggable from 'vuedraggable'
   import i18n from "@/utils/i18n";
-  import ContainerComponents from '@/components/form-designer/form-widget/container-widget/index'
   import FieldComponents from '@/components/form-designer/form-widget/field-widget/index'
 
   export default {
@@ -49,7 +49,6 @@
     mixins: [i18n],
     components: {
       Draggable,
-      ...ContainerComponents,
       ...FieldComponents,
     },
     props: {
@@ -150,11 +149,8 @@
 <style lang="scss" scoped>
   .grid-cell {
     min-height: 38px;
-    //line-height: 36px;
-    margin: 6px 0;
+    //margin: 6px 0;  /* 设置了margin，栅格列的offset、push、pull会失效！！ */
     padding: 3px;
-    //min-height: 300px;
-    //border-right: 1px dotted #cccccc;
     outline: 1px dashed #336699;
     position: relative;
 
@@ -164,7 +160,6 @@
 
     .grid-col-action{
       position: absolute;
-      //bottom: -30px;
       bottom: 0;
       right: -2px;
       height: 28px;
@@ -183,7 +178,6 @@
     .grid-col-handler {
       position: absolute;
       top: -2px;
-      //bottom: -24px;  /* 拖拽手柄位于组件下方，有时无法正常拖动，原因未明？？ */
       left: -2px;
       height: 22px;
       line-height: 22px;
@@ -195,7 +189,7 @@
         font-style: normal;
         color: #fff;
         margin: 4px;
-        cursor: default;  //cursor: move;
+        cursor: default;
       }
     }
   }

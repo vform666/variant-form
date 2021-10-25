@@ -29,7 +29,6 @@
   import refMixin from "../../../components/form-render/refMixin"
   import ContainerItemWrapper from './container-item-wrapper'
   import containerItemMixin from "./containerItemMixin";
-  import ContainerItems from './index'
   import FieldComponents from '@/components/form-designer/form-widget/field-widget/index'
 
   export default {
@@ -38,7 +37,6 @@
     mixins: [emitter, i18n, refMixin, containerItemMixin],
     components: {
       ContainerItemWrapper,
-      ...ContainerItems,
       ...FieldComponents,
     },
     props: {

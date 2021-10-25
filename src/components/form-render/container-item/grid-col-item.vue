@@ -1,5 +1,6 @@
 <template>
   <el-col class="grid-cell" :span="widget.options.span" :class="[customClass]"
+          :offset="widget.options.offset || 0" :push="widget.options.push || 0" :pull="widget.options.pull || 0"
           :key="widget.id" v-show="!widget.options.hidden">
     <template v-if="!!widget.widgetList && (widget.widgetList.length > 0)">
       <template v-for="(subWidget, swIdx) in widget.widgetList">
@@ -24,15 +25,13 @@
 <script>
   import i18n from "../../../utils/i18n"
   import refMixin from "../../../components/form-render/refMixin"
-  import ContainerItems from './index'
   import FieldComponents from '@/components/form-designer/form-widget/field-widget/index'
 
   export default {
     name: "GridColItem",
-    componentName: 'GridColItem',
+    componentName: 'ContainerItem',
     mixins: [i18n, refMixin],
     components: {
-      ...ContainerItems,
       ...FieldComponents,
     },
     props: {

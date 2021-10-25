@@ -48,7 +48,6 @@
   import i18n from "@/utils/i18n"
   import containerMixin from "@/components/form-designer/form-widget/container-widget/containerMixin"
   import ContainerWrapper from "@/components/form-designer/form-widget/container-widget/container-wrapper"
-  import ContainerComponents from '@/components/form-designer/form-widget/container-widget/index'
   import FieldComponents from '@/components/form-designer/form-widget/field-widget/index'
 
   export default {
@@ -59,7 +58,6 @@
       ContainerWrapper,
       Draggable,
 
-      ...ContainerComponents,
       ...FieldComponents,
     },
     props: {

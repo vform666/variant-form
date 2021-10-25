@@ -1,7 +1,9 @@
+import Vue from 'vue'
+
 /**
  * 格式说明：属性名称==对应属性编辑器的组件名称
  */
-let COMMON_PROPERTIES = {
+const COMMON_PROPERTIES = {
   //字段
   'name'              :            'name-editor',
   'label'             :            'label-editor',
@@ -56,10 +58,13 @@ let COMMON_PROPERTIES = {
   'cellHeight'         :            'cellHeight-editor',
   'gutter'             :            'gutter-editor',
   'span'               :            'span-editor',
+  'offset'             :            'offset-editor',
+  'push'               :            'push-editor',
+  'pull'               :            'pull-editor',
 
 }
 
-let ADVANCED_PROPERTIES = {
+const ADVANCED_PROPERTIES = {
   'min'               :            'min-editor',
   'max'               :            'max-editor',
   'precision'         :            'precision-editor',
@@ -95,7 +100,7 @@ let ADVANCED_PROPERTIES = {
 
 }
 
-let EVENT_PROPERTIES = {
+const EVENT_PROPERTIES = {
   //字段
   'onCreated'         :            'onCreated-editor',
   'onMounted'         :            'onMounted-editor',
@@ -133,6 +138,21 @@ export function registerAdvancedProperty(propName, propEditorName) {
 
 export function registerEventProperty(propName, propEditorName) {
   EVENT_PROPERTIES[propName] = propEditorName
+}
+
+export function registerCPEditor(propName, propEditorName, editorComponent) {
+  Vue.component(propEditorName, editorComponent)
+  registerCommonProperty(propName, propEditorName)
+}
+
+export function registerAPEditor(propName, propEditorName, editorComponent) {
+  Vue.component(propEditorName, editorComponent)
+  registerAdvancedProperty(propName, propEditorName)
+}
+
+export function registerEPEditor(propName, propEditorName, editorComponent) {
+  Vue.component(propEditorName, editorComponent)
+  registerEventProperty(propName, propEditorName)
 }
 
 export default {

@@ -30,7 +30,8 @@
 
     <div class="drag-handler" v-if="designer.selectedId === widget.id && !widget.internal">
       <i class="el-icon-rank" :title="i18nt('designer.hint.dragHandler')"></i>
-      <i>{{i18nt('designer.widgetLabel.' + widget.type)}}</i>
+      <i>{{i18n2t(`designer.widgetLabel.${widget.type}`, `extension.widgetLabel.${widget.type}`)}}</i>
+      <i v-if="widget.options.hidden === true" class="iconfont icon-hide"></i>
     </div>
   </div>
 </template>
@@ -79,7 +80,7 @@
       position: absolute;
       top: -2px;
       //bottom: -24px;  /* 拖拽手柄位于组件下方，有时无法正常拖动，原因未明？？ */
-      left: -6px;
+      left: -2px;
       height: 22px;
       line-height: 22px;
       background: $--color-primary;
