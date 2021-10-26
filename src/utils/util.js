@@ -134,6 +134,8 @@ export function traverseFieldWidgets(widgetList, handler) {
       })
     } else if (w.type === 'sub-form') {
       traverseFieldWidgets(w.widgetList, handler)
+    } else if (w.category === 'container') {  //自定义容器
+      traverseFieldWidgets(w.widgetList, handler)
     }
   })
 }
@@ -159,6 +161,8 @@ export function traverseContainWidgets(widgetList, handler) {
         traverseContainWidgets(tab.widgetList, handler)
       })
     } else if (w.type === 'sub-form') {
+      traverseContainWidgets(w.widgetList, handler)
+    } else if (w.category === 'container') {  //自定义容器
       traverseContainWidgets(w.widgetList, handler)
     }
   })

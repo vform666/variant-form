@@ -3,7 +3,7 @@ import {genVue2JS} from "@/utils/vue2js-generator";
 import {beautifierOpts} from "@/utils/beautifierLoader";
 import {genVue3JS} from "@/utils/vue3js-generator";
 
-function buildClassAttr(ctn, defaultClass) {
+export function buildClassAttr(ctn, defaultClass) {
   const cop = ctn.options
   let gridClassArray = []
   !!defaultClass && gridClassArray.push(defaultClass)
@@ -103,7 +103,7 @@ ${ctn.cols.map(col => {
 
 }
 
-function buildContainerWidget(widget, formConfig) {
+export function buildContainerWidget(widget, formConfig) {
   return containerTemplates[widget.type] ? containerTemplates[widget.type](widget, formConfig) : null
 }
 
@@ -358,7 +358,7 @@ const elTemplates = {  //字段组件属性
 
 }
 
-function buildFieldWidget(widget, formConfig) {
+export function buildFieldWidget(widget, formConfig) {
   let wop = widget.options
   const label = wop.labelHidden ? '' : wop.label
   const labelWidthAttr = wop.labelHidden ? `label-width="0"` : (!!wop.labelWidth ? `label-width="${wop.labelWidth}px"` : '')
@@ -370,9 +370,12 @@ function buildFieldWidget(widget, formConfig) {
   !!wop.customClass && (wop.customClass.length > 0) && classArray.push(wop.customClass.join(' '))
   if (!!wop.labelAlign) {
     wop.labelAlign !== 'label-left-align' && classArray.push(wop.labelAlign)
-  } else {
+  } else if (!!widget.formItemFlag) {
     //classArray.push(formConfig.labelAlign || 'label-left-align')
     formConfig.labelAlign !== 'label-left-align' && classArray.push(formConfig.labelAlign)
+  }
+  if (!widget.formItemFlag) {
+    classArray.push('static-content-item')
   }
   const classAttr = (classArray.length > 0) ? `class="${classArray.join(' ')}"` : ''
 
@@ -395,12 +398,12 @@ function buildFieldWidget(widget, formConfig) {
   const isFormItem = !!widget.formItemFlag
   const vShowAttr = !!wop.hidden ? `v-show="false"` : ''
   return isFormItem ?
-`<el-form-item label="${label}" ${labelWidthAttr} ${labelTooltipAttr} ${propAttr} ${classAttr} >
+`<el-form-item label="${label}" ${labelWidthAttr} ${labelTooltipAttr} ${propAttr} ${classAttr}>
   ${customLabelDom}
   ${fwDom}
 </el-form-item>`
       :
-`<div class="static-content-item" ${vShowAttr}>${fwDom}</div>`
+`<div ${classAttr} ${vShowAttr}>${fwDom}</div>`
 }
 
 function genTemplate(formConfig, widgetList, vue3Flag = false) {
@@ -510,6 +513,24 @@ const genScopedCSS = function (formConfig, vue3Flag = false) {
   }`
 
   return cssTemplate
+}
+
+/**
+ * 注册容器组件的代码生成器
+ * @param containerType 容器类型，必须唯一
+ * @param ctGenerator 代码生成器函数，接收两个参数(containerWidget, formConfig)，返回生成的容器组件代码
+ */
+export const registerCWGenerator = function (containerType, ctGenerator) {
+  containerTemplates[containerType] = ctGenerator
+}
+
+/**
+ * 注册字段组件的代码生成器
+ * @param fieldType 字段类型，必须唯一
+ * @param ftGenerator 代码生成器函数，接收两个参数(fieldWidget, formConfig)，返回生成的字段组件代码
+ */
+export const registerFWGenerator = function (fieldType, ftGenerator) {
+  elTemplates[fieldType] = ftGenerator
 }
 
 export const genSFC = function (formConfig, widgetList, beautifier, vue3Flag = false) {

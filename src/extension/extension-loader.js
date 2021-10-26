@@ -10,10 +10,13 @@ import * as PEFactory from '@/components/form-designer/setting-panel/property-ed
 import {cardSchema} from "@/extension/samples/extension-schema"
 import CardWidget from '@/extension/samples/card/card-widget'
 import CardItem from '@/extension/samples/card/card-item'
+import {registerCWGenerator} from '@/utils/sfc-generator'
+import {cardTemplateGenerator} from '@/extension/samples/extension-sfc-generator'
 
 import {alertSchema} from "@/extension/samples/extension-schema"
 import AlertWidget from '@/extension/samples/alert/alert-widget'
-
+import {registerFWGenerator} from '@/utils/sfc-generator'
+import {alertTemplateGenerator} from '@/extension/samples/extension-sfc-generator'
 
 export const loadExtension = function () {
 
@@ -22,12 +25,13 @@ export const loadExtension = function () {
    * 1. 加载组件Json Schema;
    * 2. 全局注册容器组件，容器组件有两种状态——设计期和运行期，故需要注册两个组件；
    * 3. 全局注册属性编辑器组件（基本属性、高级属性、事件属性）；
-   * 4. 加载完毕。
+   * 4. 注册容器组件的代码生成器；
+   * 5. 加载完毕。
    */
   addContainerWidgetSchema(cardSchema)  //加载组件Json Schema
   /* -------------------------------------------------- */
-  Vue.component(CardWidget.name, CardWidget)  //设计期的容器组件
-  Vue.component(CardItem.name, CardItem)  //运行期的容器组件
+  Vue.component(CardWidget.name, CardWidget)  //注册设计期的容器组件
+  Vue.component(CardItem.name, CardItem)  //注册运行期的容器组件
   /* -------------------------------------------------- */
   PERegister.registerCPEditor('cardWidth', 'card-cardWidth-editor',
       PEFactory.createInputTextEditor('cardWidth', 'extension.setting.cardWidth'))
@@ -41,6 +45,8 @@ export const loadExtension = function () {
       PEFactory.createSelectEditor('shadow', 'extension.setting.cardShadow',
           {optionItems: shadowOptions}))
   /* -------------------------------------------------- */
+  registerCWGenerator('card', cardTemplateGenerator)  //注册容器组件的代码生成器
+  /* -------------------------------------------------- */
   /* 容器组件加载完毕 end */
 
   /**
@@ -48,7 +54,8 @@ export const loadExtension = function () {
    * 1. 加载组件Json Schema;
    * 2. 全局注册字段组件，字段组件设计期和运行期共用，故需要仅需注册一个组件；
    * 3. 全局注册属性编辑器组件（基本属性、高级属性、事件属性）；
-   * 4. 加载完毕。
+   * 4. 注册字段组件的代码生成器；
+   * 5. 加载完毕。
    */
   addCustomWidgetSchema(alertSchema)  //加载组件Json Schema
   /* -------------------------------------------------- */
@@ -92,6 +99,8 @@ export const loadExtension = function () {
 
   PERegister.registerEPEditor('onClose', 'alert-onClose-editor',
       PEFactory.createEventHandlerEditor('onClose', []))
+  /* -------------------------------------------------- */
+  registerFWGenerator('alert', alertTemplateGenerator)  //注册字段组件的代码生成器
   /* -------------------------------------------------- */
   /* 字段组件加载完毕 end */
 }

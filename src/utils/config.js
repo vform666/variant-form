@@ -8,7 +8,7 @@ export const DESIGNER_OPTIONS = {
 
 }
 
-export const VARIANT_FORM_VERSION = '2.1.0'
+export const VARIANT_FORM_VERSION = '2.1.1'
 
 export const MOCK_CASE_URL = 'https://www.fastmock.site/mock/2de212e0dc4b8e0885fea44ab9f2e1d0/vform/'
 
