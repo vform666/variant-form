@@ -2,10 +2,13 @@ import axios from 'axios'
 
 import VFormDesigner from '@/components/form-designer/index.vue'
 import VFormRender from '@/components/form-render/index.vue'
+import {loadExtension} from "@/extension/extension-loader"
 
 import '@/utils/directive'
 import '@/icons'
 import '@/iconfont/iconfont.css'
+
+loadExtension()
 
 VFormDesigner.install = function (Vue) {
   Vue.component(VFormDesigner.name, VFormDesigner)

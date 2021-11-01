@@ -1,5 +1,8 @@
 import VFormRender from '@/components/form-render/index.vue'
-import axios from "axios";
+import {loadExtension} from "@/extension/extension-loader"
+import axios from "axios"
+
+loadExtension()
 
 VFormRender.install = function (Vue) {
   Vue.component(VFormRender.name, VFormRender)

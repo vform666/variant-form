@@ -20,7 +20,7 @@
 
 ### 安装依赖
 ```
-npm install
+npm install --registry=https://registry.npm.taobao.org
 ```
 
 ### 开发调试
