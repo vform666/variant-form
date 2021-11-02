@@ -4,7 +4,10 @@
     <el-card :key="widget.id" class="card-container" @click.native.stop="selectWidget(widget)"
              :shadow="widget.options.shadow" :style="{width: widget.options.cardWidth + '!important' || ''}"
              :class="[selected ? 'selected' : '', customClass]">
-      <div slot="header"><span>{{widget.options.label}}</span></div>
+      <div slot="header" class="clear-fix">
+        <span>{{widget.options.label}}</span>
+        <i class="el-icon-arrow-up float-right"></i>
+      </div>
       <draggable :list="widget.widgetList" v-bind="{group:'dragGroup', ghostClass: 'ghost',animation: 200}"
                  handle=".drag-handler"
                  @add="(evt) => onContainerDragAdd(evt, widget.widgetList)"
@@ -80,4 +83,18 @@
   ::v-deep .el-card__header {
     padding: 10px 12px;
   }
+
+  .clear-fix:before, .clear-fix:after {
+    display: table;
+    content: "";
+  }
+
+  .clear-fix:after {
+    clear: both;
+  }
+
+  .float-right {
+    float: right;
+  }
+
 </style>

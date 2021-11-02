@@ -9,7 +9,7 @@
 -->
 
 <template>
-  <div class="container-wrapper">
+  <div class="container-wrapper" :class="[customClass]">
     <slot></slot>
 
     <div class="container-action" v-if="designer.selectedId === widget.id && !widget.internal">
@@ -50,6 +50,12 @@
       indexOfParentList: Number,
       designer: Object,
     },
+    computed: {
+      customClass() {
+        return !!this.widget.options.customClass ? this.widget.options.customClass.join(' ') : ''
+      },
+
+    }
   }
 </script>
 

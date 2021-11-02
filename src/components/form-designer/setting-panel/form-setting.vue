@@ -168,6 +168,15 @@
 
       }
     },
+    created() {
+      //导入表单JSON后需要重新加载自定义CSS样式！！！
+      this.designer.handleEvent('form-json-imported', () => {
+        this.formCssCode = this.formConfig.cssCode
+        insertCustomCssToHead(this.formCssCode)
+        this.extractCssClass()
+        this.designer.emitEvent('form-css-updated', deepClone(this.cssClassList))
+      })
+    },
     mounted() {
       /* SettingPanel和FormWidget为兄弟组件, 在FormWidget加载formConfig时，
          此处SettingPanel可能无法获取到formConfig.cssCode, 故加个延时函数！ */
@@ -187,8 +196,8 @@
       extractCssClass() {
         let regExp = /\..*{/g
         let result = this.formCssCode.match(regExp)
-        //this.cssClassList.length = 0
-        this.cssClassList.splice(0, this.cssClassList.length)  //清除数组必须用splice，length=0不会响应式更新！！
+        let cssNameArray = []
+
         if (!!result && result.length > 0) {
           result.forEach((rItem) => {
             let classArray = rItem.split(',')  //切分逗号分割的多个class
@@ -198,26 +207,30 @@
                 if (caItem.indexOf('.', 1) !== -1) {  //查找第二个.位置
                   let newClass = caItem.substring(caItem.indexOf('.') + 1, caItem.indexOf('.', 1))  //仅截取第一、二个.号之间的class
                   if (!!newClass) {
-                    this.cssClassList.push(newClass.trim())
+                    cssNameArray.push(newClass.trim())
                   }
                 } else if (caItem.indexOf(' ') !== -1) {  //查找第一个空格位置
                   let newClass = caItem.substring(caItem.indexOf('.') + 1, caItem.indexOf(' '))  //仅截取第一、二个.号之间的class
                   if (!!newClass) {
-                    this.cssClassList.push(newClass.trim())
+                    cssNameArray.push(newClass.trim())
                   }
                 } else {
                   if (caItem.indexOf('{') !== -1) {  //查找第一个{位置
                     let newClass = caItem.substring(caItem.indexOf('.') + 1, caItem.indexOf('{'))
-                    this.cssClassList.push( newClass.trim() )
+                    cssNameArray.push( newClass.trim() )
                   } else {
                     let newClass = caItem.substring(caItem.indexOf('.') + 1)
-                    this.cssClassList.push( newClass.trim() )
+                    cssNameArray.push( newClass.trim() )
                   }
                 }
               })
             }
           })
         }
+
+        //this.cssClassList.length = 0
+        this.cssClassList.splice(0, this.cssClassList.length)  //清除数组必须用splice，length=0不会响应式更新！！
+        this.cssClassList = Array.from( new Set(cssNameArray) )  //数组去重
       },
 
       saveFormCss() {

@@ -1,5 +1,5 @@
 <template>
-  <container-item-wrapper>
+  <container-item-wrapper :widget="widget">
     <el-card :key="widget.id" class="card-container" :class="[customClass]"
              :shadow="widget.options.shadow" :style="{width: widget.options.cardWidth + '!important' || ''}"
              :ref="widget.id" v-show="!widget.options.hidden">

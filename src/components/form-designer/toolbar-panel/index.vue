@@ -6,9 +6,9 @@
       <el-button type="text" :disabled="redoDisabled" :title="i18nt('designer.toolbar.redoHint')" @click="redoHistory">
         <svg-icon icon-class="redo" /></el-button>
       <el-button-group style="margin-left: 20px">
-        <el-button :type="layoutType === 'PC' ? 'primary': ''" @click="changeLayoutType('PC')">
+        <el-button :type="layoutType === 'PC' ? 'info': ''" @click="changeLayoutType('PC')">
           {{i18nt('designer.toolbar.pcLayout')}}</el-button>
-        <el-button :type="layoutType === 'H5' ? 'primary': ''" @click="changeLayoutType('H5')">
+        <el-button :type="layoutType === 'H5' ? 'info': ''" @click="changeLayoutType('H5')">
           {{i18nt('designer.toolbar.mobileLayout')}}</el-button>
       </el-button-group>
     </div>
@@ -278,6 +278,8 @@
           this.$message.success(this.i18nt('designer.hint.importJsonSuccess'))
 
           this.designer.emitHistoryChange()
+
+          this.designer.emitEvent('form-json-imported', [])
         } catch(ex) {
           this.$message.error(ex + '')
         }

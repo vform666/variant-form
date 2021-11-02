@@ -1,5 +1,5 @@
 <template>
-  <container-item-wrapper>
+  <container-item-wrapper :widget="widget">
 
     <el-row :key="widget.id" :gutter="widget.options.gutter" class="grid-container"
             :class="[customClass]"

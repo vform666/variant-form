@@ -1,5 +1,5 @@
 <template>
-  <container-item-wrapper>
+  <container-item-wrapper :widget="widget">
 
     <div :key="widget.id" class="tab-container"
          v-show="!widget.options.hidden">
