@@ -1,9 +1,12 @@
 <template>
   <container-item-wrapper :widget="widget">
-    <el-card :key="widget.id" class="card-container" :class="[customClass]"
+    <el-card :key="widget.id" class="card-container" :class="[!!widget.options.folded ? 'folded' : '', customClass]"
              :shadow="widget.options.shadow" :style="{width: widget.options.cardWidth + '!important' || ''}"
              :ref="widget.id" v-show="!widget.options.hidden">
-      <div slot="header"><span>{{widget.options.label}}</span></div>
+      <div slot="header" class="clear-fix">
+        <span>{{widget.options.label}}</span>
+        <i class="float-right" :class="[!widget.options.folded ? 'el-icon-arrow-down' : 'el-icon-arrow-up']" @click="toggleCard"></i>
+      </div>
       <template v-if="!!widget.widgetList && (widget.widgetList.length > 0)">
         <template v-for="(subWidget, swIdx) in widget.widgetList">
           <template v-if="'container' === subWidget.category">
@@ -53,6 +56,9 @@
       this.unregisterFromRefList()
     },
     methods: {
+      toggleCard() {
+        this.widget.options.folded = !this.widget.options.folded
+      },
 
     },
   }
@@ -61,6 +67,23 @@
 <style lang="scss" scoped>
   ::v-deep .el-card__header {
     padding: 10px 12px;
+  }
+
+  .folded ::v-deep .el-card__body {
+    display: none;
+  }
+
+  .clear-fix:before, .clear-fix:after {
+    display: table;
+    content: "";
+  }
+
+  .clear-fix:after {
+    clear: both;
+  }
+
+  .float-right {
+    float: right;
   }
 
 </style>

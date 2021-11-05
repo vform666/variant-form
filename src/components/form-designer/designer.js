@@ -121,9 +121,12 @@ export function createDesigner(vueInstance) {
       }
     },
 
-    updateSelectedWidgetNameAndRef(selectedWidget, newName) {
+    updateSelectedWidgetNameAndRef(selectedWidget, newName, newLabel) {
       this.selectedWidgetName = newName
-      selectedWidget.options.name = newName
+      //selectedWidget.options.name = newName  //此行多余
+      if (!!newLabel && (Object.keys(selectedWidget.options).indexOf('label') > -1)) {
+        selectedWidget.options.label = newLabel
+      }
     },
 
     clearSelected() {

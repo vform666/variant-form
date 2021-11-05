@@ -270,6 +270,8 @@ export default {
     },
 
     handleInputCustomEvent(value) {
+      this.syncUpdateFormModel(value)
+
       if (!!this.field.options.onInput) {
         let customFn = new Function('value', this.field.options.onInput)
         customFn.call(this, value)

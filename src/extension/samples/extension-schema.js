@@ -7,6 +7,7 @@ export const cardSchema = {
     name: '',
     label: 'card',
     hidden: false,
+    folded: false,
     cardWidth: '100%',
     shadow: 'never',
     customClass: '',

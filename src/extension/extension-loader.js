@@ -33,6 +33,9 @@ export const loadExtension = function () {
   Vue.component(CardWidget.name, CardWidget)  //注册设计期的容器组件
   Vue.component(CardItem.name, CardItem)  //注册运行期的容器组件
   /* -------------------------------------------------- */
+  PERegister.registerCPEditor('folded', 'card-folded-editor',
+      PEFactory.createBooleanEditor('folded', 'extension.setting.cardFolded'))
+
   PERegister.registerCPEditor('cardWidth', 'card-cardWidth-editor',
       PEFactory.createInputTextEditor('cardWidth', 'extension.setting.cardWidth'))
 

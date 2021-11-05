@@ -201,7 +201,7 @@
                 this.buildDataFromWidget(childItem, wItem)
               })
             }
-          } else {
+          } else {  //自定义容器组件
             if (!!wItem.widgetList && (wItem.widgetList.length > 0)) {
               wItem.widgetList.forEach((childItem) => {
                 this.buildDataFromWidget(childItem, wItem)
@@ -217,8 +217,6 @@
             this.$set(this.formDataModel, wItem.options.name, deepClone(initialValue))
           }
         }
-
-        //TODO: 如果是自定义容器组件，需要特殊处理！！！
       },
 
       addFieldChangeEventHandler() {

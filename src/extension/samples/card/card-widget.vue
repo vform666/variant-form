@@ -3,10 +3,11 @@
                      :index-of-parent-list="indexOfParentList">
     <el-card :key="widget.id" class="card-container" @click.native.stop="selectWidget(widget)"
              :shadow="widget.options.shadow" :style="{width: widget.options.cardWidth + '!important' || ''}"
-             :class="[selected ? 'selected' : '', customClass]">
+             :class="[selected ? 'selected' : '', !!widget.options.folded ? 'folded' : '', customClass]">
       <div slot="header" class="clear-fix">
         <span>{{widget.options.label}}</span>
-        <i class="el-icon-arrow-up float-right"></i>
+        <i class="float-right" :class="[!widget.options.folded ? 'el-icon-arrow-down' : 'el-icon-arrow-up']"
+           @click="toggleCard"></i>
       </div>
       <draggable :list="widget.widgetList" v-bind="{group:'dragGroup', ghostClass: 'ghost',animation: 200}"
                  handle=".drag-handler"
@@ -70,7 +71,12 @@
        */
       checkContainerMove(evt) {
         return true
-      }
+      },
+
+      toggleCard() {
+        this.widget.options.folded = !this.widget.options.folded
+      },
+
     }
   }
 </script>
@@ -82,6 +88,10 @@
 
   ::v-deep .el-card__header {
     padding: 10px 12px;
+  }
+
+  .folded ::v-deep .el-card__body {
+    display: none;
   }
 
   .clear-fix:before, .clear-fix:after {

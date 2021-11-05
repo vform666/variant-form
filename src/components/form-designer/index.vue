@@ -61,7 +61,7 @@
   import SettingPanel from './setting-panel/index'
   import VFormWidget from './form-widget/index'
   import {createDesigner} from "@/components/form-designer/designer";
-  import {addWindowResizeHandler, getQueryParam} from "@/utils/util";
+  import {addWindowResizeHandler, deepClone, getQueryParam} from "@/utils/util";
   import {MOCK_CASE_URL, VARIANT_FORM_VERSION} from "@/utils/config";
   import i18n, { changeLocale } from "@/utils/i18n";
 
@@ -74,6 +74,12 @@
       ToolbarPanel,
       SettingPanel,
       VFormWidget,
+    },
+    props: {
+      fieldListApi: {
+        type: Object,
+        default: null,
+      }
     },
     data() {
       return {
@@ -91,11 +97,13 @@
         scrollerHeight: 0,
 
         designer: createDesigner(this),
+
+        fieldList: []
       }
     },
     provide() {
       return {
-        //
+        serverFieldList: this.fieldList,
       }
     },
     created() {
@@ -113,6 +121,8 @@
       })
 
       this.loadCase()
+
+      this.loadFieldListFromServer()
     },
     methods: {
       openHome() {
@@ -172,6 +182,26 @@
         this.changeLanguage(curLocale)
       },
 
+      loadFieldListFromServer() {
+        if (!this.fieldListApi) {
+          return
+        }
+
+        axios.get(this.fieldListApi.URL).then(res => {
+          let labelKey = this.fieldListApi.labelKey || 'label'
+          let nameKey = this.fieldListApi.nameKey || 'name'
+
+          res.data.forEach(fieldItem => {
+            this.fieldList.push({
+              label: fieldItem[labelKey],
+              name: fieldItem[nameKey]
+            })
+          })
+        }).catch(error => {
+          this.$message.error(error)
+        })
+      },
+
       handleLanguageChanged(command) {
         this.changeLanguage(command)
         this.curLangName = this.i18nt('application.' + command)
@@ -193,6 +223,13 @@
           if (modifiedFlag) {
             this.designer.emitHistoryChange()
           }
+        }
+      },
+
+      getFormJson() {
+        return {
+          widgetList: deepClone(this.designer.widgetList),
+          formConfig: deepClone(this.designer.formConfig)
         }
       },
 
