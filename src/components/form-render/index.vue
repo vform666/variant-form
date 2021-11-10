@@ -10,7 +10,7 @@
 
 <template>
   <el-form :label-position="labelPosition" :size="size" :class="[customClass]" class="render-form"
-           :label-width="formConfig.labelWidth + 'px'" :validate-on-rule-change="false"
+           :label-width="labelWidth" :validate-on-rule-change="false"
            :model="formDataModel" ref="renderForm"
            @submit.native.prevent>
     <template v-for="(widget, index) in widgetList">
@@ -67,6 +67,8 @@
     },
     data() {
       return {
+        formJsonObj: this.formJson,
+
         formDataModel: {
           //
         },
@@ -76,11 +78,11 @@
     },
     computed: {
       formConfig() {
-        return this.formJson.formConfig
+        return this.formJsonObj.formConfig
       },
 
       widgetList() {
-        return this.formJson.widgetList
+        return this.formJsonObj.widgetList
       },
 
       labelPosition() {
@@ -89,6 +91,14 @@
         }
 
         return 'left'
+      },
+
+      labelWidth() {
+        if (!!this.formConfig && !!this.formConfig.labelWidth) {
+          return this.formConfig.labelWidth + 'px'
+        }
+
+        return '80px'
       },
 
       size() {
@@ -100,7 +110,7 @@
       },
 
       customClass() {
-        return this.formConfig.customClass || ''
+        return !!this.formConfig && !!this.formConfig.customClass ? this.formConfig.customClass : ''
       },
 
     },
@@ -108,17 +118,21 @@
       //
     },
     created() {
-      this.insertCustomStyleAndScriptNode()
-      this.buildFormModel()
-      this.addFieldChangeEventHandler()
-      this.registerFormToRefList()
-      this.handleOnCreated()
+      this.initFormObject()
     },
     mounted() {
       this.initLocale()
       this.handleOnMounted()
     },
     methods: {
+      initFormObject() {
+        this.insertCustomStyleAndScriptNode()
+        this.buildFormModel()
+        this.addFieldChangeEventHandler()
+        this.registerFormToRefList()
+        this.handleOnCreated()
+      },
+
       getContainerWidgetName(widget) {
         return widget.type + '-item'
       },
@@ -143,6 +157,10 @@
       },
 
       buildFormModel() {
+        if (!this.formJsonObj || !this.widgetList) {
+          return
+        }
+
         this.widgetList.forEach((wItem) => {
           this.buildDataFromWidget(wItem, null)
         })
@@ -220,6 +238,8 @@
       },
 
       addFieldChangeEventHandler() {
+        this.$off('fieldChange')  //移除原有事件监听
+
         this.$on('fieldChange', function (fieldName, newValue, oldValue, subFormName, subFormRowIndex) {
           this.handleFieldDataChange(fieldName, newValue, oldValue, subFormName, subFormRowIndex)
           this.$emit('formChange', fieldName, newValue, oldValue, this.formDataModel, subFormName, subFormRowIndex)
@@ -231,7 +251,7 @@
       },
 
       handleFieldDataChange(fieldName, newValue, oldValue, subFormName, subFormRowIndex) {
-        if (!!this.formConfig.onFormDataChange) {
+        if (!!this.formConfig && !!this.formConfig.onFormDataChange) {
           let customFunc = new Function('fieldName', 'newValue', 'oldValue', 'formModel', 'subFormName', 'subFormRowIndex',
               this.formConfig.onFormDataChange)
           customFunc.call(this, fieldName, newValue, oldValue, this.formDataModel, subFormName, subFormRowIndex)
@@ -239,14 +259,14 @@
       },
 
       handleOnCreated() {
-        if (!!this.formConfig.onFormCreated) {
+        if (!!this.formConfig && !!this.formConfig.onFormCreated) {
           let customFunc = new Function(this.formConfig.onFormCreated)
           customFunc.call(this)
         }
       },
 
       handleOnMounted() {
-        if (!!this.formConfig.onFormMounted) {
+        if (!!this.formConfig && !!this.formConfig.onFormMounted) {
           let customFunc = new Function(this.formConfig.onFormMounted)
           customFunc.call(this)
         }
@@ -283,6 +303,37 @@
           this.$message.error(this.i18nt('render.hint.refNotFound') + widgetName)
         }
         return foundRef
+      },
+
+      /**
+       * 动态加载表单JSON
+       * @param newFormJson
+       */
+      setFormJson(newFormJson) {
+        if (!!newFormJson) {
+          if ((typeof newFormJson === 'string') || (newFormJson.constructor === Object)) {
+            let  newFormJsonObj = null
+            if (typeof newFormJson === 'string') {
+              newFormJsonObj = JSON.parse(newFormJson)
+            } else {
+              newFormJsonObj = newFormJson
+            }
+
+            if (!newFormJsonObj.formConfig || !newFormJsonObj.widgetList) {
+              this.$message.error('Set form json failed.')
+              return
+            }
+
+            this.$set(this.formJsonObj, 'formConfig', newFormJsonObj.formConfig)
+            this._provided.formConfig = newFormJsonObj.formConfig  //强制更新provide的formConfig对象
+            this.$set(this.formJsonObj, 'widgetList', newFormJsonObj.widgetList)
+
+            this.initFormObject()
+            this.handleOnMounted()
+          } else {
+            this.$message.error('Set form json failed.')
+          }
+        }
       },
 
       getFormData(needValidation = true) {

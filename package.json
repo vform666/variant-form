@@ -1,6 +1,6 @@
 {
   "name": "variant-form",
-  "version": "2.1.4",
+  "version": "2.1.5",
   "private": false,
   "scripts": {
     "serve": "vue-cli-service serve --open src/main.js",
