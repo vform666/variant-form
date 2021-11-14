@@ -7,6 +7,7 @@ export default {
 
     setting: {
       cardFolded: 'Folded',
+      cardShowFold: 'Show Fold',
       cardWidth: 'Width Of Card',
       cardShadow: 'Shadow',
 

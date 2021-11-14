@@ -3,7 +3,7 @@
                      :parent-widget="parentWidget" :parent-list="parentList" :index-of-parent-list="indexOfParentList"
                      :sub-form-row-index="subFormRowIndex" :sub-form-col-index="subFormColIndex" :sub-form-row-id="subFormRowId">
     <el-slider ref="fieldEditor" v-model="fieldModel"
-               :disabled="field.options.disabled"
+               :disabled="field.options.disabled" :show-stops="field.options.showStops"
                :min="field.options.min" :max="field.options.max" :step="field.options.step"
                :range="field.options.range" :vertical="field.options.vertical"
                @change="handleChangeEvent">

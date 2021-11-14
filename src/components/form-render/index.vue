@@ -118,6 +118,7 @@
       //
     },
     created() {
+      this.buildFormModel(!this.formJsonObj ? null : this.formJsonObj.widgetList)
       this.initFormObject()
     },
     mounted() {
@@ -127,7 +128,7 @@
     methods: {
       initFormObject() {
         this.insertCustomStyleAndScriptNode()
-        this.buildFormModel()
+        //this.buildFormModel()
         this.addFieldChangeEventHandler()
         this.registerFormToRefList()
         this.handleOnCreated()
@@ -156,14 +157,20 @@
         }
       },
 
-      buildFormModel() {
-        if (!this.formJsonObj || !this.widgetList) {
-          return
+      buildFormModel(widgetList) {
+        if (!!widgetList && (widgetList.length > 0)) {
+          widgetList.forEach((wItem) => {
+            this.buildDataFromWidget(wItem)
+          })
         }
 
-        this.widgetList.forEach((wItem) => {
-          this.buildDataFromWidget(wItem, null)
-        })
+        // if (!this.formJsonObj || !this.widgetList) {
+        //   return
+        // }
+        //
+        // this.widgetList.forEach((wItem) => {
+        //   this.buildDataFromWidget(wItem)
+        // })
       },
 
       buildDataFromWidget(wItem) {
@@ -171,7 +178,7 @@
           if (wItem.type === 'grid') {
             if (!!wItem.cols && (wItem.cols.length > 0)) {
               wItem.cols.forEach((childItem) => {
-                this.buildDataFromWidget(childItem, wItem)
+                this.buildDataFromWidget(childItem)
               })
             }
           } else if (wItem.type === 'table') {
@@ -179,7 +186,7 @@
               wItem.rows.forEach((rowItem) => {
                 if (!!rowItem.cols && (rowItem.cols.length > 0)) {
                   rowItem.cols.forEach((colItem) => {
-                    this.buildDataFromWidget(colItem, wItem)
+                    this.buildDataFromWidget(colItem)
                   })
                 }
               })
@@ -189,7 +196,7 @@
               wItem.tabs.forEach((tabItem) => {
                 if (!!tabItem.widgetList && (tabItem.widgetList.length > 0)) {
                   tabItem.widgetList.forEach((childItem) => {
-                    this.buildDataFromWidget(childItem, wItem)
+                    this.buildDataFromWidget(childItem)
                   })
                 }
               })
@@ -216,13 +223,13 @@
           } else if ((wItem.type === 'grid-col') || (wItem.type === 'table-cell')) {
             if (!!wItem.widgetList && (wItem.widgetList.length > 0)) {
               wItem.widgetList.forEach((childItem) => {
-                this.buildDataFromWidget(childItem, wItem)
+                this.buildDataFromWidget(childItem)
               })
             }
           } else {  //自定义容器组件
             if (!!wItem.widgetList && (wItem.widgetList.length > 0)) {
               wItem.widgetList.forEach((childItem) => {
-                this.buildDataFromWidget(childItem, wItem)
+                this.buildDataFromWidget(childItem)
               })
             }
           }
@@ -305,6 +312,12 @@
         return foundRef
       },
 
+      clearFormDataModel() {
+        for (let pkey in this.formDataModel) {
+          delete this.formDataModel[pkey]
+        }
+      },
+
       /**
        * 动态加载表单JSON
        * @param newFormJson
@@ -312,7 +325,7 @@
       setFormJson(newFormJson) {
         if (!!newFormJson) {
           if ((typeof newFormJson === 'string') || (newFormJson.constructor === Object)) {
-            let  newFormJsonObj = null
+            let newFormJsonObj = null
             if (typeof newFormJson === 'string') {
               newFormJsonObj = JSON.parse(newFormJson)
             } else {
@@ -320,9 +333,14 @@
             }
 
             if (!newFormJsonObj.formConfig || !newFormJsonObj.widgetList) {
-              this.$message.error('Set form json failed.')
+              this.$message.error('Invalid format of form json.')
               return
             }
+
+            /* formDataModel必须在widgetList赋值完成初始化，因为widgetList赋值意味着子组件开始创建！！！ */
+            //this.formDataModel = {}  //清空表单数据对象（有bug，会导致表单校验失败！！）
+            this.clearFormDataModel()  //上行代码有问题，会导致表单校验失败，故保留原对象引用只清空对象属性！！
+            this.buildFormModel(newFormJsonObj.widgetList)
 
             this.$set(this.formJsonObj, 'formConfig', newFormJsonObj.formConfig)
             this._provided.formConfig = newFormJsonObj.formConfig  //强制更新provide的formConfig对象

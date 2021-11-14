@@ -36,6 +36,9 @@ export const loadExtension = function () {
   PERegister.registerCPEditor('folded', 'card-folded-editor',
       PEFactory.createBooleanEditor('folded', 'extension.setting.cardFolded'))
 
+  PERegister.registerCPEditor('showFold', 'card-showFold-editor',
+      PEFactory.createBooleanEditor('showFold', 'extension.setting.cardShowFold'))
+
   PERegister.registerCPEditor('cardWidth', 'card-cardWidth-editor',
       PEFactory.createInputTextEditor('cardWidth', 'extension.setting.cardWidth'))
 

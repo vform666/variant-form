@@ -102,7 +102,7 @@ export const containers = [
     }
   },
 
-  /*
+    /*
   {
     type: 'data-table',
     category: 'container',
@@ -662,6 +662,7 @@ export const basicFields = [
       label: '',
       labelAlign: '',
       columnWidth: '200px',
+      showStops: true,
       size: '',
       labelWidth: null,
       labelHidden: false,
@@ -677,7 +678,7 @@ export const basicFields = [
       labelTooltip: null,
       min: 0,
       max: 100,
-      step: 1,
+      step: 10,
       range: false,
       //vertical: false,
       height: null,

@@ -2,6 +2,10 @@
   <el-scrollbar class="side-scroll-bar" :style="{height: scrollerHeight}">
     <div class="panel-container">
 
+    <el-tabs v-model="firstTab" class="no-bottom-margin indent-left-margin">
+      <el-tab-pane name="componentLib">
+        <span slot="label"><i class="el-icon-set-up"></i> {{i18nt('designer.componentLib')}}</span>
+
       <el-collapse v-model="activeNames" class="widget-collapse">
         <el-collapse-item name="1" :title="i18nt('designer.containerTitle')">
           <draggable tag="ul" :list="containers" :group="{name: 'dragGroup', pull: 'clone', put: false}"
@@ -49,6 +53,15 @@
 
       </el-collapse>
 
+      </el-tab-pane>
+
+      <el-tab-pane name="formLib" v-if="false">
+        <span slot="label"><i class="el-icon-c-scale-to-original"></i> {{i18nt('designer.formLib')}}</span>
+
+      </el-tab-pane>
+
+    </el-tabs>
+
     </div>
   </el-scrollbar>
 </template>
@@ -70,6 +83,8 @@
     },
     data() {
       return {
+        firstTab: 'componentLib',
+
         scrollerHeight: 0,
 
         activeNames: ['1', '2', '3', '4'],
@@ -179,11 +194,23 @@
     padding-bottom: 10px;
   }
 
+  .no-bottom-margin ::v-deep .el-tabs__header {
+    margin-bottom: 0;
+  }
+
+  .indent-left-margin {
+    ::v-deep .el-tabs__nav {
+      margin-left: 20px;
+    }
+  }
+
   .el-collapse-item ::v-deep ul > li {
     list-style: none;
   }
 
   .widget-collapse {
+    border-top-width: 0;
+
     ::v-deep .el-collapse-item__header {
       margin-left: 8px;
       font-style: italic;

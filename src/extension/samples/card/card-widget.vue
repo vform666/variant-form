@@ -6,7 +6,8 @@
              :class="[selected ? 'selected' : '', !!widget.options.folded ? 'folded' : '', customClass]">
       <div slot="header" class="clear-fix">
         <span>{{widget.options.label}}</span>
-        <i class="float-right" :class="[!widget.options.folded ? 'el-icon-arrow-down' : 'el-icon-arrow-up']"
+        <i v-if="widget.options.showFold" class="float-right"
+           :class="[!widget.options.folded ? 'el-icon-arrow-down' : 'el-icon-arrow-up']"
            @click="toggleCard"></i>
       </div>
       <draggable :list="widget.widgetList" v-bind="{group:'dragGroup', ghostClass: 'ghost',animation: 200}"
@@ -76,6 +77,14 @@
       toggleCard() {
         this.widget.options.folded = !this.widget.options.folded
       },
+
+      /**
+       * 设置折叠/打开状态
+       * @param folded
+       */
+      setFolded(folded) {
+        this.widget.options.folded = !!folded
+      }
 
     }
   }

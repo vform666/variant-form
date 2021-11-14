@@ -11,6 +11,8 @@ export default {
   },
 
   designer: {
+    componentLib: 'Components',
+    formLib: 'Templates',
     containerTitle: 'Container',
     dragHandlerHint: 'drag container or field to layout center',
     dragAction: 'drag',
@@ -164,6 +166,7 @@ export default {
       endPlaceholder: 'End Placeholder',
       widgetColumnWidth: 'Width',
       widgetSize: 'Size',
+      showStops: 'Show Stops',
       displayStyle: 'Display Style',
       inlineLayout: 'inline',
       blockLayout: 'block',

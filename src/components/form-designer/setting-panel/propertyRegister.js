@@ -15,6 +15,7 @@ const COMMON_PROPERTIES = {
   'endPlaceholder'    :            'endPlaceholder-editor',
   'columnWidth'       :            'columnWidth-editor',
   'size'              :            'size-editor',
+  'showStops'         :            'showStops-editor',
   'displayStyle'      :            'displayStyle-editor',
   'buttonStyle'       :            'buttonStyle-editor',
   'border'            :            'border-editor',

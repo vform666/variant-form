@@ -7,6 +7,7 @@ export default {
 
     setting: {
       cardFolded: '是否收起',
+      cardShowFold: '显示折叠按钮',
       cardWidth: '卡片宽度',
       cardShadow: '显示阴影',
 

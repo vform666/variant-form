@@ -11,6 +11,8 @@ export default {
   },
 
   designer: {
+    componentLib: '组件库',
+    formLib: '表单模板',
     containerTitle: '容器',
     dragHandlerHint: '鼠标拖拽容器组件或字段组件并放置于表单中',
     dragAction: '拖动',
@@ -164,6 +166,7 @@ export default {
       endPlaceholder: '截止占位内容',
       widgetColumnWidth: '组件列宽',
       widgetSize: '组件大小',
+      showStops: '显示间断点',
       displayStyle: '显示样式',
       inlineLayout: '行内',
       blockLayout: '块',
