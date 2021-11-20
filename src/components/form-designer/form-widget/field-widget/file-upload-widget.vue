@@ -160,6 +160,20 @@
         return this.handleOnBeforeUpload(file)
       },
 
+      handleOnBeforeUpload(file) {
+        if (!!this.field.options.onBeforeUpload) {
+          let bfFunc = new Function('file', this.field.options.onBeforeUpload)
+          let result = bfFunc.call(this, file)
+          if (typeof result === 'boolean') {
+            return result
+          } else {
+            return true
+          }
+        }
+
+        return true
+      },
+
       handleFileUpload(res, file, fileList) {
         if (!!this.field.options.onUploadSuccess) {
           let mountFunc = new Function('result', 'file', 'fileList', this.field.options.onUploadSuccess)

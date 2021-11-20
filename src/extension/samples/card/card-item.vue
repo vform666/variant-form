@@ -5,7 +5,8 @@
              :ref="widget.id" v-show="!widget.options.hidden">
       <div slot="header" class="clear-fix">
         <span>{{widget.options.label}}</span>
-        <i class="float-right" :class="[!widget.options.folded ? 'el-icon-arrow-down' : 'el-icon-arrow-up']" @click="toggleCard"></i>
+        <i v-if="widget.options.showFold" class="float-right"
+           :class="[!widget.options.folded ? 'el-icon-arrow-down' : 'el-icon-arrow-up']" @click="toggleCard"></i>
       </div>
       <template v-if="!!widget.widgetList && (widget.widgetList.length > 0)">
         <template v-for="(subWidget, swIdx) in widget.widgetList">

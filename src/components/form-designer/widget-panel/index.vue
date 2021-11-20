@@ -55,9 +55,22 @@
 
       </el-tab-pane>
 
-      <el-tab-pane name="formLib" v-if="false">
+      <el-tab-pane name="formLib" style="padding: 8px">
         <span slot="label"><i class="el-icon-c-scale-to-original"></i> {{i18nt('designer.formLib')}}</span>
 
+        <template v-for="(ft, idx) in formTemplates">
+          <el-card :bord-style="{ padding: '0' }" shadow="hover" class="ft-card">
+            <el-popover placement="right" trigger="hover">
+              <img slot="reference"  :src="ft.imgUrl" style="width: 200px">
+              <img :src="ft.imgUrl" style="height: 600px;width: 720px">
+            </el-popover>
+            <div class="bottom clear-fix">
+              <span class="ft-title">#{{idx+1}} {{ft.title}}</span>
+              <el-button type="text" class="right-button" @click="loadFormTemplate(ft.jsonUrl)">
+                {{i18nt('designer.hint.loadFormTemplate')}}</el-button>
+            </div>
+          </el-card>
+        </template>
       </el-tab-pane>
 
     </el-tabs>
@@ -68,9 +81,11 @@
 
 <script>
   import Draggable from 'vuedraggable'
-  import {containers, basicFields, advancedFields, customFields} from "./widgetsConfig";
-  import {addWindowResizeHandler} from "@/utils/util";
-  import i18n from "@/utils/i18n";
+  import {containers, basicFields, advancedFields, customFields} from "./widgetsConfig"
+  import {formTemplates} from './templatesConfig'
+  import {addWindowResizeHandler} from "@/utils/util"
+  import i18n from "@/utils/i18n"
+  import axios from "axios"
 
   export default {
     name: "FieldPanel",
@@ -94,7 +109,7 @@
         advancedFields,
         customFields,
 
-        allContainers: [],
+        formTemplates: formTemplates,
       }
     },
     computed: {
@@ -113,8 +128,6 @@
     },
     methods: {
       loadWidgets() {
-        //this.allContainers = deepClone(this.containers)
-
         this.containers = this.containers.map(con => {
           return {
             ...con,
@@ -168,9 +181,33 @@
       },
 
       addFieldByDbClick(widget) {
-        //console.log('addWidgetByDbClick')
         this.designer.addFieldByDbClick(widget)
       },
+
+      loadFormTemplate(jsonUrl) {
+        this.$confirm(this.i18nt('designer.hint.loadFormTemplateHint'), this.i18nt('render.hint.prompt'), {
+          confirmButtonText: this.i18nt('render.hint.confirm'),
+          cancelButtonText: this.i18nt('render.hint.cancel')
+        }).then(() => {
+          axios.get(jsonUrl).then(res => {
+            let modifiedFlag = false
+            if (typeof res.data === 'string') {
+              modifiedFlag = this.designer.loadFormJson( JSON.parse(res.data) )
+            } else if (res.data.constructor === Object) {
+              modifiedFlag = this.designer.loadFormJson(res.data)
+            }
+            if (modifiedFlag) {
+              this.designer.emitHistoryChange()
+            }
+
+            this.$message.success(this.i18nt('designer.hint.loadFormTemplateSuccess'))
+          }).catch(error => {
+            this.$message.error(this.i18nt('designer.hint.loadFormTemplateFailed') + ':' + error)
+          })
+        }).catch(error => {
+          console.error(error)
+        })
+      }
 
     }
 
@@ -179,18 +216,12 @@
 
 <style lang="scss" scoped>
   .side-scroll-bar {
-    //height: calc(100% - 56px);
-    //height: 100%;
-
     ::v-deep .el-scrollbar__wrap {
       overflow-x: hidden;
     }
   }
 
   div.panel-container {
-    //height: calc(100% - 48px);
-    //height: 100%;
-    //overflow-y: hidden;
     padding-bottom: 10px;
   }
 
@@ -264,6 +295,46 @@
         }
       }
     }
+  }
+
+  .el-card.ft-card {
+    border: 1px solid #8896B3;
+  }
+
+  .ft-card {
+    margin-bottom: 10px;
+
+    .bottom {
+      margin-top: 10px;
+      line-height: 12px;
+    }
+
+    /*
+    .image-zoom {
+      height: 500px;
+      width: 620px
+    }
+    */
+
+    .ft-title {
+      font-size: 13px;
+      font-weight: bold;
+    }
+
+    .right-button {
+      padding: 0;
+      float: right;
+    }
+
+    .clear-fix:before, .clear-fix:after {
+      display: table;
+      content: "";
+    }
+
+    .clear-fix:after {
+      clear: both;
+    }
+
   }
 
 </style>

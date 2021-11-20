@@ -53,6 +53,10 @@
         type: Object,
         default: () => {}
       },
+      previewState: { //是否表单预览状态
+        type: Boolean,
+        default: false
+      }
     },
     provide() {
       return {
@@ -62,7 +66,8 @@
         globalOptionData: this.optionData,
         globalModel: {
           formModel: this.formDataModel,
-        }
+        },
+        previewState: this.previewState,
       }
     },
     data() {
@@ -163,14 +168,6 @@
             this.buildDataFromWidget(wItem)
           })
         }
-
-        // if (!this.formJsonObj || !this.widgetList) {
-        //   return
-        // }
-        //
-        // this.widgetList.forEach((wItem) => {
-        //   this.buildDataFromWidget(wItem)
-        // })
       },
 
       buildDataFromWidget(wItem) {
@@ -354,6 +351,20 @@
         }
       },
 
+      /**
+       * 重新加载选项数据
+       * @param widgetNames 指定重新加载的组件名称或组件名数组，不传则重新加载所有选项字段
+       */
+      reloadOptionData(widgetNames) {
+        let eventParams = []
+        if (!!widgetNames && (typeof widgetNames === 'string')) {
+          eventParams = [widgetNames]
+        } else if (!!widgetNames && Array.isArray(widgetNames)) {
+          eventParams = [...widgetNames]
+        }
+        this.broadcast('FieldWidget', 'reloadOptions', [eventParams])
+      },
+
       getFormData(needValidation = true) {
         if (!needValidation) {
           return this.formDataModel
@@ -361,7 +372,7 @@
 
         let callback = function nullFunc() {}
         let promise = new window.Promise(function (resolve, reject) {
-          callback = function callback(formData, error) {
+          callback = function(formData, error) {
             !error ? resolve(formData) : reject(error);
           };
         });
@@ -465,7 +476,13 @@
           }
         })
 
-        this.$refs.renderForm.clearValidate()
+        this.$nextTick(() => {
+          this.clearValidate()  /* 清除resetField方法触发的校验错误提示 */
+        })
+      },
+
+      clearValidate(props) {
+        this.$refs.renderForm.clearValidate(props)
       },
 
       validateForm() {

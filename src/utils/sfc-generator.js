@@ -18,8 +18,15 @@ const containerTemplates = {  //容器组件属性
 `<el-row ${gridClassAttr}>
 ${ctn.cols.map(col => {
   const colOpt = col.options
+  const spanAttr = !!colOpt.responsive ? '' : `:span="${colOpt.span}"`
+  const mdAttr = !colOpt.responsive ? '' : `:md="${colOpt.md}"`
+  const smAttr = !colOpt.responsive ? '' : `:sm="${colOpt.sm}"`
+  const xsAttr = !colOpt.responsive ? '' : `:xs="${colOpt.xs}"`
+  const offsetAttr = !!colOpt.offset ? `:offset="${colOpt.offset}"` : ''
+  const pushAttr = !!colOpt.push ? `:push="${colOpt.push}"` : ''
+  const pullAttr = !!colOpt.pull ? `:pull="${colOpt.pull}"` : ''
   const colClassAttr = buildClassAttr(col, 'grid-cell')
-  return `<el-col :span="${colOpt.span}" ${colClassAttr}>
+  return `<el-col ${spanAttr} ${mdAttr} ${smAttr} ${xsAttr} ${offsetAttr} ${pushAttr} ${pullAttr} ${colClassAttr}>
     ${col.widgetList.map(cw => {
         if (cw.category === 'container') {
           return buildContainerWidget(cw, formConfig)
@@ -430,8 +437,9 @@ function genTemplate(formConfig, widgetList, vue3Flag = false) {
 const genGlobalCSS = function (formConfig) {
   const globalCssTemplate =
 `  .el-input-number.full-width-input, .el-cascader.full-width-input {
-  width: 100% !important;
-}
+    width: 100% !important;
+  }
+  
   .el-form-item--medium {
     .el-radio {
       line-height: 36px !important;
@@ -460,6 +468,19 @@ const genGlobalCSS = function (formConfig) {
     .el-rate{
       margin-top: 4px;
     }
+  }
+  
+  .clear-fix:before, .clear-fix:after {
+    display: table;
+    content: "";
+  }
+
+  .clear-fix:after {
+    clear: both;
+  }
+
+  .float-right {
+    float: right;
   }
 
 ${formConfig.cssCode}`

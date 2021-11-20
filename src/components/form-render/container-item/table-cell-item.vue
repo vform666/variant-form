@@ -54,7 +54,8 @@
   td.table-cell {
     display: table-cell;
     height: 36px;
-    border: 1px dashed #336699;
+    //border: 1px dashed #336699;
+    border: 1px solid #e5e5e5;
   }
 
 </style>

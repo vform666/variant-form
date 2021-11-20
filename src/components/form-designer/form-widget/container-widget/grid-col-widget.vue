@@ -1,6 +1,5 @@
 <template>
-  <el-col v-else-if="widget.type === 'grid-col'" class="grid-cell" :span="widget.options.span || 12"
-          :offset="widget.options.offset || 0" :push="widget.options.push || 0" :pull="widget.options.pull || 0"
+  <el-col v-else-if="widget.type === 'grid-col'" class="grid-cell" v-bind="layoutProps"
           :class="[selected ? 'selected' : '', customClass]"
           :key="widget.id" @click.native.stop="selectWidget(widget)">
     <draggable :list="widget.widgetList" v-bind="{group:'dragGroup', ghostClass: 'ghost',animation: 200}"
@@ -58,6 +57,19 @@
       indexOfParentList: Number,
       designer: Object,
     },
+    data() {
+      return {
+        layoutProps: {
+          span: this.widget.options.span || 12,
+          // md: this.widget.options.md || 12,
+          // sm: this.widget.options.sm || 12,
+          // xs: this.widget.options.xs || 12,
+          offset: this.widget.options.offset || 0,
+          push: this.widget.options.push || 0,
+          pull: this.widget.options.pull || 0,
+        }
+      }
+    },
     computed: {
       selected() {
         return this.widget.id === this.designer.selectedId
@@ -69,9 +81,101 @@
 
     },
     watch: {
-      //
+      'designer.formConfig.layoutType': {
+        handler(val) {
+          if (!!this.widget.options.responsive) {
+            if (val === 'H5') {
+              this.layoutProps.span = this.widget.options.xs || 12
+            } else if (val === 'Pad') {
+              this.layoutProps.span = this.widget.options.sm || 12
+            } else {
+              this.layoutProps.span = this.widget.options.md || 12
+            }
+          } else {
+            this.layoutProps.span = this.widget.options.span || 12
+          }
+        }
+      },
+
+      'widget.options.responsive': {
+        handler(val) {
+          let lyType = this.designer.formConfig.layoutType
+          if (!!val) {
+            if (lyType === 'H5') {
+              this.layoutProps.span = this.widget.options.xs || 12
+            } else if (lyType === 'Pad') {
+              this.layoutProps.span = this.widget.options.sm || 12
+            } else {
+              this.layoutProps.span = this.widget.options.md || 12
+            }
+          } else {
+            this.layoutProps.span = this.widget.options.span || 12
+          }
+        }
+      },
+
+      'widget.options.span': {
+        handler(val) {
+          this.layoutProps.span = val
+        }
+      },
+
+      'widget.options.md': {
+        handler(val) {
+          this.layoutProps.span = val
+        }
+      },
+
+      'widget.options.sm': {
+        handler(val) {
+          this.layoutProps.span = val
+        }
+      },
+
+      'widget.options.xs': {
+        handler(val) {
+          this.layoutProps.span = val
+        }
+      },
+
+      'widget.options.offset': {
+        handler(val) {
+          this.layoutProps.offset = val
+        }
+      },
+
+      'widget.options.push': {
+        handler(val) {
+          this.layoutProps.push = val
+        }
+      },
+
+      'widget.options.pull': {
+        handler(val) {
+          this.layoutProps.pull = val
+        }
+      },
+
+    },
+    created() {
+      this.initLayoutProps()
     },
     methods: {
+      initLayoutProps() {
+        if (!!this.widget.options.responsive) {
+          let lyType = this.designer.formConfig.layoutType
+          if (lyType === 'H5') {
+            this.layoutProps.span = this.widget.options.xs || 12
+          } else if (lyType === 'Pad') {
+            this.layoutProps.span = this.widget.options.sm || 12
+          } else {
+            this.layoutProps.span = this.widget.options.md || 12
+          }
+        } else {
+          this.layoutProps.spn = this.widget.options.span
+        }
+      },
+
       onGridDragEnd(evt, subList) {
         //
       },

@@ -108,6 +108,10 @@ export default {
       fileNameInputPlaceholder: '请输入文件名',
       sampleLoadedSuccess: '表单示例加载成功',
       sampleLoadedFail: '表单示例加载失败',
+      loadFormTemplate: '加载此模板',
+      loadFormTemplateHint: '是否加载这个模板？加载后会覆盖设计器当前表单，你可以使用“撤销”功能恢复。',
+      loadFormTemplateSuccess: '表单模板加载成功',
+      loadFormTemplateFailed: '表单模板加载失败',
 
       widgetSetting: '组件设置',
       formSetting: '表单设置',
@@ -141,6 +145,7 @@ export default {
       undoHint: '撤销',
       redoHint: '重做',
       pcLayout: 'PC',
+      padLayout: 'Pad',
       mobileLayout: 'H5',
       clear: '清空',
       preview: '预览',
@@ -226,6 +231,7 @@ export default {
       colPushTitle: '右移栅格数',
       colPullTitle: '左移栅格数',
       addColumn: '增加栅格',
+      responsive: '响应式布局',
 
       tabPaneSetting: '选项卡设置',
       addTabPane: '增加选项卡页',

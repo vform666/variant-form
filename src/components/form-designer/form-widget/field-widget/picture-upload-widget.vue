@@ -150,6 +150,20 @@
         return this.handleOnBeforeUpload(file)
       },
 
+      handleOnBeforeUpload(file) {
+        if (!!this.field.options.onBeforeUpload) {
+          let bfFunc = new Function('file', this.field.options.onBeforeUpload)
+          let result = bfFunc.call(this, file)
+          if (typeof result === 'boolean') {
+            return result
+          } else {
+            return true
+          }
+        }
+
+        return true
+      },
+
       handlePictureUpload(res, file, fileList) {
         if (!!this.field.options.onUploadSuccess) {
           let customFn = new Function('result', 'file', 'fileList', this.field.options.onUploadSuccess)
@@ -160,6 +174,7 @@
             this.updateUploadFieldModelAndEmitDataChange()
 
             this.uploadBtnHidden = this.fileList.length >= this.field.options.limit
+            //console.log('test========', this.uploadBtnHidden)
           }
         }
       },
@@ -211,7 +226,7 @@
       display: none;
     }
 
-    ::v-deep div.el-upload__tip { /* 隐藏最后的文件上传按钮 */
+    ::v-deep div.el-upload__tip { /* 隐藏最后的文件上传按钮提示 */
       display: none;
     }
   }

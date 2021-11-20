@@ -1,6 +1,5 @@
 <template>
-  <el-col class="grid-cell" :span="widget.options.span" :class="[customClass]"
-          :offset="widget.options.offset || 0" :push="widget.options.push || 0" :pull="widget.options.pull || 0"
+  <el-col class="grid-cell" :class="[customClass]" v-bind="layoutProps"
           :key="widget.id" v-show="!widget.options.hidden">
     <template v-if="!!widget.widgetList && (widget.widgetList.length > 0)">
       <template v-for="(subWidget, swIdx) in widget.widgetList">
@@ -40,7 +39,20 @@
       parentList: Array,
       indexOfParentList: Number,
     },
-    inject: ['refList', 'globalModel'],
+    inject: ['refList', 'globalModel', 'formConfig', 'previewState'],
+    data() {
+      return {
+        layoutProps: {
+          span: this.widget.options.span,
+          md: this.widget.options.md || 12,
+          sm: this.widget.options.sm || 12,
+          xs: this.widget.options.xs || 12,
+          offset: this.widget.options.offset || 0,
+          push: this.widget.options.push || 0,
+          pull: this.widget.options.pull || 0,
+        }
+      }
+    },
     computed: {
       customClass() {
         return this.widget.options.customClass || ''
@@ -48,8 +60,36 @@
 
     },
     created() {
+      this.initLayoutProps()
       this.initRefList()
     },
+    methods: {
+      initLayoutProps() {
+        if (!!this.widget.options.responsive) {
+          if (!!this.previewState) {
+            this.layoutProps.md = undefined
+            this.layoutProps.sm = undefined
+            this.layoutProps.xs = undefined
+
+            let lyType = this.formConfig.layoutType
+            if (lyType === 'H5') {
+              this.layoutProps.span = this.widget.options.xs || 12
+            } else if (lyType === 'Pad') {
+              this.layoutProps.span = this.widget.options.sm || 12
+            } else {
+              this.layoutProps.span = this.widget.options.md || 12
+            }
+          } else {
+            this.layoutProps.span = undefined
+          }
+        } else {
+          this.layoutProps.md = undefined
+          this.layoutProps.sm = undefined
+          this.layoutProps.xs = undefined
+        }
+      },
+
+    }
   }
 </script>
 

@@ -58,6 +58,7 @@ const COMMON_PROPERTIES = {
   'cellWidth'          :            'cellWidth-editor',
   'cellHeight'         :            'cellHeight-editor',
   'gutter'             :            'gutter-editor',
+  'responsive'         :            'responsive-editor',
   'span'               :            'span-editor',
   'offset'             :            'offset-editor',
   'push'               :            'push-editor',
@@ -125,35 +126,66 @@ const EVENT_PROPERTIES = {
 }
 
 /**
- * 如属性编辑器的组件名称设置为null，则不显示该属性编辑器！！
- * @param propName 属性名称
+ * 注册组件常见属性
+ * 如属性编辑器的组件名称propEditorName设置为null，则不显示该属性编辑器！！
+ * @param uniquePropName 属性名称（保证名称唯一，不跟其他组件属性冲突）
  * @param propEditorName 对应属性编辑器的组件名称
  */
-export function registerCommonProperty(propName, propEditorName) {
-  COMMON_PROPERTIES[propName] = propEditorName
+export function registerCommonProperty(uniquePropName, propEditorName) {
+  COMMON_PROPERTIES[uniquePropName] = propEditorName
 }
 
-export function registerAdvancedProperty(propName, propEditorName) {
-  ADVANCED_PROPERTIES[propName] = propEditorName
+/**
+ * 注册组件高级属性
+ * 如属性编辑器的组件名称propEditorName设置为null，则不显示该属性编辑器！！
+ * @param uniquePropName 属性名称（保证名称唯一，不跟其他组件属性冲突）
+ * @param propEditorName 对应属性编辑器的组件名称
+ */
+export function registerAdvancedProperty(uniquePropName, propEditorName) {
+  ADVANCED_PROPERTIES[uniquePropName] = propEditorName
 }
 
-export function registerEventProperty(propName, propEditorName) {
-  EVENT_PROPERTIES[propName] = propEditorName
+/**
+ * 注册组件事件属性
+ * 如属性编辑器的组件名称propEditorName设置为null，则不显示该属性编辑器！！
+ * @param uniquePropName 属性名称（保证名称唯一，不跟其他组件属性冲突）
+ * @param propEditorName 对应属性编辑器的组件名称
+ */
+export function registerEventProperty(uniquePropName, propEditorName) {
+  EVENT_PROPERTIES[uniquePropName] = propEditorName
 }
 
-export function registerCPEditor(propName, propEditorName, editorComponent) {
+/**
+ * 注册常见属性对应的属性编辑器
+ * @param uniquePropName
+ * @param propEditorName
+ * @param editorComponent
+ */
+export function registerCPEditor(uniquePropName, propEditorName, editorComponent) {
   Vue.component(propEditorName, editorComponent)
-  registerCommonProperty(propName, propEditorName)
+  registerCommonProperty(uniquePropName, propEditorName)
 }
 
-export function registerAPEditor(propName, propEditorName, editorComponent) {
+/**
+ * 注册高级属性对应的属性编辑器
+ * @param uniquePropName
+ * @param propEditorName
+ * @param editorComponent
+ */
+export function registerAPEditor(uniquePropName, propEditorName, editorComponent) {
   Vue.component(propEditorName, editorComponent)
-  registerAdvancedProperty(propName, propEditorName)
+  registerAdvancedProperty(uniquePropName, propEditorName)
 }
 
-export function registerEPEditor(propName, propEditorName, editorComponent) {
+/**
+ * 注册事件属性对应的属性编辑器
+ * @param uniquePropName
+ * @param propEditorName
+ * @param editorComponent
+ */
+export function registerEPEditor(uniquePropName, propEditorName, editorComponent) {
   Vue.component(propEditorName, editorComponent)
-  registerEventProperty(propName, propEditorName)
+  registerEventProperty(uniquePropName, propEditorName)
 }
 
 export default {

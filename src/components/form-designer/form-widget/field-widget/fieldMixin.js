@@ -98,6 +98,13 @@ export default {
           this.handleOnChange(values[0], values[1])
         }
       })
+
+      /* 监听重新加载选项事件 */
+      this.$on('reloadOptions', function (widgetNames) {
+        if ((widgetNames.length === 0) || (widgetNames.indexOf(this.field.options.name) > -1)) {
+          this.initOptionItems(true)
+        }
+      })
     },
 
     handleOnCreated() {
@@ -141,7 +148,7 @@ export default {
       }
     },
 
-    initOptionItems() {
+    initOptionItems(keepSelected) {
       if (this.designState) {
         return
       }
@@ -149,7 +156,11 @@ export default {
       if ((this.field.type === 'radio') || (this.field.type === 'checkbox')
           || (this.field.type === 'select') || (this.field.type === 'cascader')) {
         if (!!this.globalOptionData && this.globalOptionData.hasOwnProperty(this.field.options.name)) {
-          this.loadOptions( this.globalOptionData[this.field.options.name] )
+          if (!!keepSelected) {
+            this.reloadOptions(this.globalOptionData[this.field.options.name])
+          } else {
+            this.loadOptions( this.globalOptionData[this.field.options.name] )
+          }
         }
       }
     },
@@ -165,6 +176,7 @@ export default {
       if (!!this.field.options.required) {
         this.rules.push({
           required: true,
+          trigger: ['blur', 'change'],
           message: this.i18nt('render.hint.fieldRequired'),
         })
       }
@@ -197,6 +209,37 @@ export default {
           label: this.field.options.label
         })
       }
+    },
+
+    /**
+     * 禁用字段值变动触发表单校验
+     */
+    disableChangeValidate() {
+      if (!this.rules) {
+        return
+      }
+
+      this.rules.forEach(rule => {
+        if (!!rule.trigger) {
+          rule.trigger.splice(0, rule.trigger.length)
+        }
+      })
+    },
+
+    /**
+     * 启用字段值变动触发表单校验
+     */
+    enableChangeValidate() {
+      if (!this.rules) {
+        return
+      }
+
+      this.rules.forEach(rule => {
+        if (!!rule.trigger) {
+          rule.trigger.push('blur')
+          rule.trigger.push('change')
+        }
+      })
     },
 
     disableOptionOfList(optionList, optionValue) {
@@ -365,7 +408,11 @@ export default {
 
     resetField() {
       let defaultValue = this.field.options.defaultValue
+      //this.disableChangeValidate()  /* 禁用字段校验 */
       this.setValue(defaultValue)
+      this.$nextTick(() => {
+        //this.enableChangeValidate()  /* 开启字段校验 */
+      })
     },
 
     setWidgetOption(optionName, optionValue) { //通用组件选项修改API
@@ -423,9 +470,21 @@ export default {
       }
     },
 
+    /**
+     * 加载选项，并清空字段值
+     * @param options
+     */
     loadOptions(options) {
       this.field.options.optionItems = deepClone(options)
       this.clearSelectedOptions()  //清空已选选项
+    },
+
+    /**
+     * 重新加载选项，不清空字段值
+     * @param options
+     */
+    reloadOptions(options) {
+      this.field.options.optionItems = deepClone(options)
     },
 
     disableOption(optionValue) {

@@ -108,6 +108,10 @@ export default {
       fileNameInputPlaceholder: 'Enter the file name',
       sampleLoadedSuccess: 'Example loaded successfully',
       sampleLoadedFail: 'Sample load failed',
+      loadFormTemplate: 'Load This',
+      loadFormTemplateHint: 'Are you sure to load this template?',
+      loadFormTemplateSuccess: 'Load form template success!',
+      loadFormTemplateFailed: 'Load form template failed.',
 
       widgetSetting: 'Widget Config',
       formSetting: 'Form Config',
@@ -141,6 +145,7 @@ export default {
       undoHint: 'Undo',
       redoHint: 'Redo',
       pcLayout: 'PC',
+      padLayout: 'Pad',
       mobileLayout: 'H5',
       clear: 'Clear',
       preview: 'Preview',
@@ -226,6 +231,7 @@ export default {
       colPushTitle: 'Push Of Col',
       colPullTitle: 'Pull Of Col',
       addColumn: 'Add Column',
+      responsive: 'Responsive',
 
       tabPaneSetting: 'Tab Panes',
       addTabPane: 'Add Tab Pane',

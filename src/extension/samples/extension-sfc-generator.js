@@ -2,7 +2,7 @@ import {buildClassAttr, buildContainerWidget, buildFieldWidget} from '@/utils/sf
 
 export const cardTemplateGenerator = function (cw, formConfig) {
   const wop = cw.options
-  const headerAttr = `header="${wop.label}"`
+  //const headerAttr = `header="${wop.label}"`
   const classAttr = buildClassAttr(cw)
   const styleAttr = !!wop.cardWidth ? `style="{width: ${wop.cardWidth} !important}"` : ''
   const shadowAttr = `shadow="${wop.shadow}"`
@@ -10,7 +10,11 @@ export const cardTemplateGenerator = function (cw, formConfig) {
 
   const cardTemplate =
 `<div class="card-container">
-  <el-card ${headerAttr} ${classAttr} ${styleAttr} ${shadowAttr} ${vShowAttr}>
+  <el-card ${classAttr} ${styleAttr} ${shadowAttr} ${vShowAttr}>
+    <div slot="header" class="clear-fix">
+      <span>${wop.label}</span>
+      ${!!wop.showFold ? `<i class="float-right el-icon-arrow-down"></i>` : ''}
+    </div>
     ${
       cw.widgetList.map(wItem => {
         if (wItem.category === 'container') {

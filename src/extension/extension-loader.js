@@ -33,13 +33,13 @@ export const loadExtension = function () {
   Vue.component(CardWidget.name, CardWidget)  //注册设计期的容器组件
   Vue.component(CardItem.name, CardItem)  //注册运行期的容器组件
   /* -------------------------------------------------- */
-  PERegister.registerCPEditor('folded', 'card-folded-editor',
+  PERegister.registerCPEditor('card-folded', 'card-folded-editor',
       PEFactory.createBooleanEditor('folded', 'extension.setting.cardFolded'))
 
-  PERegister.registerCPEditor('showFold', 'card-showFold-editor',
+  PERegister.registerCPEditor('card-showFold', 'card-showFold-editor',
       PEFactory.createBooleanEditor('showFold', 'extension.setting.cardShowFold'))
 
-  PERegister.registerCPEditor('cardWidth', 'card-cardWidth-editor',
+  PERegister.registerCPEditor('card-cardWidth', 'card-cardWidth-editor',
       PEFactory.createInputTextEditor('cardWidth', 'extension.setting.cardWidth'))
 
   let shadowOptions = [
@@ -47,7 +47,7 @@ export const loadExtension = function () {
     {label: 'hover', value: 'hover'},
     {label: 'always', value: 'always'},
   ]
-  PERegister.registerCPEditor('shadow', 'card-shadow-editor',
+  PERegister.registerCPEditor('card-shadow', 'card-shadow-editor',
       PEFactory.createSelectEditor('shadow', 'extension.setting.cardShadow',
           {optionItems: shadowOptions}))
   /* -------------------------------------------------- */
@@ -67,7 +67,7 @@ export const loadExtension = function () {
   /* -------------------------------------------------- */
   Vue.component(AlertWidget.name, AlertWidget)  //注册组件
   /* -------------------------------------------------- */
-  PERegister.registerCPEditor('title', 'alert-title-editor',
+  PERegister.registerCPEditor('alert-title', 'alert-title-editor',
       PEFactory.createInputTextEditor('title', 'extension.setting.alertTitle'))
 
   let typeOptions = [
@@ -76,34 +76,34 @@ export const loadExtension = function () {
     {label: 'info', value: 'info'},
     {label: 'error', value: 'error'},
   ]
-  PERegister.registerCPEditor('type', 'alert-type-editor',
+  PERegister.registerCPEditor('alert-type', 'alert-type-editor',
       PEFactory.createSelectEditor('type', 'extension.setting.alertType',
           {optionItems: typeOptions}))
 
-  PERegister.registerCPEditor('description', 'alert-description-editor',
+  PERegister.registerCPEditor('alert-description', 'alert-description-editor',
       PEFactory.createInputTextEditor('description', 'extension.setting.description'))
 
-  PERegister.registerCPEditor('closable', 'alert-closable-editor',
+  PERegister.registerCPEditor('alert-closable', 'alert-closable-editor',
       PEFactory.createBooleanEditor('closable', 'extension.setting.closable'))
 
-  PERegister.registerCPEditor('closeText', 'alert-closeText-editor',
+  PERegister.registerCPEditor('alert-closeText', 'alert-closeText-editor',
       PEFactory.createInputTextEditor('closeText', 'extension.setting.closeText'))
 
-  PERegister.registerCPEditor('center', 'alert-center-editor',
+  PERegister.registerCPEditor('alert-center', 'alert-center-editor',
       PEFactory.createBooleanEditor('center', 'extension.setting.center'))
 
-  PERegister.registerCPEditor('showIcon', 'alert-showIcon-editor',
+  PERegister.registerCPEditor('alert-showIcon', 'alert-showIcon-editor',
       PEFactory.createBooleanEditor('showIcon', 'extension.setting.showIcon'))
 
   let effectOptions = [
     {label: 'light', value: 'light'},
     {label: 'dark', value: 'dark'},
   ]
-  PERegister.registerCPEditor('effect', 'alert-effect-editor',
+  PERegister.registerCPEditor('alert-effect', 'alert-effect-editor',
       PEFactory.createRadioButtonGroupEditor('effect', 'extension.setting.effect',
           {optionItems: effectOptions}))
 
-  PERegister.registerEPEditor('onClose', 'alert-onClose-editor',
+  PERegister.registerEPEditor('alert-onClose', 'alert-onClose-editor',
       PEFactory.createEventHandlerEditor('onClose', []))
   /* -------------------------------------------------- */
   registerFWGenerator('alert', alertTemplateGenerator)  //注册字段组件的代码生成器

@@ -2,7 +2,7 @@
   <div class="form-widget-container">
 
     <el-form class="full-height-width widget-form" :label-position="labelPosition"
-             :class="[customClass, layoutType === 'H5' ? 'h5-layout' : '']" :size="size" :validate-on-rule-change="false">
+             :class="[customClass, layoutType + '-layout']" :size="size" :validate-on-rule-change="false">
 
       <div v-if="designer.widgetList.length === 0" class="no-widget-hint">{{i18nt('designer.noWidgetHint')}}</div>
 
@@ -216,7 +216,18 @@
       }
     }
 
-    .el-form.h5-layout {
+    .el-form.PC-layout {
+      //
+    }
+
+    .el-form.Pad-layout {
+      margin: 0 auto;
+      width: 960px;
+      border-radius: 15px;
+      box-shadow: 0 0 1px 10px #495060;
+    }
+
+    .el-form.H5-layout {
       margin: 0 auto;
       width: 420px;
       border-radius: 15px;
