@@ -255,6 +255,7 @@
     border-bottom: 2px dotted #EBEEF5;
     height: 48px !important;
     line-height: 48px !important;
+    min-width: 800px;
   }
 
   div.main-title {
