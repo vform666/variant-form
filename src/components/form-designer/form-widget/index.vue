@@ -55,6 +55,7 @@
         refList: this.widgetRefList,
         formConfig: this.formConfig,
         globalOptionData: this.optionData,
+        getOptionData: () => this.optionData,
         globalModel: {
           formModel: this.formModel,
         }
@@ -222,7 +223,7 @@
 
     .el-form.Pad-layout {
       margin: 0 auto;
-      width: 960px;
+      max-width: 960px;
       border-radius: 15px;
       box-shadow: 0 0 1px 10px #495060;
     }

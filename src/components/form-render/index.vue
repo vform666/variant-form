@@ -64,6 +64,7 @@
         sfRefList: this.subFormRefList,  //收集SubForm引用
         formConfig: this.formConfig,
         globalOptionData: this.optionData,
+        getOptionData: () => this.optionData,  /* 该方法用于在异步更新option-data之后重新获取到最新值 */
         globalModel: {
           formModel: this.formDataModel,
         },
@@ -356,13 +357,15 @@
        * @param widgetNames 指定重新加载的组件名称或组件名数组，不传则重新加载所有选项字段
        */
       reloadOptionData(widgetNames) {
+        //this._provided.globalOptionData = this.optionData
+
         let eventParams = []
         if (!!widgetNames && (typeof widgetNames === 'string')) {
           eventParams = [widgetNames]
         } else if (!!widgetNames && Array.isArray(widgetNames)) {
           eventParams = [...widgetNames]
         }
-        this.broadcast('FieldWidget', 'reloadOptions', [eventParams])
+        this.broadcast('FieldWidget', 'reloadOptionItems', [eventParams])
       },
 
       getFormData(needValidation = true) {

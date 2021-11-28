@@ -17,7 +17,8 @@
             @click.native.stop="selectWidget(widget)">
       <template v-for="(colWidget, colIdx) in widget.cols">
         <grid-col-widget :widget="colWidget" :designer="designer" :key="colWidget.id" :parent-list="widget.cols"
-                         :index-of-parent-list="colIdx" :parent-widget="widget"></grid-col-widget>
+                         :index-of-parent-list="colIdx" :parent-widget="widget"
+                         :col-height="widget.options.colHeight"></grid-col-widget>
       </template>
     </el-row>
 

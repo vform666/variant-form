@@ -8,21 +8,21 @@
             <el-form :model="optionModel" size="mini" label-position="left" label-width="120px" class="setting-form"
                      @submit.native.prevent>
               <el-collapse v-model="widgetActiveCollapseNames" class="setting-collapse">
-                <el-collapse-item name="1" :title="i18nt('designer.setting.commonSetting')">
+                <el-collapse-item name="1" v-if="showCollapse(commonProps)" :title="i18nt('designer.setting.commonSetting')">
                   <template v-for="(editorName, propName) in commonProps">
                     <component v-if="hasPropEditor(propName, editorName)" :is="getPropEditor(propName, editorName)"
                                :designer="designer" :selected-widget="selectedWidget" :option-model="optionModel"></component>
                   </template>
                 </el-collapse-item>
 
-                <el-collapse-item name="2" :title="i18nt('designer.setting.advancedSetting')">
+                <el-collapse-item name="2" v-if="showCollapse(advProps)" :title="i18nt('designer.setting.advancedSetting')">
                   <template v-for="(editorName, propName) in advProps">
                     <component v-if="hasPropEditor(propName, editorName)" :is="getPropEditor(propName, editorName)"
                                :designer="designer" :selected-widget="selectedWidget" :option-model="optionModel"></component>
                   </template>
                 </el-collapse-item>
 
-                <el-collapse-item name="3" :title="i18nt('designer.setting.eventSetting')">
+                <el-collapse-item name="3" v-if="showEventCollapse() && showCollapse(eventProps)" :title="i18nt('designer.setting.eventSetting')">
                   <template v-for="(editorName, propName) in eventProps">
                     <component v-if="hasPropEditor(propName, editorName)" :is="getPropEditor(propName, editorName)"
                                :designer="designer" :selected-widget="selectedWidget" :option-model="optionModel"></component>
@@ -37,21 +37,21 @@
             <el-form :model="optionModel" size="mini" label-position="left" label-width="120px" class="setting-form"
                      @submit.native.prevent>
               <el-collapse v-model="widgetActiveCollapseNames" class="setting-collapse">
-                <el-collapse-item name="1" :title="i18nt('designer.setting.commonSetting')">
+                <el-collapse-item name="1" v-if="showCollapse(commonProps)" :title="i18nt('designer.setting.commonSetting')">
                   <template v-for="(editorName, propName) in commonProps">
                     <component v-if="hasPropEditor(propName, editorName)" :is="getPropEditor(propName, editorName)"
                                :designer="designer" :selected-widget="selectedWidget" :option-model="optionModel"></component>
                   </template>
                 </el-collapse-item>
 
-                <el-collapse-item name="2" :title="i18nt('designer.setting.advancedSetting')">
+                <el-collapse-item name="2" v-if="showCollapse(advProps)" :title="i18nt('designer.setting.advancedSetting')">
                   <template v-for="(editorName, propName) in advProps">
                     <component v-if="hasPropEditor(propName, editorName)" :is="getPropEditor(propName, editorName)"
                                :designer="designer" :selected-widget="selectedWidget" :option-model="optionModel"></component>
                   </template>
                 </el-collapse-item>
 
-                <el-collapse-item name="3" :title="i18nt('designer.setting.eventSetting')">
+                <el-collapse-item name="3" v-if="showEventCollapse() && showCollapse(eventProps)" :title="i18nt('designer.setting.eventSetting')">
                   <template v-for="(editorName, propName) in eventProps">
                     <component v-if="hasPropEditor(propName, editorName)" :is="getPropEditor(propName, editorName)"
                                :designer="designer" :selected-widget="selectedWidget" :option-model="optionModel"></component>
@@ -114,8 +114,11 @@
       selectedWidget: Object,
       formConfig: Object,
     },
+    inject: ['getDesignerConfig'],
     data() {
       return {
+        designerConfig: this.getDesignerConfig(),
+
         scrollerHeight: 0,
 
         activeTab: "2",
@@ -195,6 +198,14 @@
       })
     },
     methods: {
+      showEventCollapse() {
+        if (this.designerConfig['eventCollapse'] === undefined) {
+          return true
+        }
+
+        return !!this.designerConfig['eventCollapse']
+      },
+
       hasPropEditor(propName, editorName) {
         if (!editorName) {
           return false
@@ -213,6 +224,23 @@
         }
 
         return !!this.$root.$options.components[ownPropEditorName] ? ownPropEditorName : editorName  //全局注册的属性编辑器组件
+      },
+
+      showCollapse(propsObj) {
+        let result = false
+
+        for (let propName in propsObj) {
+          if (!propsObj.hasOwnProperty(propName)) {
+            continue
+          }
+
+          if (this.hasPropEditor(propName, propsObj[propName])) {
+            result = true
+            break
+          }
+        }
+
+        return result
       },
 
       editEventHandler(eventName, eventParams) {

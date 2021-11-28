@@ -2,7 +2,7 @@ import {deepClone} from "@/utils/util"
 import FormValidators from '@/utils/validators'
 
 export default {
-  inject: ['refList', 'formConfig', 'globalOptionData', 'globalModel'],
+  inject: ['refList', 'formConfig', 'globalOptionData', 'globalModel', 'getOptionData'],
 
   computed: {
     subFormName() {
@@ -100,7 +100,7 @@ export default {
       })
 
       /* 监听重新加载选项事件 */
-      this.$on('reloadOptions', function (widgetNames) {
+      this.$on('reloadOptionItems', function (widgetNames) {
         if ((widgetNames.length === 0) || (widgetNames.indexOf(this.field.options.name) > -1)) {
           this.initOptionItems(true)
         }
@@ -157,7 +157,10 @@ export default {
           || (this.field.type === 'select') || (this.field.type === 'cascader')) {
         if (!!this.globalOptionData && this.globalOptionData.hasOwnProperty(this.field.options.name)) {
           if (!!keepSelected) {
-            this.reloadOptions(this.globalOptionData[this.field.options.name])
+            //this.reloadOptions(this.globalOptionData[this.field.options.name]) /* 异步更新option-data之后不能获取到最新值，
+            // 以下改用provide的getOptionData()方法 */
+            const newOptionItems = this.getOptionData()
+            this.reloadOptions(newOptionItems[this.field.options.name])
           } else {
             this.loadOptions( this.globalOptionData[this.field.options.name] )
           }

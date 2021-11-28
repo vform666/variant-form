@@ -1,6 +1,6 @@
 <template>
   <el-col v-else-if="widget.type === 'grid-col'" class="grid-cell" v-bind="layoutProps"
-          :class="[selected ? 'selected' : '', customClass]"
+          :class="[selected ? 'selected' : '', customClass]" :style="colHeightStyle"
           :key="widget.id" @click.native.stop="selectWidget(widget)">
     <draggable :list="widget.widgetList" v-bind="{group:'dragGroup', ghostClass: 'ghost',animation: 200}"
                handle=".drag-handler" @end="(evt) => onGridDragEnd(evt, widget.widgetList)"
@@ -56,6 +56,12 @@
       parentList: Array,
       indexOfParentList: Number,
       designer: Object,
+
+      colHeight: {
+        type: String,
+        default: null
+      },
+
     },
     data() {
       return {
@@ -77,6 +83,10 @@
 
       customClass() {
         return this.widget.options.customClass || ''
+      },
+
+      colHeightStyle() {
+        return !!this.colHeight ? {height: this.colHeight + 'px'} : {}
       },
 
     },

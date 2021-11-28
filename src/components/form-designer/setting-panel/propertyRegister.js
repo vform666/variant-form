@@ -57,6 +57,7 @@ const COMMON_PROPERTIES = {
   'showRowNumber'      :            'showRowNumber-editor',
   'cellWidth'          :            'cellWidth-editor',
   'cellHeight'         :            'cellHeight-editor',
+  'colHeight'          :            'colHeight-editor',
   'gutter'             :            'gutter-editor',
   'responsive'         :            'responsive-editor',
   'span'               :            'span-editor',

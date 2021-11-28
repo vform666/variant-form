@@ -62,7 +62,7 @@ export function createDesigner(vueInstance) {
       this.initHistoryData()
     },
 
-    clearDesigner() {
+    clearDesigner(skipHistoryChange) {
       let emptyWidgetListFlag = (this.widgetList.length === 0)
       this.widgetList = []
       this.selectedId = null
@@ -70,7 +70,9 @@ export function createDesigner(vueInstance) {
       this.selectedWidget = {}  //this.selectedWidget = null
       overwriteObj(this.formConfig, defaultFormConfig) //
 
-      if (!emptyWidgetListFlag) {
+      if (!!skipHistoryChange) {
+        //什么也不做！！
+      } else if (!emptyWidgetListFlag) {
         this.emitHistoryChange()
       } else {
         this.saveCurrentHistoryStep()
@@ -618,7 +620,14 @@ export function createDesigner(vueInstance) {
       let newWidget = this.copyNewFieldWidget(widget)
       if (!!this.selectedWidget && this.selectedWidget.type === 'tab') {
         //获取当前激活的tabPane
-        //TODO:
+        let activeTab = this.selectedWidget.tabs[0]
+        this.selectedWidget.tabs.forEach(tabPane => {
+          if (!!tabPane.options.active) {
+            activeTab = tabPane
+          }
+        })
+
+        !!activeTab && activeTab.widgetList.push(newWidget)
       } else if (!!this.selectedWidget && !!this.selectedWidget.widgetList) {
         this.selectedWidget.widgetList.push(newWidget)
       } else {
@@ -626,6 +635,7 @@ export function createDesigner(vueInstance) {
       }
 
       this.setSelected(newWidget)
+      this.designer.emitHistoryChange()
     },
 
     deleteColOfGrid(gridWidget, colIdx) {

@@ -6,7 +6,8 @@
             :ref="widget.id" v-show="!widget.options.hidden">
       <template v-for="(colWidget, colIdx) in widget.cols">
         <grid-col-item :widget="colWidget" :key="colIdx" :parent-list="widget.cols"
-                       :index-of-parent-list="colIdx" :parent-widget="widget"></grid-col-item>
+                       :index-of-parent-list="colIdx" :parent-widget="widget"
+                       :col-height="widget.options.colHeight"></grid-col-item>
       </template>
     </el-row>
 

@@ -112,6 +112,7 @@ export default {
       loadFormTemplateHint: '是否加载这个模板？加载后会覆盖设计器当前表单，你可以使用“撤销”功能恢复。',
       loadFormTemplateSuccess: '表单模板加载成功',
       loadFormTemplateFailed: '表单模板加载失败',
+      currentNodeCannotBeSelected: '当前组件节点不可选择',
 
       widgetSetting: '组件设置',
       formSetting: '表单设置',
@@ -147,6 +148,8 @@ export default {
       pcLayout: 'PC',
       padLayout: 'Pad',
       mobileLayout: 'H5',
+      nodeTreeHint: '组件层次结构树',
+      nodeTreeTitle: '组件层次结构树',
       clear: '清空',
       preview: '预览',
       importJson: '导入JSON',
@@ -223,7 +226,8 @@ export default {
 
       cellWidth: '宽度',
       cellHeight: '高度',
-      gutter: '栅格间隔(像素)',
+      gridColHeight: '栅格列统一高度(px)',
+      gutter: '栅格间隔(px)',
       columnSetting: '栅格属性设置',
       colsOfGrid: '当前栅格列:',
       colSpanTitle: '栅格宽度',

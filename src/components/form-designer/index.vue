@@ -15,17 +15,17 @@
         <img src="../../assets/vform-logo.png" @click="openHome">
         <span class="bold">VForm</span> {{i18nt('application.productTitle')}} <span class="version-span">Ver {{vFormVersion}}</span></div>
       <div class="float-right external-link">
-        <el-dropdown @command="handleLanguageChanged">
+        <el-dropdown v-if="showLink('languageMenu')" @command="handleLanguageChanged">
           <span class="el-dropdown-link">{{curLangName}}<i class="el-icon-arrow-down el-icon--right"></i></span>
           <el-dropdown-menu slot="dropdown">
             <el-dropdown-item command="zh-CN">{{i18nt('application.zh-CN')}}</el-dropdown-item>
             <el-dropdown-item command="en-US">{{i18nt('application.en-US')}}</el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
-        <a href="javascript:void(0)" @click="(ev) => openUrl(ev, gitUrl)" target="_blank"><svg-icon icon-class="github" />{{i18nt('application.github')}}</a>
-        <a href="javascript:void(0)" @click="(ev) => openUrl(ev, docUrl)" target="_blank"><svg-icon icon-class="document" />{{i18nt('application.document')}}</a>
-        <a href="javascript:void(0)" @click="(ev) => openUrl(ev, chatUrl)" target="_blank">{{i18nt('application.qqGroup')}}</a>
-        <a href="javascript:void(0)" @click="(ev) => openUrl(ev, subScribeUrl)" target="_blank">
+        <a v-if="showLink('externalLink')" href="javascript:void(0)" @click="(ev) => openUrl(ev, gitUrl)" target="_blank"><svg-icon icon-class="github" />{{i18nt('application.github')}}</a>
+        <a v-if="showLink('externalLink')" href="javascript:void(0)" @click="(ev) => openUrl(ev, docUrl)" target="_blank"><svg-icon icon-class="document" />{{i18nt('application.document')}}</a>
+        <a v-if="showLink('externalLink')" href="javascript:void(0)" @click="(ev) => openUrl(ev, chatUrl)" target="_blank">{{i18nt('application.qqGroup')}}</a>
+        <a v-if="showLink('externalLink')" href="javascript:void(0)" @click="(ev) => openUrl(ev, subScribeUrl)" target="_blank">
           {{i18nt('application.subscription')}}<i class="el-icon-top-right"></i></a>
       </div>
     </el-header>
@@ -37,7 +37,9 @@
 
       <el-container class="center-layout-container">
         <el-header class="toolbar-header">
-          <toolbar-panel :designer="designer"></toolbar-panel>
+          <toolbar-panel :designer="designer" ref="toolbarRef">
+            <template #toolButton><slot name="customToolButtons"></slot></template>
+          </toolbar-panel>
         </el-header>
         <el-main class="form-widget-main">
           <el-scrollbar class="container-scroll-bar" :style="{height: scrollerHeight}">
@@ -76,10 +78,36 @@
       VFormWidget,
     },
     props: {
+      /* 后端字段列表API */
       fieldListApi: {
         type: Object,
         default: null,
-      }
+      },
+
+      /* 禁止显示的组件名称数组 */
+      bannedWidgets: {
+        type: Array,
+        default: () => []
+      },
+
+      designerConfig: {
+        type: Object,
+        default: () => {
+          return {
+            languageMenu: true,  //是否显示语言切换菜单
+            externalLink: true,  //是否显示GitHub、文档等外部链接
+            formTemplates: true,  //是否显示表单模板
+            eventCollapse: true,  //是否显示组件事件属性折叠面板
+            clearDesignerButton: true,  //是否显示清空设计器按钮
+            previewFormButton: true,  //是否显示预览表单按钮
+            importJsonButton: true,  //是否显示导入JSON按钮
+            exportJsonButton: true,  //是否显示导出JSON器按钮
+            exportCodeButton: true,  //是否显示导出代码按钮
+            generateSFCButton: true,  //是否显示生成SFC按钮
+          }
+        }
+      },
+
     },
     data() {
       return {
@@ -104,6 +132,8 @@
     provide() {
       return {
         serverFieldList: this.fieldList,
+        getDesignerConfig: () => this.designerConfig,
+        getBannedWidgets: () => this.bannedWidgets,
       }
     },
     created() {
@@ -125,6 +155,14 @@
       this.loadFieldListFromServer()
     },
     methods: {
+      showLink(configName) {
+        if (this.designerConfig[configName] === undefined) {
+          return true
+        }
+
+        return !!this.designerConfig[configName]
+      },
+
       openHome() {
         if (!!this.vsCodeFlag) {
           const msgObj = {
@@ -231,6 +269,57 @@
           widgetList: deepClone(this.designer.widgetList),
           formConfig: deepClone(this.designer.formConfig)
         }
+      },
+
+      clearDesigner() {
+        this.$refs.toolbarRef.clearFormWidget()
+      },
+
+
+      /**
+       * 刷新表单设计器
+       */
+      refreshDesigner() {
+        //this.designer.loadFormJson( this.getFormJson() )  //只有第一次调用生效？？
+
+        let fJson = this.getFormJson()
+        this.designer.clearDesigner(true)  //不触发历史记录变更
+        this.designer.loadFormJson(fJson)
+      },
+
+      /**
+       * 预览表单
+       */
+      previewForm() {
+        this.$refs.toolbarRef.previewForm()
+      },
+
+      /**
+       * 导入表单JSON
+       */
+      importJson() {
+        this.$refs.toolbarRef.importJson()
+      },
+
+      /**
+       * 导出表单JSON
+       */
+      exportJson() {
+        this.$refs.toolbarRef.exportJson()
+      },
+
+      /**
+       * 导出Vue/HTML代码
+       */
+      exportCode() {
+        this.$refs.toolbarRef.exportCode()
+      },
+
+      /**
+       * 生成SFC代码
+       */
+      generateSFC() {
+        this.$refs.toolbarRef.generateSFC()
       },
 
       //TODO: 增加更多方法！！

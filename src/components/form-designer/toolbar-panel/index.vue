@@ -13,15 +13,30 @@
         <el-button :type="layoutType === 'H5' ? 'info': ''" @click="changeLayoutType('H5')">
           {{i18nt('designer.toolbar.mobileLayout')}}</el-button>
       </el-button-group>
+      <el-button type="" style="margin-left: 20px" :title="i18nt('designer.toolbar.nodeTreeHint')" @click="showNodeTreeDrawer">
+        <svg-icon icon-class="node-tree" /></el-button>
     </div>
 
+    <el-drawer :title="i18nt('designer.toolbar.nodeTreeTitle')" direction="ltr" :visible.sync="showNodeTreeDrawerFlag" :modal="false" :size="280"
+               :destroy-on-close="true" class="node-tree-drawer">
+      <el-tree ref="nodeTree" :data="nodeTreeData" node-key="id" default-expand-all highlight-current class="node-tree"
+               icon-class="el-icon-arrow-right" @node-click="onNodeTreeClick"></el-tree>
+    </el-drawer>
+
     <div class="right-toolbar">
-      <el-button type="text" @click="clearFormWidget"><i class="el-icon-delete" />{{i18nt('designer.toolbar.clear')}}</el-button>
-      <el-button type="text" @click="previewForm"><i class="el-icon-view" />{{i18nt('designer.toolbar.preview')}}</el-button>
-      <el-button type="text" @click="importJson">{{i18nt('designer.toolbar.importJson')}}</el-button>
-      <el-button type="text" @click="exportJson">{{i18nt('designer.toolbar.exportJson')}}</el-button>
-      <el-button type="text" @click="exportCode">{{i18nt('designer.toolbar.exportCode')}}</el-button>
-      <el-button type="text" @click="generateSFC"><svg-icon icon-class="vue-sfc" />{{i18nt('designer.toolbar.generateSFC')}}</el-button>
+      <el-button v-if="showToolButton('clearDesignerButton')" type="text" @click="clearFormWidget">
+        <i class="el-icon-delete" />{{i18nt('designer.toolbar.clear')}}</el-button>
+      <el-button v-if="showToolButton('previewFormButton')" type="text" @click="previewForm">
+        <i class="el-icon-view" />{{i18nt('designer.toolbar.preview')}}</el-button>
+      <el-button v-if="showToolButton('importJsonButton')" type="text" @click="importJson">
+        {{i18nt('designer.toolbar.importJson')}}</el-button>
+      <el-button v-if="showToolButton('exportJsonButton')" type="text" @click="exportJson">
+        {{i18nt('designer.toolbar.exportJson')}}</el-button>
+      <el-button v-if="showToolButton('exportCodeButton')" type="text" @click="exportCode">
+        {{i18nt('designer.toolbar.exportCode')}}</el-button>
+      <el-button v-if="showToolButton('generateSFCButton')" type="text" @click="generateSFC">
+        <svg-icon icon-class="vue-sfc" />{{i18nt('designer.toolbar.generateSFC')}}</el-button>
+      <slot name="toolButton"></slot>
     </div>
 
     <el-dialog :title="i18nt('designer.toolbar.preview')" :visible.sync="showPreviewDialogFlag" v-if="showPreviewDialogFlag"
@@ -29,7 +44,8 @@
                :destroy-on-close="true" class="small-padding-dialog" width="75%" :fullscreen="layoutType === 'H5'">
       <div>
         <div class="form-render-wrapper" :class="[layoutType === 'H5' ? 'h5-layout' : '']">
-          <VFormRender ref="preForm" :form-json="formJson" :form-data="testFormData"
+          <VFormRender ref="preForm" :form-json="formJson" :form-data="testFormData" :preview-state="true"
+                       :option-data="testOptionData"
                        @appendButtonClick="testOnAppendButtonClick" @buttonClick="testOnButtonClick"
                        @formChange="handleFormChange"></VFormRender>
         </div>
@@ -138,12 +154,19 @@
   import VFormRender from '@/components/form-render/index'
   import CodeEditor from '@/components/code-editor/index'
   import Clipboard from 'clipboard'
-  import {deepClone, copyToClipboard, generateId, getQueryParam} from "@/utils/util";
+  import {
+    deepClone,
+    copyToClipboard,
+    generateId,
+    getQueryParam,
+    traverseAllWidgets
+  } from "@/utils/util";
   import i18n from '@/utils/i18n'
   import {generateCode} from "@/utils/code-generator";
   import {genSFC} from "@/utils/sfc-generator";
   import loadBeautifier from "@/utils/beautifierLoader";
   import { saveAs } from 'file-saver'
+  import axios from "axios"
 
   export default {
     name: "ToolbarPanel",
@@ -156,14 +179,20 @@
     props: {
       designer: Object
     },
+    inject: ['getDesignerConfig'],
     data() {
       return {
+        designerConfig: this.getDesignerConfig(),
+
         showPreviewDialogFlag: false,
         showImportJsonDialogFlag: false,
         showExportJsonDialogFlag: false,
         showExportCodeDialogFlag: false,
         showFormDataDialogFlag: false,
         showExportSFCDialogFlag: false,
+        showNodeTreeDrawerFlag: false,
+
+        nodeTreeData: [],
 
         testFunc: '',
         importTemplate: '',
@@ -188,7 +217,17 @@
           //   {'pName': 'iPhone12', 'pNum': 10},
           //   {'pName': 'P50', 'pNum': 16},
           // ]
+
+          'select62173': 2,
         },
+        testOptionData: {
+          'select62173': [
+            {label: '01', value: 1},
+            {label: '22', value: 2},
+            {label: '333', value: 3},
+          ]
+        },
+        
       }
     },
     computed: {
@@ -212,7 +251,121 @@
       },
 
     },
+    watch: {
+      'designer.widgetList': {
+        deep: true,
+        handler(val) {
+          //console.log('test-----', val)
+          //this.refreshNodeTree()
+        }
+      },
+
+
+    },
     methods: {
+      showToolButton(configName) {
+        if (this.designerConfig[configName] === undefined) {
+          return true
+        }
+
+        return !!this.designerConfig[configName]
+      },
+
+      buildTreeNodeOfWidget(widget, treeNode) {
+        let curNode = {
+          id: widget.id,
+          label: widget.options.label || widget.type,
+          //selectable: true,
+        }
+        treeNode.push(curNode)
+
+        if (widget.category === undefined) {
+          return
+        }
+
+        curNode.children = []
+        if (widget.type === 'grid') {
+          widget.cols.map(col => {
+            let colNode = {
+              id: col.id,
+              label: col.options.name || widget.type,
+              children: []
+            }
+            curNode.children.push(colNode)
+            col.widgetList.map(wChild => {
+              this.buildTreeNodeOfWidget(wChild, colNode.children)
+            })
+          })
+        } else if (widget.type === 'table') {
+          //TODO: 需要考虑合并单元格！！
+          widget.rows.map(row => {
+            let rowNode = {
+              id: row.id,
+              label: 'table-row',
+              selectable: false,
+              children: [],
+            }
+            curNode.children.push(rowNode)
+
+            row.cols.map(cell => {
+              if (!!cell.merged) {  //跳过合并单元格！！
+                return
+              }
+
+              let rowChildren = rowNode.children
+              let cellNode = {
+                id: cell.id,
+                label: 'table-cell',
+                children: []
+              }
+              rowChildren.push(cellNode)
+
+              cell.widgetList.map(wChild => {
+                this.buildTreeNodeOfWidget(wChild, cellNode.children)
+              })
+            })
+          })
+        } else if (widget.type === 'tab') {
+          widget.tabs.map(tab => {
+            let tabNode = {
+              id: tab.id,
+              label: tab.options.name || widget.type,
+              selectable: false,
+              children: []
+            }
+            curNode.children.push(tabNode)
+            tab.widgetList.map(wChild => {
+              this.buildTreeNodeOfWidget(wChild, tabNode.children)
+            })
+          })
+        } else if (widget.type === 'sub-form') {
+          widget.widgetList.map(wChild => {
+            this.buildTreeNodeOfWidget(wChild, curNode.children)
+          })
+        } else if (widget.category === 'container') {  //自定义容器
+          widget.widgetList.map(wChild => {
+            this.buildTreeNodeOfWidget(wChild, curNode.children)
+          })
+        }
+      },
+
+      refreshNodeTree() {
+        this.nodeTreeData.length = 0
+        this.designer.widgetList.forEach(wItem => {
+          this.buildTreeNodeOfWidget(wItem, this.nodeTreeData)
+        })
+      },
+
+      showNodeTreeDrawer() {
+        this.refreshNodeTree()
+        this.showNodeTreeDrawerFlag = true
+        this.$nextTick(() => {
+          if (!!this.designer.selectedId) {  //同步当前选中组件到节点树！！！
+            this.$refs.nodeTree.setCurrentKey(this.designer.selectedId)
+          }
+        })
+      },
+
       undoHistory() {
         this.designer.undoHistoryStep()
       },
@@ -405,12 +558,14 @@
       },
 
       handleFormChange(fieldName, newValue, oldValue, formModel) {
+        /*
         console.log('---formChange start---')
         console.log('fieldName', fieldName)
         console.log('newValue', newValue)
         console.log('oldValue', oldValue)
         console.log('formModel', formModel)
         console.log('---formChange end---')
+        */
       },
 
       testOnAppendButtonClick(clickedWidget) {
@@ -419,6 +574,31 @@
 
       testOnButtonClick(button) {
         console.log('test', button)
+      },
+
+      findWidgetById(wId) {
+        let foundW = null
+        traverseAllWidgets(this.designer.widgetList, (w) => {
+          if (w.id === wId) {
+            foundW = w
+          }
+        })
+
+        return foundW
+      },
+
+      onNodeTreeClick(nodeData, node, nodeEl) {
+        //console.log('test', JSON.stringify(nodeData))
+
+        if ((nodeData.selectable !== undefined) && !nodeData.selectable) {
+          this.$message.info(this.i18nt('designer.hint.currentNodeCannotBeSelected'))
+        } else {
+          const selectedId = nodeData.id
+          const foundW = this.findWidgetById(selectedId)
+          if (!!foundW) {
+            this.designer.setSelected(foundW)
+          }
+        }
       },
 
     }
@@ -495,5 +675,107 @@
     //border-width: 10px;
     box-shadow: 0 0 1px 10px #495060;
     height: calc(100vh - 142px);
+  }
+
+  .node-tree-drawer ::v-deep {
+    .el-drawer {
+      padding: 15px;
+      overflow: auto;
+    }
+
+    .el-drawer__header {
+      margin-bottom: 12px;
+      padding: 5px 5px 0;
+    }
+  }
+
+  /*.node-tree-scroll-bar {*/
+  /*  height: 100%;*/
+  /*  overflow: auto;*/
+  /*}*/
+
+  .node-tree ::v-deep {
+    .el-tree > .el-tree-node:after {
+      border-top: none;
+    }
+    .el-tree-node {
+      position: relative;
+      padding-left: 12px;
+    }
+
+    .el-tree-node__content {
+      padding-left: 0 !important;
+    }
+
+    .el-tree-node__expand-icon.is-leaf{
+      display: none;
+    }
+    .el-tree-node__children {
+      padding-left: 12px;
+    }
+
+    .el-tree-node :last-child:before {
+      height: 38px;
+    }
+
+    .el-tree > .el-tree-node:before {
+      border-left: none;
+    }
+
+    .el-tree > .el-tree-node:after {
+      border-top: none;
+    }
+
+    .el-tree-node:before {
+      content: "";
+      left: -4px;
+      position: absolute;
+      right: auto;
+      border-width: 1px;
+    }
+
+    .el-tree-node:after {
+      content: "";
+      left: -4px;
+      position: absolute;
+      right: auto;
+      border-width: 1px;
+    }
+
+    .el-tree-node:before {
+      border-left: 1px dashed #4386c6;
+      bottom: 0px;
+      height: 100%;
+      top: -26px;
+      width: 1px;
+    }
+
+    .el-tree-node:after {
+      border-top: 1px dashed #4386c6;
+      height: 20px;
+      top: 12px;
+      width: 16px;
+    }
+
+    .el-tree-node.is-current > .el-tree-node__content {
+      background: #c2d6ea !important;
+    }
+
+    .el-tree-node__expand-icon {
+      margin-left: -3px;
+      padding: 6px 6px 6px 0px;
+      font-size: 16px;
+    }
+
+    .el-tree-node__expand-icon.el-icon-caret-right:before {
+      //font-size: 16px;
+      //content: "\e723";
+    }
+
+    .el-tree-node__expand-icon.expanded.el-icon-caret-right:before {
+      //font-size: 16px;
+      //content: "\e722";
+    }
+
   }
 </style>

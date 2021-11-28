@@ -55,14 +55,14 @@
 
       </el-tab-pane>
 
-      <el-tab-pane name="formLib" style="padding: 8px">
+      <el-tab-pane v-if="showFormTemplates()" name="formLib" style="padding: 8px">
         <span slot="label"><i class="el-icon-c-scale-to-original"></i> {{i18nt('designer.formLib')}}</span>
 
         <template v-for="(ft, idx) in formTemplates">
           <el-card :bord-style="{ padding: '0' }" shadow="hover" class="ft-card">
             <el-popover placement="right" trigger="hover">
-              <img slot="reference"  :src="ft.imgUrl" style="width: 200px">
-              <img :src="ft.imgUrl" style="height: 600px;width: 720px">
+              <img slot="reference" :src="ftImages[idx].imgUrl" style="width: 200px">
+              <img :src="ftImages[idx].imgUrl" style="height: 600px;width: 720px">
             </el-popover>
             <div class="bottom clear-fix">
               <span class="ft-title">#{{idx+1}} {{ft.title}}</span>
@@ -87,6 +87,15 @@
   import i18n from "@/utils/i18n"
   import axios from "axios"
 
+  import ftImg1 from '@/assets/ft-images/t1.png'
+  import ftImg2 from '@/assets/ft-images/t2.png'
+  import ftImg3 from '@/assets/ft-images/t3.png'
+  import ftImg4 from '@/assets/ft-images/t4.png'
+  import ftImg5 from '@/assets/ft-images/t5.png'
+  import ftImg6 from '@/assets/ft-images/t6.png'
+  import ftImg7 from '@/assets/ft-images/t7.png'
+  import ftImg8 from '@/assets/ft-images/t8.png'
+
   export default {
     name: "FieldPanel",
     mixins: [i18n],
@@ -96,8 +105,11 @@
     props: {
       designer: Object,
     },
+    inject: ['getBannedWidgets', 'getDesignerConfig'],
     data() {
       return {
+        designerConfig: this.getDesignerConfig(),
+
         firstTab: 'componentLib',
 
         scrollerHeight: 0,
@@ -110,6 +122,16 @@
         customFields,
 
         formTemplates: formTemplates,
+        ftImages: [
+          {imgUrl: ftImg1},
+          {imgUrl: ftImg2},
+          {imgUrl: ftImg3},
+          {imgUrl: ftImg4},
+          {imgUrl: ftImg5},
+          {imgUrl: ftImg6},
+          {imgUrl: ftImg7},
+          {imgUrl: ftImg8},
+        ]
       }
     },
     computed: {
@@ -127,6 +149,18 @@
       })
     },
     methods: {
+      isBanned(wName) {
+        return this.getBannedWidgets().indexOf(wName) > -1
+      },
+
+      showFormTemplates() {
+        if (this.designerConfig['formTemplates'] === undefined) {
+          return true
+        }
+
+        return !!this.designerConfig['formTemplates']
+      },
+
       loadWidgets() {
         this.containers = this.containers.map(con => {
           return {
@@ -134,7 +168,7 @@
             displayName: this.i18n2t(`designer.widgetLabel.${con.type}`, `extension.widgetLabel.${con.type}`)
           }
         }).filter(con => {
-          return !con.internal
+          return !con.internal && !this.isBanned(con.type)
         })
 
         this.basicFields = this.basicFields.map(fld => {
@@ -142,6 +176,8 @@
             ...fld,
             displayName: this.i18n2t(`designer.widgetLabel.${fld.type}`, `extension.widgetLabel.${fld.type}`)
           }
+        }).filter(fld => {
+          return !this.isBanned(fld.type)
         })
 
         this.advancedFields = this.advancedFields.map(fld => {
@@ -149,6 +185,8 @@
             ...fld,
             displayName: this.i18n2t(`designer.widgetLabel.${fld.type}`, `extension.widgetLabel.${fld.type}`)
           }
+        }).filter(fld => {
+          return !this.isBanned(fld.type)
         })
 
         this.customFields = this.customFields.map(fld => {
@@ -156,6 +194,8 @@
             ...fld,
             displayName: this.i18n2t(`designer.widgetLabel.${fld.type}`, `extension.widgetLabel.${fld.type}`)
           }
+        }).filter(fld => {
+          return !this.isBanned(fld.type)
         })
       },
 

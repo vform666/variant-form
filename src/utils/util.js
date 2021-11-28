@@ -172,6 +172,34 @@ export function traverseContainWidgets(widgetList, handler) {
   })
 }
 
+export function traverseAllWidgets(widgetList, handler) {
+  widgetList.map(w => {
+    handler(w)
+
+    if (w.type === 'grid') {
+      w.cols.map(col => {
+        handler(col)
+        traverseAllWidgets(col.widgetList, handler)
+      })
+    } else if (w.type === 'table') {
+      w.rows.map(row => {
+        row.cols.map(cell => {
+          handler(cell)
+          traverseAllWidgets(cell.widgetList, handler)
+        })
+      })
+    } else if (w.type === 'tab') {
+      w.tabs.map(tab => {
+        traverseAllWidgets(tab.widgetList, handler)
+      })
+    } else if (w.type === 'sub-form') {
+      traverseAllWidgets(w.widgetList, handler)
+    } else if (w.category === 'container') {  //自定义容器
+      traverseAllWidgets(w.widgetList, handler)
+    }
+  })
+}
+
 export function copyToClipboard(content, clickEvent, $message, successMsg, errorMsg) {
   const clipboard = new Clipboard(clickEvent.target, {
     text: () => content

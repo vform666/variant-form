@@ -1,5 +1,5 @@
 <template>
-  <el-col class="grid-cell" :class="[customClass]" v-bind="layoutProps"
+  <el-col class="grid-cell" :class="[customClass]" v-bind="layoutProps" :style="colHeightStyle"
           :key="widget.id" v-show="!widget.options.hidden">
     <template v-if="!!widget.widgetList && (widget.widgetList.length > 0)">
       <template v-for="(subWidget, swIdx) in widget.widgetList">
@@ -38,6 +38,12 @@
       parentWidget: Object,
       parentList: Array,
       indexOfParentList: Number,
+
+      colHeight: {
+        type: String,
+        default: null
+      },
+
     },
     inject: ['refList', 'globalModel', 'formConfig', 'previewState'],
     data() {
@@ -56,6 +62,10 @@
     computed: {
       customClass() {
         return this.widget.options.customClass || ''
+      },
+
+      colHeightStyle() {
+        return !!this.colHeight ? {height: this.colHeight + 'px'} : {}
       },
 
     },

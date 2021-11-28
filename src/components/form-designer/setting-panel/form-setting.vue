@@ -55,7 +55,7 @@
           </el-form-item>
         </el-collapse-item>
 
-        <el-collapse-item name="2" :title="i18nt('designer.setting.eventSetting')">
+        <el-collapse-item v-if="showEventCollapse()" name="2" :title="i18nt('designer.setting.eventSetting')">
           <el-form-item label="onFormCreated" label-width="150px">
             <el-button type="info" icon="el-icon-edit" plain round @click="editFormEventHandler('onFormCreated')">
               {{i18nt('designer.setting.addEventHandler')}}</el-button>
@@ -136,8 +136,11 @@
       designer: Object,
       formConfig: Object,
     },
+    inject: ['getDesignerConfig'],
     data() {
       return {
+        designerConfig: this.getDesignerConfig(),
+
         formActiveCollapseNames: ['1', '2'],
 
         formSizes: [
@@ -188,6 +191,14 @@
       }, 1200)
     },
     methods: {
+      showEventCollapse() {
+        if (this.designerConfig['eventCollapse'] === undefined) {
+          return true
+        }
+
+        return !!this.designerConfig['eventCollapse']
+      },
+
       editFormCss() {
         this.formCssCode = this.designer.formConfig.cssCode
         this.showEditFormCssDialogFlag = true

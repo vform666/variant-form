@@ -112,6 +112,7 @@ export default {
       loadFormTemplateHint: 'Are you sure to load this template?',
       loadFormTemplateSuccess: 'Load form template success!',
       loadFormTemplateFailed: 'Load form template failed.',
+      currentNodeCannotBeSelected: 'The current node cannot be selected.',
 
       widgetSetting: 'Widget Config',
       formSetting: 'Form Config',
@@ -147,6 +148,8 @@ export default {
       pcLayout: 'PC',
       padLayout: 'Pad',
       mobileLayout: 'H5',
+      nodeTreeHint: 'Tree View Of Component Hierarchy',
+      nodeTreeTitle: 'Tree View Of Component Hierarchy',
       clear: 'Clear',
       preview: 'Preview',
       importJson: 'Import JSON',
@@ -223,6 +226,7 @@ export default {
 
       cellWidth: 'Width',
       cellHeight: 'Height',
+      gridColHeight: 'Height Of Col(px)',
       gutter: 'Gutter(px)',
       columnSetting: 'Cols Setting',
       colsOfGrid: 'Cols Of Grid:',
