@@ -7,18 +7,20 @@ function resolve (dir) {
   return path.join(__dirname, dir)
 }
 
-const npmConfigArgv = JSON.parse(process.env.npm_config_argv)
+const npmConfigArgv = (process.env.npm_config_argv === undefined) ? null : JSON.parse(process.env.npm_config_argv)
 /*
 console.log('npm config: ', npmConfigArgv)
 const procArgv = process.argv
 console.log('npm config: ', procArgv)
 */
 let buildProdFlag = false
-npmConfigArgv.original.forEach(cItem => {
-  if (cItem === 'build') {
-    buildProdFlag = true
-  }
-})
+if (!!npmConfigArgv) {
+  npmConfigArgv.original.forEach(cItem => {
+    if (cItem === 'build') {
+      buildProdFlag = true
+    }
+  })
+}
 
 const mvdir = require('mvdir');
 if (IS_PROD && buildProdFlag) {
