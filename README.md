@@ -6,7 +6,7 @@
 <br/>
 
 ### 立即体验
-[在线Demo](http://demo.vform666.com)
+[在线Demo](https://www.vform666.com/demo/)
 
 ### 友情链接
 [Fantastic-admin](https://hooray.gitee.io/fantastic-admin/) —— 一款开箱即用的 Vue 中后台管理系统框架（支持Vue2/Vue3）
