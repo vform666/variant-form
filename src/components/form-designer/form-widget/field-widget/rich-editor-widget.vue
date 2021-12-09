@@ -94,6 +94,7 @@
     methods: {
       handleRichEditorChangeEvent() {
         this.valueChangedFlag = true
+        this.syncUpdateFormModel(this.fieldModel)
       },
 
       handleRichEditorFocusEvent() {
