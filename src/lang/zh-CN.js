@@ -140,6 +140,8 @@ export default {
       colspanNotConsistentForMergeEntireColumn: '存在列宽不一致的单元格, 无法合并整列.',
       rowspanNotConsistentForDeleteEntireRow: '存在行高不一致的单元格, 不可删除整行.',
       colspanNotConsistentForDeleteEntireColumn: '存在列宽不一致的单元格, 不可删除整列.',
+      lastColCannotBeDeleted: '最后一列不可删除.',
+      lastRowCannotBeDeleted: '最后一行不可删除.',
     },
 
     toolbar: {
@@ -166,6 +168,7 @@ export default {
       advancedSetting: '高级属性',
       eventSetting: '事件属性',
       uniqueName: '唯一名称',
+      editNameHelp: '修改名称后需按回车确认',
       label: '字段标签',
       displayType: '显示类型',
       defaultValue: '默认值',

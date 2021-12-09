@@ -2,7 +2,7 @@
 /**
  * author: vformAdmin
  * email: vdpadmin@163.com
- * website: http://www.vform666.com
+ * website: https://www.vform666.com
  * date: 2021.08.18
  * remark: 如果要分发VForm源码，需在本文件顶部保留此文件头信息！！
  */
@@ -104,6 +104,8 @@
             exportJsonButton: true,  //是否显示导出JSON器按钮
             exportCodeButton: true,  //是否显示导出代码按钮
             generateSFCButton: true,  //是否显示生成SFC按钮
+
+            presetCssCode: '',  //设计器预设CSS样式代码
           }
         }
       },
@@ -117,10 +119,10 @@
         vsCodeFlag: false,
         caseName: '',
 
-        docUrl: 'http://www.vform666.com/document.html',
+        docUrl: 'https://www.vform666.com/document.html',
         gitUrl: 'https://github.com/vform666/variant-form',
-        chatUrl: 'http://www.vform666.com/chat-group.html',
-        subScribeUrl: 'http://www.vform666.com/subscribe.html',
+        chatUrl: 'https://www.vform666.com/chat-group.html',
+        subScribeUrl: 'https://www.vform666.com/subscribe.html',
 
         scrollerHeight: 0,
 
@@ -168,7 +170,7 @@
           const msgObj = {
             cmd: 'openUrl',
             data: {
-              url: 'http://www.vform666.com/'
+              url: 'https://www.vform666.com/'
             }
           }
           window.parent.postMessage(msgObj, '*')

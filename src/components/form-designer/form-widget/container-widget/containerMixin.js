@@ -1,15 +1,11 @@
 export default {
   methods: {
-    insertTableRow(widget) {
-      this.designer.insertTableRow(widget)
-
-      this.designer.emitHistoryChange()
+    appendTableRow(widget) {
+      this.designer.appendTableRow(widget)
     },
 
-    insertTableCol(widget) {
-      this.designer.insertTableCol(widget)
-
-      this.designer.emitHistoryChange()
+    appendTableCol(widget) {
+      this.designer.appendTableCol(widget)
     },
 
     onContainerDragAdd(evt, subList) {

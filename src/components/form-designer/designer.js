@@ -1,7 +1,7 @@
 /**
  * author: vformAdmin
  * email: vdpadmin@163.com
- * website: http://www.vform666.com
+ * website: https://www.vform666.com
  * date: 2021.08.18
  * remark: 如果要分发VForm源码，需在本文件顶部保留此文件头信息！！
  */
@@ -79,6 +79,12 @@ export function createDesigner(vueInstance) {
       }
     },
 
+    loadPresetCssCode(preCssCode) {
+      if ((this.formConfig.cssCode === '') && !!preCssCode) {
+        this.formConfig.cssCode = preCssCode
+      }
+    },
+
     getLayoutType() {
       return this.formConfig.layoutType || 'PC'
     },
@@ -151,9 +157,13 @@ export function createDesigner(vueInstance) {
       return true
     },
 
-    insertTableRow(widget, insertPos, cloneRowIdx) {
-      let rowIdx = (insertPos === undefined) ? widget.rows.length : insertPos  //确定插入列位置
-      let newRow = (cloneRowIdx === undefined) ? deepClone(widget.rows[widget.rows.length - 1]) : deepClone( widget.rows[cloneRowIdx] )
+    /**
+     * 追加表格新行
+     * @param widget
+     */
+    appendTableRow(widget) {
+      let rowIdx = widget.rows.length//确定插入行位置
+      let newRow = deepClone(widget.rows[widget.rows.length - 1])
       newRow.id = 'table-row-' + generateId()
       newRow.merged = false
       newRow.cols.forEach(col => {
@@ -162,37 +172,19 @@ export function createDesigner(vueInstance) {
         col.merged = false
         col.options.colspan = 1
         col.options.rowspan = 1
+        col.widgetList.length = 0
       })
       widget.rows.splice(rowIdx, 0, newRow)
-
-      let colNo = 0
-      while ((rowIdx < widget.rows.length - 1) && (colNo < widget.rows[0].cols.length)) {  //越界判断
-        let rowMerged = widget.rows[rowIdx + 1].cols[colNo].merged  //确定插入位置的单元格是否为合并单元格
-        if (!!rowMerged) {
-          let rowArray = widget.rows
-          let unMergedCell = {}
-          let startRowIndex = null
-          for (let i = rowIdx; i >= 0; i--) {  //查找该行已合并的主单元格
-            if (!rowArray[i].cols[colNo].merged && (rowArray[i].cols[colNo].options.rowspan > 1)) {
-              startRowIndex = i
-              unMergedCell = rowArray[i].cols[colNo]
-              break
-            }
-          }
-
-          let newRowspan = unMergedCell.options.rowspan + 1
-          this.setPropsOfMergedRows(widget.rows, startRowIndex, colNo, unMergedCell.options.colspan, newRowspan)
-          colNo += unMergedCell.options.colspan
-        } else {
-          colNo += 1
-        }
-      }
 
       this.emitHistoryChange()
     },
 
-    insertTableCol(widget, insertPos) {
-      let colIdx = (insertPos === undefined) ? widget.rows[0].cols.length : insertPos  //确定插入列位置
+    /**
+     * 追加表格新列
+     * @param widget
+     */
+    appendTableCol(widget) {
+      let colIdx = widget.rows[0].cols.length  //确定插入列位置
       widget.rows.forEach(row => {
         let newCol = deepClone(this.getContainerByType('table-cell'))
         newCol.id = 'table-cell-' + generateId()
@@ -200,17 +192,118 @@ export function createDesigner(vueInstance) {
         newCol.merged = false
         newCol.options.colspan = 1
         newCol.options.rowspan = 1
+        newCol.widgetList.length = 0
         row.cols.splice(colIdx, 0, newCol)
       })
 
+      this.emitHistoryChange()
+    },
+
+    insertTableRow(widget, insertPos, cloneRowIdx, curCol, aboveFlag) {
+      let newRowIdx = !!aboveFlag ? insertPos : (insertPos + 1)  //初步确定插入行位置
+      if (!aboveFlag) {  //继续向下寻找同列第一个未被合并的单元格
+        let tmpRowIdx = newRowIdx
+        let rowFoundFlag = false
+        while (tmpRowIdx < widget.rows.length) {
+          if (!widget.rows[tmpRowIdx].cols[curCol].merged) {
+            newRowIdx = tmpRowIdx
+            rowFoundFlag = true
+            break
+          } else {
+            tmpRowIdx++
+          }
+        }
+
+        if (!rowFoundFlag) {
+          newRowIdx = widget.rows.length
+        }
+      }
+
+      let newRow = deepClone( widget.rows[cloneRowIdx] )
+      newRow.id = 'table-row-' + generateId()
+      newRow.merged = false
+      newRow.cols.forEach(col => {
+        col.id = 'table-cell-' + generateId()
+        col.options.name = col.id
+        col.merged = false
+        col.options.colspan = 1
+        col.options.rowspan = 1
+        col.widgetList.length = 0
+      })
+      widget.rows.splice(newRowIdx, 0, newRow)
+
+      let colNo = 0
+      while ((newRowIdx < widget.rows.length - 1) && (colNo < widget.rows[0].cols.length)) {  //越界判断
+        const cellOfNextRow = widget.rows[newRowIdx + 1].cols[colNo]
+        const rowMerged = cellOfNextRow.merged  //确定插入位置下一行的单元格是否为合并单元格
+        if (!!rowMerged) {
+          let rowArray = widget.rows
+          let unMergedCell = {}
+          let startRowIndex = null
+          for (let i = newRowIdx; i >= 0; i--) {  //查找该行已合并的主单元格
+            if (!rowArray[i].cols[colNo].merged && (rowArray[i].cols[colNo].options.rowspan > 1)) {
+              startRowIndex = i
+              unMergedCell = rowArray[i].cols[colNo]
+              break
+            }
+          }
+
+          if (!!unMergedCell.options) {  //如果有符合条件的unMergedCell
+            let newRowspan = unMergedCell.options.rowspan + 1
+            this.setPropsOfMergedRows(widget.rows, startRowIndex, colNo, unMergedCell.options.colspan, newRowspan)
+            colNo += unMergedCell.options.colspan
+          } else {
+            colNo += 1
+          }
+        } else {
+          //colNo += 1
+          colNo += cellOfNextRow.options.colspan || 1
+        }
+      }
+
+      this.emitHistoryChange()
+    },
+
+    insertTableCol(widget, insertPos, curRow, leftFlag) {
+      let newColIdx = !!leftFlag ? insertPos : (insertPos + 1)  //初步确定插入列位置
+      if (!leftFlag) {  //继续向右寻找同行第一个未被合并的单元格
+        let tmpColIdx = newColIdx
+        let colFoundFlag = false
+        while (tmpColIdx < widget.rows[curRow].cols.length) {
+          if (!widget.rows[curRow].cols[tmpColIdx].merged) {
+            newColIdx = tmpColIdx
+            colFoundFlag = true
+            break
+          } else {
+            tmpColIdx++
+          }
+
+          if (!colFoundFlag) {
+            newColIdx = widget.rows[curRow].cols.length
+          }
+        }
+      }
+
+      widget.rows.forEach(row => {
+        let newCol = deepClone(this.getContainerByType('table-cell'))
+        newCol.id = 'table-cell-' + generateId()
+        newCol.options.name = newCol.id
+        newCol.merged = false
+        newCol.options.colspan = 1
+        newCol.options.rowspan = 1
+        newCol.widgetList.length = 0
+        row.cols.splice(newColIdx, 0, newCol)
+      })
+
       let rowNo = 0
-      while((colIdx < widget.rows[0].cols.length - 1) && (rowNo < widget.rows.length)) {  //越界判断
-        let colMerged = widget.rows[rowNo].cols[colIdx + 1].merged  //确定插入位置的单元格是否为合并单元格
+      while((newColIdx < widget.rows[0].cols.length - 1) && (rowNo < widget.rows.length)) {  //越界判断
+        const cellOfNextCol = widget.rows[rowNo].cols[newColIdx + 1]
+        const colMerged = cellOfNextCol.merged  //确定插入位置右侧列的单元格是否为合并单元格
         if (!!colMerged) {
           let colArray = widget.rows[rowNo].cols
           let unMergedCell = {}
           let startColIndex = null
-          for (let i = colIdx; i >= 0; i--) {  //查找该行已合并的主单元格
+          for (let i = newColIdx; i >= 0; i--) {  //查找该行已合并的主单元格
             if (!colArray[i].merged && (colArray[i].options.colspan > 1)) {
               startColIndex = i
               unMergedCell = colArray[i]
@@ -218,11 +311,16 @@ export function createDesigner(vueInstance) {
             }
           }
 
-          let newColspan = unMergedCell.options.colspan + 1
-          this.setPropsOfMergedCols(widget.rows, rowNo, startColIndex, newColspan, unMergedCell.options.rowspan)
-          rowNo += unMergedCell.options.rowspan
+          if (!!unMergedCell.options) {  //如果有符合条件的unMergedCell
+            let newColspan = unMergedCell.options.colspan + 1
+            this.setPropsOfMergedCols(widget.rows, rowNo, startColIndex, newColspan, unMergedCell.options.rowspan)
+            rowNo += unMergedCell.options.rowspan
+          } else {
+            rowNo += 1
+          }
         } else {
-          rowNo += 1
+          //rowNo += 1
+          rowNo += cellOfNextCol.options.rowspan || 1
         }
       }
 
@@ -262,12 +360,8 @@ export function createDesigner(vueInstance) {
     setPropsOfSplitCol(rowArray, startRowIndex, startColIndex, colspan, rowspan) {
       for (let i = startRowIndex; i < startRowIndex + rowspan; i++) {
         for (let j = startColIndex; j < startColIndex + colspan; j++) {
-          if ((i === startRowIndex) && (j === startColIndex)) {
-            rowArray[i].cols[j].options.colspan = 1
-            continue
-          }
-
           rowArray[i].cols[j].merged = false;
+          rowArray[i].cols[j].options.rowspan = 1
           rowArray[i].cols[j].options.colspan = 1
         }
       }
@@ -276,20 +370,30 @@ export function createDesigner(vueInstance) {
     setPropsOfSplitRow(rowArray, startRowIndex, startColIndex, colspan, rowspan) {
       for (let i = startRowIndex; i < startRowIndex + rowspan; i++) {
         for (let j = startColIndex; j < startColIndex + colspan; j++) {
-          if ((i === startRowIndex) && (j === startColIndex)) {
-            rowArray[i].cols[j].options.rowspan = 1  //合并后的主单元格
-            continue
-          }
-
           rowArray[i].cols[j].merged = false;
           rowArray[i].cols[j].options.rowspan = 1
+          rowArray[i].cols[j].options.colspan = 1
         }
       }
     },
 
     mergeTableCol(rowArray, colArray, curRow, curCol, leftFlag, cellWidget) {
       let mergedColIdx = !!leftFlag ? curCol : curCol + colArray[curCol].options.colspan
-      let remainedColIdx = !!leftFlag ? curCol - colArray[curCol - 1].options.colspan : curCol
+
+      // let remainedColIdx = !!leftFlag ? curCol - colArray[curCol - 1].options.colspan : curCol
+      let remainedColIdx = !!leftFlag ? curCol - 1 : curCol
+      if (!!leftFlag) {  //继续向左寻找同行未被合并的第一个单元格
+        let tmpColIdx = remainedColIdx
+        while (tmpColIdx >= 0) {
+          if (!rowArray[curRow].cols[tmpColIdx].merged) {
+            remainedColIdx = tmpColIdx
+            break;
+          } else {
+            tmpColIdx--
+          }
+        }
+      }
+
       if (!!colArray[mergedColIdx].widgetList && (colArray[mergedColIdx].widgetList.length > 0)) { //保留widgetList
         if (!colArray[remainedColIdx].widgetList || (colArray[remainedColIdx].widgetList.length === 0)) {
           colArray[remainedColIdx].widgetList = deepClone(colArray[mergedColIdx].widgetList)
@@ -334,7 +438,21 @@ export function createDesigner(vueInstance) {
 
     mergeTableRow(rowArray, curRow, curCol, aboveFlag, cellWidget) {
       let mergedRowIdx = !!aboveFlag ? curRow : curRow + cellWidget.options.rowspan
-      let remainedRowIdx = !!aboveFlag ? curRow - cellWidget.options.rowspan : curRow
+
+      //let remainedRowIdx = !!aboveFlag ? curRow - cellWidget.options.rowspan : curRow
+      let remainedRowIdx = !!aboveFlag ? curRow - 1 : curRow
+      if (!!aboveFlag) {  //继续向上寻找同列未被合并的第一个单元格
+        let tmpRowIdx = remainedRowIdx
+        while (tmpRowIdx >= 0) {
+          if (!rowArray[tmpRowIdx].cols[curCol].merged) {
+            remainedRowIdx = tmpRowIdx
+            break;
+          } else {
+            tmpRowIdx--
+          }
+        }
+      }
+
       if (!!rowArray[mergedRowIdx].cols[curCol].widgetList && (rowArray[mergedRowIdx].cols[curCol].widgetList.length > 0)) { //保留widgetList
         if (!rowArray[remainedRowIdx].cols[curCol].widgetList || (rowArray[remainedRowIdx].cols[curCol].widgetList.length === 0)) {
           rowArray[remainedRowIdx].cols[curCol].widgetList = deepClone(rowArray[mergedRowIdx].cols[curCol].widgetList)
@@ -396,8 +514,15 @@ export function createDesigner(vueInstance) {
     },
 
     deleteTableWholeCol(rowArray, colIndex) { //需考虑删除的是合并列！！
+      let onlyOneColFlag = true
+      rowArray.forEach(ri => {
+        if (ri.cols[0].options.colspan !== rowArray[0].cols.length) {
+          onlyOneColFlag = false
+        }
+      })
       //仅剩一列则不可删除！！
-      if (rowArray[0].cols[0].options.colspan === rowArray[0].cols.length) {
+      if (onlyOneColFlag) {
+        this.vueInstance.$message.info(this.vueInstance.i18nt('designer.hint.lastColCannotBeDeleted'))
         return
       }
 
@@ -423,8 +548,15 @@ export function createDesigner(vueInstance) {
     },
 
     deleteTableWholeRow(rowArray, rowIndex) { //需考虑删除的是合并行！！
+      let onlyOneRowFlag = true
+      rowArray[0].cols.forEach(ci => {
+        if (ci.options.rowspan !== rowArray.length) {
+          onlyOneRowFlag = false
+        }
+      })
       //仅剩一行则不可删除！！
-      if (rowArray[0].cols[0].options.rowspan === rowArray.length) {
+      if (onlyOneRowFlag) {
+        this.vueInstance.$message.info(this.vueInstance.i18nt('designer.hint.lastRowCannotBeDeleted'))
         return
       }
 
@@ -635,7 +767,7 @@ export function createDesigner(vueInstance) {
       }
 
       this.setSelected(newWidget)
-      this.designer.emitHistoryChange()
+      this.emitHistoryChange()
     },
 
     deleteColOfGrid(gridWidget, colIdx) {

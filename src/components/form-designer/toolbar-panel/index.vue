@@ -607,7 +607,7 @@
 
 <style lang="scss" scoped>
   div.toolbar-container {
-
+    min-width: 728px;  /* 解决工具按钮栏换行的问题！！ */
   }
 
   .left-toolbar {
@@ -679,13 +679,17 @@
 
   .node-tree-drawer ::v-deep {
     .el-drawer {
-      padding: 15px;
+      padding: 10px;
       overflow: auto;
     }
 
     .el-drawer__header {
       margin-bottom: 12px;
       padding: 5px 5px 0;
+    }
+
+    .el-drawer__body {
+      padding-left: 5px;
     }
   }
 
@@ -746,7 +750,7 @@
       border-left: 1px dashed #4386c6;
       bottom: 0px;
       height: 100%;
-      top: -26px;
+      top: -10px;
       width: 1px;
     }
 
@@ -765,16 +769,6 @@
       margin-left: -3px;
       padding: 6px 6px 6px 0px;
       font-size: 16px;
-    }
-
-    .el-tree-node__expand-icon.el-icon-caret-right:before {
-      //font-size: 16px;
-      //content: "\e723";
-    }
-
-    .el-tree-node__expand-icon.expanded.el-icon-caret-right:before {
-      //font-size: 16px;
-      //content: "\e722";
     }
 
   }

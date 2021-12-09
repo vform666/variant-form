@@ -129,7 +129,7 @@
 
       deleteWholeColDisabled() {
         //return this.colLength === 1
-        return (this.rowLength === 1) || (this.widget.options.colspan === this.colLength)
+        return (this.colLength === 1) || (this.widget.options.colspan === this.colLength)
       },
 
       deleteWholeRowDisabled() {
@@ -207,19 +207,19 @@
       },
 
       insertLeftCol() {
-        this.designer.insertTableCol(this.parentWidget, this.colIndex)
+        this.designer.insertTableCol(this.parentWidget, this.colIndex, this.rowIndex, true)
       },
 
       insertRightCol() {
-        this.designer.insertTableCol(this.parentWidget, this.colIndex + 1)
+        this.designer.insertTableCol(this.parentWidget, this.colIndex, this.rowIndex, false)
       },
 
       insertAboveRow() {
-        this.designer.insertTableRow(this.parentWidget, this.rowIndex, this.rowIndex)
+        this.designer.insertTableRow(this.parentWidget, this.rowIndex, this.rowIndex, this.colIndex, true)
       },
 
       insertBelowRow() {
-        this.designer.insertTableRow(this.parentWidget, this.rowIndex + 1, this.rowIndex)
+        this.designer.insertTableRow(this.parentWidget, this.rowIndex, this.rowIndex, this.colIndex, false)
       },
 
       mergeLeftCol() {
@@ -285,13 +285,15 @@
     .form-widget-list {
       border: 1px dashed #336699;
       margin: 3px;
-      //min-height: 36px;
 
-      position: absolute;
-      top: 0;
-      right: 0;
-      bottom: 0;
-      left: 0;
+      //min-height: 36px;
+      height: 100%;
+
+      /*position: absolute;*/
+      /*top: 0;*/
+      /*right: 0;*/
+      /*bottom: 0;*/
+      /*left: 0;*/
     }
 
     .table-cell-action{

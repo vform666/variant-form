@@ -2,6 +2,7 @@
   <form-item-wrapper :designer="designer" :field="field" :rules="rules" :design-state="designState"
                      :parent-widget="parentWidget" :parent-list="parentList" :index-of-parent-list="indexOfParentList"
                      :sub-form-row-index="subFormRowIndex" :sub-form-col-index="subFormColIndex" :sub-form-row-id="subFormRowId">
+    <!-- el-upload增加:name="field.options.name"后，会导致又拍云上传失败！故删除之！！ -->
     <el-upload ref="fieldEditor" :disabled="field.options.disabled"
                :action="field.options.uploadURL" :headers="uploadHeaders" :data="uploadData"
                :with-credentials="field.options.withCredentials"
@@ -107,15 +108,14 @@
     },
 
     methods: {
-
       handlePictureExceed() {
-        //let uploadLimit = this.field.options.limit
+        let uploadLimit = this.field.options.limit  /* 此行不能注释，下一行ES6模板字符串需要用到！！ */
         this.$message.warning(eval('`' + this.i18nt('render.hint.uploadExceed') + '`'));
       },
 
-      updateUploadFieldModelAndEmitDataChange() {
+      updateUploadFieldModelAndEmitDataChange(fileList) {
         let oldValue = deepClone(this.fieldModel)
-        this.fieldModel = deepClone(this.fileList)
+        this.fieldModel = deepClone(fileList)
         this.syncUpdateFormModel(this.fieldModel)
         this.emitFieldDataChange(this.fieldModel, oldValue)
       },
@@ -170,25 +170,17 @@
           customFn.call(this, res, file, fileList)
         } else {
           if (file.status === 'success') {
-            this.fileList.push(file)
-            this.updateUploadFieldModelAndEmitDataChange()
+            //this.fileList.push(file)  /* 上传过程中，this.fileList是只读的，不能修改赋值!! */
+            this.updateUploadFieldModelAndEmitDataChange(fileList)
 
-            this.uploadBtnHidden = this.fileList.length >= this.field.options.limit
-            //console.log('test========', this.uploadBtnHidden)
+            this.uploadBtnHidden = fileList.length >= this.field.options.limit
           }
         }
       },
 
       handlePictureRemove(file, fileList) {
-        let foundIdx = -1
-        this.fileList.forEach((tf,idx) => {
-          if (tf.name === file.name) {
-            foundIdx = idx
-          }
-        })
-
         this.fileList = fileList
-        this.updateUploadFieldModelAndEmitDataChange()
+        this.updateUploadFieldModelAndEmitDataChange(fileList)
 
         this.uploadBtnHidden = fileList.length >= this.field.options.limit
       },

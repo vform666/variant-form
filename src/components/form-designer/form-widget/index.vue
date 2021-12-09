@@ -61,6 +61,7 @@
         }
       }
     },
+    inject: ['getDesignerConfig'],
     data() {
       return {
         formModel: {},
@@ -111,6 +112,7 @@
     },
     created() {
       this.designer.initDesigner();
+      this.designer.loadPresetCssCode( this.getDesignerConfig().presetCssCode )
     },
     mounted() {
       this.disableFirefoxDefaultDrop()  /* 禁用Firefox默认拖拽搜索功能!! */

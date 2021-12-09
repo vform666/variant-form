@@ -140,6 +140,8 @@ export default {
       colspanNotConsistentForMergeEntireColumn: 'Cells in this column don\'t have the same colspan, operation failed.',
       rowspanNotConsistentForDeleteEntireRow: 'Cells in this row don\'t have the same rowspan, operation failed.',
       colspanNotConsistentForDeleteEntireColumn: 'Cells in this column don\'t have the same colspan, operation failed.',
+      lastColCannotBeDeleted: 'The last col cannot be deleted.',
+      lastRowCannotBeDeleted: 'The last row cannot be deleted.',
     },
 
     toolbar: {
@@ -166,6 +168,7 @@ export default {
       advancedSetting: 'Advanced Setting',
       eventSetting: 'Event Setting',
       uniqueName: 'Unique Name',
+      editNameHelp: 'Press enter to confirm the modification',
       label: 'Label',
       displayType: 'Type',
       defaultValue: 'Default Value',

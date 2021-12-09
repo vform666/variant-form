@@ -17,14 +17,19 @@
 
 ### 功能一览
 ```
-> 拖拽式表单设计；
-> 支持PC、H5两种布局；
+> 拖拽式可视化表单设计；
+> 支持PC、Pad、H5三种布局；
 > 支持运行时动态加载表单；
 > 支持表单复杂交互控制；
 > 支持自定义CSS样式；
-> 支持历史撤销、重做功能；
+> 支持自定义校验逻辑；
+> 支持国际化多语言；
+> 兼容IE 11浏览器；
 > 可导出Vue组件、HTML源码；
 > 可导出Vue的SFC单文件组件；
+> 支持开发自定义组件；
+> 支持响应式自适应布局；
+> 支持VS Code插件；
 > 更多功能等你探究...；
 ```
 
@@ -158,17 +163,17 @@ body {
 ### 资源链接
 <hr>
 
-文档官网：<a href="http://www.vform666.com/" target="_blank">http://www.vform666.com/</a>
+文档官网：<a href="https://www.vform666.com/" target="_blank">https://www.vform666.com/</a>
 
-在线演示：<a href="http://demo.vform666.com/" target="_blank">http://demo.vform666.com/</a>
+在线演示：<a href="https://www.vform666.com/demo/" target="_blank">https://www.vform666.com/demo/</a>
 
-VS Code插件：<a href="http://www.vform666.com/pages/plugin/" target="_blank">http://www.vform666.com/pages/plugin/</a>
+VS Code插件：<a href="https://www.vform666.com/pages/plugin/" target="_blank">https://www.vform666.com/pages/plugin/</a>
 
 Github仓库：<a href="https://github.com/vform666/variant-form" target="_blank">https://github.com/vform666/variant-form</a>
 
 Gitee备份仓库：<a href="https://gitee.com/vdpadmin/variant-form" target="_blank">https://gitee.com/vdpadmin/variant-form</a>
 
-更新日志：<a href="http://www.vform666.com/pages/changelog/" target="_blank">http://www.vform666.com/pages/changelog/</a>
+更新日志：<a href="https://www.vform666.com/pages/changelog/" target="_blank">https://www.vform666.com/pages/changelog/</a>
 
 技术交流群：微信搜索“vformAdmin”，或者扫如下二维码加群
 

@@ -179,7 +179,8 @@ export default {
       if (!!this.field.options.required) {
         this.rules.push({
           required: true,
-          trigger: ['blur', 'change'],
+          //trigger: ['blur', 'change'],
+          trigger: ['blur'],  /* 去掉change事件触发校验，change事件触发时formModel数据尚未更新，导致radio/checkbox必填校验出错！！ */
           message: this.i18nt('render.hint.fieldRequired'),
         })
       }

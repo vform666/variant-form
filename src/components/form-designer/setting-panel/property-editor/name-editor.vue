@@ -1,10 +1,15 @@
 <template>
-  <el-form-item :label="i18nt('designer.setting.uniqueName')" :rules="nameRequiredRule">
+  <el-form-item :rules="nameRequiredRule">
+    <span slot="label">{{i18nt('designer.setting.uniqueName')}}
+      <el-tooltip effect="light" :content="i18nt('designer.setting.editNameHelp')">
+        <i class="el-icon-info"></i></el-tooltip>
+    </span>
     <template v-if="!!selectedWidget.category">
       <el-input type="text" v-model="optionModel.name" @change="updateWidgetNameAndRef"></el-input>
     </template>
     <template v-else>
-      <el-select v-model="optionModel.name" allow-create filterable @change="updateWidgetNameAndRef">
+      <el-select v-model="optionModel.name" allow-create filterable @change="updateWidgetNameAndRef"
+                 :title="i18nt('designer.setting.editNameHelp')">
         <el-option v-for="(sf, sfIdx) in serverFieldList" :key="sfIdx" :label="sf.label" :value="sf.name"></el-option>
       </el-select>
     </template>
