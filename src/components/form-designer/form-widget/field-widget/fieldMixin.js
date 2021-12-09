@@ -412,11 +412,16 @@ export default {
 
     resetField() {
       let defaultValue = this.field.options.defaultValue
-      //this.disableChangeValidate()  /* 禁用字段校验 */
       this.setValue(defaultValue)
       this.$nextTick(() => {
-        //this.enableChangeValidate()  /* 开启字段校验 */
+        //
       })
+
+      //清空上传组件文件列表
+      if ((this.field.type === 'picture-upload') || (this.field.type === 'file-upload')) {
+        this.$refs['fieldEditor'].clearFiles()
+        this.fileList.splice(0, this.fileList.length)
+      }
     },
 
     setWidgetOption(optionName, optionValue) { //通用组件选项修改API
