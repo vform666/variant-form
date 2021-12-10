@@ -716,6 +716,7 @@
     }
     .el-tree-node__children {
       padding-left: 12px;
+      overflow: visible !important; /* 加入此行让el-tree宽度自动撑开，超出宽度el-draw自动出现水平滚动条！ */
     }
 
     .el-tree-node :last-child:before {

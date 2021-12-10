@@ -174,6 +174,10 @@ export default {
       }
     },
 
+    clearFieldRules() {
+      this.rules.splice(0, this.rules.length)  //清空已有
+    },
+
     buildFieldRules() {
       this.rules.splice(0, this.rules.length)  //清空已有
       if (!!this.field.options.required) {
@@ -298,6 +302,9 @@ export default {
 
       //number组件一般不会触发focus事件，故此处需要手工赋值oldFieldValue！！
       this.oldFieldValue = deepClone(value)  /* oldFieldValue需要在initFieldModel()方法中赋初值!! */
+
+      /* 主动触发表单的单个字段校验，用于清除字段可能存在的校验错误提示 */
+      this.dispatch('VFormRender', 'fieldValidation', [this.field.options.name])
     },
 
     handleFocusCustomEvent(event) {
@@ -449,6 +456,12 @@ export default {
 
     setHidden(flag) {
       this.field.options.hidden = flag
+
+      if (!!flag) {  //清除组件校验规则
+        this.clearFieldRules()
+      } else {  //重建组件校验规则
+        this.buildFieldRules()
+      }
     },
 
     setRequired(flag) {

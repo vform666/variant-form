@@ -134,8 +134,8 @@
     methods: {
       initFormObject() {
         this.insertCustomStyleAndScriptNode()
-        //this.buildFormModel()
         this.addFieldChangeEventHandler()
+        this.addFieldValidateEventHandler()
         this.registerFormToRefList()
         this.handleOnCreated()
       },
@@ -248,6 +248,13 @@
         this.$on('fieldChange', function (fieldName, newValue, oldValue, subFormName, subFormRowIndex) {
           this.handleFieldDataChange(fieldName, newValue, oldValue, subFormName, subFormRowIndex)
           this.$emit('formChange', fieldName, newValue, oldValue, this.formDataModel, subFormName, subFormRowIndex)
+        })
+      },
+
+      addFieldValidateEventHandler() {
+        this.$off('fieldValidation')  //移除原有事件监听
+        this.$on('fieldValidation', (fieldName) => {
+          this.$refs.renderForm.validateField(fieldName)
         })
       },
 
