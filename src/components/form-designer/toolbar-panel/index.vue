@@ -47,7 +47,11 @@
           <VFormRender ref="preForm" :form-json="formJson" :form-data="testFormData" :preview-state="true"
                        :option-data="testOptionData"
                        @appendButtonClick="testOnAppendButtonClick" @buttonClick="testOnButtonClick"
-                       @formChange="handleFormChange"></VFormRender>
+                       @formChange="handleFormChange">
+            <!--
+            <div slot="testSlot">aaaa</div>
+            -->
+          </VFormRender>
         </div>
       </div>
       <code-editor v-model="testFunc" style="display: none"></code-editor>

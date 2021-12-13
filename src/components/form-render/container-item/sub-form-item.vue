@@ -52,7 +52,9 @@
                           :key="fieldSchemaData[sfrIdx][swIdx].id" :parent-list="widget.widgetList"
                           :index-of-parent-list="swIdx" :parent-widget="widget"
                           :sub-form-row-id="subFormRowId"
-                          :sub-form-row-index="sfrIdx" :sub-form-col-index="swIdx"></component>
+                          :sub-form-row-index="sfrIdx" :sub-form-col-index="swIdx">
+              <!-- 子表单暂不支持插槽！！！ -->
+            </component>
           </div>
         </template>
       </el-row>

@@ -1,5 +1,5 @@
 <template>
-  <el-col v-else-if="widget.type === 'grid-col'" class="grid-cell" v-bind="layoutProps"
+  <el-col v-if="widget.type === 'grid-col'" class="grid-cell" v-bind="layoutProps"
           :class="[selected ? 'selected' : '', customClass]" :style="colHeightStyle"
           :key="widget.id" @click.native.stop="selectWidget(widget)">
     <draggable :list="widget.widgetList" v-bind="{group:'dragGroup', ghostClass: 'ghost',animation: 200}"

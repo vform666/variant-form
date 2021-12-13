@@ -56,9 +56,9 @@ export default {
       'file-upload':    'File',
       'rich-editor':    'Rich Editor',
       cascader:         'Cascader',
+      slot:             'Slot',
 
       custom:           'Custom Component',
-      slot:             'Slot'
     },
 
     hint: {

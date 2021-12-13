@@ -20,9 +20,9 @@
       <i class="el-icon-bottom" v-if="!!parentList && (parentList.length > 1)" :title="i18nt('designer.hint.moveDownWidget')"
          @click.stop="moveDownWidget()"></i>
       <i v-if="widget.type === 'table'" class="iconfont icon-insertrow" :title="i18nt('designer.hint.insertRow')"
-         @click.stop="insertTableRow(widget)"></i>
+         @click.stop="appendTableRow(widget)"></i>
       <i v-if="widget.type === 'table'" class="iconfont icon-insertcolumn" :title="i18nt('designer.hint.insertColumn')"
-         @click.stop="insertTableCol(widget)"></i>
+         @click.stop="appendTableCol(widget)"></i>
       <i class="el-icon-copy-document" v-if="(widget.type === 'grid') || (widget.type === 'table')"
          :title="i18nt('designer.hint.cloneWidget')" @click.stop="cloneContainer(widget)"></i>
       <i class="el-icon-delete" :title="i18nt('designer.hint.remove')" @click.stop="removeWidget"></i>

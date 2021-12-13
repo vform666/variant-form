@@ -8,7 +8,12 @@
         <tr v-for="(row, rowIdx) in widget.rows" :key="row.id">
           <template v-for="(colWidget, colIdx) in row.cols">
             <table-cell-item v-if="!colWidget.merged" :widget="colWidget" :key="colIdx" :parent-list="widget.cols"
-                             :row-index="rowIdx" :col-index="colIdx" :parent-widget="widget"></table-cell-item>
+                             :row-index="rowIdx" :col-index="colIdx" :parent-widget="widget">
+              <!-- 递归传递插槽！！！ -->
+              <template v-for="slot in Object.keys($scopedSlots)" v-slot:[slot]="scope">
+                <slot :name="slot" v-bind="scope"/>
+              </template>
+            </table-cell-item>
           </template>
         </tr>
         </tbody>

@@ -16,11 +16,21 @@
     <template v-for="(widget, index) in widgetList">
       <template v-if="'container' === widget.category">
         <component :is="getContainerWidgetName(widget)" :widget="widget" :key="widget.id" :parent-list="widgetList"
-                        :index-of-parent-list="index" :parent-widget="null"></component>
+                        :index-of-parent-list="index" :parent-widget="null">
+          <!-- 递归传递插槽！！！ -->
+          <template v-for="slot in Object.keys($scopedSlots)" v-slot:[slot]="scope">
+            <slot :name="slot" v-bind="scope"/>
+          </template>
+        </component>
       </template>
       <template v-else>
         <component :is="getWidgetName(widget)" :field="widget" :form-model="formDataModel" :designer="null" :key="widget.id" :parent-list="widgetList"
-                      :index-of-parent-list="index" :parent-widget="null"></component>
+                      :index-of-parent-list="index" :parent-widget="null">
+          <!-- 递归传递插槽！！！ -->
+          <template v-for="slot in Object.keys($scopedSlots)" v-slot:[slot]="scope">
+            <slot :name="slot" v-bind="scope"/>
+          </template>
+        </component>
       </template>
     </template>
   </el-form>

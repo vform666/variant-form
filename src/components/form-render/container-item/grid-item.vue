@@ -7,7 +7,12 @@
       <template v-for="(colWidget, colIdx) in widget.cols">
         <grid-col-item :widget="colWidget" :key="colIdx" :parent-list="widget.cols"
                        :index-of-parent-list="colIdx" :parent-widget="widget"
-                       :col-height="widget.options.colHeight"></grid-col-item>
+                       :col-height="widget.options.colHeight">
+          <!-- 递归传递插槽！！！ -->
+          <template v-for="slot in Object.keys($scopedSlots)" v-slot:[slot]="scope">
+            <slot :name="slot" v-bind="scope"/>
+          </template>
+        </grid-col-item>
       </template>
     </el-row>
 
