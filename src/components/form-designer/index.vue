@@ -38,7 +38,7 @@
       <el-container class="center-layout-container">
         <el-header class="toolbar-header">
           <toolbar-panel :designer="designer" ref="toolbarRef">
-            <template #toolButton><slot name="customToolButtons"></slot></template>
+            <template #toolButtons><slot name="customToolButtons"></slot></template>
           </toolbar-panel>
         </el-header>
         <el-main class="form-widget-main">

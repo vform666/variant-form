@@ -38,7 +38,6 @@ export default {
             this.activeTabName = tp.options.name
           }
         })
-
       }
     },
 
@@ -92,6 +91,9 @@ export default {
           this.disableSubFormRow(rIdx)
         })
       }
+
+      //禁用3个操作按钮
+      this.actionDisabled = true
     },
 
     enableSubForm() {
@@ -100,6 +102,9 @@ export default {
           this.enableSubFormRow(rIdx)
         })
       }
+
+      //启用3个操作按钮
+      this.actionDisabled = false
     },
 
     resetSubForm() { //重置subForm数据为空

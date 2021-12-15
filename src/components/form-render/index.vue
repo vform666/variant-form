@@ -255,7 +255,7 @@
       addFieldChangeEventHandler() {
         this.$off('fieldChange')  //移除原有事件监听
 
-        this.$on('fieldChange', function (fieldName, newValue, oldValue, subFormName, subFormRowIndex) {
+        this.$on('fieldChange', (fieldName, newValue, oldValue, subFormName, subFormRowIndex) => {
           this.handleFieldDataChange(fieldName, newValue, oldValue, subFormName, subFormRowIndex)
           this.$emit('formChange', fieldName, newValue, oldValue, this.formDataModel, subFormName, subFormRowIndex)
         })
@@ -374,8 +374,6 @@
        * @param widgetNames 指定重新加载的组件名称或组件名数组，不传则重新加载所有选项字段
        */
       reloadOptionData(widgetNames) {
-        //this._provided.globalOptionData = this.optionData
-
         let eventParams = []
         if (!!widgetNames && (typeof widgetNames === 'string')) {
           eventParams = [widgetNames]
@@ -409,24 +407,16 @@
       },
 
       setFormData(formData) { //设置表单数据
-        //this.formDataModel = formData //inject注入的formModel不是响应式的，直接赋值在其他组件拿不到最新值！！
-
         Object.keys(this.formDataModel).forEach(propName => {
           if (!!formData && formData.hasOwnProperty(propName)) {
             this.formDataModel[propName] = deepClone( formData[propName] )
           }
         })
 
-        //this.formDataModel = formData
-        //this._provided.globalModel.formModel = formData  /* 这种写法可使inject的属性保持响应式更新！！ */
-        //
-
         // 通知SubForm组件：表单数据更新事件！！
-        //this.broadcast('ContainerItem', 'setFormData', formData)
         this.broadcast('ContainerItem', 'setFormData', this.formDataModel)
 
         // 通知FieldWidget组件：表单数据更新事件！！
-        //this.broadcast('FieldWidget', 'setFormData', formData)
         this.broadcast('FieldWidget', 'setFormData', this.formDataModel)
       },
 
@@ -457,11 +447,11 @@
         wNameList.forEach(wName => {
           let foundW = this.getWidgetRef(wName)
           if (!!foundW) {
-            // if (!!foundW.setDisabled) {
-            //   foundW.setDisabled(true)
-            // }
-
-            !!foundW.setDisabled && foundW.setDisabled(true)
+            if (!!foundW.widget && (foundW.widget.type === 'sub-form')) {
+              foundW.disableSubForm()
+            } else {
+              !!foundW.setDisabled && foundW.setDisabled(true)
+            }
           }
         })
       },
@@ -471,11 +461,11 @@
         wNameList.forEach(wName => {
           let foundW = this.getWidgetRef(wName)
           if (!!foundW) {
-            // if (!!foundW.setDisabled) {
-            //   foundW.setDisabled(false)
-            // }
-
-            !!foundW.setDisabled && foundW.setDisabled(false)
+            if (!!foundW.widget && (foundW.widget.type === 'sub-form')) {
+              foundW.enableSubForm()
+            } else {
+              !!foundW.setDisabled && foundW.setDisabled(false)
+            }
           }
         })
       },

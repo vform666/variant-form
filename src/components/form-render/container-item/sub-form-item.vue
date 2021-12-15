@@ -6,7 +6,7 @@
       <el-row class="header-row">
         <div class="action-header-column">
           <span class="action-label">{{i18nt('render.hint.subFormAction')}}</span>
-          <el-button round type="primary" size="mini" class="action-button" @click="addSubFormRow"
+          <el-button :disabled="actionDisabled" round type="primary" size="mini" class="action-button" @click="addSubFormRow"
                      :title="i18nt('render.hint.subFormAddActionHint')">
             {{i18nt('render.hint.subFormAddAction')}}<i class="el-icon-plus el-icon-right"></i></el-button>
         </div>
@@ -38,9 +38,9 @@
       <el-row v-for="(subFormRowId, sfrIdx) in rowIdData" class="sub-form-row" :key="subFormRowId">
         <div class="sub-form-action-column hide-label">
           <div class="action-button-column">
-            <el-button circle type="" icon="el-icon-circle-plus-outline" @click="insertSubFormRow(sfrIdx)"
+            <el-button :disabled="actionDisabled" circle type="" icon="el-icon-circle-plus-outline" @click="insertSubFormRow(sfrIdx)"
                        :title="i18nt('render.hint.insertSubFormRow')"></el-button>
-            <el-button circle type="" icon="el-icon-delete" @click="deleteSubFormRow(sfrIdx)"
+            <el-button :disabled="actionDisabled" circle type="" icon="el-icon-delete" @click="deleteSubFormRow(sfrIdx)"
                        :title="i18nt('render.hint.deleteSubFormRow')"></el-button>
             <span v-if="widget.options.showRowNumber" class="row-number-span">#{{sfrIdx+1}}</span>
           </div>
@@ -88,6 +88,7 @@
       return {
         rowIdData: [],
         fieldSchemaData: [],
+        actionDisabled: false,
       }
     },
     created() {
