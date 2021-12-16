@@ -76,9 +76,6 @@
         fileList: [],  //上传文件列表
         uploadBtnHidden: false,
 
-        // styleVariables: {
-        //   '--select-file-action': selectFileText,
-        // },
       }
     },
     computed: {
@@ -179,7 +176,7 @@
       },
 
       handlePictureRemove(file, fileList) {
-        this.fileList = fileList
+        this.fileList = deepClone(fileList)  //this.fileList = fileList
         this.updateUploadFieldModelAndEmitDataChange(fileList)
 
         this.uploadBtnHidden = fileList.length >= this.field.options.limit

@@ -14,13 +14,15 @@
       <div slot="tip" class="el-upload__tip"
            v-if="!!field.options.uploadTip">{{field.options.uploadTip}}</div>
       <i slot="default" class="el-icon-plus avatar-uploader-icon"></i>
-      <div slot="file" slot-scope="{file}" class="upload-file-list">
-        <span class="upload-file-name" :title="file.name">{{file.name}}</span>
-        <a :href="file.url" download="">
-          <i class="el-icon-download file-action" title="i18nt('render.hint.downloadFile')"></i></a>
-        <i class="el-icon-delete file-action" title="i18nt('render.hint.removeFile')" v-if="!field.options.disabled"
-           @click="removeUploadFile(file.name)"></i>
-      </div>
+      <template #file="{ file }">
+        <div class="upload-file-list">
+          <span class="upload-file-name" :title="file.name">{{file.name}}</span>
+          <a :href="file.url" download="">
+            <i class="el-icon-download file-action" title="i18nt('render.hint.downloadFile')"></i></a>
+          <i class="el-icon-delete file-action" title="i18nt('render.hint.removeFile')" v-if="!field.options.disabled"
+            @click="removeUploadFile(file.name)"></i>
+        </div>
+      </template>
     </el-upload>
   </form-item-wrapper>
 </template>
@@ -182,6 +184,7 @@
           if (file.status === 'success') {
             //this.fileList.push(file)  /* 上传过程中，this.fileList是只读的，不能修改赋值!! */
             this.updateUploadFieldModelAndEmitDataChange(fileList)
+            this.fileList = deepClone(fileList)
 
             this.uploadBtnHidden = fileList.length >= this.field.options.limit
           }
@@ -189,7 +192,7 @@
       },
 
       handleFileRemove(file, fileList) {
-        this.fileList = fileList
+        this.fileList = deepClone(fileList)  //this.fileList = fileList
         this.updateUploadFieldModelAndEmitDataChange(fileList)
 
         this.uploadBtnHidden = fileList.length >= this.field.options.limit
