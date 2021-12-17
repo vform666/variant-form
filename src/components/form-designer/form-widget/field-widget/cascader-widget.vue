@@ -7,6 +7,8 @@
                  :size="field.options.size"
                  :clearable="field.options.clearable"
                  :filterable="field.options.filterable"
+                 :props="{ checkStrictly: field.options.checkStrictly, expandTrigger: 'hover' }"
+                 @visible-change="hideDropDownOnClick" @expand-change="hideDropDownOnClick"
                  :placeholder="field.options.placeholder || i18nt('render.hint.selectPlaceholder')"
                  @focus="handleFocusCustomEvent" @blur="handleBlurCustomEvent"
                  @change="handleChangeEvent">
@@ -89,6 +91,16 @@
     },
 
     methods: {
+      /* 开启任意级节点可选后，点击radio隐藏下拉框 */
+      hideDropDownOnClick() {
+        setTimeout(() => {
+          document.querySelectorAll(".el-cascader-panel .el-radio").forEach((el) => {
+            el.onclick = () => {
+              this.$refs.fieldEditor.dropDownVisible = false  //单选框部分点击隐藏下拉框
+            }
+          })
+        }, 100)
+      },
 
     }
   }

@@ -498,7 +498,7 @@ export default {
      */
     loadOptions(options) {
       this.field.options.optionItems = deepClone(options)
-      this.clearSelectedOptions()  //清空已选选项
+      //this.clearSelectedOptions()  //清空已选选项
     },
 
     /**

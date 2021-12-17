@@ -206,6 +206,7 @@ export default {
       automaticDropdown: 'Automatic Dropdown',
       multiple: 'Multiple',
       multipleLimit: 'Multiple Limit',
+      checkStrictly: 'Any Level Selectable',
       contentPosition: 'Content Position',
       plain: 'Plain',
       round: 'Round',

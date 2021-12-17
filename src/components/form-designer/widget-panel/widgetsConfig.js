@@ -869,6 +869,7 @@ export const advancedFields = [
       hidden: false,
       clearable: true,
       filterable: false,
+      checkStrictly: false,  //可选择任意一级选项，默认不开启
       optionItems: [
         {label: 'select 1', value: 1, children: [{label: 'child 1', value: 11}]},
         {label: 'select 2', value: 2},
