@@ -34,12 +34,44 @@ const langResources = {
   }
 }
 
+// *********************  下述代码参考element-ui/lib/locale/format.js begin  *****************//
+
+const RE_NARGS = /(%|)\{([0-9a-zA-Z_]+)\}/g;
+function hasOwn(obj, key) {
+  return Object.prototype.hasOwnProperty.call(obj, key);
+}
+
+const elLocalFormatter = function template(string, args) {
+  return string.replace(RE_NARGS, (match, prefix, i, index) => {
+    let result;
+
+    if (string[index - 1] === '{' &&
+        string[index + match.length] === '}') {
+      return i;
+    } else {
+      result = hasOwn(args, i) ? args[i] : null;
+      if (result === null || result === undefined) {
+        return '';
+      }
+
+      return result;
+    }
+  })
+}
+
+// *********************  下述代码参考element-ui/lib/locale/format.js end  ******************//
+
 Vue.use(si18n, {
   lang: localStorage.getItem('v_form_locale') || 'zh-CN',
   messages: langResources
 })
 
-locale.i18n((key, value) => Vue.prototype.$st(key))
+locale.i18n((key, value) => {
+  let result = Vue.prototype.$st(key)
+  //console.log('test-key', key)
+  //console.log('test-result', result)
+  return elLocalFormatter(result, value)
+})
 
 export const changeLocale = function(langName) {
   Vue.prototype.$si18n.setLang(langName)

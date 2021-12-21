@@ -9,7 +9,7 @@ export function get(object, path) {
   let result = object
 
   keys.forEach(key => {
-      result = isDef(result[key]) ? result[key] : ''
+      result = isDef(result) && isDef(result[key]) ? result[key] : null
   })
 
   return result

@@ -27,13 +27,13 @@ const install = (Vue, options) => {
         const message = get(messages, path)
         return typeof message === 'function'
             ? message(...args)
-            : message || path
+            : (message !== null ? message : path)
     }
 
     proto.$st2 = (path, path2) => {
       let messages = _vm.messages[_vm.lang]
       const message = get(messages, path)
-      return (message !== '') ? message : get(messages, path2)
+      return (message !== null) ? message : get(messages, path2)
     }
 
     proto.$si18n.add = (messages = {}) => {
