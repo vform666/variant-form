@@ -4,7 +4,7 @@
       <el-tooltip effect="light" :content="i18nt('designer.setting.editNameHelp')">
         <i class="el-icon-info"></i></el-tooltip>
     </span>
-    <template v-if="!!selectedWidget.category">
+    <template v-if="!!selectedWidget.category || noFieldList">
       <el-input type="text" v-model="optionModel.name" @change="updateWidgetNameAndRef"></el-input>
     </template>
     <template v-else>
@@ -33,6 +33,12 @@
       return {
         nameRequiredRule: [{required: true, message: 'name required'}],
       }
+    },
+    computed: {
+      noFieldList() {
+        return !this.serverFieldList || (this.serverFieldList.length <= 0)
+      },
+
     },
     methods: {
       updateWidgetNameAndRef(newName) {

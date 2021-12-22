@@ -68,8 +68,6 @@ Vue.use(si18n, {
 
 locale.i18n((key, value) => {
   let result = Vue.prototype.$st(key)
-  //console.log('test-key', key)
-  //console.log('test-result', result)
   return elLocalFormatter(result, value)
 })
 
