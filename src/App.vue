@@ -1,11 +1,6 @@
 <template>
   <div id="app">
-    <VFormDesigner>
-      <!-- 自定义按钮插槽演示 -->
-      <template #customToolButtons>
-        <el-button type="text">test</el-button>
-	    </template>
-    </VFormDesigner>
+    <VFormDesigner ref="vfDesignerRef"></VFormDesigner>
   </div>
 </template>
 

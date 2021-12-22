@@ -145,11 +145,6 @@
       this.caseName = getQueryParam('case')
     },
     mounted() {
-      console.error('slot=====', this.$slots.customToolButtons)
-      console.info('slot=====2222', this.$slots.customToolButtons)
-      console.info('slot=====3333', this.$slots)
-      console.info('test info: ', 'aaaaaaaaaaaaaa')
-
       this.initLocale()
 
       this.scrollerHeight = window.innerHeight - 56 - 36 + 'px'
