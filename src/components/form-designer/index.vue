@@ -38,7 +38,9 @@
       <el-container class="center-layout-container">
         <el-header class="toolbar-header">
           <toolbar-panel :designer="designer" ref="toolbarRef">
-            <template #toolButtons><slot name="customToolButtons"></slot></template>
+            <template v-for="(idx, slotName) in $slots" #[slotName]>
+              <slot :name="slotName"></slot>
+            </template>
           </toolbar-panel>
         </el-header>
         <el-main class="form-widget-main">
@@ -143,6 +145,11 @@
       this.caseName = getQueryParam('case')
     },
     mounted() {
+      console.error('slot=====', this.$slots.customToolButtons)
+      console.info('slot=====2222', this.$slots.customToolButtons)
+      console.info('slot=====3333', this.$slots)
+      console.info('test info: ', 'aaaaaaaaaaaaaa')
+
       this.initLocale()
 
       this.scrollerHeight = window.innerHeight - 56 - 36 + 'px'

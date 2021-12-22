@@ -36,7 +36,9 @@
         {{i18nt('designer.toolbar.exportCode')}}</el-button>
       <el-button v-if="showToolButton('generateSFCButton')" type="text" @click="generateSFC">
         <svg-icon icon-class="vue-sfc" />{{i18nt('designer.toolbar.generateSFC')}}</el-button>
-      <slot name="toolButtons"></slot>
+      <template v-for="(idx, slotName) in $slots">
+        <slot :name="slotName"></slot>
+      </template>
     </div>
 
     <el-dialog :title="i18nt('designer.toolbar.preview')" :visible.sync="showPreviewDialogFlag" v-if="showPreviewDialogFlag"
