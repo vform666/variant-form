@@ -27,7 +27,7 @@ export default {
     //--------------------- 组件内部方法 begin ------------------//
 
     initFieldModel() {
-      if (this.field.formItemFlag === false) {
+      if (!this.field.formItemFlag) {
         return
       }
 
@@ -175,10 +175,18 @@ export default {
     },
 
     clearFieldRules() {
+      if (!this.field.formItemFlag) {
+        return
+      }
+
       this.rules.splice(0, this.rules.length)  //清空已有
     },
 
     buildFieldRules() {
+      if (!this.field.formItemFlag) {
+        return
+      }
+
       this.rules.splice(0, this.rules.length)  //清空已有
       if (!!this.field.options.required) {
         this.rules.push({
@@ -325,6 +333,9 @@ export default {
 
     handleInputCustomEvent(value) {
       this.syncUpdateFormModel(value)
+
+      /* 主动触发表单的单个字段校验，用于清除字段可能存在的校验错误提示 */
+      this.dispatch('VFormRender', 'fieldValidation', [this.field.options.name])
 
       if (!!this.field.options.onInput) {
         let customFn = new Function('value', this.field.options.onInput)
@@ -528,6 +539,14 @@ export default {
     setToolbar(customToolbar) {
       this.customToolbar = customToolbar
     },
+
+    /**
+     * 是否子表单内嵌的组件
+     * @returns {boolean}
+     */
+    isSubFormItem() {
+      return !!this.parentWidget ? this.parentWidget.type === 'sub-form' : false
+    }
 
     //--------------------- 以上为组件支持外部调用的API方法 end ------------------//
 

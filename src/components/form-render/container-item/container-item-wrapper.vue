@@ -18,7 +18,10 @@
   export default {
     name: "container-item-wrapper",
     props: {
-      widget: Object,
+      widget: {
+        type: Object,
+        required: true
+      }
     },
     computed: {
       customClass() {
