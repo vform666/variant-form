@@ -25,3 +25,4 @@ pnpm-debug.log*
 *.sw?
 /package-lock.json
 /VariantForm.iml
+yarn.lock
