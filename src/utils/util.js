@@ -119,21 +119,21 @@ export const loadRemoteScript = function(srcPath, callback) {  /*加载远程js�
 }
 
 export function traverseFieldWidgets(widgetList, handler) {
-  widgetList.map(w => {
+  widgetList.forEach(w => {
     if (w.formItemFlag) {
       handler(w)
     } else if (w.type === 'grid') {
-      w.cols.map(col => {
+      w.cols.forEach(col => {
         traverseFieldWidgets(col.widgetList, handler)
       })
     } else if (w.type === 'table') {
-      w.rows.map(row => {
-        row.cols.map(cell => {
+      w.rows.forEach(row => {
+        row.cols.forEach(cell => {
           traverseFieldWidgets(cell.widgetList, handler)
         })
       })
     } else if (w.type === 'tab') {
-      w.tabs.map(tab => {
+      w.tabs.forEach(tab => {
         traverseFieldWidgets(tab.widgetList, handler)
       })
     } else if (w.type === 'sub-form') {
@@ -145,23 +145,23 @@ export function traverseFieldWidgets(widgetList, handler) {
 }
 
 export function traverseContainWidgets(widgetList, handler) {
-  widgetList.map(w => {
+  widgetList.forEach(w => {
     if (w.category === 'container') {
       handler(w)
     }
 
     if (w.type === 'grid') {
-      w.cols.map(col => {
+      w.cols.forEach(col => {
         traverseContainWidgets(col.widgetList, handler)
       })
     } else if (w.type === 'table') {
-      w.rows.map(row => {
-        row.cols.map(cell => {
+      w.rows.forEach(row => {
+        row.cols.forEach(cell => {
           traverseContainWidgets(cell.widgetList, handler)
         })
       })
     } else if (w.type === 'tab') {
-      w.tabs.map(tab => {
+      w.tabs.forEach(tab => {
         traverseContainWidgets(tab.widgetList, handler)
       })
     } else if (w.type === 'sub-form') {
@@ -173,23 +173,23 @@ export function traverseContainWidgets(widgetList, handler) {
 }
 
 export function traverseAllWidgets(widgetList, handler) {
-  widgetList.map(w => {
+  widgetList.forEach(w => {
     handler(w)
 
     if (w.type === 'grid') {
-      w.cols.map(col => {
+      w.cols.forEach(col => {
         handler(col)
         traverseAllWidgets(col.widgetList, handler)
       })
     } else if (w.type === 'table') {
-      w.rows.map(row => {
-        row.cols.map(cell => {
+      w.rows.forEach(row => {
+        row.cols.forEach(cell => {
           handler(cell)
           traverseAllWidgets(cell.widgetList, handler)
         })
       })
     } else if (w.type === 'tab') {
-      w.tabs.map(tab => {
+      w.tabs.forEach(tab => {
         traverseAllWidgets(tab.widgetList, handler)
       })
     } else if (w.type === 'sub-form') {
@@ -198,6 +198,51 @@ export function traverseAllWidgets(widgetList, handler) {
       traverseAllWidgets(w.widgetList, handler)
     }
   })
+}
+
+function handleWidgetForTraverse(widget, handler) {
+  if (!!widget.category) {
+    traverseFieldWidgetsOfContainer(widget, handler)
+  } else if (widget.formItemFlag) {
+    handler(widget)
+  }
+}
+
+/**
+ * 遍历容器内的字段组件
+ * @param con 
+ * @param handler 
+ */
+export function traverseFieldWidgetsOfContainer(con, handler) {
+  if (con.type === 'grid') {
+    con.cols.forEach(col => {
+      col.widgetList.forEach(cw => {
+        handleWidgetForTraverse(cw, handler)
+      })
+    })
+  } else if (con.type === 'table') {
+    con.rows.forEach(row => {
+      row.cols.forEach(cell => {
+        cell.widgetList.forEach(cw => {
+          handleWidgetForTraverse(cw, handler)
+        })
+      })
+    })
+  } else if (con.type === 'tab') {
+    con.tabs.forEach(tab => {
+      tab.widgetList.forEach(cw => {
+        handleWidgetForTraverse(cw, handler)
+      })
+    })
+  } else if (con.type === 'sub-form') {
+    con.widgetList.forEach(cw => {
+      handleWidgetForTraverse(cw, handler)
+    })
+  } else if (con.category === 'container') {  //自定义容器
+    con.widgetList.forEach(cw => {
+      handleWidgetForTraverse(cw, handler)
+    })
+  }
 }
 
 export function copyToClipboard(content, clickEvent, $message, successMsg, errorMsg) {
