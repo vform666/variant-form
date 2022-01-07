@@ -6,7 +6,7 @@
 <br/>
 
 ### 立即体验
-[在线Demo](https://www.vform666.com/demo/)
+[在线Demo](http://120.92.142.115/)
 
 ### 友情链接
 [Fantastic-admin](https://hooray.gitee.io/fantastic-admin/) —— 一款开箱即用的 Vue 中后台管理系统框架（支持Vue2/Vue3）
@@ -165,7 +165,7 @@ body {
 
 文档官网：<a href="https://www.vform666.com/" target="_blank">https://www.vform666.com/</a>
 
-在线演示：<a href="https://www.vform666.com/demo/" target="_blank">https://www.vform666.com/demo/</a>
+在线演示：<a href="http://120.92.142.115/" target="_blank">http://120.92.142.115/</a>
 
 VS Code插件：<a href="https://www.vform666.com/pages/plugin/" target="_blank">https://www.vform666.com/pages/plugin/</a>
 
