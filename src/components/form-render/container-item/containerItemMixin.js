@@ -91,6 +91,13 @@ export default {
       }
     },
 
+    /**
+     * 获取子表单的行数
+     */
+    getSubFormRowCount() {
+      return !this.rowIdData ? 0 : this.rowIdData.length
+    },
+
     disableSubFormRow(rowIndex) {
       this.widget.widgetList.forEach(subWidget => {
         let swRefName = subWidget.options.name + '@row' + this.rowIdData[rowIndex]
@@ -145,11 +152,15 @@ export default {
 
     getSubFormValues(needValidation = true) {
       if (this.widget.type === 'sub-form') {
-        //TODO: 逐行校验子表单！！
+        //TODO: 逐行校验子表单！暂未实现！！
         return this.formModel[this.widget.options.name]
       } else {
         this.$message.error(this.i18nt('render.hint.nonSubFormType'))
       }
+    },
+
+    setSubFormValues(subFormValues) {
+      //TODO: 待实现！！
     },
 
     // validateField(fieldName) { //逐行校验子表单字段

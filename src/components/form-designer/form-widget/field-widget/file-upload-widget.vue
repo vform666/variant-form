@@ -18,9 +18,9 @@
         <div class="upload-file-list">
           <span class="upload-file-name" :title="file.name">{{file.name}}</span>
           <a :href="file.url" download="">
-            <i class="el-icon-download file-action" title="i18nt('render.hint.downloadFile')"></i></a>
-          <i class="el-icon-delete file-action" title="i18nt('render.hint.removeFile')" v-if="!field.options.disabled"
-            @click="removeUploadFile(file.name)"></i>
+            <i class="el-icon-download file-action" :title="i18nt('render.hint.downloadFile')"></i></a>
+          <i class="el-icon-delete file-action" :title="i18nt('render.hint.removeFile')" v-if="!field.options.disabled"
+             @click="removeUploadFile(file.name)"></i>
         </div>
       </template>
     </el-upload>
@@ -200,7 +200,7 @@
 
       removeUploadFile(fileName) {
         let foundIdx = -1
-        this.fileList.forEach((file,idx) => {
+        this.fileList.forEach((file, idx) => {
           if (file.name === fileName) {
             foundIdx = idx
           }

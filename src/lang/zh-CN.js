@@ -316,6 +316,31 @@ export default {
       formRefName: '引用名称',
       formRulesName: '验证规则名称',
 
+      //data-table
+      tableWidth: '宽度(px/%)',
+      tableHeight: '高度(px/%)',
+      showCheckBox: '是否显示复选框列',
+      showIndex: '是否显示行号',
+      showPagination: '是否显示分页',
+      smallPagination: '小型分页',
+      tableColEdit: '表格列编辑',
+      tableDataEdit: '表格数据编辑',
+      showSummary: '是否合计',
+      stripe: '是否斑马线',
+      rowSpacing: '行距（px）',
+      editAction: '编辑...',
+      columnName: '字段名称',
+      columnLabel: '显示名称',
+      columnWidth: '列宽(px/%)',
+      visibleColumn: '是否显示',
+      sortableColumn: '是否排序',
+      fixedColumn: '是否固定',
+      alignTypeOfColumn: '对齐方式',
+      formatOfColumn: '格式化',
+      actionColumn: '操作',
+      addTableColumn: '增加列',
+      deleteTableColumn: '删除列',
+      OnlyOneColumnCannotBeDeleted: '表格只有一列时不可删除.',
     }
 
   }

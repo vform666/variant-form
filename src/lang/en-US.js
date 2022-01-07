@@ -316,6 +316,31 @@ export default {
       formRefName: 'Ref Name',
       formRulesName: 'Rules Name',
 
+      //data-table
+      tableWidth: 'Width(px/%)',
+      tableHeight: 'Height(px/%)',
+      showCheckBox: 'Show CheckBox',
+      showIndex: 'Show Row Number',
+      showPagination: 'Show Pagination',
+      smallPagination: 'Small Pagination',
+      tableColEdit: 'Edit Cols',
+      tableDataEdit: 'Edit Data',
+      stripe: 'Stripe',
+      showSummary: 'Show Summary',
+      rowSpacing: 'Row Spacing(px)',
+      editAction: 'Edit...',
+      columnName: 'Name',
+      columnLabel: 'Label',
+      columnWidth: 'Width(px/%)',
+      visibleColumn: 'Visible',
+      sortableColumn: 'Sortable',
+      fixedColumn: 'Fixed',
+      alignTypeOfColumn: 'Align',
+      formatOfColumn: 'Format',
+      actionColumn: 'Action',
+      addTableColumn: 'Add New Column',
+      deleteTableColumn: 'Delete This Column',
+      OnlyOneColumnCannotBeDeleted: 'The last column cannot be deleted.',
     }
 
   }

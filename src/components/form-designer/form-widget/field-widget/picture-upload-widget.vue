@@ -169,6 +169,7 @@
           if (file.status === 'success') {
             //this.fileList.push(file)  /* 上传过程中，this.fileList是只读的，不能修改赋值!! */
             this.updateUploadFieldModelAndEmitDataChange(fileList)
+            this.fileList = deepClone(fileList)
 
             this.uploadBtnHidden = fileList.length >= this.field.options.limit
           }

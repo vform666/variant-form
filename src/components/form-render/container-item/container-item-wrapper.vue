@@ -21,7 +21,7 @@
       widget: {
         type: Object,
         required: true
-      }
+      },
     },
     computed: {
       customClass() {

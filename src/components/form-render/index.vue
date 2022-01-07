@@ -41,7 +41,12 @@
   import emitter from 'element-ui/lib/mixins/emitter'
   import './container-item/index'
   import FieldComponents from '@/components/form-designer/form-widget/field-widget/index'
-  import {deepClone, insertCustomCssToHead, insertGlobalFunctionsToHtml} from "../../utils/util"
+  import {
+    deepClone,
+    insertCustomCssToHead,
+    insertGlobalFunctionsToHtml,
+    traverseFieldWidgets
+  } from "@/utils/util"
   import i18n, { changeLocale } from "../../utils/i18n"
 
   export default {
@@ -298,14 +303,61 @@
         let foundW = this.getWidgetRef(widgetName)
         if (!!foundW) {
           foundW.setDisabled(disabledFlag)
+        } else { //没找到，可能是子表单中的组件
+          this.findWidgetOfSubFormAndSetDisabled(widgetName, disabledFlag)
         }
+      },
+
+      findWidgetOfSubFormAndSetDisabled(widgetName, disabledFlag) {
+        this.findWidgetNameInSubForm(widgetName).forEach(wn => {
+          let sw = this.getWidgetRef(wn)
+          if (!!sw) {
+            sw.setDisabled(disabledFlag)
+          }
+        })
       },
 
       findWidgetAndSetHidden(widgetName, hiddenFlag) {
         let foundW = this.getWidgetRef(widgetName)
         if (!!foundW) {
           foundW.setHidden(hiddenFlag)
+        } else { //没找到，可能是子表单中的组件
+          this.findWidgetOfSubFormAndSetHidden(widgetName, hiddenFlag)
         }
+      },
+
+      findWidgetOfSubFormAndSetHidden(widgetName, hiddenFlag) {
+        this.findWidgetNameInSubForm(widgetName).forEach(wn => {
+          let sw = this.getWidgetRef(wn)
+          if (!!sw) {
+            sw.setHidden(hiddenFlag)
+          }
+        })
+      },
+
+      findWidgetNameInSubForm(widgetName) {
+        let result = []
+        let subFormName = null
+        let handlerFn = (field, parent) => {
+          if (!!field.options && (field.options.name === widgetName)) {
+            subFormName = parent.options.name
+          }
+        }
+        traverseFieldWidgets(this.widgetList, handlerFn)
+
+        if (!!subFormName) {
+          let subFormRef = this.getWidgetRef(subFormName)
+          if (!!subFormRef) {
+            let rowIds = subFormRef.getRowIdData()
+            if (!!rowIds && (rowIds.length > 0)) {
+              rowIds.forEach(rid => {
+                result.push( widgetName + '@row' + rid)
+              })
+            }
+          }
+        }
+
+        return result
       },
 
       //--------------------- 以下为组件支持外部调用的API方法 begin ------------------//
@@ -423,7 +475,19 @@
       getFieldValue(fieldName) { //单个字段获取值
         let fieldRef = this.getWidgetRef(fieldName)
         if (!!fieldRef && !!fieldRef.getValue) {
-          fieldRef.getValue()
+          return fieldRef.getValue()
+        }
+
+        if (!fieldRef) { //如果是子表单字段
+          let result = []
+          this.findWidgetNameInSubForm(fieldName).forEach(wn => {
+            let sw = this.getWidgetRef(wn)
+            if (!!sw && !!sw.getValue) {
+              result.push( sw.getValue() )
+            }
+          })
+
+          return result
         }
       },
 
@@ -432,14 +496,24 @@
         if (!!fieldRef && !!fieldRef.setValue) {
           fieldRef.setValue(fieldValue)
         }
+
+        if (!fieldRef) { //如果是子表单字段
+          this.findWidgetNameInSubForm(fieldName).forEach(wn => {
+            let sw = this.getWidgetRef(wn)
+            if (!!sw && !!sw.setValue) {
+              sw.setValue(fieldValue)
+            }
+          })
+        }
       },
 
       getSubFormValues(subFormName, needValidation = true) {
         let foundSFRef = this.subFormRefList[subFormName]
-        // if (!foundSFRef) {
-        //   return this.formDataModel[subFormName]
-        // }
         return foundSFRef.getSubFormValues(needValidation)
+      },
+
+      setSubFormValues(subFormName, subFormValues) {
+        //TODO: 待实现！！
       },
 
       disableForm() {

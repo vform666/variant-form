@@ -7,7 +7,7 @@
                  :size="field.options.size"
                  :clearable="field.options.clearable"
                  :filterable="field.options.filterable"
-                 :props="{ checkStrictly: field.options.checkStrictly, expandTrigger: 'hover' }"
+                 :props="{ checkStrictly: field.options.checkStrictly, multiple: field.options.multiple, expandTrigger: 'hover' }"
                  @visible-change="hideDropDownOnClick" @expand-change="hideDropDownOnClick"
                  :placeholder="field.options.placeholder || i18nt('render.hint.selectPlaceholder')"
                  @focus="handleFocusCustomEvent" @blur="handleBlurCustomEvent"

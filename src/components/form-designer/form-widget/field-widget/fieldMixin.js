@@ -519,6 +519,14 @@ export default {
     reloadOptions(options) {
       this.field.options.optionItems = deepClone(options)
     },
+    
+    /**
+     * 返回radio/checkbox/select/cascader的选项数据
+     * @returns 选择项数组
+     */
+     getOptions() {
+      return this.field.options.optionItems
+    },
 
     disableOption(optionValue) {
       this.disableOptionOfList(this.field.options.optionItems, optionValue)
