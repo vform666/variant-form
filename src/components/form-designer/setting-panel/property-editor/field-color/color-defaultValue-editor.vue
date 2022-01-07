@@ -1,6 +1,8 @@
 <template>
-  <el-color-picker v-model="optionModel.defaultValue" @change="emitDefaultValueChange">
-  </el-color-picker>
+  <el-form-item :label="i18nt('designer.setting.defaultValue')">
+    <el-color-picker v-model="optionModel.defaultValue" @change="emitDefaultValueChange">
+    </el-color-picker>
+  </el-form-item>
 </template>
 
 <script>
