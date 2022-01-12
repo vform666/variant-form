@@ -59,7 +59,7 @@
         <span slot="label"><i class="el-icon-c-scale-to-original"></i> {{i18nt('designer.formLib')}}</span>
 
         <template v-for="(ft, idx) in formTemplates">
-          <el-card :bord-style="{ padding: '0' }" shadow="hover" class="ft-card">
+          <el-card :key="idx" :bord-style="{ padding: '0' }" shadow="hover" class="ft-card">
             <el-popover placement="right" trigger="hover">
               <img slot="reference" :src="ft.imgUrl" style="width: 200px">
               <img :src="ft.imgUrl" style="height: 600px;width: 720px">
