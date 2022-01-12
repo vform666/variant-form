@@ -8,6 +8,11 @@
 ### 立即体验
 [在线Demo](http://120.92.142.115/)
 
+
+### Vue 3预览版已发布
+[立即进入](https://gitee.com/vdpadmin/variant-form3-vite)
+
+
 ### 友情链接
 [Fantastic-admin](https://hooray.gitee.io/fantastic-admin/) —— 一款开箱即用的 Vue 中后台管理系统框架（支持Vue2/Vue3）
 
@@ -167,11 +172,11 @@ body {
 
 在线演示：<a href="http://120.92.142.115/" target="_blank">http://120.92.142.115/</a>
 
-VS Code插件：<a href="https://www.vform666.com/pages/plugin/" target="_blank">https://www.vform666.com/pages/plugin/</a>
+Gitee仓库：<a href="https://gitee.com/vdpadmin/variant-form" target="_blank">https://gitee.com/vdpadmin/variant-form</a>
 
 Github仓库：<a href="https://github.com/vform666/variant-form" target="_blank">https://github.com/vform666/variant-form</a>
 
-Gitee备份仓库：<a href="https://gitee.com/vdpadmin/variant-form" target="_blank">https://gitee.com/vdpadmin/variant-form</a>
+VS Code插件：<a href="https://www.vform666.com/pages/plugin/" target="_blank">https://www.vform666.com/pages/plugin/</a>
 
 更新日志：<a href="https://www.vform666.com/pages/changelog/" target="_blank">https://www.vform666.com/pages/changelog/</a>
 
