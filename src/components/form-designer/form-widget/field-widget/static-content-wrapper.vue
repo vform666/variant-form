@@ -1,6 +1,6 @@
 <template>
-  <div class="field-wrapper" :class="{'design-time-bottom-margin': !!this.designer}">
-    <div class="static-content-item" v-show="!field.options.hidden || (designState === true)"
+  <div class="field-wrapper" :class="{'design-time-bottom-margin': !!this.designer}" :style="{display: displayStyle}">
+    <div class="static-content-item" v-show="!field.options.hidden || (designState === true)" :style="{display: displayStyle}"
          :class="[selected ? 'selected' : '', customClass]" @click.stop="selectField(field)">
       <slot></slot>
     </div>
@@ -40,6 +40,11 @@
       designState: {
         type: Boolean,
         default: false
+      },
+
+      displayStyle: {
+        type: String,
+        default: 'block'
       },
 
       subFormRowIndex: { /* 子表单组件行索引，从0开始计数 */

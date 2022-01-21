@@ -84,7 +84,7 @@ export default {
 
     initEventHandler() {
       this.$on('setFormData', function (newFormData) {
-        console.log('formModel of globalModel----------', this.globalModel.formModel)
+        //console.log('formModel of globalModel----------', this.globalModel.formModel)
         if (!this.subFormItemFlag) {
           this.setValue(newFormData[this.field.options.name])
         }

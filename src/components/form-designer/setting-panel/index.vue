@@ -114,6 +114,11 @@
       selectedWidget: Object,
       formConfig: Object,
     },
+    provide() {
+      return {
+        isSubFormChildWidget: () => this.subFormChildWidgetFlag,
+      }
+    },
     inject: ['getDesignerConfig'],
     data() {
       return {
@@ -180,6 +185,12 @@
 
       this.designer.handleEvent('form-css-updated', (cssClassList) => {
         this.designer.setCssClassList(cssClassList)
+      })
+
+      //监听字段组件选中事件
+      this.designer.handleEvent('field-selected', (parentWidget) => {
+        this.subFormChildWidgetFlag = !!parentWidget && (parentWidget.type === 'sub-form');
+        //console.log('subFormChildWidgetFlag', this.subFormChildWidgetFlag)
       })
     },
     mounted() {

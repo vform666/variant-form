@@ -177,6 +177,7 @@ export default {
       endPlaceholder: 'End Placeholder',
       widgetColumnWidth: 'Width',
       widgetSize: 'Size',
+      fontSize: 'Font Size',
       showStops: 'Show Stops',
       displayStyle: 'Display Style',
       inlineLayout: 'inline',

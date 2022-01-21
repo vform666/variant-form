@@ -177,6 +177,7 @@ export default {
       endPlaceholder: '截止占位内容',
       widgetColumnWidth: '组件列宽',
       widgetSize: '组件大小',
+      fontSize: '字体大小',
       showStops: '显示间断点',
       displayStyle: '显示样式',
       inlineLayout: '行内',

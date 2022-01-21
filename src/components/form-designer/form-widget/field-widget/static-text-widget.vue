@@ -2,7 +2,8 @@
   <static-content-wrapper :designer="designer" :field="field" :design-state="designState"
                           :parent-widget="parentWidget" :parent-list="parentList" :index-of-parent-list="indexOfParentList"
                           :sub-form-row-index="subFormRowIndex" :sub-form-col-index="subFormColIndex" :sub-form-row-id="subFormRowId">
-    <div ref="fieldEditor">{{field.options.textContent}}</div>
+    <div ref="fieldEditor" :style="!!field.options.fontSize ? `font-size: ${field.options.fontSize};`: ''">
+      {{field.options.textContent}}</div>
   </static-content-wrapper>
 </template>
 

@@ -32,6 +32,7 @@ const COMMON_PROPERTIES = {
   'editable'          :            'editable-editor',
   'showPassword'      :            'showPassword-editor',
   'textContent'       :            'textContent-editor',
+  'fontSize'          :            'fontSize-editor',
   'htmlContent'       :            'htmlContent-editor',
   'format'            :            'format-editor',
   'valueFormat'       :            'valueFormat-editor',

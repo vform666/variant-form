@@ -39,20 +39,6 @@ export const containers = [
     }
   },
 
-  /*
-  {
-    type: 'section',
-    category: 'container',
-    icon: 'section',
-    widgetList: [],
-    options: {
-      name: '',
-      hidden: false,
-      customClass: '',  //自定义css类名
-    }
-  },
-  */
-
   {
     type: 'grid-col',
     category: 'container',
@@ -665,6 +651,7 @@ export const basicFields = [
       columnWidth: '200px',
       hidden: false,
       textContent: 'static text',
+      fontSize: '13px',
       //-------------------
       customClass: '',  //自定义css类名
       //-------------------
@@ -699,6 +686,7 @@ export const basicFields = [
       label: '',
       columnWidth: '200px',
       size: '',
+      displayStyle: 'block',
       disabled: false,
       hidden: false,
       type: '',
@@ -748,6 +736,7 @@ export const advancedFields = [
       label: '',
       labelWidth: null,
       labelHidden: false,
+      columnWidth: '200px',
       disabled: false,
       hidden: false,
       required: false,
@@ -790,6 +779,7 @@ export const advancedFields = [
       label: '',
       labelWidth: null,
       labelHidden: false,
+      columnWidth: '200px',
       disabled: false,
       hidden: false,
       required: false,
@@ -832,6 +822,7 @@ export const advancedFields = [
       placeholder: '',
       labelWidth: null,
       labelHidden: false,
+      columnWidth: '200px',
       disabled: false,
       hidden: false,
       required: false,
@@ -865,6 +856,7 @@ export const advancedFields = [
       size: '',
       labelWidth: null,
       labelHidden: false,
+      columnWidth: '200px',
       disabled: false,
       hidden: false,
       clearable: true,

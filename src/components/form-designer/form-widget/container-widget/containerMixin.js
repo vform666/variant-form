@@ -15,6 +15,7 @@ export default {
       }
 
       this.designer.emitHistoryChange()
+      this.designer.emitEvent('field-selected', this.widget)
     },
 
     onContainerDragUpdate() {

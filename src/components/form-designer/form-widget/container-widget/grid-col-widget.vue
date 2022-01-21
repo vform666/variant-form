@@ -197,6 +197,7 @@
         }
 
         this.designer.emitHistoryChange()
+        this.designer.emitEvent('field-selected', this.widget)
       },
 
       onGridDragUpdate() {
