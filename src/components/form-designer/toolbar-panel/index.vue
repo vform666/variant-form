@@ -272,7 +272,7 @@
 
     },
     mounted() {
-      let maxTBWidth = this.designerConfig.toolBarMaxWidth
+      let maxTBWidth = this.designerConfig.toolbarMaxWidth
       let newTBWidth = window.innerWidth - 260 - 300 - 320 - 80
       this.toolBarWidth = newTBWidth >= maxTBWidth ? maxTBWidth : (newTBWidth <= 300 ? 300 : newTBWidth)
       addWindowResizeHandler(() => {
