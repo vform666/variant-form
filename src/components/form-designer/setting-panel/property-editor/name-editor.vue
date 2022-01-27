@@ -4,11 +4,11 @@
       <el-tooltip effect="light" :content="i18nt('designer.setting.editNameHelp')">
         <i class="el-icon-info"></i></el-tooltip>
     </span>
-    <template v-if="!!selectedWidget.category || noFieldList">
-      <el-input type="text" v-model="optionModel.name" @change="updateWidgetNameAndRef"></el-input>
+    <template v-if="(!!selectedWidget.category && (selectedWidget.type !== 'sub-form')) || noFieldList">
+      <el-input type="text" v-model="optionModel.name" :readonly="widgetNameReadonly" @change="updateWidgetNameAndRef"></el-input>
     </template>
     <template v-else>
-      <el-select v-model="optionModel.name" allow-create filterable @change="updateWidgetNameAndRef"
+      <el-select v-model="optionModel.name" allow-create filterable :disabled="widgetNameReadonly" @change="updateWidgetNameAndRef"
                  :title="i18nt('designer.setting.editNameHelp')">
         <el-option v-for="(sf, sfIdx) in serverFieldList" :key="sfIdx" :label="sf.label" :value="sf.name"></el-option>
       </el-select>
@@ -28,7 +28,7 @@
       selectedWidget: Object,
       optionModel: Object,
     },
-    inject: ['serverFieldList'],
+    inject: ['serverFieldList', 'getDesignerConfig'],
     data() {
       return {
         nameRequiredRule: [{required: true, message: 'name required'}],
@@ -37,6 +37,10 @@
     computed: {
       noFieldList() {
         return !this.serverFieldList || (this.serverFieldList.length <= 0)
+      },
+
+      widgetNameReadonly() {
+        return !!this.getDesignerConfig().widgetNameReadonly
       },
 
     },

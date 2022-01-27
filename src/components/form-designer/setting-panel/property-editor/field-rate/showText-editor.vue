@@ -1,6 +1,6 @@
 <template>
   <el-form-item :label="i18nt('designer.setting.showText')">
-    <el-checkbox v-model="optionModel.showText"></el-checkbox>
+    <el-switch v-model="optionModel.showText"></el-switch>
   </el-form-item>
 </template>
 

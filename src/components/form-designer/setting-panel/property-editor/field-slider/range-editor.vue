@@ -1,6 +1,6 @@
 <template>
   <el-form-item :label="i18nt('designer.setting.range')">
-    <el-checkbox v-model="optionModel.range"></el-checkbox>
+    <el-switch v-model="optionModel.range"></el-switch>
   </el-form-item>
 </template>
 

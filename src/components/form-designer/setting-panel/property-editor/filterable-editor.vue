@@ -1,6 +1,6 @@
 <template>
   <el-form-item :label="i18nt('designer.setting.filterable')">
-    <el-checkbox v-model="optionModel.filterable"></el-checkbox>
+    <el-switch v-model="optionModel.filterable"></el-switch>
   </el-form-item>
 </template>
 

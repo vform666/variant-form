@@ -25,6 +25,13 @@ export default {
   methods: {
 
     //--------------------- 组件内部方法 begin ------------------//
+    getPropName() {
+      if (this.subFormItemFlag && !this.designState) {
+        return this.subFormName + "." + this.subFormRowIndex + "." + this.field.options.name + ""
+      } else {
+        return this.field.options.name
+      }
+    },
 
     initFieldModel() {
       if (!this.field.formItemFlag) {
@@ -304,7 +311,7 @@ export default {
       }
     },
 
-    handleChangeEvent(value) {
+    handleChangeEvent(value) {  /* input的清除输入小按钮会同时触发handleChangeEvent、handleInputCustomEvent！！ */
       this.syncUpdateFormModel(value)
       this.emitFieldDataChange(value, this.oldFieldValue)
 
@@ -312,7 +319,7 @@ export default {
       this.oldFieldValue = deepClone(value)  /* oldFieldValue需要在initFieldModel()方法中赋初值!! */
 
       /* 主动触发表单的单个字段校验，用于清除字段可能存在的校验错误提示 */
-      this.dispatch('VFormRender', 'fieldValidation', [this.field.options.name])
+      this.dispatch('VFormRender', 'fieldValidation', [this.getPropName()])
     },
 
     handleFocusCustomEvent(event) {
@@ -335,7 +342,7 @@ export default {
       this.syncUpdateFormModel(value)
 
       /* 主动触发表单的单个字段校验，用于清除字段可能存在的校验错误提示 */
-      this.dispatch('VFormRender', 'fieldValidation', [this.field.options.name])
+      this.dispatch('VFormRender', 'fieldValidation', [this.getPropName()])
 
       if (!!this.field.options.onInput) {
         let customFn = new Function('value', this.field.options.onInput)
@@ -429,11 +436,12 @@ export default {
     },
 
     resetField() {
+      if (!!this.subFormItemFlag) { //跳过子表单组件
+        return
+      }
+
       let defaultValue = this.field.options.defaultValue
       this.setValue(defaultValue)
-      this.$nextTick(() => {
-        //
-      })
 
       //清空上传组件文件列表
       if ((this.field.type === 'picture-upload') || (this.field.type === 'file-upload')) {
@@ -519,7 +527,7 @@ export default {
     reloadOptions(options) {
       this.field.options.optionItems = deepClone(options)
     },
-    
+
     /**
      * 返回radio/checkbox/select/cascader的选项数据
      * @returns 选择项数组

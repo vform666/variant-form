@@ -1,6 +1,6 @@
 <template>
   <el-form-item :label="i18nt('designer.setting.withCredentials')">
-    <el-checkbox v-model="optionModel.withCredentials"></el-checkbox>
+    <el-switch v-model="optionModel.withCredentials"></el-switch>
   </el-form-item>
 </template>
 

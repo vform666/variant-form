@@ -1,6 +1,6 @@
 <template>
   <el-form-item :label="i18nt('designer.setting.border')">
-    <el-checkbox v-model="optionModel.border"></el-checkbox>
+    <el-switch v-model="optionModel.border"></el-switch>
   </el-form-item>
 </template>
 

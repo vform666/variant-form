@@ -1,6 +1,6 @@
 <template>
   <el-form-item :label="i18nt('designer.setting.showPassword')" v-if="optionModel.type === 'password'">
-    <el-checkbox v-model="optionModel.showPassword"></el-checkbox>
+    <el-switch v-model="optionModel.showPassword"></el-switch>
   </el-form-item>
 </template>
 

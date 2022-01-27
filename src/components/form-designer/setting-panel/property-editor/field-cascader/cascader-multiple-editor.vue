@@ -1,6 +1,6 @@
 <template>
   <el-form-item :label="i18nt('designer.setting.multiple')">
-    <el-checkbox v-model="optionModel.multiple"></el-checkbox>
+    <el-switch v-model="optionModel.multiple"></el-switch>
   </el-form-item>
 </template>
 

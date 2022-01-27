@@ -1,6 +1,6 @@
 <template>
   <el-form-item :label="i18nt('designer.setting.showScore')">
-    <el-checkbox v-model="optionModel.showScore"></el-checkbox>
+    <el-switch v-model="optionModel.showScore"></el-switch>
   </el-form-item>
 </template>
 

@@ -1,6 +1,6 @@
 <template>
   <el-form-item :label="i18nt('designer.setting.showWordLimit')">
-    <el-checkbox v-model="optionModel.showWordLimit"></el-checkbox>
+    <el-switch v-model="optionModel.showWordLimit"></el-switch>
   </el-form-item>
 </template>
 

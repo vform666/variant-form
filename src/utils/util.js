@@ -210,8 +210,8 @@ function handleWidgetForTraverse(widget, handler) {
 
 /**
  * 遍历容器内的字段组件
- * @param con 
- * @param handler 
+ * @param con
+ * @param handler
  */
 export function traverseFieldWidgetsOfContainer(con, handler) {
   if (con.type === 'grid') {
@@ -243,6 +243,44 @@ export function traverseFieldWidgetsOfContainer(con, handler) {
       handleWidgetForTraverse(cw, handler)
     })
   }
+}
+
+/**
+ * 获取所有字段组件
+ * @param widgetList
+ * @returns {[]}
+ */
+export function getAllFieldWidgets(widgetList) {
+  let result = []
+  let handlerFn = (w) => {
+    result.push({
+      type: w.type,
+      name: w.options.name,
+      field: w
+    })
+  }
+  traverseFieldWidgets(widgetList, handlerFn)
+
+  return result
+}
+
+/**
+ * 获取所有容器组件
+ * @param widgetList
+ * @returns {[]}
+ */
+export function getAllContainerWidgets(widgetList) {
+  let result = []
+  let handlerFn = (w) => {
+    result.push({
+      type: w.type,
+      name: w.options.name,
+      container: w
+    })
+  }
+  traverseContainWidgets(widgetList, handlerFn)
+
+  return result
 }
 
 export function copyToClipboard(content, clickEvent, $message, successMsg, errorMsg) {

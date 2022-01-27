@@ -1,6 +1,6 @@
 <template>
   <el-form-item :label="i18nt('designer.setting.showBlankRow')">
-    <el-checkbox v-model="optionModel.showBlankRow"></el-checkbox>
+    <el-switch v-model="optionModel.showBlankRow"></el-switch>
   </el-form-item>
 </template>
 

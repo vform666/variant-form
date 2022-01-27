@@ -1,6 +1,6 @@
 <template>
   <el-form-item :label="i18nt('designer.setting.labelHidden')">
-    <el-checkbox v-model="optionModel.labelHidden"></el-checkbox>
+    <el-switch v-model="optionModel.labelHidden"></el-switch>
   </el-form-item>
 </template>
 

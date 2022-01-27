@@ -1,6 +1,6 @@
 <template>
   <el-form-item :label="i18nt('designer.setting.allowCreate')">
-    <el-checkbox v-model="optionModel.allowCreate"></el-checkbox>
+    <el-switch v-model="optionModel.allowCreate"></el-switch>
   </el-form-item>
 </template>
 

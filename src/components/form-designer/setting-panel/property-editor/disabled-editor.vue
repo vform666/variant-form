@@ -1,6 +1,6 @@
 <template>
   <el-form-item :label="i18nt('designer.setting.disabled')">
-    <el-checkbox v-model="optionModel.disabled"></el-checkbox>
+    <el-switch v-model="optionModel.disabled"></el-switch>
   </el-form-item>
 </template>
 

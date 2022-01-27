@@ -1,6 +1,6 @@
 <template>
   <el-form-item :label="i18nt('designer.setting.required')">
-    <el-checkbox v-model="optionModel.required"></el-checkbox>
+    <el-switch v-model="optionModel.required"></el-switch>
   </el-form-item>
 </template>
 

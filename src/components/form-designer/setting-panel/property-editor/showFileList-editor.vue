@@ -1,6 +1,6 @@
 <template>
   <el-form-item :label="i18nt('designer.setting.showFileList')">
-    <el-checkbox v-model="optionModel.showFileList"></el-checkbox>
+    <el-switch v-model="optionModel.showFileList"></el-switch>
   </el-form-item>
 </template>
 

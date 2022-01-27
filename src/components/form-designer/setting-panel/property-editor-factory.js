@@ -49,7 +49,7 @@ export const createBooleanEditor = function (propName, propLabelKey) {
     render(h) {
       return (
         <el-form-item label={translate(propLabelKey)}>
-          <el-checkbox v-model={this.optionModel[propName]} />
+          <el-switch v-model={this.optionModel[propName]} />
         </el-form-item>
       )
     }

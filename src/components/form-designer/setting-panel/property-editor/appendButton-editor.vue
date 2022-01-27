@@ -4,7 +4,7 @@
       <el-divider class="custom-divider">{{i18nt('designer.setting.inputButton')}}</el-divider>
     </el-form-item>
     <el-form-item :label="i18nt('designer.setting.appendButton')">
-      <el-checkbox v-model="optionModel.appendButton"></el-checkbox>
+      <el-switch v-model="optionModel.appendButton"></el-switch>
     </el-form-item>
   </div>
 </template>

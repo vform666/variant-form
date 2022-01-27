@@ -1,6 +1,6 @@
 <template>
   <el-form-item :label="i18nt('designer.setting.showRowNumber')">
-    <el-checkbox v-model="optionModel.showRowNumber"></el-checkbox>
+    <el-switch v-model="optionModel.showRowNumber"></el-switch>
   </el-form-item>
 </template>
 

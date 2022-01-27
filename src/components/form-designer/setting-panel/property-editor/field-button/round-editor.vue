@@ -1,6 +1,6 @@
 <template>
   <el-form-item :label="i18nt('designer.setting.round')">
-    <el-checkbox v-model="optionModel.round"></el-checkbox>
+    <el-switch v-model="optionModel.round"></el-switch>
   </el-form-item>
 </template>
 

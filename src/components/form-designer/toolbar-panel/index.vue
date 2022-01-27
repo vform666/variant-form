@@ -236,7 +236,7 @@
             {label: '333', value: 3},
           ]
         },
-        
+
       }
     },
     computed: {
@@ -272,12 +272,13 @@
 
     },
     mounted() {
+      let maxTBWidth = this.designerConfig.toolBarMaxWidth
       let newTBWidth = window.innerWidth - 260 - 300 - 320 - 80
-      this.toolBarWidth = newTBWidth >= 420 ? 420 : (newTBWidth <= 300 ? 300 : newTBWidth)
+      this.toolBarWidth = newTBWidth >= maxTBWidth ? maxTBWidth : (newTBWidth <= 300 ? 300 : newTBWidth)
       addWindowResizeHandler(() => {
         this.$nextTick(() => {
           let newTBWidth2 = window.innerWidth - 260 - 300 - 320 - 80
-          this.toolBarWidth = newTBWidth2 >= 420 ? 420 : (newTBWidth2 <= 300 ? 300 : newTBWidth2)
+          this.toolBarWidth = newTBWidth2 >= maxTBWidth ? maxTBWidth : (newTBWidth2 <= 300 ? 300 : newTBWidth2)
         })
       })
     },

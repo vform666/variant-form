@@ -1,6 +1,6 @@
 <template>
   <el-form-item :label="i18nt('designer.setting.checkStrictly')">
-    <el-checkbox v-model="optionModel.checkStrictly"></el-checkbox>
+    <el-switch v-model="optionModel.checkStrictly"></el-switch>
   </el-form-item>
 </template>
 

@@ -1,6 +1,6 @@
 <template>
   <el-form-item :label="i18nt('designer.setting.buttonStyle')">
-    <el-checkbox v-model="optionModel.buttonStyle"></el-checkbox>
+    <el-switch v-model="optionModel.buttonStyle"></el-switch>
   </el-form-item>
 </template>
 

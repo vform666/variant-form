@@ -1,6 +1,6 @@
 <template>
   <el-form-item :label="i18nt('designer.setting.remote')">
-    <el-checkbox v-model="optionModel.remote" @change="onRemoteChange"></el-checkbox>
+    <el-switch v-model="optionModel.remote" @change="onRemoteChange"></el-switch>
   </el-form-item>
 </template>
 

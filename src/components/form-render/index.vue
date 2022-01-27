@@ -42,7 +42,7 @@
   import './container-item/index'
   import FieldComponents from '@/components/form-designer/form-widget/field-widget/index'
   import {
-    deepClone,
+    deepClone, getAllContainerWidgets, getAllFieldWidgets,
     insertCustomCssToHead,
     insertGlobalFunctionsToHtml,
     traverseFieldWidgets
@@ -549,6 +549,7 @@
         subFormNames.forEach(sfName => {
           if (!!this.subFormRefList[sfName].resetSubForm) {
             this.subFormRefList[sfName].resetSubForm()
+            this.subFormRefList[sfName].addSubFormRow()
           }
         })
 
@@ -623,7 +624,23 @@
             })
           }
         }
-      }
+      },
+
+      /**
+       * 获取所有字段组件
+       * @returns {*[]}
+       */
+      getFieldWidgets() {
+        return getAllFieldWidgets(this.formJsonObj.widgetList)
+      },
+
+      /**
+       * 获取所有容器组件
+       * @returns {*[]}
+       */
+      getContainerWidgets() {
+        return getAllContainerWidgets(this.formJsonObj.widgetList)
+      },
 
       //--------------------- 以上为组件支持外部调用的API方法 end ------------------//
 
