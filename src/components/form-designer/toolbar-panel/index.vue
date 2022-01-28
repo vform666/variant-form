@@ -23,7 +23,7 @@
                icon-class="el-icon-arrow-right" @node-click="onNodeTreeClick"></el-tree>
     </el-drawer>
 
-    <div class="right-toolbar" :style="{width: toolBarWidth + 'px'}">
+    <div class="right-toolbar" :style="{width: toolbarWidth + 'px'}">
       <div class="right-toolbar-con">
         <el-button v-if="showToolButton('clearDesignerButton')" type="text" @click="clearFormWidget">
           <i class="el-icon-delete" />{{i18nt('designer.toolbar.clear')}}</el-button>
@@ -192,7 +192,7 @@
       return {
         designerConfig: this.getDesignerConfig(),
 
-        toolBarWidth: 420,
+        toolbarWidth: 420,
         showPreviewDialogFlag: false,
         showImportJsonDialogFlag: false,
         showExportJsonDialogFlag: false,
@@ -272,13 +272,14 @@
 
     },
     mounted() {
-      let maxTBWidth = this.designerConfig.toolbarMaxWidth
+      let maxTBWidth = this.designerConfig.toolbarMaxWidth || 420
+      let minTBWidth = this.designerConfig.toolbarMinWidth || 300
       let newTBWidth = window.innerWidth - 260 - 300 - 320 - 80
-      this.toolBarWidth = newTBWidth >= maxTBWidth ? maxTBWidth : (newTBWidth <= 300 ? 300 : newTBWidth)
+      this.toolbarWidth = newTBWidth >= maxTBWidth ? maxTBWidth : (newTBWidth <= minTBWidth ? minTBWidth : newTBWidth)
       addWindowResizeHandler(() => {
         this.$nextTick(() => {
           let newTBWidth2 = window.innerWidth - 260 - 300 - 320 - 80
-          this.toolBarWidth = newTBWidth2 >= maxTBWidth ? maxTBWidth : (newTBWidth2 <= 300 ? 300 : newTBWidth2)
+          this.toolbarWidth = newTBWidth2 >= maxTBWidth ? maxTBWidth : (newTBWidth2 <= minTBWidth ? minTBWidth : newTBWidth2)
         })
       })
     },

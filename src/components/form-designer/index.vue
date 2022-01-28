@@ -116,6 +116,7 @@
             exportCodeButton: true,  //是否显示导出代码按钮
             generateSFCButton: true,  //是否显示生成SFC按钮
             toolbarMaxWidth: 420,  //设计器工具按钮栏最大宽度（单位像素）
+            toolbarMinWidth: 300,  //设计器工具按钮栏最小宽度（单位像素）
 
             presetCssCode: '',  //设计器预设CSS样式代码
           }
