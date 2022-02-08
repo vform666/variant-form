@@ -9,7 +9,7 @@
 [在线Demo](http://120.92.142.115/)
 
 
-### Vue 3预览版已发布
+### Vue 3正式版已发布
 [立即进入](https://gitee.com/vdpadmin/variant-form3-vite)
 
 
