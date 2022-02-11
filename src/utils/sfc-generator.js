@@ -177,7 +177,7 @@ function getElAttrs(widget, formConfig) {  //获取El组件属性
     pictureUploadIconChild: `<template #default><i class="el-icon-plus"></i></template>`,
     fileUploadIconChild: `<template #default><i class="el-icon-plus"></i></template>`,
 
-    buttonType: !!wop.type ? `type="${wop.type}` : '',
+    buttonType: !!wop.type ? `type="${wop.type}"` : '',
     buttonPlain: !!wop.plain ? `plain` : '',
     buttonRound: !!wop.round ? `round` : '',
     buttonCircle: !!wop.circle ? `circle` : '',

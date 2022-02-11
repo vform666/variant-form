@@ -532,7 +532,7 @@ export default {
      * 返回radio/checkbox/select/cascader的选项数据
      * @returns 选择项数组
      */
-     getOptions() {
+    getOptions() {
       return this.field.options.optionItems
     },
 
