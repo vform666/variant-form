@@ -90,7 +90,6 @@
       /* 后端字段列表API */
       fieldListApi: {
         type: Object,
-        headers: Object,  //请求头
         default: null,
       },
 
