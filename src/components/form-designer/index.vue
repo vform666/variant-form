@@ -90,6 +90,7 @@
       /* 后端字段列表API */
       fieldListApi: {
         type: Object,
+        headers: Object,  //请求头
         default: null,
       },
 
@@ -240,10 +241,12 @@
           return
         }
 
-        axios.get(this.fieldListApi.URL).then(res => {
+        let headers = this.fieldListApi.headers || {}
+        axios.get(this.fieldListApi.URL, {'headers': headers}).then(res => {
           let labelKey = this.fieldListApi.labelKey || 'label'
           let nameKey = this.fieldListApi.nameKey || 'name'
 
+          this.fieldList.splice(0, this.fileList.length)  //清空已有
           res.data.forEach(fieldItem => {
             this.fieldList.push({
               label: fieldItem[labelKey],
