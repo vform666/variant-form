@@ -111,7 +111,7 @@
 
     },
     created() {
-      this.designer.initDesigner();
+      this.designer.initDesigner( !!this.getDesignerConfig().resetFormJson );
       this.designer.loadPresetCssCode( this.getDesignerConfig().presetCssCode )
     },
     mounted() {

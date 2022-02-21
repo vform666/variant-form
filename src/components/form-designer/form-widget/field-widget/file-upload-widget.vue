@@ -194,8 +194,12 @@
       handleFileRemove(file, fileList) {
         this.fileList = deepClone(fileList)  //this.fileList = fileList
         this.updateUploadFieldModelAndEmitDataChange(fileList)
-
         this.uploadBtnHidden = fileList.length >= this.field.options.limit
+
+        if (!!this.field.options.onFileRemove) {
+          let customFn = new Function('file', 'fileList', this.field.options.onFileRemove)
+          customFn.call(this, file, fileList)
+        }
       },
 
       removeUploadFile(fileName) {

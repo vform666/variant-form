@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <VFormDesigner ref="vfDesignerRef"></VFormDesigner>
+    <VFormDesigner ref="vfDesignerRef" :designer-config="designerConfig"></VFormDesigner>
   </div>
 </template>
 
@@ -11,6 +11,13 @@ export default {
   name: 'App',
   components: {
     VFormDesigner,
+  },
+  data() {
+    return {
+      designerConfig: {
+        resetFormJson: true,
+      }
+    }
   }
 }
 </script>

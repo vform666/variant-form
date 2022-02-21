@@ -48,7 +48,7 @@ export function createDesigner(vueInstance) {
       steps: [],
     },
 
-    initDesigner() {
+    initDesigner(resetFormJson) {
       this.widgetList = []
       this.formConfig = deepClone(defaultFormConfig)
 
@@ -59,7 +59,9 @@ export function createDesigner(vueInstance) {
           "color:#333"
       )
 
-      this.initHistoryData()
+      if (!resetFormJson) {
+        this.initHistoryData()
+      }
     },
 
     clearDesigner(skipHistoryChange) {
@@ -863,7 +865,7 @@ export function createDesigner(vueInstance) {
         this.historyData.steps = this.historyData.steps.slice(0, this.historyData.index + 1)
       }
 
-      console.log('history', this.historyData.index)
+      //console.log('history', this.historyData.index)
     },
 
     saveCurrentHistoryStep() {
@@ -879,7 +881,7 @@ export function createDesigner(vueInstance) {
       if (this.historyData.index !== 0) {
         this.historyData.index--
       }
-      console.log('undo', this.historyData.index)
+      //console.log('undo', this.historyData.index)
 
       this.widgetList = deepClone(this.historyData.steps[this.historyData.index].widgetList)
       this.formConfig = deepClone(this.historyData.steps[this.historyData.index].formConfig)
@@ -889,7 +891,7 @@ export function createDesigner(vueInstance) {
       if (this.historyData.index !== (this.historyData.steps.length - 1)) {
         this.historyData.index++
       }
-      console.log('redo', this.historyData.index)
+      //console.log('redo', this.historyData.index)
 
       this.widgetList = deepClone(this.historyData.steps[this.historyData.index].widgetList)
       this.formConfig = deepClone(this.historyData.steps[this.historyData.index].formConfig)

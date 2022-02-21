@@ -119,6 +119,8 @@
             toolbarMinWidth: 300,  //设计器工具按钮栏最小宽度（单位像素）
 
             presetCssCode: '',  //设计器预设CSS样式代码
+
+            resetFormJson: false,  //是否在设计器初始化时将表单内容重置为空
           }
         }
       },

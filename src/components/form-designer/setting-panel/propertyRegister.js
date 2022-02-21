@@ -118,6 +118,7 @@ const EVENT_PROPERTIES = {
   'onBeforeUpload'    :            'onBeforeUpload-editor',
   'onUploadSuccess'   :            'onUploadSuccess-editor',
   'onUploadError'     :            'onUploadError-editor',
+  'onFileRemove'      :            'onFileRemove-editor',
   'onValidate'        :            'onValidate-editor',
 
   //容器

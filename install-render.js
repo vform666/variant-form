@@ -13,13 +13,13 @@ const components = [
 ]
 
 const install = (Vue) => {
+  window.axios = axios
   components.forEach(component => {
     Vue.component(component.name, component)
   })
 }
 
 if (typeof window !== 'undefined' && window.Vue) { /* script方式引入时主动调用install方法！！ */
-  window.axios = axios
   install(window.Vue);
 }
 
