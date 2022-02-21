@@ -162,14 +162,12 @@ export default {
 
       if ((this.field.type === 'radio') || (this.field.type === 'checkbox')
           || (this.field.type === 'select') || (this.field.type === 'cascader')) {
-        if (!!this.globalOptionData && this.globalOptionData.hasOwnProperty(this.field.options.name)) {
+        const newOptionItems = this.getOptionData()
+        if (!!newOptionItems && newOptionItems.hasOwnProperty(this.field.options.name)) {
           if (!!keepSelected) {
-            //this.reloadOptions(this.globalOptionData[this.field.options.name]) /* 异步更新option-data之后不能获取到最新值，
-            // 以下改用provide的getOptionData()方法 */
-            const newOptionItems = this.getOptionData()
             this.reloadOptions(newOptionItems[this.field.options.name])
           } else {
-            this.loadOptions( this.globalOptionData[this.field.options.name] )
+            this.loadOptions(newOptionItems[this.field.options.name])
           }
         }
       }
