@@ -162,16 +162,15 @@
       },
 
       handlePictureUpload(res, file, fileList) {
-        if (!!this.field.options.onUploadSuccess) {
-          let customFn = new Function('result', 'file', 'fileList', this.field.options.onUploadSuccess)
-          customFn.call(this, res, file, fileList)
-        } else {
-          if (file.status === 'success') {
-            //this.fileList.push(file)  /* 上传过程中，this.fileList是只读的，不能修改赋值!! */
-            this.updateUploadFieldModelAndEmitDataChange(fileList)
-            this.fileList = deepClone(fileList)
+        if (file.status === 'success') {
+          //this.fileList.push(file)  /* 上传过程中，this.fileList是只读的，不能修改赋值!! */
+          this.updateUploadFieldModelAndEmitDataChange(fileList)
+          this.fileList = deepClone(fileList)
+          this.uploadBtnHidden = fileList.length >= this.field.options.limit
 
-            this.uploadBtnHidden = fileList.length >= this.field.options.limit
+          if (!!this.field.options.onUploadSuccess) {
+            let customFn = new Function('result', 'file', 'fileList', this.field.options.onUploadSuccess)
+            customFn.call(this, res, file, fileList)
           }
         }
       },

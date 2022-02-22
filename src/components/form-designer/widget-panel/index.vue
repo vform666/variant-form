@@ -20,6 +20,7 @@
 
         <el-collapse-item name="2" :title="i18nt('designer.basicFieldTitle')">
           <draggable tag="ul" :list="basicFields" :group="{name: 'dragGroup', pull: 'clone', put: false}"
+                     :move="checkFieldMove"
                      :clone="handleFieldWidgetClone" ghost-class="ghost" :sort="false">
             <li v-for="(fld, index) in basicFields" :key="index" class="field-widget-item" :title="fld.displayName"
                 @dblclick="addFieldByDbClick(fld)">
@@ -30,6 +31,7 @@
 
         <el-collapse-item name="3" :title="i18nt('designer.advancedFieldTitle')">
           <draggable tag="ul" :list="advancedFields" :group="{name: 'dragGroup', pull: 'clone', put: false}"
+                     :move="checkFieldMove"
                      :clone="handleFieldWidgetClone" ghost-class="ghost" :sort="false">
             <li v-for="(fld, index) in advancedFields" :key="index" class="field-widget-item" :title="fld.displayName"
                 @dblclick="addFieldByDbClick(fld)">
@@ -41,6 +43,7 @@
         <!-- -->
         <el-collapse-item name="4" :title="i18nt('designer.customFieldTitle')">
           <draggable tag="ul" :list="customFields" :group="{name: 'dragGroup', pull: 'clone', put: false}"
+                     :move="checkFieldMove"
                      :clone="handleFieldWidgetClone" ghost-class="ghost" :sort="false">
             <li v-for="(fld, index) in customFields" :key="index" class="field-widget-item" :title="fld.displayName"
                 @dblclick="addFieldByDbClick(fld)">
@@ -209,6 +212,10 @@
 
       checkContainerMove(evt) {
         return this.designer.checkWidgetMove(evt)
+      },
+
+      checkFieldMove(evt) {
+        return this.designer.checkFieldMove(evt)
       },
 
       onContainerDragEnd(evt) {

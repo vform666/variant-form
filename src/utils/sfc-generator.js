@@ -177,7 +177,7 @@ function getElAttrs(widget, formConfig) {  //获取El组件属性
     pictureUploadIconChild: `<template #default><i class="el-icon-plus"></i></template>`,
     fileUploadIconChild: `<template #default><i class="el-icon-plus"></i></template>`,
 
-    buttonType: !!wop.type ? `type="${wop.type}"` : '',
+    buttonType: !!wop.type ? `type="${wop.type}` : '',
     buttonPlain: !!wop.plain ? `plain` : '',
     buttonRound: !!wop.round ? `round` : '',
     buttonCircle: !!wop.circle ? `circle` : '',
@@ -260,29 +260,29 @@ const elTemplates = {  //字段组件属性
   'time': (widget, formConfig) => {
     const {vModel, readonly, disabled, size, placeholder, clearable, format, editable
       } = getElAttrs(widget, formConfig)
-    return `<el-input ${vModel} class="full-width-input" ${readonly} ${disabled} ${size} ${format}
-            value-format="HH:mm:ss" ${placeholder} ${clearable} ${editable}></el-input>`
+    return `<el-time-picker ${vModel} class="full-width-input" ${readonly} ${disabled} ${size} ${format}
+            value-format="HH:mm:ss" ${placeholder} ${clearable} ${editable}></el-time-picker>`
   },
 
   'time-range': (widget, formConfig) => {
     const {vModel, readonly, disabled, size, startPlaceholder, endPlaceholder, clearable, format, editable
       } = getElAttrs(widget, formConfig)
-    return `<el-input is-range ${vModel} class="full-width-input" ${readonly} ${disabled} ${size} ${format}
-            value-format="HH:mm:ss" ${startPlaceholder} ${endPlaceholder} ${clearable} ${editable}></el-input>`
+    return `<el-time-picker is-range ${vModel} class="full-width-input" ${readonly} ${disabled} ${size} ${format}
+            value-format="HH:mm:ss" ${startPlaceholder} ${endPlaceholder} ${clearable} ${editable}></el-time-picker>`
   },
 
   'date': (widget, formConfig) => {
     const {vModel, readonly, disabled, size, type, placeholder, clearable, format, valueFormat, editable
       } = getElAttrs(widget, formConfig)
-    return `<el-input ${vModel} ${type} class="full-width-input" ${readonly} ${disabled} ${size} ${format}
-              ${valueFormat} ${placeholder} ${clearable} ${editable}></el-input>`
+    return `<el-date-picker ${vModel} ${type} class="full-width-input" ${readonly} ${disabled} ${size} ${format}
+              ${valueFormat} ${placeholder} ${clearable} ${editable}></el-date-picker>`
   },
 
   'date-range': (widget, formConfig) => {
     const {vModel, readonly, disabled, size, type, startPlaceholder, endPlaceholder, clearable, format, valueFormat, editable
       } = getElAttrs(widget, formConfig)
-    return `<el-input is-range ${vModel} ${type} class="full-width-input" ${readonly} ${disabled} ${size} ${format}
-            ${valueFormat} ${startPlaceholder} ${endPlaceholder} ${clearable} ${editable}></el-input>`
+    return `<el-date-picker is-range ${vModel} ${type} class="full-width-input" ${readonly} ${disabled} ${size} ${format}
+            ${valueFormat} ${startPlaceholder} ${endPlaceholder} ${clearable} ${editable}></el-date-picker>`
   },
 
   'switch': (widget, formConfig) => {

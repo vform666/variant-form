@@ -148,8 +148,25 @@ export function createDesigner(vueInstance) {
     checkWidgetMove(evt) { /* Only field widget can be dragged into sub-form */
       if (!!evt.draggedContext && !!evt.draggedContext.element) {
         let wgCategory = evt.draggedContext.element.category
+        let wgType = evt.draggedContext.element.type
         if (!!evt.to) {
           if ((evt.to.className === 'sub-form-table') && (wgCategory === 'container')) {
+            //this.$message.info(this.vueInstance.i18nt('designer.hint.onlyFieldWidgetAcceptable'))
+            return false
+          }
+        }
+      }
+
+      return true
+    },
+
+    checkFieldMove(evt) {
+      if (!!evt.draggedContext && !!evt.draggedContext.element) {
+        let wgCategory = evt.draggedContext.element.category
+        let wgType = evt.draggedContext.element.type + ''
+        //console.log('wgType======', wgType)
+        if (!!evt.to) {
+          if ((evt.to.className === 'sub-form-table') && (wgType === 'slot')) {
             //this.$message.info(this.vueInstance.i18nt('designer.hint.onlyFieldWidgetAcceptable'))
             return false
           }
