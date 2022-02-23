@@ -15,7 +15,7 @@ export default {
   data() {
     return {
       designerConfig: {
-        resetFormJson: true,
+        resetFormJson: false,
       }
     }
   }

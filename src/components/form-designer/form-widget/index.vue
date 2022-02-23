@@ -173,7 +173,6 @@
 
 <style lang="scss" scoped>
   .container-scroll-bar {
-
     ::v-deep .el-scrollbar__wrap, ::v-deep .el-scrollbar__view {
       overflow-x: hidden;
     }
@@ -187,14 +186,6 @@
     overflow-y: auto;
 
     .el-form.full-height-width {
-      /*
-      margin: 0 auto;
-      width: 420px;
-      border-radius: 15px;
-      //border-width: 10px;
-      box-shadow: 0 0 1px 10px #495060;
-      */
-
       height: 100%;
       padding: 3px;
       background: #ffffff;

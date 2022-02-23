@@ -162,6 +162,7 @@ export default {
 
       if ((this.field.type === 'radio') || (this.field.type === 'checkbox')
           || (this.field.type === 'select') || (this.field.type === 'cascader')) {
+        /* 异步更新option-data之后globalOptionData不能获取到最新值，改用provide的getOptionData()方法 */
         const newOptionItems = this.getOptionData()
         if (!!newOptionItems && newOptionItems.hasOwnProperty(this.field.options.name)) {
           if (!!keepSelected) {

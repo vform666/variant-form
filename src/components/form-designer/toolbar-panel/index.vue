@@ -45,9 +45,10 @@
 
     <el-dialog :title="i18nt('designer.toolbar.preview')" :visible.sync="showPreviewDialogFlag" v-if="showPreviewDialogFlag"
                :show-close="true" :close-on-click-modal="false" :close-on-press-escape="false" center v-dialog-drag
-               :destroy-on-close="true" class="small-padding-dialog" width="75%" :fullscreen="layoutType === 'H5'">
+               :destroy-on-close="true" class="small-padding-dialog" width="75%"
+               :fullscreen="(layoutType === 'H5') || (layoutType === 'Pad')">
       <div>
-        <div class="form-render-wrapper" :class="[layoutType === 'H5' ? 'h5-layout' : '']">
+        <div class="form-render-wrapper" :class="[layoutType === 'H5' ? 'h5-layout' : (layoutType === 'Pad' ? 'pad-layout' : '')]">
           <VFormRender ref="preForm" :form-json="formJson" :form-data="testFormData" :preview-state="true"
                        :option-data="testOptionData"
                        @appendButtonClick="testOnAppendButtonClick" @buttonClick="testOnButtonClick"
@@ -695,12 +696,21 @@
 
   .form-render-wrapper {
     //height: calc(100vh - 142px);
-    all: revert !important; /* 防止表单继承el-dialog等外部样式，未生效，原因不明？？ */
+    //all: revert !important; /* 防止表单继承el-dialog等外部样式，未生效，原因不明？？ */
   }
 
   .form-render-wrapper.h5-layout {
     margin: 0 auto;
     width: 420px;
+    border-radius: 15px;
+    //border-width: 10px;
+    box-shadow: 0 0 1px 10px #495060;
+    height: calc(100vh - 142px);
+  }
+
+  .form-render-wrapper.pad-layout {
+    margin: 0 auto;
+    width: 960px;
     border-radius: 15px;
     //border-width: 10px;
     box-shadow: 0 0 1px 10px #495060;
