@@ -104,7 +104,7 @@
 
       labelWidth() {
         if (!!this.field.options.labelHidden) {
-          return 0
+          return !!this.designState ? 5 : 0  //设计期间标签最小宽度5像素，以便于鼠标点击可选中组件！！
         }
 
         if (!!this.field.options.labelWidth) {

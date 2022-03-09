@@ -66,6 +66,7 @@
         <el-button type="primary" @click="setFormDisabled">{{i18nt('designer.hint.disableForm')}}</el-button>
         <el-button type="primary" @click="setFormEnabled">{{i18nt('designer.hint.enableForm')}}</el-button>
         <el-button type="" @click="showPreviewDialogFlag = false">{{i18nt('designer.hint.closePreview')}}</el-button>
+        <el-button @click="printFormJson">PrintFormJson</el-button>
       </div>
     </el-dialog>
 
@@ -577,6 +578,15 @@
 
       setFormEnabled() {
         this.$refs['preForm'].enableForm()
+      },
+
+      printFormJson() {
+        let tmpFS = {
+          widgetList: deepClone(this.designer.widgetList),
+          formConfig: deepClone(this.designer.formConfig)
+        }
+
+        console.log(tmpFS)
       },
 
       handleFormChange(fieldName, newValue, oldValue, formModel) {

@@ -189,6 +189,7 @@ export default {
       labelHidden: '隐藏字段标签',
       required: '必填字段',
       validation: '字段校验',
+      requiredHint: '必填校验提示',
       validationHelp: '支持输入正则表达式',
       validationHint: '校验失败提示',
       readonly: '只读',

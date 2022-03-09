@@ -1,4 +1,4 @@
-import {generateId, traverseFieldWidgetsOfContainer} from "@/utils/util";
+import { traverseFieldWidgetsOfContainer } from "@/utils/util";
 
 export default {
   computed: {

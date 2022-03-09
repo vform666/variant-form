@@ -4,7 +4,7 @@
       <el-tooltip effect="light" :content="i18nt('designer.setting.validationHelp')">
         <i class="el-icon-info"></i></el-tooltip>
     </span>
-    <el-select v-model="optionModel.validation" filterable allow-create default-first-option>
+    <el-select v-model="optionModel.validation" filterable clearable allow-create default-first-option>
       <el-option v-for="(fv, fvIdx) in fieldValidators"
                  :key="fvIdx"
                  :label="fv.label"

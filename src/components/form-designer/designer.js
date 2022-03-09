@@ -714,7 +714,7 @@ export function createDesigner(vueInstance) {
       let tempId = generateId()
       newWidget.id = newWidget.type.replace(/-/g, '') + tempId
       newWidget.options.name = newWidget.id
-      newWidget.options.label = newWidget.type.toLowerCase()
+      newWidget.options.label = newWidget.options.label || newWidget.type.toLowerCase()
 
       delete newWidget.displayName
       return newWidget

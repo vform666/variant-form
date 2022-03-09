@@ -23,6 +23,7 @@ const COMMON_PROPERTIES = {
   'labelHidden'       :            'labelHidden-editor',
   'rows'              :            'rows-editor',
   'required'          :            'required-editor',
+  'requiredHint'      :            'requiredHint-editor',
   'validation'        :            'validation-editor',
   'validationHint'    :            'validationHint-editor',
   'readonly'          :            'readonly-editor',

@@ -247,7 +247,7 @@
           let labelKey = this.fieldListApi.labelKey || 'label'
           let nameKey = this.fieldListApi.nameKey || 'name'
 
-          this.fieldList.splice(0, this.fileList.length)  //清空已有
+          this.fieldList.splice(0, this.fieldList.length)  //清空已有
           res.data.forEach(fieldItem => {
             this.fieldList.push({
               label: fieldItem[labelKey],

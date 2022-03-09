@@ -1,6 +1,10 @@
 <template>
   <div id="app">
-    <VFormDesigner ref="vfDesignerRef" :designer-config="designerConfig"></VFormDesigner>
+    <VFormDesigner ref="vfDesignerRef" :designer-config="designerConfig">
+      <template #customToolButtons>
+        <el-button type="text" @click="printFormJson">测试按钮</el-button>
+      </template>
+    </VFormDesigner>
   </div>
 </template>
 
@@ -16,7 +20,13 @@ export default {
     return {
       designerConfig: {
         resetFormJson: false,
+        toolbarMaxWidth: 490,
       }
+    }
+  },
+  methods: {
+    printFormJson() {
+      console.log( this.$refs.vfDesignerRef.getFormJson() )
     }
   }
 }
