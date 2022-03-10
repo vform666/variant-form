@@ -161,6 +161,14 @@ export function registerEventProperty(uniquePropName, propEditorName) {
 }
 
 /**
+ * 判断属性是否已注册
+ * @param uniquePropName 属性名称（保证名称唯一，不跟其他组件属性冲突）
+ */
+export function propertyRegistered(uniquePropName) {
+  return !!COMMON_PROPERTIES[uniquePropName] || !!ADVANCED_PROPERTIES[uniquePropName] || !!EVENT_PROPERTIES[uniquePropName]
+}
+
+/**
  * 注册常见属性对应的属性编辑器
  * @param uniquePropName
  * @param propEditorName

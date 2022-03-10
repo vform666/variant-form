@@ -54,6 +54,11 @@ $--color-primary: #409EFF;
   }
 }
 
+.el-card {
+  margin-top: 3px;
+  margin-bottom: 3px;
+}
+
 input[type="password"]::-ms-reveal {  /* 隐藏IE/Edge原生的密码查看按钮 */
   display: none;
 }

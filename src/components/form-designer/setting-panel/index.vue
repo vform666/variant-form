@@ -97,6 +97,7 @@
     addWindowResizeHandler,
   } from "@/utils/util";
   import i18n from "@/utils/i18n";
+  import { propertyRegistered } from "@/components/form-designer/setting-panel/propertyRegister";
 
   const {COMMON_PROPERTIES, ADVANCED_PROPERTIES, EVENT_PROPERTIES} = WidgetProperties
 
@@ -220,6 +221,14 @@
       hasPropEditor(propName, editorName) {
         if (!editorName) {
           return false
+        }
+
+        /* alert组件注册了两个type属性编辑器，跳过第一个type属性编辑器，只显示第二个alert-type属性编辑器！！ */
+        if (propName.indexOf('-') <= -1) {
+          let uniquePropName = this.selectedWidget.type + '-' + propName
+          if (propertyRegistered(uniquePropName)) {
+            return false
+          }
         }
 
         let originalPropName = propName.replace(this.selectedWidget.type + '-', '')  //去掉组件名称前缀-，如果有的话！！
