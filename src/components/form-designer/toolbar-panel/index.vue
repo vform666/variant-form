@@ -67,6 +67,7 @@
         <el-button type="primary" @click="setFormEnabled">{{i18nt('designer.hint.enableForm')}}</el-button>
         <el-button type="" @click="showPreviewDialogFlag = false">{{i18nt('designer.hint.closePreview')}}</el-button>
         <el-button v-if="false" @click="printFormJson">PrintFormJson</el-button>
+        <el-button v-if="true" @click="testValidate">TestValidate</el-button>
       </div>
     </el-dialog>
 
@@ -587,6 +588,10 @@
         }
 
         console.log(tmpFS)
+      },
+
+      testValidate() {
+        console.log('test===', this.$refs['preForm'].validateForm())
       },
 
       handleFormChange(fieldName, newValue, oldValue, formModel) {

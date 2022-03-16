@@ -1,5 +1,5 @@
 <template>
-  <el-form-item :rules="nameRequiredRule">
+  <el-form-item prop="name" :rules="nameRequiredRule">
     <span slot="label">{{i18nt('designer.setting.uniqueName')}}
       <el-tooltip effect="light" :content="i18nt('designer.setting.editNameHelp')">
         <i class="el-icon-info"></i></el-tooltip>

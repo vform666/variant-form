@@ -42,7 +42,7 @@
   import './container-item/index'
   import FieldComponents from '@/components/form-designer/form-widget/field-widget/index'
   import {
-    deepClone, getAllContainerWidgets, getAllFieldWidgets,
+    generateId, deepClone, getAllContainerWidgets, getAllFieldWidgets,
     insertCustomCssToHead,
     insertGlobalFunctionsToHtml,
     traverseFieldWidgets
@@ -95,6 +95,7 @@
         },
         widgetRefList: {},
         subFormRefList: {},
+        formId: null,  //表单唯一Id，用于区分页面上的多个v-form-render组件！！
       }
     },
     computed: {
@@ -148,6 +149,7 @@
     },
     methods: {
       initFormObject() {
+        this.formId = 'vfRender' + generateId()
         this.insertCustomStyleAndScriptNode()
         this.addFieldChangeEventHandler()
         this.addFieldValidateEventHandler()
@@ -170,11 +172,11 @@
 
       insertCustomStyleAndScriptNode() {
         if (!!this.formConfig && !!this.formConfig.cssCode) {
-          insertCustomCssToHead(this.formConfig.cssCode)
+          insertCustomCssToHead(this.formConfig.cssCode, this.formId)
         }
 
         if (!!this.formConfig && !!this.formConfig.functions) {
-          insertGlobalFunctionsToHtml(this.formConfig.functions)
+          insertGlobalFunctionsToHtml(this.formConfig.functions, this.formId)
         }
       },
 
@@ -259,7 +261,6 @@
 
       addFieldChangeEventHandler() {
         this.$off('fieldChange')  //移除原有事件监听
-
         this.$on('fieldChange', (fieldName, newValue, oldValue, subFormName, subFormRowIndex) => {
           this.handleFieldDataChange(fieldName, newValue, oldValue, subFormName, subFormRowIndex)
           this.$emit('formChange', fieldName, newValue, oldValue, this.formDataModel, subFormName, subFormRowIndex)
@@ -572,8 +573,14 @@
         this.$refs.renderForm.clearValidate(props)
       },
 
+      /* 验证表单，通过返回true，不通过返回false */
       validateForm() {
-        //
+        let result = null
+        this.$refs['renderForm'].validate((valid) => {
+          result = valid
+        })
+
+        return result
       },
 
       validateFields() {

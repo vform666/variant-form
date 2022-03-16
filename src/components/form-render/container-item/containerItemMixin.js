@@ -91,6 +91,12 @@ export default {
       }
     },
 
+    setWidgetOption(optionName, optionValue) { //通用组件选项修改API
+      if (this.widget.options.hasOwnProperty(optionName)) {
+        this.widget.options[optionName] = optionValue
+      }
+    },
+
     /**
      * 获取子表单的行数
      */
