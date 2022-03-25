@@ -1,5 +1,5 @@
 import {translate} from "@/utils/i18n"
-import emitter from 'element-ui/lib/mixins/emitter'
+import emitter from '@/utils/emitter'
 
 export const createInputTextEditor = function (propName, propLabelKey) {
   return {

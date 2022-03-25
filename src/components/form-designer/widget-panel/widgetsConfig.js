@@ -902,17 +902,6 @@ export const advancedFields = [
     },
   },
 
-  // {
-  //   type: 'slot',
-  //   icon: 'slot-field',
-  //   formItemFlag: false,
-  //   options: {
-  //     name: '',
-  //     label: '',
-  //     customClass: '',  //自定义css类名
-  //   }
-  // },
-
 ]
 
 export const customFields = [

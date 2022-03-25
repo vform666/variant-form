@@ -64,8 +64,8 @@
         <template v-for="(ft, idx) in formTemplates">
           <el-card :key="idx" :bord-style="{ padding: '0' }" shadow="hover" class="ft-card">
             <el-popover placement="right" trigger="hover">
-              <img slot="reference" :src="ftImages[idx].imgUrl" style="width: 200px">
-              <img :src="ftImages[idx].imgUrl" style="height: 600px;width: 720px">
+              <img slot="reference" :src="ft.imgUrl" style="width: 200px">
+              <img :src="ft.imgUrl" style="height: 600px;width: 720px">
             </el-popover>
             <div class="bottom clear-fix">
               <span class="ft-title">#{{idx+1}} {{ft.title}}</span>
@@ -90,14 +90,14 @@
   import i18n from "@/utils/i18n"
   import axios from "axios"
 
-  import ftImg1 from '@/assets/ft-images/t1.png'
-  import ftImg2 from '@/assets/ft-images/t2.png'
-  import ftImg3 from '@/assets/ft-images/t3.png'
-  import ftImg4 from '@/assets/ft-images/t4.png'
-  import ftImg5 from '@/assets/ft-images/t5.png'
-  import ftImg6 from '@/assets/ft-images/t6.png'
-  import ftImg7 from '@/assets/ft-images/t7.png'
-  import ftImg8 from '@/assets/ft-images/t8.png'
+  // import ftImg1 from '@/assets/ft-images/t1.png'
+  // import ftImg2 from '@/assets/ft-images/t2.png'
+  // import ftImg3 from '@/assets/ft-images/t3.png'
+  // import ftImg4 from '@/assets/ft-images/t4.png'
+  // import ftImg5 from '@/assets/ft-images/t5.png'
+  // import ftImg6 from '@/assets/ft-images/t6.png'
+  // import ftImg7 from '@/assets/ft-images/t7.png'
+  // import ftImg8 from '@/assets/ft-images/t8.png'
 
   export default {
     name: "FieldPanel",
@@ -125,16 +125,16 @@
         customFields,
 
         formTemplates: formTemplates,
-        ftImages: [
-          {imgUrl: ftImg1},
-          {imgUrl: ftImg2},
-          {imgUrl: ftImg3},
-          {imgUrl: ftImg4},
-          {imgUrl: ftImg5},
-          {imgUrl: ftImg6},
-          {imgUrl: ftImg7},
-          {imgUrl: ftImg8},
-        ]
+        // ftImages: [
+        //   {imgUrl: ftImg1},
+        //   {imgUrl: ftImg2},
+        //   {imgUrl: ftImg3},
+        //   {imgUrl: ftImg4},
+        //   {imgUrl: ftImg5},
+        //   {imgUrl: ftImg6},
+        //   {imgUrl: ftImg7},
+        //   {imgUrl: ftImg8},
+        // ]
       }
     },
     computed: {

@@ -317,6 +317,7 @@ export default {
       formModelName: '数据对象名称',
       formRefName: '引用名称',
       formRulesName: '验证规则名称',
+      syntaxCheckWarning: 'JS代码存在语法错误，请仔细检查！',
 
       //data-table
       tableWidth: '宽度(px/%)',

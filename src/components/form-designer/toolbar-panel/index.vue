@@ -67,7 +67,8 @@
         <el-button type="primary" @click="setFormEnabled">{{i18nt('designer.hint.enableForm')}}</el-button>
         <el-button type="" @click="showPreviewDialogFlag = false">{{i18nt('designer.hint.closePreview')}}</el-button>
         <el-button v-if="false" @click="printFormJson">PrintFormJson</el-button>
-        <el-button v-if="true" @click="testValidate">TestValidate</el-button>
+        <el-button v-if="false" @click="testValidate">TestValidate</el-button>
+        <el-button v-if="false" @click="testSetFormData">TestSF</el-button>
       </div>
     </el-dialog>
 
@@ -592,6 +593,18 @@
 
       testValidate() {
         console.log('test===', this.$refs['preForm'].validateForm())
+      },
+
+      testSetFormData() {
+        let fData = {
+          'fuTest': [
+            {
+              name: '上传文件测试.xlsx',
+              url: 'https://www.vform666.com/123.xlsx'
+            }
+          ]
+        }
+        this.$refs['preForm'].setFormData(fData)
       },
 
       handleFormChange(fieldName, newValue, oldValue, formModel) {

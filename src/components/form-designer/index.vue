@@ -345,16 +345,16 @@
        * 获取所有字段组件
        * @returns {*[]}
        */
-      getFieldWidgets() {
-        return getAllFieldWidgets(this.designer.widgetList)
+      getFieldWidgets(widgetList = null) {
+        return !!widgetList ? getAllFieldWidgets(widgetList) : getAllFieldWidgets(this.designer.widgetList)
       },
 
       /**
        * 获取所有容器组件
        * @returns {*[]}
        */
-      getContainerWidgets() {
-        return getAllContainerWidgets(this.designer.widgetList)
+      getContainerWidgets(widgetList = null) {
+        return !!widgetList ? getAllContainerWidgets(widgetList) : getAllContainerWidgets(this.designer.widgetList)
       },
 
       //TODO: 增加更多方法！！

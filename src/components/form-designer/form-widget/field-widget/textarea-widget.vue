@@ -16,9 +16,9 @@
 
 <script>
   import FormItemWrapper from './form-item-wrapper'
-  import emitter from 'element-ui/lib/mixins/emitter'
-  import i18n, {translate} from "@/utils/i18n";
-  import fieldMixin from "@/components/form-designer/form-widget/field-widget/fieldMixin";
+  import emitter from '@/utils/emitter'
+  import i18n, {translate} from "@/utils/i18n"
+  import fieldMixin from "@/components/form-designer/form-widget/field-widget/fieldMixin"
 
   export default {
     name: "textarea-widget",

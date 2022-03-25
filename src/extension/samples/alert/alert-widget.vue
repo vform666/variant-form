@@ -11,7 +11,7 @@
 
 <script>
   import StaticContentWrapper from '@/components/form-designer/form-widget/field-widget/static-content-wrapper'
-  import emitter from 'element-ui/lib/mixins/emitter'
+  import emitter from '@/utils/emitter'
   import i18n from "@/utils/i18n"
   import fieldMixin from "@/components/form-designer/form-widget/field-widget/fieldMixin"
 

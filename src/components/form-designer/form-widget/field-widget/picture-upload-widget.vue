@@ -20,7 +20,7 @@
 
 <script>
   import FormItemWrapper from './form-item-wrapper'
-  import emitter from 'element-ui/lib/mixins/emitter'
+  import emitter from '@/utils/emitter'
   import i18n, {translate} from "@/utils/i18n";
   import {deepClone} from "@/utils/util";
   import fieldMixin from "@/components/form-designer/form-widget/field-widget/fieldMixin";

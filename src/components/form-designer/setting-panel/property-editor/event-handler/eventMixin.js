@@ -1,4 +1,4 @@
-import emitter from 'element-ui/lib/mixins/emitter'
+import emitter from '@/utils/emitter'
 
 export default {
   mixins: [emitter],

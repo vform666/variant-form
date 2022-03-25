@@ -38,7 +38,7 @@
 
 <script>
   //import ElForm from 'element-ui/packages/form/src/form.vue'  /* 用于源码调试Element UI */
-  import emitter from 'element-ui/lib/mixins/emitter'
+  import emitter from '@/utils/emitter'
   import './container-item/index'
   import FieldComponents from '@/components/form-designer/form-widget/field-widget/index'
   import {
@@ -172,11 +172,13 @@
 
       insertCustomStyleAndScriptNode() {
         if (!!this.formConfig && !!this.formConfig.cssCode) {
-          insertCustomCssToHead(this.formConfig.cssCode, this.formId)
+          insertCustomCssToHead(this.formConfig.cssCode,
+              !!this.previewState ? '' : this.formId)
         }
 
         if (!!this.formConfig && !!this.formConfig.functions) {
-          insertGlobalFunctionsToHtml(this.formConfig.functions, this.formId)
+          insertGlobalFunctionsToHtml(this.formConfig.functions,
+              !!this.previewState ? '' : this.formId)
         }
       },
 
@@ -639,16 +641,16 @@
        * 获取所有字段组件
        * @returns {*[]}
        */
-      getFieldWidgets() {
-        return getAllFieldWidgets(this.formJsonObj.widgetList)
+      getFieldWidgets(widgetList = null) {
+        return !!widgetList ? getAllFieldWidgets(widgetList) : getAllFieldWidgets(this.formJsonObj.widgetList)
       },
 
       /**
        * 获取所有容器组件
        * @returns {*[]}
        */
-      getContainerWidgets() {
-        return getAllContainerWidgets(this.formJsonObj.widgetList)
+      getContainerWidgets(widgetList = null) {
+        return !!widgetList ? getAllContainerWidgets(widgetList) : getAllContainerWidgets(this.formJsonObj.widgetList)
       },
 
       //--------------------- 以上为组件支持外部调用的API方法 end ------------------//

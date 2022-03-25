@@ -64,7 +64,7 @@
 </template>
 
 <script>
-  import emitter from 'element-ui/lib/mixins/emitter'
+  import emitter from '@/utils/emitter'
   import i18n from "../../../utils/i18n"
   import {deepClone, generateId} from "../../../utils/util"
   import refMixin from "../../../components/form-render/refMixin"
