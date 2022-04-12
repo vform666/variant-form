@@ -54,19 +54,18 @@
         }
 
         if (!!this.designer.formWidget) {
-          //检查newName是否已存在！！
-          let foundRef = this.designer.formWidget.getWidgetRef(newName)
+          let foundRef = this.designer.formWidget.getWidgetRef(newName) // 检查newName是否已存在！！
           if (!!foundRef) {
             this.selectedWidget.options.name = oldName
             this.$message.info(this.i18nt('designer.hint.duplicateName') + newName)
             return
           }
 
-          let fieldWidget = this.designer.formWidget.getWidgetRef(oldName)
-          if (!!fieldWidget && !!fieldWidget.registerToRefList) {
-            fieldWidget.registerToRefList(oldName)  //注册组件新的ref名称并删除老的ref！！
+          let widgetInDesign = this.designer.formWidget.getWidgetRef(oldName)
+          if (!!widgetInDesign && !!widgetInDesign.registerToRefList) {
+            widgetInDesign.registerToRefList(oldName)  //注册组件新的ref名称并删除老的ref！！
             let newLabel = this.getLabelByFieldName(newName)
-            this.designer.updateSelectedWidgetNameAndRef(this.selectedWidget, newName, newLabel)
+            this.designer.updateSelectedWidgetNameAndLabel(this.selectedWidget, newName, newLabel)
           }
         }
       },

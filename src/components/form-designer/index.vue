@@ -45,7 +45,7 @@
         </el-header>
         <el-main class="form-widget-main">
           <el-scrollbar class="container-scroll-bar" :style="{height: scrollerHeight}">
-            <v-form-widget :designer="designer" :form-config="designer.formConfig">
+            <v-form-widget :designer="designer" :form-config="designer.formConfig" ref="formRef">
             </v-form-widget>
           </el-scrollbar>
         </el-main>
@@ -70,7 +70,7 @@
     deepClone,
     getAllContainerWidgets,
     getAllFieldWidgets,
-    getQueryParam
+    getQueryParam, traverseAllWidgets
   } from "@/utils/util"
   import {MOCK_CASE_URL, VARIANT_FORM_VERSION} from "@/utils/config"
   import i18n, { changeLocale } from "@/utils/i18n"
@@ -357,6 +357,32 @@
         return !!widgetList ? getAllContainerWidgets(widgetList) : getAllContainerWidgets(this.designer.widgetList)
       },
 
+      /**
+       * 升级表单json，以补充最新的组件属性
+       * @param formJson
+       */
+      upgradeFormJson(formJson) {
+        if (!formJson.widgetList || !formJson.formConfig) {
+          this.$message.error('Invalid form json!')
+          return
+        }
+
+        traverseAllWidgets(formJson.widgetList, (w) => {
+          this.designer.upgradeWidgetConfig(w)
+        })
+        this.designer.upgradeFormConfig(formJson.formConfig)
+
+        return formJson
+      },
+
+      getWidgetRef(widgetName, showError = false) {
+        return this.$refs['formRef'].getWidgetRef(widgetName, showError)
+      },
+
+      getSelectedWidgetRef() {
+        return this.$refs['formRef'].getSelectedWidgetRef()
+      },
+
       //TODO: 增加更多方法！！
 
     }
@@ -365,6 +391,8 @@
 
 <style lang="scss" scoped>
   .el-container.main-container {
+    background: #fff;
+
     ::v-deep aside {  /* 防止aside样式被外部样式覆盖！！ */
       margin: 0;
       padding: 0;

@@ -49,11 +49,13 @@
   import containerMixin from "@/components/form-designer/form-widget/container-widget/containerMixin"
   import ContainerWrapper from "@/components/form-designer/form-widget/container-widget/container-wrapper"
   import FieldComponents from '@/components/form-designer/form-widget/field-widget/index'
+  import refMixinDesign from "@/components/form-designer/refMixinDesign"
 
   export default {
     name: "tab-widget",
     componentName: 'ContainerWidget',
-    mixins: [i18n, containerMixin],
+    mixins: [i18n, containerMixin, refMixinDesign],
+    inject: ['refList'],
     components: {
       ContainerWrapper,
       Draggable,
@@ -85,6 +87,9 @@
     },
     watch: {
       //
+    },
+    created() {
+      this.initRefList()
     },
     mounted() {
       //

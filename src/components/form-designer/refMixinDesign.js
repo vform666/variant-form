@@ -14,8 +14,14 @@ export default {
       return foundRef
     },
 
-    getFormRef() { /* 获取VFrom引用，必须在VForm组件created之后方可调用 */
-      return this.refList['v_form_ref']
+    /* 该方法用于组件重名检查！！ */
+    registerToRefList(oldRefName) {
+      if ((this.refList !== null) && !!this.widget.options.name) {
+        if (!!oldRefName) {
+          delete this.refList[oldRefName]
+        }
+        this.refList[this.widget.options.name] = this
+      }
     },
 
   }

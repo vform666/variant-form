@@ -38,11 +38,13 @@
   import containerMixin from "@/components/form-designer/form-widget/container-widget/containerMixin"
   import ContainerWrapper from "@/components/form-designer/form-widget/container-widget/container-wrapper"
   import TableCellWidget from "@/components/form-designer/form-widget/container-widget/table-cell-widget"
+  import refMixinDesign from "@/components/form-designer/refMixinDesign"
 
   export default {
     name: "table-widget",
     componentName: 'ContainerWidget',
-    mixins: [i18n, containerMixin],
+    mixins: [i18n, containerMixin, refMixinDesign],
+    inject: ['refList'],
     components: {
       ContainerWrapper,
       TableCellWidget,
@@ -66,6 +68,9 @@
     },
     watch: {
       //
+    },
+    created() {
+      this.initRefList()
     },
     mounted() {
       //
