@@ -575,14 +575,14 @@
         this.$refs.renderForm.clearValidate(props)
       },
 
-      /* 验证表单，通过返回true，不通过返回false */
-      validateForm() {
-        let result = null
+      /**
+       * 校验表单
+       * @param callback 回调函数
+       */
+      validateForm(callback) {
         this.$refs['renderForm'].validate((valid) => {
-          result = valid
+          callback(valid)
         })
-
-        return result
       },
 
       validateFields() {
