@@ -224,7 +224,10 @@ export default {
       }
 
       if (!!this.field.options.onValidate) {
-        let customFn = new Function('rule', 'value', 'callback', this.field.options.onValidate)
+        let customFn = (rule, value, callback) => {
+          let tmpFunc =  new Function('rule', 'value', 'callback', this.field.options.onValidate)
+          return tmpFunc.call(this, rule, value, callback)
+        }
         this.rules.push({
           validator: customFn,
           trigger: ['blur', 'change'],
