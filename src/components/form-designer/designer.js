@@ -116,6 +116,10 @@ export function createDesigner(vueInstance) {
         modifiedFlag = true
       }
 
+      if (modifiedFlag) {
+        this.emitEvent('form-json-imported', [])  // 通知其他组件
+      }
+
       return modifiedFlag
     },
 
