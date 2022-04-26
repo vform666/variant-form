@@ -321,3 +321,30 @@ export function getQueryParam(variable) {
 
   return undefined;
 }
+
+export function getDefaultFormConfig() {
+  return {
+    modelName: 'formData',
+    refName: 'vForm',
+    rulesName: 'rules',
+    labelWidth: 80,
+    labelPosition: 'left',
+    size: '',
+    labelAlign: 'label-left-align',
+    cssCode: '',
+    customClass: '',
+    functions: '',
+    layoutType: 'PC',
+
+    onFormCreated: '',
+    onFormMounted: '',
+    onFormDataChange: '',
+  }
+}
+
+export function buildDefaultFormJson() {
+  return {
+    widgetList: [],
+    formConfig: deepClone( getDefaultFormConfig() )
+  }
+}

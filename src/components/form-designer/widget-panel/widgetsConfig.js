@@ -764,7 +764,7 @@ export const advancedFields = [
       showFileList: true,
       limit: 3,
       fileMaxSize: 5, //MB
-      fileTypes: ['jpeg', 'png'],
+      fileTypes: ['jpg', 'jpeg', 'png'],
       //headers: [],
       //-------------------
       customClass: '',  //自定义css类名

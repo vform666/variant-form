@@ -6,28 +6,12 @@
  * remark: 如果要分发VForm源码，需在本文件顶部保留此文件头信息！！
  */
 
-import {deepClone, generateId, overwriteObj} from "@/utils/util"
+import {deepClone, generateId, getDefaultFormConfig, overwriteObj} from "@/utils/util"
 import {containers, advancedFields, basicFields, customFields} from "@/components/form-designer/widget-panel/widgetsConfig.js"
 import {VARIANT_FORM_VERSION} from "@/utils/config"
 
 export function createDesigner(vueInstance) {
-  let defaultFormConfig = {
-    modelName: 'formData',
-    refName: 'vForm',
-    rulesName: 'rules',
-    labelWidth: 80,
-    labelPosition: 'left',
-    size: '',
-    labelAlign: 'label-left-align',
-    cssCode: '',
-    customClass: '',
-    functions: '',
-    layoutType: 'PC',
-
-    onFormCreated: '',
-    onFormMounted: '',
-    onFormDataChange: '',
-  }
+  let defaultFormConfig = deepClone( getDefaultFormConfig() )
 
   return {
     widgetList: [],

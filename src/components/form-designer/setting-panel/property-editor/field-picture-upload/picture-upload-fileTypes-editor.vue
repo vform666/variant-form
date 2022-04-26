@@ -29,9 +29,10 @@
     data() {
       return {
         uploadPictureTypes: [
-          {value: 'jpeg', label: 'JPG'},
-          {value: 'png', label: 'PNG'},
-          {value: 'gif', label: 'GIF'},
+          {value: 'jpg', label: 'jpg'},
+          {value: 'jpeg', label: 'jpeg'},
+          {value: 'png', label: 'png'},
+          {value: 'gif', label: 'gif'},
         ],
       }
     }

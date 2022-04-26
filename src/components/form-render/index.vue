@@ -45,7 +45,7 @@
     generateId, deepClone, getAllContainerWidgets, getAllFieldWidgets,
     insertCustomCssToHead,
     insertGlobalFunctionsToHtml,
-    traverseFieldWidgets
+    traverseFieldWidgets, buildDefaultFormJson
   } from "@/utils/util"
   import i18n, { changeLocale } from "../../utils/i18n"
 
@@ -59,9 +59,12 @@
       ...FieldComponents,
     },
     props: {
-      formJson: Object, //prop传入的表单JSON配置
+      formJson: { //prop传入的表单JSON配置
+        type: Object,
+        default: () => buildDefaultFormJson()
+      },
       formData: { //prop传入的表单数据
-        Object,
+        type: Object,
         default: () => {}
       },
       optionData: { //prop传入的选项数据
