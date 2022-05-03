@@ -246,8 +246,11 @@
     computed: {
       formJson() {
         return {
-          widgetList: this.designer.widgetList,
-          formConfig: this.designer.formConfig
+          // widgetList: this.designer.widgetList,
+          // formConfig: this.designer.formConfig
+
+          widgetList: deepClone(this.designer.widgetList),
+          formConfig: deepClone(this.designer.formConfig)
         }
       },
 

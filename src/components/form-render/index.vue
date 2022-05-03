@@ -96,9 +96,12 @@
         formDataModel: {
           //
         },
+
         widgetRefList: {},
         subFormRefList: {},
         formId: null,  //表单唯一Id，用于区分页面上的多个v-form-render组件！！
+
+        externalComponents:  {},  //外部组件实例集合
       }
     },
     computed: {
@@ -654,6 +657,33 @@
        */
       getContainerWidgets(widgetList = null) {
         return !!widgetList ? getAllContainerWidgets(widgetList) : getAllContainerWidgets(this.formJsonObj.widgetList)
+      },
+
+      /**
+       * 增加外部组件引用，可通过getEC()方法获取外部组件，以便在VForm内部调用外部组件方法
+       * @param componentName 外部组件名称
+       * @param externalComponent 外部组件实例
+       */
+      addEC(componentName, externalComponent) {
+        this.externalComponents[componentName] = externalComponent
+      },
+
+      /**
+       * 判断外部组件是否可获取
+       * @param componentName 外部组件名称
+       * @returns {boolean}
+       */
+      hasEC(componentName) {
+        return this.externalComponents.hasOwnProperty(componentName)
+      },
+
+      /**
+       * 获取外部组件实例
+       * @param componentName
+       * @returns {*}
+       */
+      getEC(componentName) {
+        return this.externalComponents[componentName]
       },
 
       //--------------------- 以上为组件支持外部调用的API方法 end ------------------//
