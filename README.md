@@ -180,6 +180,6 @@ VS Code插件：<a href="https://www.vform666.com/pages/plugin/" target="_blank"
 
 更新日志：<a href="https://www.vform666.com/changelog.html" target="_blank">https://www.vform666.com/changelog.html</a>
 
-技术交流群：微信搜索“vformAdmin”，或者扫如下二维码加群
+技术交流群：扫如下二维码加群
 
-![image](https://ks3-cn-beijing.ksyuncs.com/vform-static/img/vx-qrcode-242.png)
+![image](https://vform2022.ks3-cn-beijing.ksyuncs.com/vchat_qrcode.png)
