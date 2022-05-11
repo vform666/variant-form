@@ -153,6 +153,10 @@ export default {
           subFormModel.splice(0, subFormModel.length)
           this.rowIdData.splice(0, this.rowIdData.length)
         }
+
+        if (this.widget.options.showBlankRow) {
+          this.addSubFormRow()
+        }
       }
     },
 

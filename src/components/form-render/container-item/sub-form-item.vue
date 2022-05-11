@@ -150,6 +150,11 @@
         return this.rowIdData
       },
 
+      getWidgetRefOfSubForm(widgetName, rowIndex) {
+        let realWidgetName = widgetName + '@row' + this.rowIdData[rowIndex]
+        return this.getWidgetRef(realWidgetName)
+      },
+
       initFieldSchemaData() {  //初始化fieldSchemaData！！！
         if (this.widget.type !== 'sub-form') {
           return
