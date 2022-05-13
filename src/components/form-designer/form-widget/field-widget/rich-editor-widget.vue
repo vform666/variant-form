@@ -12,10 +12,11 @@
 
 <script>
   import FormItemWrapper from './form-item-wrapper'
+  import {VueEditor} from 'vue2-editor'
   import emitter from '@/utils/emitter'
-  import i18n, {translate} from "@/utils/i18n";
-  import {deepClone} from "@/utils/util";
-  import fieldMixin from "@/components/form-designer/form-widget/field-widget/fieldMixin";
+  import i18n, {translate} from "@/utils/i18n"
+  import {deepClone} from "@/utils/util"
+  import fieldMixin from "@/components/form-designer/form-widget/field-widget/fieldMixin"
 
   export default {
     name: "rich-editor-widget",
@@ -49,10 +50,10 @@
     },
     components: {
       FormItemWrapper,
-
-      VueEditor: resolve => { //懒加载！！
-        require(['vue2-editor'], ({VueEditor}) => resolve(VueEditor))
-      }
+      VueEditor
+      // VueEditor: resolve => { //懒加载！！
+      //   require(['vue2-editor'], ({VueEditor}) => resolve(VueEditor))
+      // }
     },
     inject: ['refList', 'formConfig', 'globalOptionData', 'globalModel'],
     data() {
