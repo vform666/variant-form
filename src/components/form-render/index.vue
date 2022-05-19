@@ -154,9 +154,11 @@
       this.handleOnMounted()
     },
     methods: {
-      initFormObject() {
+      initFormObject(insertHtmlCodeFlag = true) {
         this.formId = 'vfRender' + generateId()
-        this.insertCustomStyleAndScriptNode()
+        if (!!insertHtmlCodeFlag) {
+          this.insertCustomStyleAndScriptNode()
+        }
         this.addFieldChangeEventHandler()
         this.addFieldValidateEventHandler()
         this.registerFormToRefList()
@@ -422,8 +424,9 @@
             this._provided.formConfig = newFormJsonObj.formConfig  //强制更新provide的formConfig对象
             this.$set(this.formJsonObj, 'widgetList', newFormJsonObj.widgetList)
 
+            this.insertCustomStyleAndScriptNode()  /* 必须先插入表单全局函数，否则VForm内部引用全局函数会报错！！！ */
             this.$nextTick(() => {
-              this.initFormObject()
+              this.initFormObject(false)
               this.handleOnMounted()
             })
           } else {

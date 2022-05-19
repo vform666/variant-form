@@ -210,7 +210,7 @@ function buildCheckboxChildren(widget, formConfig) {
 function buildSelectChildren(widget, formConfig) {
   let wop = widget.options
   const childTag = 'el-option'
-  return `<${childTag} v-for="(item, index) in ${wop.name}Options" :key="index" :label="item.value"
+  return `<${childTag} v-for="(item, index) in ${wop.name}Options" :key="index" :label="item.label"
           :value="item.value" :disabled="item.disabled"></${childTag}>`
 }
 
