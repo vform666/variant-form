@@ -599,15 +599,23 @@
       },
 
       testSetFormData() {
-        let fData = {
-          'fuTest': [
-            {
-              name: '上传文件测试.xlsx',
-              url: 'https://www.vform666.com/123.xlsx'
-            }
+        // let fData = {
+        //   'fuTest': [
+        //     {
+        //       name: '上传文件测试.xlsx',
+        //       url: 'https://www.vform666.com/123.xlsx'
+        //     }
+        //   ]
+        // }
+        // this.$refs['preForm'].setFormData(fData)
+
+        let nfData = {
+          "checkbox45524": [
+            1,
+            2
           ]
         }
-        this.$refs['preForm'].setFormData(fData)
+        this.$refs['preForm'].setFormData(nfData)
       },
 
       handleFormChange(fieldName, newValue, oldValue, formModel) {

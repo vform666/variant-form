@@ -13,7 +13,7 @@
                      :move="checkContainerMove" @end="onContainerDragEnd">
             <li v-for="(ctn, index) in containers" :key="index" class="container-widget-item" :title="ctn.displayName"
                 @dblclick="addContainerByDbClick(ctn)">
-              <span><svg-icon :icon-class="ctn.icon" />{{i18n2t(`designer.widgetLabel.${ctn.type}`, `extension.widgetLabel.${ctn.type}`)}}</span>
+              <span><svg-icon :icon-class="ctn.icon" class-name="color-svg-icon" />{{i18n2t(`designer.widgetLabel.${ctn.type}`, `extension.widgetLabel.${ctn.type}`)}}</span>
             </li>
           </draggable>
         </el-collapse-item>
@@ -24,7 +24,7 @@
                      :clone="handleFieldWidgetClone" ghost-class="ghost" :sort="false">
             <li v-for="(fld, index) in basicFields" :key="index" class="field-widget-item" :title="fld.displayName"
                 @dblclick="addFieldByDbClick(fld)">
-              <span><svg-icon :icon-class="fld.icon" />{{i18n2t(`designer.widgetLabel.${fld.type}`, `extension.widgetLabel.${fld.type}`)}}</span>
+              <span><svg-icon :icon-class="fld.icon" class-name="color-svg-icon" />{{i18n2t(`designer.widgetLabel.${fld.type}`, `extension.widgetLabel.${fld.type}`)}}</span>
             </li>
           </draggable>
         </el-collapse-item>
@@ -35,7 +35,7 @@
                      :clone="handleFieldWidgetClone" ghost-class="ghost" :sort="false">
             <li v-for="(fld, index) in advancedFields" :key="index" class="field-widget-item" :title="fld.displayName"
                 @dblclick="addFieldByDbClick(fld)">
-              <span><svg-icon :icon-class="fld.icon" />{{i18n2t(`designer.widgetLabel.${fld.type}`, `extension.widgetLabel.${fld.type}`)}}</span>
+              <span><svg-icon :icon-class="fld.icon" class-name="color-svg-icon" />{{i18n2t(`designer.widgetLabel.${fld.type}`, `extension.widgetLabel.${fld.type}`)}}</span>
             </li>
           </draggable>
         </el-collapse-item>
@@ -48,7 +48,7 @@
             <li v-for="(fld, index) in customFields" :key="index" class="field-widget-item" :title="fld.displayName"
                 @dblclick="addFieldByDbClick(fld)">
               <span>
-                <svg-icon :icon-class="fld.icon" />{{i18n2t(`designer.widgetLabel.${fld.type}`, `extension.widgetLabel.${fld.type}`)}}</span>
+                <svg-icon :icon-class="fld.icon" class-name="color-svg-icon" />{{i18n2t(`designer.widgetLabel.${fld.type}`, `extension.widgetLabel.${fld.type}`)}}</span>
             </li>
           </draggable>
         </el-collapse-item>
@@ -262,6 +262,10 @@
 </script>
 
 <style lang="scss" scoped>
+  .color-svg-icon {
+    color: $--color-primary;
+  }
+
   .side-scroll-bar {
     ::v-deep .el-scrollbar__wrap {
       overflow-x: hidden;
@@ -355,13 +359,6 @@
       margin-top: 10px;
       line-height: 12px;
     }
-
-    /*
-    .image-zoom {
-      height: 500px;
-      width: 620px
-    }
-    */
 
     .ft-title {
       font-size: 13px;
