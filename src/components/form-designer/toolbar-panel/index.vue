@@ -745,6 +745,8 @@
     //border-width: 10px;
     box-shadow: 0 0 1px 10px #495060;
     height: calc(100vh - 142px);
+    overflow-y: auto;
+    overflow-x: hidden;
   }
 
   .form-render-wrapper.pad-layout {
@@ -754,6 +756,8 @@
     //border-width: 10px;
     box-shadow: 0 0 1px 10px #495060;
     height: calc(100vh - 142px);
+    overflow-y: auto;
+    overflow-x: hidden;
   }
 
   .node-tree-drawer ::v-deep {
