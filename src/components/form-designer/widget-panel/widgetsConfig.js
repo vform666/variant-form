@@ -747,6 +747,7 @@ export const advancedFields = [
     options: {
       name: '',
       label: '',
+      labelAlign: '',
       labelWidth: null,
       labelHidden: false,
       columnWidth: '200px',
@@ -791,6 +792,7 @@ export const advancedFields = [
     options: {
       name: '',
       label: '',
+      labelAlign: '',
       labelWidth: null,
       labelHidden: false,
       columnWidth: '200px',
@@ -834,6 +836,7 @@ export const advancedFields = [
     options: {
       name: '',
       label: '',
+      labelAlign: '',
       placeholder: '',
       labelWidth: null,
       labelHidden: false,
@@ -866,6 +869,7 @@ export const advancedFields = [
     options: {
       name: '',
       label: '',
+      labelAlign: '',
       defaultValue: '',
       placeholder: '',
       size: '',

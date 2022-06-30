@@ -121,7 +121,7 @@
     methods: {
       handleFileExceed() {
         let uploadLimit = this.field.options.limit  /* 此行不能注释，下一行ES6模板字符串需要用到！！ */
-        this.$message.warning(eval('`' + this.i18nt('render.hint.uploadExceed') + '`'));
+        this.$message.warning( this.i18nt('render.hint.uploadExceed').replace('${uploadLimit}', uploadLimit) )
       },
 
       updateUploadFieldModelAndEmitDataChange(fileList) {
