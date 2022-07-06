@@ -181,6 +181,38 @@ export default {
     //   //TODO:
     // },
 
+    /**
+     * 动态增加自定义css样式
+     * @param className
+     */
+    addCssClass(className) {
+      if (!this.widget.options.customClass) {
+        this.widget.options.customClass = [className]
+      } else {
+        this.widget.options.customClass.push(className)
+      }
+    },
+
+    /**
+     * 动态移除自定义css样式
+     * @param className
+     */
+    removeCssClass(className) {
+      if (!this.widget.options.customClass) {
+        return
+      }
+
+      let foundIdx = -1
+      this.widget.options.customClass.map((cc, idx) => {
+        if (cc === className) {
+          foundIdx = idx
+        }
+      })
+      if (foundIdx > -1) {
+        this.widget.options.customClass.splice(foundIdx, 1)
+      }
+    },
+
     //--------------------- 以上为组件支持外部调用的API方法 end ------------------//
 
   },

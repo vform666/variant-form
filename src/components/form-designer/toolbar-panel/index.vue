@@ -45,7 +45,7 @@
 
     <el-dialog :title="i18nt('designer.toolbar.preview')" :visible.sync="showPreviewDialogFlag" v-if="showPreviewDialogFlag"
                :show-close="true" :close-on-click-modal="false" :close-on-press-escape="false" center v-dialog-drag
-               :destroy-on-close="true" class="small-padding-dialog" width="75%"
+               :destroy-on-close="true" :append-to-body="true" class="small-padding-dialog" width="75%"
                :fullscreen="(layoutType === 'H5') || (layoutType === 'Pad')">
       <div>
         <div class="form-render-wrapper" :class="[layoutType === 'H5' ? 'h5-layout' : (layoutType === 'Pad' ? 'pad-layout' : '')]">

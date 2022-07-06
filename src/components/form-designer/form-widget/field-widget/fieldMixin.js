@@ -353,8 +353,17 @@ export default {
     },
 
     emitAppendButtonClick() {
-      /* 必须调用mixins中的dispatch方法逐级向父组件发送消息！！ */
-      this.dispatch('VFormRender', 'appendButtonClick', [this]);
+      if (!!this.designState) { //设计状态不触发点击事件
+        return
+      }
+
+      if (!!this.field.options.onAppendButtonClick) {
+        let customFn = new Function(this.field.options.onAppendButtonClick)
+        customFn.call(this)
+      } else {
+        /* 必须调用mixins中的dispatch方法逐级向父组件发送消息！！ */
+        this.dispatch('VFormRender', 'appendButtonClick', [this])
+      }
     },
 
     handleOnChange(val, oldVal) {  //自定义onChange事件
@@ -564,7 +573,39 @@ export default {
      */
     isSubFormItem() {
       return !!this.parentWidget ? this.parentWidget.type === 'sub-form' : false
-    }
+    },
+
+    /**
+     * 动态增加自定义css样式
+     * @param className
+     */
+    addCssClass(className) {
+      if (!this.field.options.customClass) {
+        this.field.options.customClass = [className]
+      } else {
+        this.field.options.customClass.push(className)
+      }
+    },
+
+    /**
+     * 动态移除自定义css样式
+     * @param className
+     */
+    removeCssClass(className) {
+      if (!this.field.options.customClass) {
+        return
+      }
+
+      let foundIdx = -1
+      this.field.options.customClass.map((cc, idx) => {
+        if (cc === className) {
+          foundIdx = idx
+        }
+      })
+      if (foundIdx > -1) {
+        this.field.options.customClass.splice(foundIdx, 1)
+      }
+    },
 
     //--------------------- 以上为组件支持外部调用的API方法 end ------------------//
 

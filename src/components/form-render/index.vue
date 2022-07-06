@@ -481,7 +481,6 @@
 
         // 通知SubForm组件：表单数据更新事件！！
         this.broadcast('ContainerItem', 'setFormData', this.formDataModel)
-
         // 通知FieldWidget组件：表单数据更新事件！！
         this.broadcast('FieldWidget', 'setFormData', this.formDataModel)
       },
