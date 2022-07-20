@@ -222,11 +222,11 @@
         this.emitFieldDataChange(this.fieldModel, oldValue)
       },
 
-      removeUploadFile(fileName) {
+      removeUploadFile(fileName, fileUrl, fileUid) {
         let foundIdx = -1
         let foundFile = null
         this.fileList.forEach((file, idx) => {
-          if (file.name === fileName) {
+          if ((file.name === fileName) && ((file.url === fileUrl) || (!!fileUid && file.uid === fileUid))) {
             foundIdx = idx
             foundFile = file
           }
