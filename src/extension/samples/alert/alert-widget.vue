@@ -5,7 +5,7 @@
     <el-alert ref="fieldEditor" :title="field.options.title" :type="field.options.type"
               :description="field.options.description" :closable="field.options.closable"
               :center="field.options.center" :close-text="field.options.closeText"
-              :show-icon="field.options.showIcon" :effect="field.options.effect" @close="handelCloseCustomEvent"></el-alert>
+              :show-icon="field.options.showIcon" :effect="field.options.effect" @close="handleCloseCustomEvent"></el-alert>
   </static-content-wrapper>
 </template>
 
@@ -56,7 +56,7 @@
       this.unregisterFromRefList()
     },
     methods: {
-      handelCloseCustomEvent() {
+      handleCloseCustomEvent() {
         if (!!this.field.options.onClose) {
           let changeFn = new Function(this.field.options.onClose)
           changeFn.call(this)

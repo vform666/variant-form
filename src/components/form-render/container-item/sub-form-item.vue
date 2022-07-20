@@ -269,7 +269,7 @@
           this.deleteFromRowIdData(formRowIndex)
           this.deleteFromFieldSchemaData(formRowIndex)
 
-          this.handelSubFormRowDelete(oldSubFormData, deletedDataRow)
+          this.handleSubFormRowDelete(oldSubFormData, deletedDataRow)
           this.handleSubFormRowChange(oldSubFormData)
         }).catch(() => {
           //
@@ -297,7 +297,7 @@
         }
       },
 
-      handelSubFormRowDelete(subFormData, deletedDataRow) {
+      handleSubFormRowDelete(subFormData, deletedDataRow) {
         if (!!this.widget.options.onSubFormRowDelete) {
           let customFunc = new Function('subFormData', 'deletedDataRow', this.widget.options.onSubFormRowDelete)
           customFunc.call(this, subFormData, deletedDataRow)

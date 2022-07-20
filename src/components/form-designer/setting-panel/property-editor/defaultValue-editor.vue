@@ -1,6 +1,6 @@
 <template>
-  <el-form-item :label="i18nt('designer.setting.defaultValue')">
-    <el-input v-if="!hasConfig('optionItems')" type="text" v-model="optionModel.defaultValue"
+  <el-form-item v-if="!hasConfig('optionItems')" :label="i18nt('designer.setting.defaultValue')">
+    <el-input type="text" v-model="optionModel.defaultValue"
               @change="emitDefaultValueChange"></el-input>
   </el-form-item>
 </template>
