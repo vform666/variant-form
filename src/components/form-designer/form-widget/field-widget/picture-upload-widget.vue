@@ -8,7 +8,7 @@
                :with-credentials="field.options.withCredentials"
                :multiple="field.options.multipleSelect" :file-list="fileList" :show-file-list="field.options.showFileList"
                list-type="picture-card" :class="{'hideUploadDiv': uploadBtnHidden}"
-               :limit="field.options.limit" :on-exceed="handlePictureExceed"
+               :limit="field.options.limit" :on-exceed="handlePictureExceed" :on-preview="handlePicturePreview"
                :before-upload="beforePictureUpload"
                :on-success="handlePictureUpload" :on-error="handleUploadError" :on-remove="handlePictureRemove">
       <div slot="tip" class="el-upload__tip"
@@ -117,6 +117,11 @@
       handlePictureExceed() {
         let uploadLimit = this.field.options.limit
         this.$message.warning( this.i18nt('render.hint.uploadExceed').replace('${uploadLimit}', uploadLimit) )
+      },
+
+      handlePicturePreview(file) {
+        this.previewUrl = file.url
+        this.showPreviewDialogFlag = true
       },
 
       beforePictureUpload(file) {

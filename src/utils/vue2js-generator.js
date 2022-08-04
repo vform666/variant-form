@@ -1,4 +1,4 @@
-import {isNotNull, traverseContainWidgets, traverseFieldWidgets} from "@/utils/util";
+import {isNotNull, traverseContainerWidgets, traverseFieldWidgets} from "@/utils/util";
 import {translate} from "@/utils/i18n";
 import FormValidators, {getRegExp} from "@/utils/validators";
 
@@ -79,7 +79,7 @@ export function buildActiveTabs(formConfig, widgetList) {
       cw.tabs.length > 0 && resultList.push(`'${cop.name}ActiveTab': '${cw.tabs[0].options.name}',`)
     }
   }
-  traverseContainWidgets(widgetList, handlerFn)
+  traverseContainerWidgets(widgetList, handlerFn)
 
   return resultList
 }

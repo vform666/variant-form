@@ -152,7 +152,7 @@ export function traverseFieldWidgets(widgetList, handler, parent = null) {
   })
 }
 
-export function traverseContainWidgets(widgetList, handler) {
+export function traverseContainerWidgets(widgetList, handler) {
   widgetList.forEach(w => {
     if (w.category === 'container') {
       handler(w)
@@ -160,22 +160,22 @@ export function traverseContainWidgets(widgetList, handler) {
 
     if (w.type === 'grid') {
       w.cols.forEach(col => {
-        traverseContainWidgets(col.widgetList, handler)
+        traverseContainerWidgets(col.widgetList, handler)
       })
     } else if (w.type === 'table') {
       w.rows.forEach(row => {
         row.cols.forEach(cell => {
-          traverseContainWidgets(cell.widgetList, handler)
+          traverseContainerWidgets(cell.widgetList, handler)
         })
       })
     } else if (w.type === 'tab') {
       w.tabs.forEach(tab => {
-        traverseContainWidgets(tab.widgetList, handler)
+        traverseContainerWidgets(tab.widgetList, handler)
       })
     } else if (w.type === 'sub-form') {
-      traverseContainWidgets(w.widgetList, handler)
+      traverseContainerWidgets(w.widgetList, handler)
     } else if (w.category === 'container') {  //自定义容器
-      traverseContainWidgets(w.widgetList, handler)
+      traverseContainerWidgets(w.widgetList, handler)
     }
   })
 }
@@ -286,7 +286,7 @@ export function getAllContainerWidgets(widgetList) {
       container: w
     })
   }
-  traverseContainWidgets(widgetList, handlerFn)
+  traverseContainerWidgets(widgetList, handlerFn)
 
   return result
 }

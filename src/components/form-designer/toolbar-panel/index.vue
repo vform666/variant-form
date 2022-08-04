@@ -69,6 +69,7 @@
         <el-button v-if="false" @click="printFormJson">PrintFormJson</el-button>
         <el-button v-if="false" @click="testValidate">TestValidate</el-button>
         <el-button v-if="false" @click="testSetFormData">TestSF</el-button>
+        <el-button v-if="false" @click="testReloadOptionData">Test ROD</el-button>
       </div>
     </el-dialog>
 
@@ -238,7 +239,13 @@
             {label: '01', value: 1},
             {label: '22', value: 2},
             {label: '333', value: 3},
-          ]
+          ],
+
+          'select001': [
+            {label: '辣椒', value: 1},
+            {label: '菠萝', value: 2},
+            {label: '丑橘子', value: 3},
+          ],
         },
 
       }
@@ -616,6 +623,16 @@
           ]
         }
         this.$refs['preForm'].setFormData(nfData)
+      },
+
+      testReloadOptionData() {
+        this.testOptionData['select001'].push({
+          label: 'aaa',
+          value: 888
+        })
+
+        //this.$refs.preForm.reloadOptionData()
+        this.$refs.preForm.reloadOptionData('select001')
       },
 
       handleFormChange(fieldName, newValue, oldValue, formModel) {
