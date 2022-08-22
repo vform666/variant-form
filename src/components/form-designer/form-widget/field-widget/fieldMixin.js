@@ -90,14 +90,14 @@ export default {
     },
 
     initEventHandler() {
-      this.$on('setFormData', function (newFormData) {
+      this.$on('setFormData', (newFormData) => {
         //console.log('formModel of globalModel----------', this.globalModel.formModel)
         if (!this.subFormItemFlag) {
           this.setValue(newFormData[this.field.options.name])
         }
       })
 
-      this.$on('field-value-changed', function (values) {
+      this.$on('field-value-changed', (values) => {
         if (!!this.subFormItemFlag) {
           let subFormData = this.formModel[this.subFormName]
           this.handleOnChangeForSubForm(values[0], values[1], subFormData, this.subFormRowId)
@@ -107,7 +107,7 @@ export default {
       })
 
       /* 监听重新加载选项事件 */
-      this.$on('reloadOptionItems', function (widgetNames) {
+      this.$on('reloadOptionItems', (widgetNames) => {
         if ((widgetNames.length === 0) || (widgetNames.indexOf(this.field.options.name) > -1)) {
           this.initOptionItems(true)
         }
