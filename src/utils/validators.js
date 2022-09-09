@@ -2,7 +2,7 @@ import {isEmptyStr, isNull} from "./util";
 
 export const getRegExp = function (validatorName) {
   const commonRegExp = {
-    number: '/^\\d+(\\.\\d+)?$/',
+    number: '/^[-]?\\d+(\\.\\d+)?$/',
     letter: '/^[A-Za-z]+$/',
     letterAndNumber: '/^[A-Za-z0-9]+$/',
     mobilePhone: '/^[1][3-9][0-9]{9}$/',

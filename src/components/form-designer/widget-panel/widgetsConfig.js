@@ -883,6 +883,7 @@ export const advancedFields = [
       filterable: false,
       multiple: false,
       checkStrictly: false,  //可选择任意一级选项，默认不开启
+      showAllLevels: true,  //显示完整路径
       optionItems: [
         {label: 'select 1', value: 1, children: [{label: 'child 1', value: 11}]},
         {label: 'select 2', value: 2},

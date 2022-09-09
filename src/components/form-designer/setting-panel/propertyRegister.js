@@ -42,6 +42,7 @@ const COMMON_PROPERTIES = {
   'remote'            :            'remote-editor',
   'automaticDropdown' :            'automaticDropdown-editor',
   'checkStrictly'     :            'checkStrictly-editor',
+  'showAllLevels'     :            'showAllLevels-editor',
   'multiple'          :            'multiple-editor',
   'multipleLimit'     :            'multipleLimit-editor',
   'contentPosition'   :            'contentPosition-editor',

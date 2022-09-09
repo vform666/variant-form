@@ -46,7 +46,7 @@ export const genVue3JS = function (formConfig, widgetList) {
       const instance = getCurrentInstance()
       
       const submitForm = () => {
-        instance.ctx.$refs['vForm'].validate(valid => {
+        instance.proxy.$refs['vForm'].validate(valid => {
           if (!valid) return
           
           //TODO: 提交表单
@@ -54,7 +54,7 @@ export const genVue3JS = function (formConfig, widgetList) {
       }
       
       const resetForm = () => {
-        instance.ctx.$refs['vForm'].resetFields()
+        instance.proxy.$refs['vForm'].resetFields()
       }
       
       return {

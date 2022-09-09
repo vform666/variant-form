@@ -209,6 +209,7 @@ export default {
       multiple: '选项可多选',
       multipleLimit: '多选数量限制',
       checkStrictly: '任意级节点可选',
+      showAllLevels: '显示完整路径',
       contentPosition: '文字位置',
       plain: '朴素按钮',
       round: '圆角按钮',
