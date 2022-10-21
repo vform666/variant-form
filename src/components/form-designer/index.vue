@@ -75,6 +75,7 @@
   import {MOCK_CASE_URL, VARIANT_FORM_VERSION} from "@/utils/config"
   import i18n, { changeLocale } from "@/utils/i18n"
   import axios from "axios"
+  import SvgIcon from '@/components/svg-icon'
 
   export default {
     name: "VFormDesigner",
@@ -85,6 +86,7 @@
       ToolbarPanel,
       SettingPanel,
       VFormWidget,
+      SvgIcon,
     },
     props: {
       /* 后端字段列表API */

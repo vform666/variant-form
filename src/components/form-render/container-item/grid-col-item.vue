@@ -4,7 +4,7 @@
     <template v-if="!!widget.widgetList && (widget.widgetList.length > 0)">
       <template v-for="(subWidget, swIdx) in widget.widgetList">
         <template v-if="'container' === subWidget.category">
-          <component :is="subWidget.type + '-item'" :widget="subWidget" :key="swIdx" :parent-list="widget.widgetList"
+          <component :is="getComponentByContainer(subWidget)" :widget="subWidget" :key="swIdx" :parent-list="widget.widgetList"
                           :index-of-parent-list="swIdx" :parent-widget="widget">
             <!-- 递归传递插槽！！！ -->
             <template v-for="slot in Object.keys($scopedSlots)" v-slot:[slot]="scope">

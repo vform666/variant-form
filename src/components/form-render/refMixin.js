@@ -18,5 +18,13 @@ export default {
       return this.refList['v_form_ref']
     },
 
+    getComponentByContainer(con) {
+      if (con.type === 'grid') {  //grid-item跟VueGridLayout全局注册组件重名，故特殊处理！！
+        return 'vf-grid-item'
+      }
+
+      return con.type + '-item'
+    },
+
   }
 }

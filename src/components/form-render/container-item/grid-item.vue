@@ -28,7 +28,7 @@
   import containerItemMixin from "./containerItemMixin"
 
   export default {
-    name: "grid-item",
+    name: "vf-grid-item", //grid-item跟VueGridLayout全局注册组件重名，故特殊处理！！
     componentName: 'ContainerItem',
     mixins: [emitter, i18n, refMixin, containerItemMixin],
     components: {

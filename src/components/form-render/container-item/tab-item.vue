@@ -8,7 +8,7 @@
                      :disabled="tab.options.disabled" :name="tab.options.name">
           <template v-for="(subWidget, swIdx) in tab.widgetList">
             <template v-if="'container' === subWidget.category">
-              <component :is="subWidget.type + '-item'" :widget="subWidget" :key="swIdx" :parent-list="tab.widgetList"
+              <component :is="getComponentByContainer(subWidget)" :widget="subWidget" :key="swIdx" :parent-list="tab.widgetList"
                               :index-of-parent-list="swIdx" :parent-widget="widget">
                 <!-- 递归传递插槽！！！ -->
                 <template v-for="slot in Object.keys($scopedSlots)" v-slot:[slot]="scope">

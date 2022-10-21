@@ -89,6 +89,7 @@
   import {addWindowResizeHandler} from "@/utils/util"
   import i18n from "@/utils/i18n"
   import axios from "axios"
+  import SvgIcon from '@/components/svg-icon'
 
   // import ftImg1 from '@/assets/ft-images/t1.png'
   // import ftImg2 from '@/assets/ft-images/t2.png'
@@ -104,6 +105,7 @@
     mixins: [i18n],
     components: {
       Draggable,
+      SvgIcon,
     },
     props: {
       designer: Object,
