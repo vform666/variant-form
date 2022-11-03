@@ -16,6 +16,9 @@
 ### Vue 3正式版已发布
 [立即进入](https://gitee.com/vdpadmin/variant-form3-vite)
 
+### 🎉🎉基于Vant组件库的Mobile版本已发布🎉🎉
+[立即进入](https://vform666.com/vform-mobile.html)
+
 
 ### 友情链接
 [Fantastic-admin](https://hooray.gitee.io/fantastic-admin/) —— 一款开箱即用的 Vue 中后台管理系统框架（支持Vue2/Vue3）

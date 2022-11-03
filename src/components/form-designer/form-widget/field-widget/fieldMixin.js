@@ -189,7 +189,7 @@ export default {
     },
 
     buildFieldRules() {
-      if (!this.field.formItemFlag) {
+      if (!this.field.formItemFlag && this.field.options.hidden) {
         return
       }
 

@@ -127,6 +127,10 @@ export const loadRemoteScript = function(srcPath, callback) {  /*加载远程js�
 }
 
 export function traverseFieldWidgets(widgetList, handler, parent = null) {
+  if (!widgetList) {
+    return
+  }
+
   widgetList.forEach(w => {
     if (w.formItemFlag) {
       handler(w, parent)
@@ -153,6 +157,10 @@ export function traverseFieldWidgets(widgetList, handler, parent = null) {
 }
 
 export function traverseContainerWidgets(widgetList, handler) {
+  if (!widgetList) {
+    return
+  }
+
   widgetList.forEach(w => {
     if (w.category === 'container') {
       handler(w)
@@ -181,6 +189,10 @@ export function traverseContainerWidgets(widgetList, handler) {
 }
 
 export function traverseAllWidgets(widgetList, handler) {
+  if (!widgetList) {
+    return
+  }
+
   widgetList.forEach(w => {
     handler(w)
 
@@ -259,6 +271,10 @@ export function traverseFieldWidgetsOfContainer(con, handler) {
  * @returns {[]}
  */
 export function getAllFieldWidgets(widgetList) {
+  if (!widgetList) {
+    return []
+  }
+
   let result = []
   let handlerFn = (w) => {
     result.push({
@@ -278,6 +294,10 @@ export function getAllFieldWidgets(widgetList) {
  * @returns {[]}
  */
 export function getAllContainerWidgets(widgetList) {
+  if (!widgetList) {
+    return []
+  }
+
   let result = []
   let handlerFn = (w) => {
     result.push({
