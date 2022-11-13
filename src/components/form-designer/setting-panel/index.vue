@@ -72,7 +72,7 @@
     </el-tabs>
 
     <el-dialog :title="i18nt('designer.setting.editWidgetEventHandler')" :visible.sync="showWidgetEventDialogFlag"
-               v-if="showWidgetEventDialogFlag" :show-close="true" class="small-padding-dialog" v-dialog-drag
+               v-if="showWidgetEventDialogFlag" :show-close="true" class="small-padding-dialog" append-to-body v-dialog-drag
                :close-on-click-modal="false" :close-on-press-escape="false" :destroy-on-close="true">
       <el-alert type="info" :closable="false" :title="eventHeader"></el-alert>
       <code-editor :mode="'javascript'" :readonly="false" v-model="eventHandlerCode" ref="ecEditor"></code-editor>

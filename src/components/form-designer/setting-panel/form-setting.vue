@@ -81,7 +81,7 @@
     </el-form>
 
     <el-dialog :title="i18nt('designer.setting.editFormEventHandler')" :visible.sync="showFormEventDialogFlag"
-               v-if="showFormEventDialogFlag" :show-close="true" class="small-padding-dialog" v-dialog-drag
+               v-if="showFormEventDialogFlag" :show-close="true" class="small-padding-dialog" append-to-body v-dialog-drag
                :close-on-click-modal="false" :close-on-press-escape="false" :destroy-on-close="true">
       <el-alert type="info" :closable="false" :title="'form.' + eventParamsMap[curEventName]"></el-alert>
       <code-editor :mode="'javascript'" :readonly="false" v-model="formEventHandlerCode" ref="ecEditor"></code-editor>
@@ -95,7 +95,7 @@
     </el-dialog>
 
     <el-dialog :title="i18nt('designer.setting.formCss')" :visible.sync="showEditFormCssDialogFlag"
-               v-if="showEditFormCssDialogFlag" :show-close="true" class="small-padding-dialog" v-dialog-drag
+               v-if="showEditFormCssDialogFlag" :show-close="true" class="small-padding-dialog" append-to-body v-dialog-drag
                :close-on-click-modal="false" :close-on-press-escape="false" :destroy-on-close="true">
       <code-editor :mode="'css'" :readonly="false" v-model="formCssCode"></code-editor>
       <div slot="footer" class="dialog-footer">
@@ -107,7 +107,7 @@
     </el-dialog>
 
     <el-dialog :title="i18nt('designer.setting.globalFunctions')" :visible.sync="showEditFunctionsDialogFlag"
-               v-if="showEditFunctionsDialogFlag" :show-close="true" class="small-padding-dialog" v-dialog-drag
+               v-if="showEditFunctionsDialogFlag" :show-close="true" class="small-padding-dialog" append-to-body v-dialog-drag
                :close-on-click-modal="false" :close-on-press-escape="false" :destroy-on-close="true">
       <code-editor :mode="'javascript'" :readonly="false" v-model="functionsCode" ref="gfEditor"></code-editor>
       <div slot="footer" class="dialog-footer">

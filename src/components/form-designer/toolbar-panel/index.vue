@@ -74,7 +74,7 @@
     </el-dialog>
 
     <el-dialog :title="i18nt('designer.toolbar.importJson')" :visible.sync="showImportJsonDialogFlag"
-               v-if="showImportJsonDialogFlag" :show-close="true" class="small-padding-dialog" center v-dialog-drag
+               v-if="showImportJsonDialogFlag" :show-close="true" class="small-padding-dialog" center append-to-body v-dialog-drag
                :close-on-click-modal="false" :close-on-press-escape="false" :destroy-on-close="true">
       <el-alert type="info" :title="i18nt('designer.hint.importJsonHint')" show-icon class="alert-padding"></el-alert>
       <code-editor :mode="'json'" :readonly="false" v-model="importTemplate"></code-editor>
@@ -87,7 +87,7 @@
     </el-dialog>
 
     <el-dialog :title="i18nt('designer.toolbar.exportJson')" :visible.sync="showExportJsonDialogFlag"
-               v-if="showExportJsonDialogFlag" :show-close="true" class="small-padding-dialog" center v-dialog-drag
+               v-if="showExportJsonDialogFlag" :show-close="true" class="small-padding-dialog" center append-to-body v-dialog-drag
                :close-on-click-modal="false" :close-on-press-escape="false" :destroy-on-close="true">
       <code-editor :mode="'json'" :readonly="true" v-model="jsonContent"></code-editor>
       <div slot="footer" class="dialog-footer">
@@ -100,7 +100,7 @@
     </el-dialog>
 
     <el-dialog :title="i18nt('designer.toolbar.exportCode')" :visible.sync="showExportCodeDialogFlag"
-               v-if="showExportCodeDialogFlag" :show-close="true" class="small-padding-dialog" center v-dialog-drag
+               v-if="showExportCodeDialogFlag" :show-close="true" class="small-padding-dialog" center append-to-body v-dialog-drag
                width="65%" :close-on-click-modal="false" :close-on-press-escape="false" :destroy-on-close="true">
       <el-tabs type="border-card" class="no-box-shadow no-padding" v-model="activeCodeTab">
         <el-tab-pane label="Vue" name="vue">
@@ -139,7 +139,7 @@
     </el-dialog>
 
     <el-dialog :title="i18nt('designer.toolbar.generateSFC')" :visible.sync="showExportSFCDialogFlag"
-               v-if="showExportSFCDialogFlag" :show-close="true" class="small-padding-dialog" center v-dialog-drag
+               v-if="showExportSFCDialogFlag" :show-close="true" class="small-padding-dialog" center append-to-body v-dialog-drag
                width="65%" :close-on-click-modal="false" :close-on-press-escape="false" :destroy-on-close="true">
       <el-tabs type="border-card" class="no-box-shadow no-padding" v-model="activeSFCTab">
         <el-tab-pane label="Vue2" name="vue2">

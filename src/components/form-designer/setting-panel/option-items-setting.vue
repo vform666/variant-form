@@ -47,7 +47,7 @@
     </div>
 
     <el-dialog :title="i18nt('designer.setting.importOptions')" :visible.sync="showImportDialogFlag"
-               v-if="showImportDialogFlag" :show-close="true" class="small-padding-dialog"
+               v-if="showImportDialogFlag" :show-close="true" class="small-padding-dialog" append-to-body
                :close-on-click-modal="false" :close-on-press-escape="false" :destroy-on-close="true">
       <el-form-item>
         <el-input type="textarea" rows="10" v-model="optionLines"></el-input>
@@ -59,7 +59,7 @@
     </el-dialog>
 
     <el-dialog :title="i18nt('designer.setting.importOptions')" :visible.sync="showImportCascaderDialogFlag"
-               v-if="showImportCascaderDialogFlag" :show-close="true" class="small-padding-dialog"
+               v-if="showImportCascaderDialogFlag" :show-close="true" class="small-padding-dialog" append-to-body
                :close-on-click-modal="false" :close-on-press-escape="false" :destroy-on-close="true">
       <code-editor v-model="cascaderOptions" mode="json" :readonly="false"></code-editor>
       <div slot="footer" class="dialog-footer">
