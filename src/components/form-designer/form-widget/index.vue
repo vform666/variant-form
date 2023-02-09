@@ -172,6 +172,12 @@
         return this.getWidgetRef(wName)
       },
 
+      clearWidgetRefList() {
+        Object.keys(this.widgetRefList).forEach(key => {
+          delete this.widgetRefList[key]
+        })
+      },
+
     }
   }
 </script>

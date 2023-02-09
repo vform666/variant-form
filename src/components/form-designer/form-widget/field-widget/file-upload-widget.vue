@@ -201,9 +201,13 @@
           this.updateFieldModelAndEmitDataChangeForUpload(fileList, customResult, res)
           if (!!customResult && !!customResult.name) {
             file.name = customResult.name
+          } else {
+            file.name = file.name || res.name || res.fileName || res.filename
           }
           if (!!customResult && !!customResult.url) {
             file.url = customResult.url
+          } else {
+            file.url = file.url || res.url
           }
           this.fileList = deepClone(fileList)
           this.uploadBtnHidden = fileList.length >= this.field.options.limit

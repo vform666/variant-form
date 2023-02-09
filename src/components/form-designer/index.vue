@@ -280,6 +280,7 @@
           }
 
           if (modifiedFlag) {
+            this.$refs.formRef.clearWidgetRefList()
             this.designer.emitHistoryChange()
           }
         }
@@ -294,6 +295,7 @@
 
       clearDesigner() {
         this.$refs.toolbarRef.clearFormWidget()
+        this.$refs.formRef.clearWidgetRefList()
       },
 
 
