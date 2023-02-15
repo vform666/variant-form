@@ -49,11 +49,16 @@
         type: Object,
         default: () => ({})
       },
+      globalDsv: {
+        type: Object,
+        default: () => ({})
+      },
     },
     provide() {
       return {
         refList: this.widgetRefList,
         formConfig: this.formConfig,
+        getGlobalDsv: () => this.globalDsv, // 全局数据源变量
         globalOptionData: this.optionData,
         getOptionData: () => this.optionData,
         globalModel: {

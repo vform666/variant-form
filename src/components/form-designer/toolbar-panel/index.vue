@@ -50,7 +50,7 @@
       <div>
         <div class="form-render-wrapper" :class="[layoutType === 'H5' ? 'h5-layout' : (layoutType === 'Pad' ? 'pad-layout' : '')]">
           <VFormRender ref="preForm" :form-json="formJson" :form-data="testFormData" :preview-state="true"
-                       :option-data="testOptionData"
+                       :option-data="testOptionData" :global-dsv="designerDsv"
                        @appendButtonClick="testOnAppendButtonClick" @buttonClick="testOnButtonClick"
                        @formChange="handleFormChange">
             <!--
@@ -191,7 +191,11 @@
       SvgIcon,
     },
     props: {
-      designer: Object
+      designer: Object,
+      globalDsv: {
+        type: Object,
+        default: () => ({})
+      },
     },
     inject: ['getDesignerConfig'],
     data() {
@@ -273,6 +277,10 @@
       layoutType() {
         return this.designer.getLayoutType()
       },
+
+      designerDsv() {
+        return this.globalDsv
+      }
 
     },
     watch: {

@@ -1,4 +1,5 @@
 export default {
+  inject: ['getGlobalDsv'],
   methods: {
     appendTableRow(widget) {
       this.designer.appendTableRow(widget)

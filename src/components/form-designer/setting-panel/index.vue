@@ -114,6 +114,10 @@
       designer: Object,
       selectedWidget: Object,
       formConfig: Object,
+      globalDsv: {
+        type: Object,
+        default: () => ({})
+      },
     },
     provide() {
       return {

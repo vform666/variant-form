@@ -1,6 +1,7 @@
 import { traverseFieldWidgetsOfContainer } from "@/utils/util";
 
 export default {
+  inject: ['getGlobalDsv'],
   computed: {
     customClass() {
       return this.widget.options.customClass || ''

@@ -37,7 +37,7 @@
 
       <el-container class="center-layout-container">
         <el-header class="toolbar-header">
-          <toolbar-panel :designer="designer" ref="toolbarRef">
+          <toolbar-panel :designer="designer" :global-dsv="globalDsv" ref="toolbarRef">
             <template v-for="(idx, slotName) in $slots" #[slotName]>
               <slot :name="slotName"></slot>
             </template>
@@ -45,14 +45,15 @@
         </el-header>
         <el-main class="form-widget-main">
           <el-scrollbar class="container-scroll-bar" :style="{height: scrollerHeight}">
-            <v-form-widget :designer="designer" :form-config="designer.formConfig" ref="formRef">
+            <v-form-widget :designer="designer" :form-config="designer.formConfig" :global-dsv="globalDsv" ref="formRef">
             </v-form-widget>
           </el-scrollbar>
         </el-main>
       </el-container>
 
       <el-aside>
-        <setting-panel :designer="designer" :selected-widget="designer.selectedWidget" :form-config="designer.formConfig" />
+        <setting-panel :designer="designer" :selected-widget="designer.selectedWidget"
+                       :form-config="designer.formConfig" :global-dsv="globalDsv" />
       </el-aside>
     </el-container>
 
@@ -125,6 +126,12 @@
             resetFormJson: false,  //是否在设计器初始化时将表单内容重置为空
           }
         }
+      },
+
+      /* 全局数据源变量 */
+      globalDsv: {
+        type: Object,
+        default: () => ({})
       },
 
     },

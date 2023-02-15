@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <VFormDesigner ref="vfDesignerRef" :designer-config="designerConfig">
+    <VFormDesigner ref="vfDesignerRef" :designer-config="designerConfig" :global-dsv="globalDsv">
       <template #customToolButtons>
         <el-button type="text" @click="printFormJson">测试按钮</el-button>
       </template>
@@ -21,7 +21,13 @@ export default {
       designerConfig: {
         resetFormJson: false,
         toolbarMaxWidth: 490,
-      }
+      },
+
+      //全局数据源变量
+      globalDsv: {
+        testApiHost: 'http://www.test.com/api',
+        testPort: 8080,
+      },
     }
   },
   methods: {

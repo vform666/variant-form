@@ -74,13 +74,18 @@
       previewState: { //是否表单预览状态
         type: Boolean,
         default: false
-      }
+      },
+      globalDsv: {
+        type: Object,
+        default: () => ({})
+      },
     },
     provide() {
       return {
         refList: this.widgetRefList,
         sfRefList: this.subFormRefList,  //收集SubForm引用
         formConfig: this.formConfig,
+        getGlobalDsv: () => this.globalDsv, // 全局数据源变量
         globalOptionData: this.optionData,
         getOptionData: () => this.optionData,  /* 该方法用于在异步更新option-data之后重新获取到最新值 */
         globalModel: {
@@ -693,6 +698,14 @@
        */
       getEC(componentName) {
         return this.externalComponents[componentName]
+      },
+
+      /**
+       * 获取globalDsv对象
+       * @returns {*}
+       */
+      getGlobalDsv() {
+        return this.globalDsv
       },
 
       //--------------------- 以上为组件支持外部调用的API方法 end ------------------//

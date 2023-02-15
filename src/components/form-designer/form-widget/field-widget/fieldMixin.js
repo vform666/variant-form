@@ -2,7 +2,7 @@ import {deepClone} from "@/utils/util"
 import FormValidators from '@/utils/validators'
 
 export default {
-  inject: ['refList', 'formConfig', 'globalOptionData', 'globalModel', 'getOptionData'],
+  inject: ['refList', 'formConfig', 'getGlobalDsv', 'globalOptionData', 'globalModel', 'getOptionData'],
 
   computed: {
     subFormName() {
