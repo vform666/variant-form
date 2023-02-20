@@ -352,7 +352,7 @@ export function getDefaultFormConfig() {
     size: '',
     labelAlign: 'label-left-align',
     cssCode: '',
-    customClass: '',
+    customClass: [],
     functions: '',
     layoutType: 'PC',
 

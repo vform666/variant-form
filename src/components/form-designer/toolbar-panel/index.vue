@@ -424,6 +424,7 @@
 
       clearFormWidget() {
         this.designer.clearDesigner()
+        this.designer.formWidget.clearWidgetRefList()
       },
 
       previewForm() {
