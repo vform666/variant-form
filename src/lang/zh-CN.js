@@ -178,6 +178,7 @@ export default {
       widgetColumnWidth: '组件列宽',
       widgetSize: '组件大小',
       fontSize: '字体大小',
+      textAlign: '文字对齐',
       showStops: '显示间断点',
       displayStyle: '显示样式',
       inlineLayout: '行内',
@@ -196,6 +197,7 @@ export default {
       disabled: '禁用',
       hidden: '隐藏',
       textContent: '静态文字',
+      preWrap: '自动换行',
       htmlContent: 'HTML',
       clearable: '可清除',
       editable: '可输入',
@@ -233,6 +235,7 @@ export default {
 
       cellWidth: '宽度',
       cellHeight: '高度',
+      wordBreak: '文字自动换行',
       gridColHeight: '栅格列统一高度(px)',
       gutter: '栅格间隔(px)',
       columnSetting: '栅格属性设置',

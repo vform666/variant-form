@@ -1,7 +1,7 @@
 <template>
   <td class="table-cell" :class="[customClass]"
       :colspan="widget.options.colspan || 1" :rowspan="widget.options.rowspan || 1"
-      :style="{width: widget.options.cellWidth + ' !important' || '', height: widget.options.cellHeight + ' !important' || ''}">
+      :style="{width: widget.options.cellWidth + ' !important' || '', height: widget.options.cellHeight + ' !important' || '', 'word-break': !!widget.options.wordBreak ? 'break-all' : 'normal'}">
     <template v-for="(subWidget, swIdx) in widget.widgetList">
       <template v-if="'container' === subWidget.category">
         <component :is="getComponentByContainer(subWidget)" :widget="subWidget" :key="swIdx" :parent-list="widget.widgetList"

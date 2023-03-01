@@ -12,7 +12,7 @@
                :automatic-dropdown="field.options.automaticDropdown"
                :multiple="field.options.multiple" :multiple-limit="field.options.multipleLimit"
                :placeholder="field.options.placeholder || i18nt('render.hint.selectPlaceholder')"
-               :remote="field.options.remote" :remote-method="remoteQuery"
+               :remote="field.options.remote" :remote-method="remoteMethod"
                @focus="handleFocusCustomEvent" @blur="handleBlurCustomEvent"
                @change="handleChangeEvent">
       <el-option v-for="item in field.options.optionItems" :key="item.value" :label="item.label"
@@ -72,6 +72,14 @@
     computed: {
       allowDefaultFirstOption() {
         return (!!this.field.options.filterable && !!this.field.options.allowCreate)
+      },
+
+      remoteMethod() {
+        if (!!this.field.options.remote && !!this.field.options.onRemoteQuery) {
+          return this.remoteQuery
+        } else {
+          return undefined
+        }
       },
 
     },

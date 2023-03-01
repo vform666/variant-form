@@ -1,6 +1,6 @@
 <template>
   <td class="table-cell" :class="[selected ? 'selected' : '', customClass]"
-      :style="{width: widget.options.cellWidth + '!important' || '', height: widget.options.cellHeight + '!important' || ''}"
+      :style="{width: widget.options.cellWidth + '!important' || '', height: widget.options.cellHeight + '!important' || '', 'word-break': !!widget.options.wordBreak ? 'break-all' : 'normal'}"
       :colspan="widget.options.colspan || 1" :rowspan="widget.options.rowspan || 1"
       @click.stop="selectWidget(widget)">
     <draggable :list="widget.widgetList" class="draggable-div" v-bind="{group:'dragGroup', ghostClass: 'ghost',animation: 200}"

@@ -1,6 +1,6 @@
 <template>
-  <el-form-item :label="i18nt('designer.setting.textContent')">
-    <el-input v-model="optionModel.textContent" type="textarea" :rows="3"></el-input>
+  <el-form-item :label="i18nt('designer.setting.wordBreak')">
+    <el-switch v-model="optionModel.wordBreak"></el-switch>
   </el-form-item>
 </template>
 
@@ -8,7 +8,7 @@
   import i18n from "@/utils/i18n"
 
   export default {
-    name: "textContent-editor",
+    name: "table-cell-wordBreak-editor",
     mixins: [i18n],
     props: {
       designer: Object,

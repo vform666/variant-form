@@ -73,6 +73,7 @@ export const containers = [
       cellHeight: '',
       colspan: 1,
       rowspan: 1,
+      wordBreak: false,  //是否自动换行
       customClass: '',  //自定义css类名
     }
   },
@@ -665,7 +666,9 @@ export const basicFields = [
       columnWidth: '200px',
       hidden: false,
       textContent: 'static text',
+      textAlign: 'left',
       fontSize: '13px',
+      preWrap: false,  //是否自动换行
       //-------------------
       customClass: '',  //自定义css类名
       //-------------------

@@ -8,10 +8,11 @@
 ### 立即体验
 [在线Demo](http://120.92.142.115/)
 
-
 ### 立即体验VForm Pro高级版（提供商业支持）
 [Pro Demo](https://vform666.com/pages/pro/)
 
+### 视频教程集合：
+[B站观看](https://space.bilibili.com/626932375)
 
 ### Vue 3正式版已发布
 [立即进入](https://gitee.com/vdpadmin/variant-form3-vite)

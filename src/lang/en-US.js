@@ -178,6 +178,7 @@ export default {
       widgetColumnWidth: 'Width',
       widgetSize: 'Size',
       fontSize: 'Font Size',
+      textAlign: 'Text Align',
       showStops: 'Show Stops',
       displayStyle: 'Display Style',
       inlineLayout: 'inline',
@@ -196,6 +197,7 @@ export default {
       disabled: 'Disabled',
       hidden: 'Hidden',
       textContent: 'Text',
+      preWrap: 'Line Wrap',
       htmlContent: 'HTML',
       clearable: 'Clearable',
       editable: 'Editable',
@@ -233,6 +235,7 @@ export default {
 
       cellWidth: 'Width',
       cellHeight: 'Height',
+      wordBreak: 'Line Wrap',
       gridColHeight: 'Height Of Col(px)',
       gutter: 'Gutter(px)',
       columnSetting: 'Cols Setting',
