@@ -185,7 +185,7 @@
             this.layoutProps.span = this.widget.options.md || 12
           }
         } else {
-          this.layoutProps.spn = this.widget.options.span
+          this.layoutProps.span = this.widget.options.span
         }
       },
 

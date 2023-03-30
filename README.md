@@ -9,7 +9,7 @@
 [在线Demo](http://120.92.142.115/)
 
 ### 立即体验VForm Pro高级版（提供商业支持）
-[Pro Demo](https://vform666.com/pages/pro/)
+[Pro Demo](https://www.vform666.com/pro/)
 
 ### 视频教程集合：
 [B站观看](https://space.bilibili.com/626932375)
@@ -184,11 +184,11 @@ Gitee仓库：<a href="https://gitee.com/vdpadmin/variant-form" target="_blank">
 
 Github仓库：<a href="https://github.com/vform666/variant-form" target="_blank">https://github.com/vform666/variant-form</a>
 
-VS Code插件：<a href="https://www.vform666.com/pages/plugin/" target="_blank">https://www.vform666.com/pages/plugin/</a>
+VS Code插件：<a href="https://www.vform666.com/plugin/" target="_blank">https://www.vform666.com/plugin/</a>
 
 更新日志：<a href="https://www.vform666.com/changelog.html" target="_blank">https://www.vform666.com/changelog.html</a>
 
-订阅Pro版：<a href="https://www.vform666.com/pages/pro/" target="_blank">https://www.vform666.com/pages/pro/</a>
+订阅Pro版：<a href="https://www.vform666.com/pro/" target="_blank">https://www.vform666.com/pro/</a>
 
 技术交流群：扫如下二维码加群
 
