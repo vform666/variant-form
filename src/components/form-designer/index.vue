@@ -10,10 +10,12 @@
 
 <template>
   <el-container class="main-container full-height">
-    <el-header class="main-header">
+    <el-header class="main-header" v-if="showLink('headerShow')" >
       <div class="float-left main-title">
-        <img src="../../assets/vform-logo.png" @click="openHome">
-        <span class="bold">VForm</span> {{i18nt('application.productTitle')}} <span class="version-span">Ver {{vFormVersion}}</span></div>
+        <!-- <img src="../../assets/vform-logo.png" @click="openHome"> -->
+        <!-- <span class="bold">VForm</span> -->
+         {{i18nt('application.productTitle')}}
+        <span class="version-span">Ver {{vFormVersion}}</span></div>
       <div class="float-right external-link">
         <el-dropdown v-if="showLink('languageMenu')" :hide-timeout="2000" @command="handleLanguageChanged">
           <span class="el-dropdown-link">{{curLangName}}<i class="el-icon-arrow-down el-icon--right"></i></span>
@@ -106,6 +108,7 @@
         type: Object,
         default: () => {
           return {
+            headerShow: true,  //是否显示顶栏
             languageMenu: true,  //是否显示语言切换菜单
             externalLink: true,  //是否显示GitHub、文档等外部链接
             formTemplates: true,  //是否显示表单模板
