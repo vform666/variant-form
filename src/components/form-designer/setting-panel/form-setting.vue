@@ -42,7 +42,7 @@
             <el-button type="info" icon="el-icon-edit" plain round @click="editGlobalFunctions">{{i18nt('designer.setting.addEventHandler')}}</el-button>
           </el-form-item>
           <el-form-item label-width="0">
-            <el-divider class="custom-divider">{{i18nt('designer.setting.formSFCSetting')}}</el-divider>
+            <el-divider class="custom-divider" content-position="left">{{i18nt('designer.setting.formSFCSetting')}}</el-divider>
           </el-form-item>
           <el-form-item :label="i18nt('designer.setting.formModelName')">
             <el-input type="text" v-model="formConfig.modelName"></el-input>
@@ -332,6 +332,10 @@
     .custom-divider.el-divider--horizontal {
       margin: 10px 0;
     }
+    .custom-divider .el-divider__text.is-left{
+      left: 5px;
+      padding: 0 5px 0 5px;
+    }
   }
 
   .setting-collapse {
@@ -340,8 +344,14 @@
     }
 
     ::v-deep .el-collapse-item__header {
-      font-style: italic;
+      background: #f2f2f4;
+      height: 28px;
+      padding: 0 10px;
+      // font-style: italic;
       font-weight: bold;
+    }
+    ::v-deep .el-collapse-item__wrap {
+      padding: 10px;
     }
   }
 

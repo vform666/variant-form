@@ -7,8 +7,9 @@ import ElementUI from 'element-ui'
 import './utils/directive'
 import './icons'
 
-import 'element-ui/lib/theme-chalk/index.css'
+// import 'element-ui/lib/theme-chalk/index.css'
 import '@/styles/index.scss'
+import '@/styles/theme/index.scss'
 import '@/iconfont/iconfont.css'
 
 import {loadExtension} from '@/extension/extension-loader'

@@ -31,7 +31,7 @@
     </el-header>
 
     <el-container>
-      <el-aside class="side-panel">
+      <el-aside class="left-panel">
         <widget-panel :designer="designer" />
       </el-aside>
 
@@ -51,7 +51,7 @@
         </el-main>
       </el-container>
 
-      <el-aside>
+      <el-aside class="right-panel">
         <setting-panel :designer="designer" :selected-widget="designer.selectedWidget"
                        :form-config="designer.formConfig" :global-dsv="globalDsv" />
       </el-aside>
@@ -416,12 +416,12 @@
 
   .el-container.center-layout-container {
     min-width: 680px;
-    border-left: 2px dotted #EBEEF5;
-    border-right: 2px dotted #EBEEF5;
+    border-left: 1px solid #EBEEF5;
+    border-right: 1px solid #EBEEF5;
   }
 
   .el-header.main-header {
-    border-bottom: 2px dotted #EBEEF5;
+    border-bottom: 1px solid #EBEEF5;
     height: 48px !important;
     line-height: 48px !important;
     min-width: 800px;
@@ -475,13 +475,17 @@
 
   .el-header.toolbar-header {
     font-size: 14px;
-    border-bottom: 1px dotted #CCCCCC;
+    border-bottom: 1px solid #dddddd;
     height: 42px !important;
     //line-height: 42px !important;
   }
 
-  .el-aside.side-panel {
+  .el-aside.left-panel {
     width: 260px !important;
+    overflow-y: hidden;
+  }
+  .el-aside.right-panel {
+    // width: 320px !important;
     overflow-y: hidden;
   }
 

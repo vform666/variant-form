@@ -1,6 +1,6 @@
 <template>
   <el-container class="panel-container">
-    <el-tabs :active-name="activeTab" style="height: 100%; overflow: hidden">
+    <el-tabs :active-name="activeTab" style="width: 100%; height: 100%; overflow: hidden">
       <el-tab-pane :label="i18nt('designer.hint.widgetSetting')" name="1">
         <el-scrollbar class="setting-scrollbar" :style="{height: scrollerHeight}">
 
@@ -306,7 +306,11 @@
 
 <style lang="scss" scoped>
   .panel-container {
-    padding: 0 8px;
+    // padding: 0 8px;
+    ::v-deep .el-tabs__header {
+      padding: 0 10px;
+      margin: 0;
+    }
   }
 
   .setting-scrollbar {
@@ -321,8 +325,14 @@
     }
 
     ::v-deep .el-collapse-item__header {
-      font-style: italic;
+      background: #f2f2f4;
+      height: 28px;
+      padding: 0 10px;
+      // font-style: italic;
       font-weight: bold;
+    }
+    ::v-deep .el-collapse-item__wrap {
+      padding: 10px;
     }
   }
 

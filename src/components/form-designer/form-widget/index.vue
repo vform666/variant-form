@@ -259,7 +259,6 @@
   .grid-cell {
     min-height: 30px;
     border-right: 1px dotted #cccccc;
-
   }
 
   .fade-enter-active, .fade-leave-active {
