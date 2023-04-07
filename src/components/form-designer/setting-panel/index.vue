@@ -205,10 +205,10 @@
         this.activeTab = "1"
       }
 
-      this.scrollerHeight = window.innerHeight - 56 - 48 + 'px'
+      this.scrollerHeight = window.innerHeight - 40 - 48 + 'px'
       addWindowResizeHandler(() => {
         this.$nextTick(() => {
-          this.scrollerHeight = window.innerHeight - 56 - 48 + 'px'
+          this.scrollerHeight = window.innerHeight - 40 - 48 + 'px'
           //console.log(this.scrollerHeight)
         })
       })
