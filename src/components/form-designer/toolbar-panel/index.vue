@@ -23,7 +23,7 @@
                icon-class="el-icon-arrow-right" @node-click="onNodeTreeClick"></el-tree>
     </el-drawer>
 
-    <div class="right-toolbar" :style="{width: toolbarWidth + 'px'}">
+    <div class="right-toolbar">
       <div class="right-toolbar-con">
         <el-button v-if="showToolButton('clearDesignerButton')" type="text" @click="clearFormWidget">
           <i class="el-icon-delete" />{{i18nt('designer.toolbar.clear')}}</el-button>
@@ -695,24 +695,30 @@
 
 <style lang="scss" scoped>
   div.toolbar-container {
-    //min-width: 728px;  /* 解决工具按钮栏换行的问题 */
-    /* 上一行css有问题，当窗口宽度不足时会把按钮挤出到右边的属性设置区，弃之！ */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    overflow: hidden;
+    height: 100%;
   }
 
   .left-toolbar {
-    float: left;
+    display: flex;
+    flex-shrink: 1;
     font-size: 16px;
   }
 
   .right-toolbar {
-    float: right;
-    //width: 420px;
+    margin-left: 10px;
+    flex-shrink: 0;
     text-align: right;
     overflow: hidden;
 
     .right-toolbar-con {
-      text-align: left;
-      width: 600px;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      // min-width: 600px;
     }
 
     ::v-deep .el-button--text {
