@@ -13,6 +13,7 @@ export default {
   designer: {
     componentLib: '组件库',
     formLib: '表单模板',
+    hierarchy: '大纲',
     containerTitle: '容器',
     dragHandlerHint: '鼠标拖拽容器组件或字段组件并放置于表单中',
     dragAction: '拖动',

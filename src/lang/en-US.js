@@ -13,6 +13,7 @@ export default {
   designer: {
     componentLib: 'Components',
     formLib: 'Templates',
+    hierarchy: 'Hierarchy',
     containerTitle: 'Container',
     dragHandlerHint: 'drag container or field to layout center',
     dragAction: 'drag',

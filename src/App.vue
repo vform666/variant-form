@@ -2,9 +2,9 @@
   <div id="app">
     <VFormDesigner ref="vfDesignerRef" :designer-config="designerConfig" :global-dsv="globalDsv">
       <template #customToolButtons>
-        <el-button type="normal" @click="printFormJson">测试按钮</el-button>
-        <el-button type="normal" @click="printFormJson">测试按钮</el-button>
-        <el-button type="primary" @click="printFormJson">测试按钮</el-button>
+        <!-- <el-button type="normal" @click="printFormJson">测试按钮</el-button> -->
+        <el-button type="normal" @click="insertFormJson">外部导入</el-button>
+        <el-button type="primary" @click="printFormJson">外部导出</el-button>
       </template>
     </VFormDesigner>
   </div>
@@ -52,6 +52,10 @@ export default {
   methods: {
     printFormJson() {
       console.log( this.$refs.vfDesignerRef.getFormJson() )
+    },
+    insertFormJson() {
+      let jsonObj = require('./assets/testForm.json')
+      this.$refs.vfDesignerRef.setFormJson(jsonObj)
     }
   }
 }
