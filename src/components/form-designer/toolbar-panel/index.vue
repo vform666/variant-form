@@ -718,7 +718,6 @@
       display: flex;
       align-items: center;
       justify-content: flex-end;
-      // min-width: 600px;
     }
 
     ::v-deep .el-button--text {
