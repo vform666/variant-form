@@ -5,7 +5,7 @@
         <svg-icon icon-class="undo" /></el-button>
       <el-button type="text" :disabled="redoDisabled" :title="i18nt('designer.toolbar.redoHint')" @click="redoHistory">
         <svg-icon icon-class="redo" /></el-button>
-      <el-button-group style="margin-left: 20px">
+      <el-button-group style="margin-left: 20px" v-if="showToolButton('devices')">
         <el-button :type="layoutType === 'PC' ? 'info': ''" @click="changeLayoutType('PC')">
           {{i18nt('designer.toolbar.pcLayout')}}</el-button>
         <el-button :type="layoutType === 'Pad' ? 'info': ''" @click="changeLayoutType('Pad')">

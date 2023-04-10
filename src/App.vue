@@ -21,7 +21,8 @@ export default {
       designerConfig: {
         resetFormJson: false,
         toolbarMaxWidth: 490,
-        headerShow: false,  //是否显示顶栏
+        headerShow: true,  //是否显示顶栏
+        devices: false,  //是否显示设备切换
         // languageMenu: true,  //是否显示语言切换菜单
         externalLink: false,  //是否显示GitHub、文档等外部链接
         // formTemplates: true,  //是否显示表单模板
