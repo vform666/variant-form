@@ -7,12 +7,14 @@
     "build": "vue-cli-service build --report --dest dist/build",
     "lib": "vue-cli-service build --report --target lib --dest dist/lib --name VFormDesigner install.js",
     "lib-render": "vue-cli-service build --report --target lib --dest dist/lib-render --name VFormRender install-render.js",
+    "fix-memory-limit": "cross-env LIMIT=4096 increase-memory-limit",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
     "axios": "^0.21.1",
     "clipboard": "^2.0.8",
     "core-js": "^3.6.5",
+    "cross-env": "^7.0.3",
     "element-ui": "^2.15.1",
     "file-saver": "^2.0.5",
     "vue": "^2.6.11",
@@ -28,6 +30,7 @@
     "babel-polyfill": "^6.26.0",
     "eslint": "^6.7.2",
     "eslint-plugin-vue": "^6.2.2",
+    "increase-memory-limit": "^1.0.7",
     "mvdir": "^1.0.21",
     "sass": "^1.45.1",
     "sass-loader": "^8.0.2",
