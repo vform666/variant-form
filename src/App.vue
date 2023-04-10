@@ -2,6 +2,8 @@
   <div id="app">
     <VFormDesigner ref="vfDesignerRef" :designer-config="designerConfig" :global-dsv="globalDsv">
       <template #customToolButtons>
+        <el-button type="normal" @click="printFormJson">测试按钮</el-button>
+        <el-button type="normal" @click="printFormJson">测试按钮</el-button>
         <el-button type="primary" @click="printFormJson">测试按钮</el-button>
       </template>
     </VFormDesigner>
