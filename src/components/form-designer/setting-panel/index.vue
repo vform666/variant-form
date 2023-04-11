@@ -61,6 +61,14 @@
             </el-form>
           </template>
 
+          <template v-if="!(!!designer.selectedWidget && !designer.selectedWidget.category) && !(!!designer.selectedWidget && !!designer.selectedWidget.category)">
+            <!-- <div class="empty" style="padding-top:40px;display:flex;font-size:small;color:gray;align-items:center;justify-content:center;">
+              未选择组件
+            </div> -->
+            <el-empty description="未选择组件"></el-empty>
+          </template>
+
+
         </el-scrollbar>
       </el-tab-pane>
 
@@ -307,6 +315,20 @@
 <style lang="scss" scoped>
   .panel-container {
     // padding: 0 8px;
+    ::v-deep .el-tabs__nav {
+      // margin-left: 20px;
+      margin: 0;
+      width: 100%;
+      box-sizing: border-box;
+      display: flex;
+    }
+    ::v-deep .el-tabs__item{
+      // padding: 0 10px;
+      padding: 0;
+      width: calc(100% / 2);
+      display: flex;
+      justify-content: center;
+    }
     ::v-deep .el-tabs__header {
       padding: 0 10px;
       margin: 0;
