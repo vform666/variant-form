@@ -62,10 +62,10 @@
           </template>
 
           <template v-if="!(!!designer.selectedWidget && !designer.selectedWidget.category) && !(!!designer.selectedWidget && !!designer.selectedWidget.category)">
-            <!-- <div class="empty" style="padding-top:40px;display:flex;font-size:small;color:gray;align-items:center;justify-content:center;">
+            <div class="empty" style="padding-top:40px;display:flex;font-size:small;color:gray;align-items:center;justify-content:center;">
               未选择组件
-            </div> -->
-            <el-empty description="未选择组件"></el-empty>
+            </div>
+            <!-- <el-empty description="未选择组件"></el-empty> -->
           </template>
 
 
