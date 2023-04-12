@@ -12,8 +12,8 @@
   <el-container class="main-container full-height">
     <el-header class="main-header" v-if="showLink('headerShow')" >
       <div class="float-left main-title">
-        <!-- <img src="../../assets/vform-logo.png" @click="openHome"> -->
-        <!-- <span class="bold">VForm</span> -->
+        <img src="../../assets/vform-logo.png" @click="openHome">
+        <span class="bold">VForm</span>
          {{i18nt('application.productTitle')}}
         <span class="version-span">Ver {{vFormVersion}}</span></div>
       <div class="float-right external-link">
