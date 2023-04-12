@@ -62,6 +62,7 @@
       <code-editor v-model="testFunc" style="display: none"></code-editor>
       <div slot="footer" class="dialog-footer">
         <el-button type="primary" @click="getFormData">{{i18nt('designer.hint.getFormData')}}</el-button>
+        <el-button type="primary" @click="getFieldList">{{i18nt('designer.hint.getFieldListData')}}</el-button>
         <el-button type="primary" @click="resetForm">{{i18nt('designer.hint.resetForm')}}</el-button>
         <el-button type="primary" @click="setFormDisabled">{{i18nt('designer.hint.disableForm')}}</el-button>
         <el-button type="primary" @click="setFormEnabled">{{i18nt('designer.hint.enableForm')}}</el-button>
@@ -138,6 +139,22 @@
       </div>
     </el-dialog>
 
+    <el-dialog :title="i18nt('designer.hint.exportFieldListData')" :visible.sync="showFieldListDataDialogFlag"
+               v-if="showFieldListDataDialogFlag" :show-close="true" class="dialog-title-light-bg" center v-dialog-drag
+               :close-on-click-modal="false" :close-on-press-escape="false" :destroy-on-close="true"
+               :append-to-body="true">
+      <div style="border: 1px solid #DCDFE6">
+        <code-editor :mode="'json'" :readonly="true" v-model="fieldListJson"></code-editor>
+      </div>
+      <div slot="footer" class="dialog-footer">
+        <el-button type="primary" class="copy-form-data-json-btn" :data-clipboard-text="fieldListRawJson" @click="copyFieldListDataJson">
+          {{i18nt('designer.hint.copyFormData')}}</el-button>
+        <el-button @click="saveFieldListData">{{i18nt('designer.hint.saveFormData')}}</el-button>
+        <el-button type="" @click="showFieldListDataDialogFlag = false">
+          {{i18nt('designer.hint.closePreview')}}</el-button>
+      </div>
+    </el-dialog>
+
     <el-dialog :title="i18nt('designer.toolbar.generateSFC')" :visible.sync="showExportSFCDialogFlag"
                v-if="showExportSFCDialogFlag" :show-close="true" class="small-padding-dialog" center append-to-body v-dialog-drag
                width="65%" :close-on-click-modal="false" :close-on-press-escape="false" :destroy-on-close="true">
@@ -208,6 +225,7 @@
         showExportJsonDialogFlag: false,
         showExportCodeDialogFlag: false,
         showFormDataDialogFlag: false,
+        showFieldListDataDialogFlag: false,
         showExportSFCDialogFlag: false,
         showNodeTreeDrawerFlag: false,
 
@@ -220,6 +238,9 @@
 
         formDataJson: '',
         formDataRawJson: '',
+
+        fieldListJson: '',
+        fieldListRawJson: '',
 
         vueCode: '',
         htmlCode: '',
@@ -578,6 +599,37 @@
         })
       },
 
+      getFieldListPromiseWrap () {
+        let callback = function nullFunc() {}
+        let promise = new window.Promise(function (resolve, reject) {
+          callback = function(fieldListJson, fieldListRawJson, error) {
+            !error ? resolve(fieldListJson, fieldListRawJson) : reject(error);
+          };
+        });
+        try {
+          const fieldListData = this.$refs['preForm'].getFieldWidgets()
+          const fieldListJson = JSON.stringify(fieldListData, null, '  ')
+          const fieldListRawJson = JSON.stringify(fieldListData)
+          callback(fieldListJson, fieldListRawJson)
+        } catch (error) {
+          callback(this.formDataModel, this.i18nt('render.hint.fieldListGenerateFailed'))
+        }
+
+        return promise
+      },
+
+      getFieldList () {
+        // console.log('【getFieldWidgets】',this.$refs['preForm'].getFieldWidgets())
+        // console.log('【getContainerWidgets】',this.$refs['preForm'].getContainerWidgets())
+        this.getFieldListPromiseWrap().then((fieldListJson, fieldListRawJson)=>{
+          this.fieldListJson = fieldListJson
+          this.fieldListRawJson = fieldListRawJson
+          this.showFieldListDataDialogFlag = true
+        }).catch(error => {
+          this.$message.error(error)
+        })
+      },
+
       copyFormDataJson(e) {
         copyToClipboard(this.formDataRawJson, e,
             this.$message,
@@ -586,8 +638,21 @@
         )
       },
 
+      copyFieldListJson(e) {
+        copyToClipboard(this.fieldListRawJson, e,
+            this.$message,
+            this.i18nt('designer.hint.copyJsonSuccess'),
+            this.i18nt('designer.hint.copyJsonFail')
+        )
+      },
+
+
       saveFormData() {
         this.saveAsFile(this.htmlCode, `formData${generateId()}.json`)
+      },
+
+      savefieldListData() {
+        this.saveAsFile(this.htmlCode, `fieldListData${generateId()}.json`)
       },
 
       resetForm() {

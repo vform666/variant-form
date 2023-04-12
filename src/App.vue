@@ -4,6 +4,7 @@
       <template #customToolButtons>
         <!-- <el-button type="normal" @click="printFormJson">测试按钮</el-button> -->
         <el-button type="normal" @click="insertFormJson">外部导入</el-button>
+        <el-button type="normal" @click="getFieldList">获取字段列表</el-button>
         <el-button type="primary" @click="printFormJson">外部导出</el-button>
       </template>
     </VFormDesigner>
@@ -56,6 +57,9 @@ export default {
     insertFormJson() {
       let jsonObj = require('./assets/testForm.json')
       this.$refs.vfDesignerRef.setFormJson(jsonObj)
+    },
+    getFieldList() {
+      console.log(this.$refs.vfDesignerRef.getFieldWidgets())
     }
   }
 }

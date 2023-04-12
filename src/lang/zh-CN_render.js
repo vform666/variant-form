@@ -26,6 +26,7 @@ export default {
       downloadFile: '下载',
       removeFile: '移除',
       validationFailed: '表单数据校验失败',
+      fieldListGenerateFailed: '表单字段列表生成失败',
 
       subFormAction: '操作',
       subFormAddAction: '新增',
