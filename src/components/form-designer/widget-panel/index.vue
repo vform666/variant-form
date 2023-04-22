@@ -265,7 +265,8 @@
 
 <style lang="scss" scoped>
   .color-svg-icon {
-    color: $--color-primary;
+    -webkit-font-smoothing: antialiased;
+    color: #7c7d82;
   }
 
   .side-scroll-bar {
@@ -319,21 +320,28 @@
 
         .container-widget-item, .field-widget-item {
           display: inline-block;
-          height: 28px;
-          line-height: 28px;
-          width: 115px;
+          height: 32px;
+          line-height: 32px;
+          width: 98px;
           float: left;
           margin: 2px 6px 6px 0;
           cursor: move;
           white-space: nowrap;
           text-overflow: ellipsis;
           overflow: hidden;
-          background: #f1f2f3;
+          background: #fff;
+          border: 1px solid #e8e9eb;
+          border-radius: 4px;
+          padding: 0 8px;
         }
 
         .container-widget-item:hover, .field-widget-item:hover {
-          background: #EBEEF5;
-          outline: 1px solid $--color-primary;
+          background: #F1F2F3;
+          border-color: $--color-primary;
+
+          .color-svg-icon {
+            color: $--color-primary;
+          }
         }
 
         .drag-handler {
