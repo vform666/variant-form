@@ -4,7 +4,7 @@
                      :sub-form-row-index="subFormRowIndex" :sub-form-col-index="subFormColIndex" :sub-form-row-id="subFormRowId">
     <!-- el-upload增加:name="field.options.name"后，会导致又拍云上传失败！故删除之！！ -->
     <el-upload ref="fieldEditor" :disabled="field.options.disabled"
-               :action="field.options.uploadURL" :headers="uploadHeaders" :data="uploadData"
+               :action="realUploadURL" :headers="uploadHeaders" :data="uploadData"
                :with-credentials="field.options.withCredentials"
                :multiple="field.options.multipleSelect" :file-list="fileList" :show-file-list="field.options.showFileList"
                list-type="picture-card" :class="{'hideUploadDiv': uploadBtnHidden}"
@@ -29,7 +29,7 @@
   import FormItemWrapper from './form-item-wrapper'
   import emitter from '@/utils/emitter'
   import i18n, {translate} from "@/utils/i18n";
-  import {deepClone} from "@/utils/util";
+  import {deepClone, evalFn} from "@/utils/util";
   import fieldMixin from "@/components/form-designer/form-widget/field-widget/fieldMixin";
 
   export default {
@@ -88,6 +88,16 @@
       }
     },
     computed: {
+      realUploadURL() {
+        let uploadURL = this.field.options.uploadURL
+        if (!!uploadURL && ((uploadURL.indexOf('DSV.') > -1) || (uploadURL.indexOf('DSV[') > -1))) {
+          let DSV = this.getGlobalDsv()
+          console.log('test DSV: ', DSV)  //防止DSV被打包工具优化！！！
+          return evalFn(this.field.options.uploadURL, DSV)
+        }
+
+        return this.field.options.uploadURL
+      },
 
     },
     beforeCreate() {
