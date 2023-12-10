@@ -10,7 +10,9 @@
 
 
 ### 🎉🎉<mark>基于VForm的全栈低代码平台已发布</mark>🎉🎉
-[美乐低代码——立即进入](https://melecode.com/)
+
+[美乐低代码——立即进入](https://melecode.com/) （私有部署、开箱即用️，已开源✌✌）️
+
 
 ### 立即体验VForm Pro高级版（提供商业支持）
 [Pro Demo](https://www.vform666.com/pro/)
